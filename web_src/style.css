@@ -1,0 +1,693 @@
+:root {
+  --bg: #14101a;
+  --bg2: #1d1726;
+  --card: #251d33;
+  --card-hi: #2e2440;
+  --line: #3a2f52;
+  --text: #e8e2f4;
+  --dim: #9c92b5;
+  --gold: #e8b34b;
+  --accent: #7c6cff;
+  --r1: #8a93a6; /* 普通 */
+  --r2: #4fa3d8; /* 稀有 */
+  --r3: #b06cd8; /* 史诗 */
+  --r4: #e8b34b; /* 传说 */
+  --passive-color: #4fa3d8; /* 冷色调 - 蓝绿 */
+  --active-color: #b871e1; /* 暖色调 - 金色 */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(
+    180deg,
+    var(--bg2) 0%,
+    rgba(20, 16, 26, 0.98) 100%
+  );
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+}
+.topbar-toggle {
+  display: none;
+  position: relative;
+  z-index: 11;
+  width: 36px;
+  height: 20px;
+  margin: -1px auto 0;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: var(--card);
+  color: var(--dim);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.topbar-toggle:hover {
+  color: var(--text);
+}
+body.nav-collapsed .topbar-toggle {
+  transform: rotate(180deg);
+}
+
+header {
+  padding: 12px 20px 10px;
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brand h1 {
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+.brand .sub {
+  color: var(--accent);
+  font-size: 15px;
+}
+.brand .meta {
+  color: var(--dim);
+  font-size: 11px;
+}
+
+.searchbar {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  max-width: 720px;
+}
+#search {
+  flex: 1;
+  padding: 9px 14px;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+#search:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(124, 108, 255, 0.25);
+}
+#clear-btn {
+  width: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--dim);
+  font-size: 17px;
+  cursor: pointer;
+}
+#clear-btn:hover {
+  color: var(--text);
+}
+
+nav#tabs {
+  display: flex;
+  gap: 6px;
+  padding: 10px 20px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+@media (max-width: 768px) {
+  nav#tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  .topbar-toggle {
+    display: block;
+  }
+  body.nav-collapsed .topbar-body {
+    display: none;
+  }
+}
+.tab {
+  white-space: nowrap;
+  padding: 7px 16px;
+  background: transparent;
+  color: var(--dim);
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  font-size: 13px;
+}
+.tab .n {
+  color: var(--gold);
+  margin-left: 5px;
+  font-size: 12px;
+}
+.tab.active {
+  background: var(--card);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+#filters {
+  display: flex;
+  gap: 8px;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px dashed transparent;
+}
+#filters:not(:empty) {
+  border-top-color: var(--line);
+}
+#tag-filters {
+  display: flex;
+  gap: 8px;
+  padding: 6px 20px 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px dashed transparent;
+}
+#tag-filters:empty {
+  display: none;
+}
+#tag-filters:not(:empty) {
+  border-top-color: var(--line);
+}
+.tag-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.tg-btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--dim);
+  transition: background 0.15s;
+}
+.tg-btn.open {
+  background: var(--card);
+  color: var(--text);
+  font-weight: 600;
+}
+.tg-btn:hover {
+  background: var(--card);
+}
+.tg-btn:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.tg-btn:hover::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 12px;
+  border: 4px solid transparent;
+  border-top-color: var(--line);
+  z-index: 100;
+  pointer-events: none;
+}
+.tg-items {
+  display: inline-flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.chip {
+  padding: 4px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--dim);
+}
+.chip .cnt {
+  margin-left: 6px;
+  opacity: 0.75;
+  font-size: 11px;
+}
+.chip.on .cnt {
+  opacity: 1;
+  font-weight: 700;
+}
+.chip.on {
+  color: var(--bg);
+  font-weight: 600;
+}
+.chip.r1.on {
+  background: var(--r1);
+  border-color: var(--r1);
+}
+.chip.r2.on {
+  background: var(--r2);
+  border-color: var(--r2);
+}
+.chip.r3.on {
+  background: var(--r3);
+  border-color: var(--r3);
+}
+.chip.r4.on {
+  background: var(--r4);
+  border-color: var(--r4);
+}
+
+main {
+  padding: 6px 20px 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+#result-info {
+  color: var(--dim);
+  font-size: 12px;
+  margin: 8px 2px;
+}
+
+.cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+}
+.section-divider {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 14px 0 4px;
+  margin-top: 6px;
+  border-top: 1px dashed var(--line);
+}
+/* #42: 神秘事件单行展示 */
+.cards.events-list {
+  grid-template-columns: 1fr;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 15px;
+  cursor: pointer;
+  transition:
+    transform 0.08s,
+    border-color 0.12s,
+    background 0.12s;
+}
+.card:hover {
+  background: var(--card-hi);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.card.open {
+  grid-column: 1 / -1;
+  border-color: var(--gold);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 48px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: contain;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.avatar.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dim);
+  font-size: 18px;
+}
+.titles {
+  min-width: 0;
+  flex: 1;
+}
+.name {
+  font-size: 15.5px;
+  font-weight: 700;
+}
+.name .en {
+  color: var(--dim);
+  font-weight: 400;
+  font-size: 11.5px;
+  margin-left: 7px;
+}
+.idline {
+  color: var(--dim);
+  font-size: 11.5px;
+}
+
+.badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.badge {
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  color: var(--dim);
+}
+.badge.r1 {
+  color: var(--r1);
+  border-color: var(--r1);
+}
+.badge.r2 {
+  color: var(--r2);
+  border-color: var(--r2);
+}
+.badge.r3 {
+  color: var(--r3);
+  border-color: var(--r3);
+}
+.badge.r4 {
+  color: var(--r4);
+  border-color: var(--r4);
+}
+.badge.warn {
+  color: #e88;
+  border-color: #a66;
+}
+
+.desc {
+  color: var(--text);
+  opacity: 0.92;
+  margin-top: 9px;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.desc.dim {
+  color: var(--dim);
+  font-style: italic;
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+.stat {
+  font-size: 11.5px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 8px;
+  color: #cfc7e6;
+}
+.stat b {
+  color: var(--gold);
+  font-weight: 600;
+}
+.stat.fan-tip {
+  position: relative;
+  cursor: help;
+  transition: all 0.15s ease;
+}
+.fan-stats {
+  gap: 8px;
+}
+.fan-stats .stat {
+  font-size: 13px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(88, 80, 120, 0.4), rgba(60, 55, 90, 0.4));
+  border: 1px solid rgba(160, 140, 220, 0.3);
+  color: #d8d0f0;
+  font-weight: 500;
+}
+.fan-stats .stat:hover {
+  background: linear-gradient(135deg, rgba(110, 95, 160, 0.6), rgba(80, 70, 130, 0.6));
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(100, 80, 200, 0.3);
+}
+.fz-tip-card {
+  position: fixed;
+  transform: translateX(-50%) translateY(-100%);
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 12px 16px;
+  min-width: 200px;
+  max-width: 300px;
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+.fz-tip-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.fz-tip-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+.fz-tip-en {
+  font-size: 12px;
+  color: var(--dim);
+}
+.fz-tip-id {
+  font-size: 11px;
+  color: var(--dim);
+  margin-bottom: 6px;
+}
+.fz-tip-fan {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 1px 8px;
+  margin-bottom: 8px;
+}
+.fz-tip-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-line;
+}
+
+.detail {
+  display: none;
+  margin-top: 12px;
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+}
+.card.open .detail {
+  display: block;
+}
+.kv {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 4px 16px;
+}
+.kv div {
+  font-size: 12px;
+  color: var(--dim);
+}
+.kv b {
+  color: var(--text);
+}
+.subh {
+  color: var(--accent);
+  font-size: 12.5px;
+  margin: 10px 0 5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subh-passive {
+  color: var(--passive-color);
+}
+.subh-active {
+  color: var(--active-color);
+}
+.skillbox {
+  background: var(--bg2);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 8px 11px;
+  margin: 6px 0;
+  font-size: 12.5px;
+  border-bottom: 1px solid var(--line);
+}
+.skillbox .sn {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.skill-lv {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.skill-lv .tl {
+  margin-right: 6px;
+}
+.skillbox .sd {
+  color: #cfc7e6;
+  white-space: pre-wrap;
+}
+.subh-icon {
+  width: 40px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: contain;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.subh-passive .subh-icon {
+  border-color: var(--passive-color);
+}
+.subh-active .subh-icon {
+  border-color: var(--active-color);
+}
+.subh-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.subh-label {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.subh-passive .subh-label {
+  color: var(--passive-color);
+}
+.subh-active .subh-label {
+  color: var(--active-color);
+}
+.subh-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+.subh-passive .subh-name {
+  color: var(--passive-color);
+}
+.subh-active .subh-name {
+  color: var(--active-color);
+}
+
+/* 祭品升级款合并展示 */
+.tier {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 7px;
+}
+.tier .tl {
+  flex-shrink: 0;
+  width: 52px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--gold);
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1px 4px;
+}
+.tier .td {
+  flex: 1;
+  color: var(--text);
+  opacity: 0.92;
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.tier .tn {
+  color: var(--dim);
+  font-size: 11px;
+  margin-top: 1px;
+}
+
+footer {
+  text-align: center;
+  color: var(--dim);
+  font-size: 11px;
+  padding: 18px 0 26px;
+}
+
+mark {
+  background: rgba(232, 179, 75, 0.35);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  color: var(--dim);
+  padding: 60px 0;
+}
+
+/* 默认卡片不可点击（无交互效果） */
+.card {
+  cursor: default;
+}
+.card:hover {
+  background: var(--card);
+  border-color: var(--line);
+  transform: none;
+}
+
+/* 神秘事件页面卡片可点击 */
+.cards.events-list .card {
+  cursor: pointer;
+}
+.cards.events-list .card:hover {
+  background: var(--card-hi);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* 神秘事件页面展开的卡片保留金色边框 */
+.cards.events-list .card.open {
+  border-color: var(--gold);
+}

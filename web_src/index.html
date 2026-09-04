@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我在地府打麻将 · 图鉴</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 注意: 本目录(web_src/)含 data.json, 可直接打开本文件预览。
+     运行 python build_web.py 生成完整站点到 output/site/ -->
+    <div class="topbar" id="topbar">
+      <header>
+        <div class="brand">
+          <h1>我在地府打麻将 <span class="sub">资源图鉴</span></h1>
+          <span class="meta" id="build-meta"></span>
+        </div>
+        <div class="searchbar">
+          <input
+            type="search"
+            id="search"
+            placeholder="搜索 名称 / ID / 描述… (多个关键字用空格分隔)"
+            autocomplete="off"
+          />
+          <button id="clear-btn" title="清空">×</button>
+        </div>
+      </header>
+
+      <div class="topbar-body" id="topbar-body">
+        <nav id="tabs"></nav>
+        <div id="filters"></div>
+        <div id="tag-filters"></div>
+      </div>
+
+      <button class="topbar-toggle" id="topbar-toggle">▲</button>
+    </div>
+
+    <main>
+      <div id="result-info"></div>
+      <div id="cards" class="cards"></div>
+    </main>
+
+    <footer>数据由 build_web.py 从游戏资源提取 · 仅限本地学习研究使用</footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

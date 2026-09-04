@@ -1,0 +1,43 @@
+# ===== 环境变量（包含本地配置，不入库）=====
+.env
+
+# ===== 外部工具（体积大，不入库）=====
+tools/
+
+# ===== Il2CppDumper 输出（可用工具重新生成，见 AGENT.md）=====
+/dump_output/
+
+*.zip
+
+# ===== 游戏本体二进制与数据（版权资源，不入库）=====
+DemonicMahjong/
+*.exe
+*.dll
+
+# ===== 输出目录（构建产物，不入库）=====
+/output/
+
+# ===== 游戏资源（版权资源，不入库）=====
+assets/lingyong_card/*.png
+assets/enums.json
+web_src/data.json
+
+# ===== Excel 输出（可由 extract_all.py 重新生成）=====
+*.xlsx
+~$*
+
+# ===== 临时/草稿脚本 =====
+/probe_*
+/inspect.ps1
+
+# Python
+__pycache__/
+
+# 日志文件
+*.log
+
+# Windows artifacts
+nul
+
+# IDE
+.idea/
