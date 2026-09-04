@@ -1628,6 +1628,7 @@ def copy_web_files():
     """把 web_src/ 与图标同步到 site/（不重新提取数据）。"""
     WEB_SRC = Path(__file__).parent / "web_src"
     ASSETS = Path(__file__).parent / "assets"
+    repo_url = os.environ.get("REPO_URL", "")
     for f in ("index.html", "app.js", "style.css", "data.json"):
         src = WEB_SRC / f
         if not src.exists():
@@ -1642,7 +1643,11 @@ def copy_web_files():
                 print(f"  web_src/{f} formatted")
             except subprocess.CalledProcessError as e:
                 print(f"  web_src/{f} prettier format failed: {e.stderr.strip()}")
-        (SITE_DIR / f).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+        content = src.read_text(encoding="utf-8")
+        # 替换环境变量占位符
+        if repo_url:
+            content = content.replace("__REPO_URL__", repo_url)
+        (SITE_DIR / f).write_text(content, encoding="utf-8")
         print(f"  site/{f} copied")
 
     # 复制 assets/enums.json 到 site/

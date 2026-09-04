@@ -1,6 +1,11 @@
 /* 我在地府打麻将 · 图鉴  (由 build_web.py 数据驱动) */
 "use strict";
 
+/* ========== 站点配置 ========== */
+const SITE_CONFIG = {
+  repoUrl: "__REPO_URL__", // 仓库地址，构建时从 .env 替换
+};
+
 const TABS = [
   { key: "characters", label: "角色" },
   { key: "lingyong", label: "灵佣" },
@@ -34,6 +39,11 @@ const RAR_ORDER = { 普通: 0, 稀有: 1, 史诗: 2, 传说: 3 };
 })();
 
 function initApp() {
+  // 设置仓库链接
+  const repoLink = document.getElementById("repo-link");
+  if (repoLink && SITE_CONFIG.repoUrl) {
+    repoLink.href = SITE_CONFIG.repoUrl;
+  }
   init();
 }
 
