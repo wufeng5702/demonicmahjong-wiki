@@ -17,11 +17,6 @@ DemonicMahjong/
 # ===== 输出目录（构建产物，不入库）=====
 /output/
 
-# ===== 游戏资源（版权资源，不入库）=====
-assets/lingyong_card/*.png
-assets/enums.json
-web_src/data.json
-
 # ===== Excel 输出（可由 extract_all.py 重新生成）=====
 *.xlsx
 ~$*
