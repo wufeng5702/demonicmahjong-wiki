@@ -246,7 +246,8 @@ function avatarHtml(e, cat) {
   }
   const glyph = GLYPH[cat] || "?";
   let dir;
-  if (cat === "bosslingyong") dir = "lingyong_BOSS";
+  if (cat === "characters") dir = "character";
+  else if (cat === "bosslingyong") dir = "lingyong_BOSS";
   else if (cat === "pabao")
     dir =
       e._src === "宝牌" ? "baopai" : e._src === "业镜Buff" ? "buff" : "pailing";
@@ -388,7 +389,7 @@ function cardHtml(e, cat, q) {
           const firstId = skills[0]?.id;
           const suffix = g === "passives" ? "_passive" : "_active";
           const iconSrc = firstId
-            ? `icons/characters/${firstId}${suffix}.png`
+            ? `icons/character_skill/${firstId}${suffix}.png`
             : "";
           const iconHtml = iconSrc
             ? `<img class="subh-icon" src="${iconSrc}" onerror="this.style.display='none'" alt="">`

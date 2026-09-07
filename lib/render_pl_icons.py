@@ -373,8 +373,18 @@ def render(parts, size=SIZE, basis=None, roll=0.0):
 # ---------- 主流程 ----------
 def render_pailing_icons(bundle_path, out_dir):
     """渲染牌灵图标。bundle_path: 主 bundle 路径, out_dir: 输出目录 (site/icons/)。"""
-    env = UnityPy.load(str(bundle_path))
-    objs = {o.path_id: o for o in env.objects}
+    from UnityPy import AssetsManager
+    from pathlib import Path as _Path
+    am = AssetsManager()
+    bundle_path = _Path(bundle_path)
+    # 加载 monoscripts bundle (新版游戏需要)
+    for ms_bf in bundle_path.parent.glob("*_monoscripts_*.bundle"):
+        am.load_file(str(ms_bf))
+        break
+    bf = am.load_file(str(bundle_path))
+    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
+    env = bf.files[cab_keys[0]]
+    objs = {o.path_id: o for o in env.objects.values()}
 
     # 收集 PaiLingPayload
     pls = []

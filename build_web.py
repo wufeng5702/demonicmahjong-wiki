@@ -36,6 +36,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 
 sys.path.insert(0, str(Path(__file__).parent / "lib"))
 
+import UnityPy
 from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
@@ -45,7 +46,10 @@ GAME_DIR = Path(r"E:\DemonicMahjong")
 GAME_DATA_DIR = GAME_DIR / "DemonicMahjong" / "Demonic Mahjong_Data"
 AA_DIR = GAME_DATA_DIR / "StreamingAssets/aa/StandaloneWindows64"
 CATALOG = GAME_DATA_DIR / "StreamingAssets/aa/catalog.json"
+SHARED0 = GAME_DATA_DIR / "sharedassets0.assets"
 SHARED1 = GAME_DATA_DIR / "sharedassets1.assets"
+SHARED2 = GAME_DATA_DIR / "sharedassets2.assets"
+SHARED3 = GAME_DATA_DIR / "sharedassets3.assets"
 SHARED4 = GAME_DATA_DIR / "sharedassets4.assets"
 DUMP_CS = GAME_DIR / "dump_output/dump.cs"
 SITE_DIR = GAME_DIR / "site"
@@ -1596,9 +1600,9 @@ def apply_text(entries, i2, id_fields=("nameKey", "descKey")):
 
 
 def extract_achievement_icons():
-    """从 bundle 提取成就图标到 legendary_icons/achievements/。"""
+    """从 bundle 提取成就图标到 site/icons/achievements/。"""
     from UnityPy.enums import ClassIDType
-    out_dir = GAME_DIR / "legendary_icons" / "achievements"
+    out_dir = SITE_DIR / "icons" / "achievements"
     out_dir.mkdir(parents=True, exist_ok=True)
     bpath = locate_bundle()
     if not bpath:
@@ -1629,6 +1633,542 @@ def extract_achievement_icons():
     print(f"  achievement icons: {count} extracted to {out_dir}")
 
 
+def _extract_lingyong_icons():
+    """从 bundle + sharedassets1 + sharedassets4 提取灵佣图标到 icons/lingyong/ 和 icons/lingyong_BOSS/。"""
+    out_dir = SITE_DIR / "icons"
+    (out_dir / "lingyong").mkdir(parents=True, exist_ok=True)
+    (out_dir / "lingyong_BOSS").mkdir(parents=True, exist_ok=True)
+
+    bpath = locate_bundle()
+    if not bpath:
+        print("  [WARN] bundle not found, skip lingyong icons")
+        return
+    am = AssetsManager()
+    for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
+        am.load_file(str(ms_bf))
+        break
+    bf = am.load_file(str(bpath))
+    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
+    sf = bf.files[cab_keys[0]]
+
+    sprite_map = {}
+    for obj in sf.objects.values():
+        if obj.type.name == "Sprite":
+            try:
+                d = obj.read()
+                nm = getattr(d, "m_Name", "")
+                if nm:
+                    sprite_map[nm] = obj
+            except Exception:
+                pass
+
+    count = 0
+    seen = set()
+
+    def _save_icon(xid, sub):
+        nonlocal count
+        if xid in seen or xid == 0 or not sub:
+            return
+        if sub not in sprite_map:
+            return
+        if 20000 <= xid < 30000:
+            return
+        seen.add(xid)
+        try:
+            img = sprite_map[sub].read().image
+            if (10000 <= xid < 20000) or (30000 <= xid < 40000):
+                target = out_dir / "lingyong_BOSS"
+            else:
+                target = out_dir / "lingyong"
+            img.save(str(target / f"{xid}.png"))
+            count += 1
+        except Exception:
+            pass
+
+    for obj in sf.objects.values():
+        if obj.type != ClassIDType.MonoBehaviour:
+            continue
+        try:
+            d = obj.read()
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "XiaoChouPaiPayload":
+                continue
+            xid = int(getattr(d, "id", 0) or 0)
+            ic = getattr(d, "iconReference", None)
+            if ic is None:
+                continue
+            sub = getattr(ic, "m_SubObjectName", "") or ""
+            _save_icon(xid, sub)
+        except Exception:
+            continue
+
+    env1 = UnityPy.load(str(SHARED1))
+    for obj in env1.objects:
+        if obj.type.name != "MonoBehaviour":
+            continue
+        try:
+            d = obj.read(check_read=False)
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "XiaoChouPaiPayload":
+                continue
+            raw = obj.get_raw_data()
+            pd = rp.parse_payload(raw, "XiaoChouPaiPayload")
+            xid = int(pd.get("id", 0))
+            ic = pd.get("iconReference") or {}
+            sub = ic.get("sub", "")
+            _save_icon(xid, sub)
+        except Exception:
+            continue
+
+    env4 = UnityPy.load(str(SHARED4))
+    for obj in env4.objects:
+        if obj.type.name != "MonoBehaviour":
+            continue
+        try:
+            d = obj.read(check_read=False)
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "XiaoChouPaiPayload":
+                continue
+            raw = obj.get_raw_data()
+            pd = rp.parse_payload(raw, "XiaoChouPaiPayload")
+            xid = int(pd.get("id", 0))
+            ic = pd.get("iconReference") or {}
+            sub = ic.get("sub", "")
+            _save_icon(xid, sub)
+        except Exception:
+            continue
+
+    print(f"  lingyong icons: {count} extracted")
+
+
+def _extract_character_avatars():
+    """从 sharedassets4 提取角色头像到 icons/character/。"""
+    out_dir = SITE_DIR / "icons" / "character"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    env4 = UnityPy.load(str(SHARED4))
+    count = 0
+    for obj in env4.objects:
+        if obj.type.name != "MonoBehaviour":
+            continue
+        try:
+            d = obj.read(check_read=False)
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "RoleAvatar":
+                continue
+            raw = obj.get_raw_data()
+            pd = rp.parse_payload(raw, "RoleAvatar")
+            cid = int(pd.get("characterID", 0))
+            if cid == 0:
+                continue
+            hi = pd.get("headIcon") or {}
+            pid = hi.get("path_id", 0)
+            if pid == 0:
+                continue
+            for io in env4.objects:
+                if io.path_id == pid:
+                    img = io.read().image
+                    img.save(str(out_dir / f"{cid}.png"))
+                    count += 1
+                    break
+        except Exception:
+            continue
+    print(f"  character avatars: {count} extracted")
+
+
+def _extract_character_skill_icons():
+    """从 bundle+sharedassets4 提取角色被动技能图标到 icons/character_skill/。"""
+    out_dir = SITE_DIR / "icons" / "character_skill"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    bpath = locate_bundle()
+    if not bpath:
+        print("  [WARN] bundle not found, skip character skill icons")
+        return
+    am = AssetsManager()
+    for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
+        am.load_file(str(ms_bf))
+        break
+    bf = am.load_file(str(bpath))
+    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
+    sf = bf.files[cab_keys[0]]
+
+    sprite_map = {}
+    for obj in sf.objects.values():
+        if obj.type.name == "Sprite":
+            try:
+                d = obj.read()
+                nm = getattr(d, "m_Name", "")
+                if nm:
+                    sprite_map[nm] = obj
+            except Exception:
+                pass
+
+    count = 0
+    seen = set()
+
+    def _save_passive(xid, sub):
+        nonlocal count
+        if xid < 20000 or xid in seen or not sub:
+            return
+        if sub not in sprite_map:
+            return
+        seen.add(xid)
+        try:
+            img = sprite_map[sub].read().image
+            img.save(str(out_dir / f"{xid}_passive.png"))
+            count += 1
+        except Exception:
+            pass
+
+    for obj in sf.objects.values():
+        if obj.type != ClassIDType.MonoBehaviour:
+            continue
+        try:
+            d = obj.read()
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "XiaoChouPaiPayload":
+                continue
+            xid = int(getattr(d, "id", 0) or 0)
+            ic = getattr(d, "iconReference", None)
+            if ic is None:
+                continue
+            sub = getattr(ic, "m_SubObjectName", "") or ""
+            _save_passive(xid, sub)
+        except Exception:
+            continue
+
+    env4 = UnityPy.load(str(SHARED4))
+    for obj in env4.objects:
+        if obj.type.name != "MonoBehaviour":
+            continue
+        try:
+            d = obj.read(check_read=False)
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "XiaoChouPaiPayload":
+                continue
+            raw = obj.get_raw_data()
+            pd = rp.parse_payload(raw, "XiaoChouPaiPayload")
+            xid = int(pd.get("id", 0))
+            ic = pd.get("iconReference") or {}
+            sub = ic.get("sub", "")
+            _save_passive(xid, sub)
+        except Exception:
+            continue
+    print(f"  character skill icons: {count} extracted")
+
+
+def _extract_relic_icons():
+    """从 sharedassets4 + bundle 提取遗物图标到 icons/relics/。"""
+    out_dir = SITE_DIR / "icons" / "relics"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    env4 = UnityPy.load(str(SHARED4))
+    count = 0
+    seen = set()
+
+    pid_map = {o.path_id: o for o in env4.objects}
+
+    def _save_icon(did, io):
+        nonlocal count
+        if did in seen:
+            return
+        try:
+            d = io.read()
+            if hasattr(d, "image"):
+                img = d.image
+            elif io.type.name == "Texture2D":
+                img = d.image
+            else:
+                return
+            img.save(str(out_dir / f"{did}.png"))
+            count += 1
+            seen.add(did)
+        except Exception:
+            pass
+
+    list_names = ["RelicDisplayList", "RelicDisplayMysteriousList", "RelicDisplayOutsiderList"]
+    for ln in list_names:
+        for obj in env4.objects:
+            if obj.type.name != "MonoBehaviour":
+                continue
+            try:
+                d = obj.read(check_read=False)
+                ms = getattr(d, "m_Script", None)
+                sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+                if sn != ln:
+                    continue
+                raw = obj.get_raw_data()
+                _, _, _, _, pos = rp.mb_header(raw)
+                vals = rp.parse_fields(raw, pos, [("value", "vp")])["value"]
+                for ref in vals:
+                    rpid = (ref or {}).get("path_id")
+                    if not rpid or rpid not in pid_map:
+                        continue
+                    ro = pid_map[rpid]
+                    try:
+                        rraw = ro.get_raw_data()
+                        rd = rp.parse_payload(rraw, "RelicDisplay")
+                        did = int(rd.get("displayId", 0))
+                        if did == 0 or did in seen:
+                            continue
+                        icon = rd.get("icon") or {}
+                        ipid = icon.get("path_id", 0)
+                        fid = icon.get("file_id", 0)
+                        if ipid == 0 or fid != 0:
+                            continue
+                        if ipid in pid_map:
+                            _save_icon(did, pid_map[ipid])
+                    except Exception:
+                        pass
+            except Exception:
+                continue
+
+    bpath = locate_bundle()
+    if bpath:
+        am = AssetsManager()
+        for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
+            am.load_file(str(ms_bf))
+            break
+        bf = am.load_file(str(bpath))
+        cab_keys = [k for k in bf.files if k.startswith("CAB-")]
+        sf = bf.files[cab_keys[0]]
+
+        for obj in sf.objects.values():
+            if obj.type != ClassIDType.MonoBehaviour:
+                continue
+            try:
+                d = obj.read()
+                ms = getattr(d, "m_Script", None)
+                sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+                if not sn.endswith("Display"):
+                    continue
+                did = int(getattr(d, "displayId", 0) or 0)
+                if did == 0 or did in seen:
+                    continue
+                icon = getattr(d, "icon", None)
+                if icon is None:
+                    continue
+                ipid = getattr(icon, "path_id", 0)
+                fid = getattr(icon, "m_FileID", 0)
+                if ipid == 0 or fid != 0:
+                    continue
+                for io in sf.objects.values():
+                    if io.path_id == ipid:
+                        _save_icon(did, io)
+                        break
+            except Exception:
+                continue
+
+    print(f"  relic icons: {count} extracted")
+
+
+def _extract_offering_icons():
+    """从 sharedassets1 提取祭品图标到 icons/offerings/。"""
+    out_dir = SITE_DIR / "icons" / "offerings"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    env1 = UnityPy.load(str(SHARED1))
+    count = 0
+    seen = set()
+    for obj in env1.objects:
+        if obj.type.name != "MonoBehaviour":
+            continue
+        try:
+            d = obj.read(check_read=False)
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "OfferingPayload":
+                continue
+            raw = obj.get_raw_data()
+            pd = rp.parse_payload(raw, "OfferingPayload")
+            did = int(pd.get("displayId", 0))
+            if did == 0 or did in seen:
+                continue
+            seen.add(did)
+            icon = pd.get("icon") or {}
+            ipid = icon.get("path_id", 0)
+            fid = icon.get("file_id", 0)
+            if ipid == 0 or fid != 0:
+                continue
+            for io in env1.objects:
+                if io.path_id == ipid:
+                    img = io.read().image
+                    img.save(str(out_dir / f"{did}.png"))
+                    count += 1
+                    break
+        except Exception:
+            continue
+    print(f"  offering icons: {count} extracted")
+
+
+def _extract_offering_skill_icons():
+    """从 sharedassets4+sharedassets1 提取角色主动技能图标到 icons/character_skill/。"""
+    out_dir = SITE_DIR / "icons" / "character_skill"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    env4 = UnityPy.load(str(SHARED4))
+    env1 = UnityPy.load(str(SHARED1))
+    other_envs = []
+    for sa in [SHARED0, SHARED2, SHARED3]:
+        if sa.exists():
+            other_envs.append(UnityPy.load(str(sa)))
+    count = 0
+    seen = set()
+    for obj in env4.objects:
+        if obj.type.name != "MonoBehaviour":
+            continue
+        try:
+            d = obj.read(check_read=False)
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "OfferingPayload":
+                continue
+            raw = obj.get_raw_data()
+            pd = rp.parse_payload(raw, "OfferingPayload")
+            did = int(pd.get("displayId", 0))
+            if did < 20000 or did in seen:
+                continue
+            seen.add(did)
+            icon = pd.get("icon") or {}
+            ipid = icon.get("path_id", 0)
+            fid = icon.get("file_id", 0)
+            if ipid == 0:
+                continue
+            resolved = False
+            envs_to_try = [env4] if fid == 0 else [env1] + other_envs
+            for e in envs_to_try:
+                for io in e.objects:
+                    if io.path_id == ipid:
+                        try:
+                            img = io.read().image
+                            img.save(str(out_dir / f"{did}_active.png"))
+                            count += 1
+                            resolved = True
+                        except Exception:
+                            pass
+                        break
+                if resolved:
+                    break
+        except Exception:
+            continue
+    print(f"  offering skill icons: {count} extracted")
+
+
+def _extract_baopai_icons():
+    """从 bundle 提取宝牌图标到 icons/baopai/（合成纹理+遮罩+裁剪）。"""
+    from PIL import Image as PILImage, ImageFilter
+    import numpy as np
+
+    out_dir = SITE_DIR / "icons" / "baopai"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    bpath = locate_bundle()
+    if not bpath:
+        print("  [WARN] bundle not found, skip baopai icons")
+        return
+    am = AssetsManager()
+    for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
+        am.load_file(str(ms_bf))
+        break
+    bf = am.load_file(str(bpath))
+    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
+    sf = bf.files[cab_keys[0]]
+
+    count = 0
+    for obj in sf.objects.values():
+        if obj.type != ClassIDType.MonoBehaviour:
+            continue
+        try:
+            d = obj.read()
+            ms = getattr(d, "m_Script", None)
+            sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
+            if sn != "BaoPaiPayload":
+                continue
+            bid = int(getattr(d, "id", 0) or 0)
+            if bid == 0:
+                continue
+
+            baoMaterialMask = getattr(d, "baoMaterialMask", None)
+            if not baoMaterialMask:
+                continue
+            bpid = getattr(baoMaterialMask, "path_id", 0)
+            if not bpid:
+                continue
+
+            bg_arr = None
+            mask_arr = None
+
+            for bo in sf.objects.values():
+                if bo.path_id == bpid:
+                    bd = bo.read()
+                    props = bd.m_SavedProperties
+                    texenvs = getattr(props, "m_TexEnvs", None)
+                    for texenv in texenvs:
+                        name = texenv[0]
+                        tex = texenv[1].m_Texture
+                        tpid = getattr(tex, "path_id", 0)
+                        if tpid:
+                            for to in sf.objects.values():
+                                if to.path_id == tpid:
+                                    td = to.read()
+                                    img = td.image
+                                    if name == "_MainTex":
+                                        bg_arr = np.array(img)[:, :, :3].astype(np.float32)
+                                    elif name == "_MaskTex":
+                                        mask_arr = np.array(img).astype(np.float32)
+                                    break
+                    break
+
+            if bg_arr is None or mask_arr is None:
+                continue
+
+            if bg_arr.shape[0] != 512 or bg_arr.shape[1] != 512:
+                bg_img = PILImage.fromarray(bg_arr.astype(np.uint8)).resize((512, 512), PILImage.LANCZOS)
+                bg_arr = np.array(bg_img).astype(np.float32)
+
+            blue = mask_arr[:, :, 2] / 255.0
+            card_mask = blue > 0.1
+            ys, xs = np.where(card_mask)
+            y_min, y_max = ys.min(), ys.max()
+            x_min, x_max = xs.min(), xs.max()
+
+            output = np.zeros((512, 512, 3), dtype=np.float32)
+            output[card_mask] = bg_arr[card_mask]
+
+            red = mask_arr[:, :, 0] / 255.0
+
+            red_img = PILImage.fromarray((mask_arr[:, :, 0]).astype(np.uint8))
+            dilated = red_img.filter(ImageFilter.MaxFilter(7))
+            eroded = red_img.filter(ImageFilter.MinFilter(5))
+            outline = np.array(dilated).astype(np.float32) - np.array(eroded).astype(np.float32)
+            outline = np.clip(outline, 0, 255) / 255.0
+
+            white = np.ones((512, 512, 3), dtype=np.float32) * 240
+            dark = np.ones((512, 512, 3), dtype=np.float32) * 30
+
+            output = output * (1 - red[:, :, np.newaxis]) + white * red[:, :, np.newaxis]
+            output = output * (1 - outline[:, :, np.newaxis]) + dark * outline[:, :, np.newaxis]
+
+            cropped = output[y_min:y_max + 1, x_min:x_max + 1]
+            cropped_img = PILImage.fromarray(cropped.astype(np.uint8))
+            w, h = cropped_img.size
+            target_h = 350
+            target_w = int(w * target_h / h)
+            final = cropped_img.resize((target_w, target_h), PILImage.LANCZOS)
+            final.save(str(out_dir / f"{bid}.png"))
+            count += 1
+        except Exception:
+            continue
+    print(f"  baopai icons: {count} extracted")
+
+
 def copy_web_files():
     """把 web_src/ 与图标同步到 site/（不重新提取数据）。"""
     WEB_SRC = Path(__file__).parent / "web_src"
@@ -1655,19 +2195,7 @@ def copy_web_files():
         (SITE_DIR / f).write_text(content, encoding="utf-8")
         print(f"  site/{f} copied")
 
-    icons_src = GAME_DIR / "legendary_icons"
-    if icons_src.exists():
-        dst = SITE_DIR / "icons"
-        dst.mkdir(exist_ok=True)
-        copied = 0
-        for sub in icons_src.iterdir():
-            if sub.is_dir():
-                d = dst / sub.name
-                if d.exists():
-                    shutil.rmtree(d)
-                shutil.copytree(sub, d)
-                copied += len(list(d.glob("**/*.png")))
-        print(f"  site/icons synced ({copied} png from legendary_icons)")
+
 
 
 def main():
@@ -1791,7 +2319,22 @@ def main():
         json.dump(payload, fp, ensure_ascii=False, indent=1)
     size = data_json_path.stat().st_size
     print(f"  web_src/data.json written ({size:,} bytes)")
+
+    print("\n[6/6] extracting icons...")
     extract_achievement_icons()
+    _extract_lingyong_icons()
+    _extract_character_avatars()
+    _extract_character_skill_icons()
+    _extract_relic_icons()
+    _extract_offering_icons()
+    _extract_offering_skill_icons()
+    _extract_baopai_icons()
+    try:
+        import render_pl_icons
+        render_pl_icons.render_pailing_icons(BUNDLE_PATH, SITE_DIR / "icons")
+    except Exception as e:
+        print(f"  [WARN] pailing icon rendering failed: {e}")
+
     copy_web_files()
     print("\n[DONE]")
 
