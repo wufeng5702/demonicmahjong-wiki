@@ -1655,12 +1655,6 @@ def copy_web_files():
         (SITE_DIR / f).write_text(content, encoding="utf-8")
         print(f"  site/{f} copied")
 
-    # 复制 assets/enums.json 到 site/
-    enums_src = ASSETS / "enums.json"
-    if enums_src.exists():
-        (SITE_DIR / "enums.json").write_text(enums_src.read_text(encoding="utf-8"), encoding="utf-8")
-        print(f"  site/enums.json copied")
-
     icons_src = GAME_DIR / "legendary_icons"
     if icons_src.exists():
         dst = SITE_DIR / "icons"
