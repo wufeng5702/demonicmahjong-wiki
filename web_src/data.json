@@ -1,5 +1,5 @@
 {
- "_comment": "本文件由 build_web.py 于 2026-09-07 09:41:21 自动生成, 请勿手动修改",
+ "_comment": "本文件由 build_web.py 于 2026-09-07 10:34:37 自动生成, 请勿手动修改",
  "meta": {
   "game": "我在地府打麻将",
   "build": "build_web.py"
@@ -19011,7 +19011,7 @@
   "relics": [
    {
     "id": 1,
-    "en": "",
+    "en": "ZhuCanLan",
     "cn": "",
     "nameKey": "Relic/Individual/1_39d00f5e0bea4e1479105b27e80d1685/Name",
     "descKey": "Relic/Individual/1_39d00f5e0bea4e1479105b27e80d1685/Description",
@@ -19027,7 +19027,7 @@
    },
    {
     "id": 2,
-    "en": "",
+    "en": "DiaoHuaShiHe",
     "cn": "",
     "nameKey": "Relic/Individual/2_1e534a24836401949a733ff89bb7e669/Name",
     "descKey": "Relic/Individual/2_1e534a24836401949a733ff89bb7e669/Description",
@@ -19043,7 +19043,7 @@
    },
    {
     "id": 3,
-    "en": "",
+    "en": "LianTai",
     "cn": "",
     "nameKey": "Relic/Individual/3_ea670a4ae5bc36e47a6ef19740933a01/Name",
     "descKey": "Relic/Individual/3_ea670a4ae5bc36e47a6ef19740933a01/Description",
@@ -19059,7 +19059,7 @@
    },
    {
     "id": 4,
-    "en": "",
+    "en": "QiXingDeng",
     "cn": "",
     "nameKey": "Relic/Individual/4_52dcedd8d372d2446886e55fa3df48ab/Name",
     "descKey": "Relic/Individual/4_52dcedd8d372d2446886e55fa3df48ab/Description",
@@ -19075,7 +19075,7 @@
    },
    {
     "id": 5,
-    "en": "",
+    "en": "QingMingJian",
     "cn": "",
     "nameKey": "Relic/Individual/5_196da64f8f9c9c544af6a9368bc73f50/Name",
     "descKey": "Relic/Individual/5_196da64f8f9c9c544af6a9368bc73f50/Description",
@@ -19091,7 +19091,7 @@
    },
    {
     "id": 6,
-    "en": "",
+    "en": "ChangMingSuo",
     "cn": "",
     "nameKey": "Relic/Individual/6_45e1af6ff50e102469ec724e3fe730cc/Name",
     "descKey": "Relic/Individual/6_45e1af6ff50e102469ec724e3fe730cc/Description",
@@ -19107,7 +19107,7 @@
    },
    {
     "id": 7,
-    "en": "",
+    "en": "JinGangChu",
     "cn": "",
     "nameKey": "Relic/Individual/7_b5f8c91327ab8d641b09e7290c21631e/Name",
     "descKey": "Relic/Individual/7_b5f8c91327ab8d641b09e7290c21631e/Description",
@@ -19123,7 +19123,7 @@
    },
    {
     "id": 8,
-    "en": "",
+    "en": "ZhaoHunFan",
     "cn": "",
     "nameKey": "Relic/Individual/8_90fbb2a4d912b594b9fbbaf3c330c8d3/Name",
     "descKey": "Relic/Individual/8_90fbb2a4d912b594b9fbbaf3c330c8d3/Description",
@@ -19139,7 +19139,7 @@
    },
    {
     "id": 10,
-    "en": "",
+    "en": "KongQueLing",
     "cn": "",
     "nameKey": "Relic/Individual/10_aa435c19c55e122439505f7587e51cf4/Name",
     "descKey": "Relic/Individual/10_aa435c19c55e122439505f7587e51cf4/Description",
@@ -19181,7 +19181,7 @@
    },
    {
     "id": 13,
-    "en": "",
+    "en": "JuBaoPen",
     "cn": "",
     "nameKey": "Relic/Individual/13_c3a8eaec86dfc11429d073d7853d17b3/Name",
     "descKey": "Relic/Individual/13_c3a8eaec86dfc11429d073d7853d17b3/Description",
@@ -19197,7 +19197,7 @@
    },
    {
     "id": 14,
-    "en": "",
+    "en": "FuChen",
     "cn": "",
     "nameKey": "Relic/Individual/14_7f8406b700e4efa428ce820a09b29858/Name",
     "descKey": "Relic/Individual/14_7f8406b700e4efa428ce820a09b29858/Description",
@@ -19213,7 +19213,7 @@
    },
    {
     "id": 15,
-    "en": "",
+    "en": "QianPai",
     "cn": "",
     "nameKey": "Relic/Individual/15_b8b7aa030395b8b47ac87f593e31a473/Name",
     "descKey": "Relic/Individual/15_b8b7aa030395b8b47ac87f593e31a473/Description",
@@ -19242,7 +19242,7 @@
    },
    {
     "id": 17,
-    "en": "",
+    "en": "JinHe",
     "cn": "",
     "nameKey": "Relic/Individual/17_b59c031688125924eb267cedd7116fae/Name",
     "descKey": "Relic/Individual/17_b59c031688125924eb267cedd7116fae/Description",
@@ -19258,7 +19258,7 @@
    },
    {
     "id": 18,
-    "en": "",
+    "en": "YuFo",
     "cn": "",
     "nameKey": "Relic/Individual/18_fd93fa8bb99281b4a8ea0400052dcbfc/Name",
     "descKey": "Relic/Individual/18_fd93fa8bb99281b4a8ea0400052dcbfc/Description",
@@ -19274,7 +19274,7 @@
    },
    {
     "id": 20,
-    "en": "",
+    "en": "YaoQianShu",
     "cn": "",
     "nameKey": "Relic/Individual/20_d083231d9ef61ce45ba99270ce7f32ab/Name",
     "descKey": "Relic/Individual/20_d083231d9ef61ce45ba99270ce7f32ab/Description",
@@ -19290,7 +19290,7 @@
    },
    {
     "id": 21,
-    "en": "",
+    "en": "ChuXuGuan",
     "cn": "",
     "nameKey": "Relic/Individual/21_19bffdade11f7224e9d88813682277d0/Name",
     "descKey": "Relic/Individual/21_19bffdade11f7224e9d88813682277d0/Description",
@@ -19306,7 +19306,7 @@
    },
    {
     "id": 22,
-    "en": "",
+    "en": "JinHuLu",
     "cn": "",
     "nameKey": "Relic/Individual/22_93d35f127e44cb14394a1b12a6306ca2/Name",
     "descKey": "Relic/Individual/22_93d35f127e44cb14394a1b12a6306ca2/Description",
@@ -19322,7 +19322,7 @@
    },
    {
     "id": 23,
-    "en": "",
+    "en": "YuHuLu",
     "cn": "",
     "nameKey": "Relic/Individual/23_c6387a86911ddfd49ad035dda86529f1/Name",
     "descKey": "Relic/Individual/23_c6387a86911ddfd49ad035dda86529f1/Description",
@@ -19338,7 +19338,7 @@
    },
    {
     "id": 24,
-    "en": "",
+    "en": "BaoPing",
     "cn": "",
     "nameKey": "Relic/Individual/24_5d951867fd0759e4bb5c4dba8accf99f/Name",
     "descKey": "Relic/Individual/24_5d951867fd0759e4bb5c4dba8accf99f/Description",
@@ -19383,7 +19383,7 @@
    },
    {
     "id": 27,
-    "en": "",
+    "en": "DiFuTeng",
     "cn": "",
     "nameKey": "Relic/Individual/27_d5e14b662984bd64a8257d43162536b9/Name",
     "descKey": "Relic/Individual/27_d5e14b662984bd64a8257d43162536b9/Description",
@@ -19399,7 +19399,7 @@
    },
    {
     "id": 28,
-    "en": "",
+    "en": "MiHunXiang",
     "cn": "",
     "nameKey": "Relic/Individual/28_4df04644b10a1b841871dfea10a0b5d3/Name",
     "descKey": "Relic/Individual/28_4df04644b10a1b841871dfea10a0b5d3/Description",
@@ -19415,7 +19415,7 @@
    },
    {
     "id": 29,
-    "en": "",
+    "en": "JiXiangJie",
     "cn": "",
     "nameKey": "Relic/Individual/29_4649b85d653704c4797d7afaacb9bd6e/Name",
     "descKey": "Relic/Individual/29_4649b85d653704c4797d7afaacb9bd6e/Description",
@@ -19431,7 +19431,7 @@
    },
    {
     "id": 30,
-    "en": "",
+    "en": "JiMaoDan",
     "cn": "",
     "nameKey": "Relic/Individual/30_e4e6c5c3fdf9dfb4e8727d32b0b92c33/Name",
     "descKey": "Relic/Individual/30_e4e6c5c3fdf9dfb4e8727d32b0b92c33/Description",
@@ -19447,7 +19447,7 @@
    },
    {
     "id": 31,
-    "en": "",
+    "en": "TieFanWan",
     "cn": "",
     "nameKey": "Relic/Individual/31_4ec31af0da26ef249b0d1348c0eab161/Name",
     "descKey": "Relic/Individual/31_4ec31af0da26ef249b0d1348c0eab161/Description",
@@ -19463,7 +19463,7 @@
    },
    {
     "id": 32,
-    "en": "",
+    "en": "JinFanWan",
     "cn": "",
     "nameKey": "Relic/Individual/32_3529f5bfa923f9241b728623a9a5a818/Name",
     "descKey": "Relic/Individual/32_3529f5bfa923f9241b728623a9a5a818/Description",
@@ -19479,7 +19479,7 @@
    },
    {
     "id": 33,
-    "en": "",
+    "en": "YuRuYi",
     "cn": "",
     "nameKey": "Relic/Individual/33_3a427687f3b9eef42b1eeebb0d025fb5/Name",
     "descKey": "Relic/Individual/33_3a427687f3b9eef42b1eeebb0d025fb5/Description",
@@ -19495,7 +19495,7 @@
    },
    {
     "id": 34,
-    "en": "",
+    "en": "JinRuYi",
     "cn": "",
     "nameKey": "Relic/Individual/34_590a93a026857924ba393d591eb8416d/Name",
     "descKey": "Relic/Individual/34_590a93a026857924ba393d591eb8416d/Description",
@@ -19511,7 +19511,7 @@
    },
    {
     "id": 35,
-    "en": "",
+    "en": "BaiFaLuo",
     "cn": "",
     "nameKey": "Relic/Individual/35_ba4305e69cf848845abcd0ca5386ec27/Name",
     "descKey": "Relic/Individual/35_ba4305e69cf848845abcd0ca5386ec27/Description",
@@ -19527,7 +19527,7 @@
    },
    {
     "id": 36,
-    "en": "",
+    "en": "FaChi",
     "cn": "",
     "nameKey": "Relic/Individual/36_31cc8628c6b6bf14f9b751e10d22ec27/Name",
     "descKey": "Relic/Individual/36_31cc8628c6b6bf14f9b751e10d22ec27/Description",
@@ -19543,7 +19543,7 @@
    },
    {
     "id": 37,
-    "en": "",
+    "en": "FaYin",
     "cn": "",
     "nameKey": "Relic/Individual/37_a7a88ba8845aeaa4fa52b666f4452d50/Name",
     "descKey": "Relic/Individual/37_a7a88ba8845aeaa4fa52b666f4452d50/Description",
@@ -19650,7 +19650,7 @@
    },
    {
     "id": 45,
-    "en": "",
+    "en": "WanQi",
     "cn": "",
     "nameKey": "Relic/Individual/45_5d0b11927aa444d4b873354c3111f2a1/Name",
     "descKey": "Relic/Individual/45_5d0b11927aa444d4b873354c3111f2a1/Description",
@@ -19666,7 +19666,7 @@
    },
    {
     "id": 46,
-    "en": "",
+    "en": "TongQi",
     "cn": "",
     "nameKey": "Relic/Individual/46_a0b2a0f78f42baf49b927d6f754c170c/Name",
     "descKey": "Relic/Individual/46_a0b2a0f78f42baf49b927d6f754c170c/Description",
@@ -19682,7 +19682,7 @@
    },
    {
     "id": 47,
-    "en": "",
+    "en": "SuoQi",
     "cn": "",
     "nameKey": "Relic/Individual/47_38b86b9e5d25036479bf3fe89415df98/Name",
     "descKey": "Relic/Individual/47_38b86b9e5d25036479bf3fe89415df98/Description",
@@ -19698,7 +19698,7 @@
    },
    {
     "id": 48,
-    "en": "",
+    "en": "ZiQi",
     "cn": "",
     "nameKey": "Relic/Individual/48_7146b0efa7eb91247ac5c357c4dde82e/Name",
     "descKey": "Relic/Individual/48_7146b0efa7eb91247ac5c357c4dde82e/Description",
@@ -19714,7 +19714,7 @@
    },
    {
     "id": 49,
-    "en": "",
+    "en": "XiangQi",
     "cn": "",
     "nameKey": "Relic/Individual/49_47119a42168454d40a4655265b5d3578/Name",
     "descKey": "Relic/Individual/49_47119a42168454d40a4655265b5d3578/Description",
@@ -19730,7 +19730,7 @@
    },
    {
     "id": 50,
-    "en": "",
+    "en": "TuQi",
     "cn": "",
     "nameKey": "Relic/Individual/50_ec18a7290f2117b4ba47680aac3afcd6/Name",
     "descKey": "Relic/Individual/50_ec18a7290f2117b4ba47680aac3afcd6/Description",
@@ -19746,7 +19746,7 @@
    },
    {
     "id": 51,
-    "en": "",
+    "en": "ShuQi",
     "cn": "",
     "nameKey": "Relic/Individual/51_128510c2f1c62fd4fba10ebbcb894e2c/Name",
     "descKey": "Relic/Individual/51_128510c2f1c62fd4fba10ebbcb894e2c/Description",
@@ -19778,7 +19778,7 @@
    },
    {
     "id": 53,
-    "en": "",
+    "en": "WanLing",
     "cn": "",
     "nameKey": "Relic/Individual/53_20710cfc15900a0498c996198927a6d0/Name",
     "descKey": "Relic/Individual/53_20710cfc15900a0498c996198927a6d0/Description",
@@ -19794,7 +19794,7 @@
    },
    {
     "id": 54,
-    "en": "",
+    "en": "TongLing",
     "cn": "",
     "nameKey": "Relic/Individual/54_823d1e99c37967849b0ef7c4c217e0ed/Name",
     "descKey": "Relic/Individual/54_823d1e99c37967849b0ef7c4c217e0ed/Description",
@@ -19810,7 +19810,7 @@
    },
    {
     "id": 55,
-    "en": "",
+    "en": "SuoLing",
     "cn": "",
     "nameKey": "Relic/Individual/55_6e3aaf7a41ec6f84b825c36aee49512f/Name",
     "descKey": "Relic/Individual/55_6e3aaf7a41ec6f84b825c36aee49512f/Description",
@@ -19858,7 +19858,7 @@
    },
    {
     "id": 58,
-    "en": "",
+    "en": "ZhenZhi",
     "cn": "",
     "nameKey": "Relic/Individual/58_d6905d8af6f156f44be9bdb426516d21/Name",
     "descKey": "Relic/Individual/58_d6905d8af6f156f44be9bdb426516d21/Description",
@@ -19874,7 +19874,7 @@
    },
    {
     "id": 59,
-    "en": "",
+    "en": "TaoMuJian",
     "cn": "",
     "nameKey": "Relic/Individual/59_3bb14a3e67cefa34693237d50a310b5e/Name",
     "descKey": "Relic/Individual/59_3bb14a3e67cefa34693237d50a310b5e/Description",
@@ -19903,7 +19903,7 @@
    },
    {
     "id": 61,
-    "en": "",
+    "en": "GuiMianJu",
     "cn": "",
     "nameKey": "Relic/Individual/61_cb13cabec7ac18a498fc6c1ef56e1c42/Name",
     "descKey": "Relic/Individual/61_cb13cabec7ac18a498fc6c1ef56e1c42/Description",
@@ -19919,7 +19919,7 @@
    },
    {
     "id": 62,
-    "en": "",
+    "en": "BaoShiBiShou",
     "cn": "",
     "nameKey": "Relic/Individual/62_e696bfcba989574448f92af326399742/Name",
     "descKey": "Relic/Individual/62_e696bfcba989574448f92af326399742/Description",
@@ -19951,7 +19951,7 @@
    },
    {
     "id": 64,
-    "en": "",
+    "en": "ZhouDuRen",
     "cn": "",
     "nameKey": "Relic/Individual/64_e781bede06b8c444c9ed1d0f6dd994ca/Name",
     "descKey": "Relic/Individual/64_e781bede06b8c444c9ed1d0f6dd994ca/Description",
@@ -19967,7 +19967,7 @@
    },
    {
     "id": 65,
-    "en": "",
+    "en": "PingAnKou",
     "cn": "",
     "nameKey": "Relic/Individual/65_52ff3a50c382df5438ba550872e23c1a/Name",
     "descKey": "Relic/Individual/65_52ff3a50c382df5438ba550872e23c1a/Description",
@@ -19983,7 +19983,7 @@
    },
    {
     "id": 66,
-    "en": "",
+    "en": "MoDaoShi",
     "cn": "",
     "nameKey": "Relic/Individual/66_74ca8785bff95f84abdf909e7f9de4b2/Name",
     "descKey": "Relic/Individual/66_74ca8785bff95f84abdf909e7f9de4b2/Description",
@@ -19999,7 +19999,7 @@
    },
    {
     "id": 67,
-    "en": "",
+    "en": "LianDeng",
     "cn": "",
     "nameKey": "Relic/Individual/67_6b969b3c1520831449246565965257d7/Name",
     "descKey": "Relic/Individual/67_6b969b3c1520831449246565965257d7/Description",
@@ -20015,7 +20015,7 @@
    },
    {
     "id": 68,
-    "en": "",
+    "en": "ZhuanJingTong",
     "cn": "",
     "nameKey": "Relic/Individual/68_38b45d7d2e4f1034596908579d9506e2/Name",
     "descKey": "Relic/Individual/68_38b45d7d2e4f1034596908579d9506e2/Description",
@@ -20031,7 +20031,7 @@
    },
    {
     "id": 70,
-    "en": "",
+    "en": "ZhenHunLing",
     "cn": "",
     "nameKey": "Relic/Individual/70_8117cde1d3c62a84c9c930889cdf0091/Name",
     "descKey": "Relic/Individual/70_8117cde1d3c62a84c9c930889cdf0091/Description",
@@ -20047,7 +20047,7 @@
    },
    {
     "id": 71,
-    "en": "",
+    "en": "TianDeng",
     "cn": "",
     "nameKey": "Relic/Individual/71_c12474dd8f7643e47ac8c5372a4fa6fa/Name",
     "descKey": "Relic/Individual/71_c12474dd8f7643e47ac8c5372a4fa6fa/Description",
@@ -20063,7 +20063,7 @@
    },
    {
     "id": 72,
-    "en": "",
+    "en": "FengXianBaoXiang",
     "cn": "",
     "nameKey": "Relic/Individual/72_1595311af1d610840b9f83af81923d44/Name",
     "descKey": "Relic/Individual/72_1595311af1d610840b9f83af81923d44/Description",
@@ -20079,7 +20079,7 @@
    },
    {
     "id": 73,
-    "en": "",
+    "en": "DiYuBaoXiang",
     "cn": "",
     "nameKey": "Relic/Individual/73_2771ef74f48b9754c89af491e48708eb/Name",
     "descKey": "Relic/Individual/73_2771ef74f48b9754c89af491e48708eb/Description",
@@ -20111,7 +20111,7 @@
    },
    {
     "id": 75,
-    "en": "",
+    "en": "KuLouZhuTai",
     "cn": "",
     "nameKey": "Relic/Individual/75_3dbcb08ffdfb2d246aea444159422b4f/Name",
     "descKey": "Relic/Individual/75_3dbcb08ffdfb2d246aea444159422b4f/Description",
@@ -20127,7 +20127,7 @@
    },
    {
     "id": 76,
-    "en": "",
+    "en": "KongBuLaZhu",
     "cn": "",
     "nameKey": "Relic/Individual/76_430df2286f6c5a940ad5c5384df515eb/Name",
     "descKey": "Relic/Individual/76_430df2286f6c5a940ad5c5384df515eb/Description",
@@ -20143,7 +20143,7 @@
    },
    {
     "id": 77,
-    "en": "",
+    "en": "GuaiYiGongTai",
     "cn": "",
     "nameKey": "Relic/Individual/77_3a527640bc742ec4badce08c0a997fd5/Name",
     "descKey": "Relic/Individual/77_3a527640bc742ec4badce08c0a997fd5/Description",
@@ -20159,7 +20159,7 @@
    },
    {
     "id": 78,
-    "en": "",
+    "en": "BuXiangGongTai",
     "cn": "",
     "nameKey": "Relic/Individual/78_20ecd1a44cfb9f848ace2ae4400a3a05/Name",
     "descKey": "Relic/Individual/78_20ecd1a44cfb9f848ace2ae4400a3a05/Description",
@@ -20175,7 +20175,7 @@
    },
    {
     "id": 79,
-    "en": "",
+    "en": "YinSiBi",
     "cn": "",
     "nameKey": "Relic/Individual/79_dafacffa033c05546b47c07a948cb31a/Name",
     "descKey": "Relic/Individual/79_dafacffa033c05546b47c07a948cb31a/Description",
@@ -20191,7 +20191,7 @@
    },
    {
     "id": 80,
-    "en": "",
+    "en": "EGuiFan",
     "cn": "",
     "nameKey": "Relic/Individual/80_028560783275e574d961f66d7b7a72e5/Name",
     "descKey": "Relic/Individual/80_028560783275e574d961f66d7b7a72e5/Description",
@@ -20207,7 +20207,7 @@
    },
    {
     "id": 81,
-    "en": "",
+    "en": "WuGuWaWa",
     "cn": "",
     "nameKey": "Relic/Individual/81_2a5dcaaa00c4a804c88d4c62856bf994/Name",
     "descKey": "Relic/Individual/81_2a5dcaaa00c4a804c88d4c62856bf994/Description",
@@ -20223,7 +20223,7 @@
    },
    {
     "id": 82,
-    "en": "",
+    "en": "ZouMaDeng",
     "cn": "",
     "nameKey": "Relic/Individual/82_828b2c497431ddd4888cc3131f962147/Name",
     "descKey": "Relic/Individual/82_828b2c497431ddd4888cc3131f962147/Description",
@@ -20239,7 +20239,7 @@
    },
    {
     "id": 83,
-    "en": "",
+    "en": "ShouKao",
     "cn": "",
     "nameKey": "Relic/Individual/83_0f9fb3d6708397d49bc4c0610b6f3fa0/Name",
     "descKey": "Relic/Individual/83_0f9fb3d6708397d49bc4c0610b6f3fa0/Description",
@@ -20255,7 +20255,7 @@
    },
    {
     "id": 84,
-    "en": "",
+    "en": "PoWan",
     "cn": "",
     "nameKey": "Relic/Individual/84_c403db6849886434c8807e1a40f7328d/Name",
     "descKey": "Relic/Individual/84_c403db6849886434c8807e1a40f7328d/Description",
@@ -20271,7 +20271,7 @@
    },
    {
     "id": 85,
-    "en": "",
+    "en": "ShengXiuDingZi",
     "cn": "",
     "nameKey": "Relic/Individual/85_481faa29e71c72d428000529ab69d58e/Name",
     "descKey": "Relic/Individual/85_481faa29e71c72d428000529ab69d58e/Description",
@@ -20287,7 +20287,7 @@
    },
    {
     "id": 86,
-    "en": "",
+    "en": "ZhiRen",
     "cn": "",
     "nameKey": "Relic/Individual/86_b71839ab0510c8348aef0cd0956fbea4/Name",
     "descKey": "Relic/Individual/86_b71839ab0510c8348aef0cd0956fbea4/Description",
@@ -20303,7 +20303,7 @@
    },
    {
     "id": 87,
-    "en": "",
+    "en": "GuiCheng",
     "cn": "",
     "nameKey": "Relic/Individual/87_e6f11c5480ec3d64289a822a29060735/Name",
     "descKey": "Relic/Individual/87_e6f11c5480ec3d64289a822a29060735/Description",
@@ -20319,7 +20319,7 @@
    },
    {
     "id": 88,
-    "en": "",
+    "en": "TaiSui",
     "cn": "",
     "nameKey": "Relic/Individual/88_e69007e264470ae41aa4267f68e1083e/Name",
     "descKey": "Relic/Individual/88_e69007e264470ae41aa4267f68e1083e/Description",
@@ -20377,7 +20377,7 @@
    },
    {
     "id": 118,
-    "en": "",
+    "en": "ZhuQueYin",
     "cn": "",
     "nameKey": "Relic/Individual/118_ffa6dba4866820541abdbb590fefe04d/Name",
     "descKey": "Relic/Individual/118_ffa6dba4866820541abdbb590fefe04d/Description",
@@ -20393,7 +20393,7 @@
    },
    {
     "id": 125,
-    "en": "",
+    "en": "QianKunQuan",
     "cn": "",
     "nameKey": "Relic/Individual/125_e781bede06b8c444c9ed1d0f6dd994ca/Name",
     "descKey": "Relic/Individual/125_e781bede06b8c444c9ed1d0f6dd994ca/Description",
@@ -20409,7 +20409,7 @@
    },
    {
     "id": 126,
-    "en": "",
+    "en": "JuDuGongTai",
     "cn": "",
     "nameKey": "Relic/Individual/126_eeae051985d83ec448fdac2cc98ded5c/Name",
     "descKey": "Relic/Individual/126_eeae051985d83ec448fdac2cc98ded5c/Description",
@@ -20425,7 +20425,7 @@
    },
    {
     "id": 127,
-    "en": "",
+    "en": "MiWuGongTai",
     "cn": "",
     "nameKey": "Relic/Individual/127_d83b8938e76b88242959f2c141fed6e5/Name",
     "descKey": "Relic/Individual/127_d83b8938e76b88242959f2c141fed6e5/Description",
@@ -20441,7 +20441,7 @@
    },
    {
     "id": 128,
-    "en": "",
+    "en": "DiYuGongTai",
     "cn": "",
     "nameKey": "Relic/Individual/128_60b183d22b169364d8e8baf0cb67a36b/Name",
     "descKey": "Relic/Individual/128_60b183d22b169364d8e8baf0cb67a36b/Description",
@@ -20457,7 +20457,7 @@
    },
    {
     "id": 129,
-    "en": "",
+    "en": "XiShengGongTai",
     "cn": "",
     "nameKey": "Relic/Individual/129_5419035e11abf4c48acb97f1f0e3a2b2/Name",
     "descKey": "Relic/Individual/129_5419035e11abf4c48acb97f1f0e3a2b2/Description",
@@ -20553,7 +20553,7 @@
    },
    {
     "id": 135,
-    "en": "",
+    "en": "YouAnFan",
     "cn": "",
     "nameKey": "Relic/Individual/135_a2f1ac9ed894d3f459890b3b5a9e5f6d/Name",
     "descKey": "Relic/Individual/135_a2f1ac9ed894d3f459890b3b5a9e5f6d/Description",
@@ -20649,7 +20649,7 @@
    },
    {
     "id": 141,
-    "en": "",
+    "en": "XiangLing",
     "cn": "",
     "nameKey": "Relic/Individual/141_bb34721399fb6ed4ea6560112b0e25f6/Name",
     "descKey": "Relic/Individual/141_bb34721399fb6ed4ea6560112b0e25f6/Description",
@@ -20665,7 +20665,7 @@
    },
    {
     "id": 142,
-    "en": "",
+    "en": "TuLing",
     "cn": "",
     "nameKey": "Relic/Individual/142_e31f7efaefb60d647aa0595108f8e9dc/Name",
     "descKey": "Relic/Individual/142_e31f7efaefb60d647aa0595108f8e9dc/Description",
@@ -20681,7 +20681,7 @@
    },
    {
     "id": 143,
-    "en": "",
+    "en": "ShuLing",
     "cn": "",
     "nameKey": "Relic/Individual/143_25624b4e6c6632d46b959195ee4565fc/Name",
     "descKey": "Relic/Individual/143_25624b4e6c6632d46b959195ee4565fc/Description",
@@ -20697,7 +20697,7 @@
    },
    {
     "id": 144,
-    "en": "",
+    "en": "ZuZhouBaoXiang",
     "cn": "",
     "nameKey": "Relic/Individual/144_1595311af1d610840b9f83af81923d44/Name",
     "descKey": "Relic/Individual/144_1595311af1d610840b9f83af81923d44/Description",
@@ -20729,7 +20729,7 @@
    },
    {
     "id": 146,
-    "en": "",
+    "en": "HongYingQiang",
     "cn": "",
     "nameKey": "Relic/Individual/146_bb203f71e5ae24e439aa9cc81126b7d9/Name",
     "descKey": "Relic/Individual/146_bb203f71e5ae24e439aa9cc81126b7d9/Description",
@@ -20745,7 +20745,7 @@
    },
    {
     "id": 147,
-    "en": "",
+    "en": "YuWan",
     "cn": "",
     "nameKey": "Relic/Individual/147_66cf2bf9afe3f8b47b8567da0bf9bd85/Name",
     "descKey": "Relic/Individual/147_66cf2bf9afe3f8b47b8567da0bf9bd85/Description",
@@ -20761,7 +20761,7 @@
    },
    {
     "id": 148,
-    "en": "",
+    "en": "BiShan",
     "cn": "",
     "nameKey": "Relic/Individual/148_1d4e6b38443d9fb40a8d3d19bf4df99b/Name",
     "descKey": "Relic/Individual/148_1d4e6b38443d9fb40a8d3d19bf4df99b/Description",
@@ -20777,7 +20777,7 @@
    },
    {
     "id": 149,
-    "en": "",
+    "en": "DiYuBiShou",
     "cn": "",
     "nameKey": "Relic/Individual/149_21d332e0e74379a41b64b2eb265c4d50/Name",
     "descKey": "Relic/Individual/149_21d332e0e74379a41b64b2eb265c4d50/Description",
@@ -20806,7 +20806,7 @@
    },
    {
     "id": 151,
-    "en": "",
+    "en": "CanYuePan",
     "cn": "",
     "nameKey": "Relic/Individual/151_fb4bcb7508df7264ea55a46098e8083c/Name",
     "descKey": "Relic/Individual/151_fb4bcb7508df7264ea55a46098e8083c/Description",
@@ -20822,7 +20822,7 @@
    },
    {
     "id": 152,
-    "en": "",
+    "en": "LaoYueLan",
     "cn": "",
     "nameKey": "Relic/Individual/152_162eb441cba495249bfc0558976983c9/Name",
     "descKey": "Relic/Individual/152_162eb441cba495249bfc0558976983c9/Description",
@@ -20838,7 +20838,7 @@
    },
    {
     "id": 153,
-    "en": "",
+    "en": "ChiNianBaoXiang",
     "cn": "",
     "nameKey": "Relic/Individual/153_e2868c002a388c346928de7eb8f22c8a/Name",
     "descKey": "Relic/Individual/153_e2868c002a388c346928de7eb8f22c8a/Description",
@@ -20854,7 +20854,7 @@
    },
    {
     "id": 154,
-    "en": "",
+    "en": "FengLingZhu",
     "cn": "",
     "nameKey": "Relic/Individual/154_61bb34f37a39743438c38a2a001b80b4/Name",
     "descKey": "Relic/Individual/154_61bb34f37a39743438c38a2a001b80b4/Description",
@@ -20870,7 +20870,7 @@
    },
    {
     "id": 155,
-    "en": "",
+    "en": "LongZhu",
     "cn": "",
     "nameKey": "Relic/Individual/155_6c3d9c498150b344395c2c9e7be938e0/Name",
     "descKey": "Relic/Individual/155_6c3d9c498150b344395c2c9e7be938e0/Description",
@@ -20886,7 +20886,7 @@
    },
    {
     "id": 156,
-    "en": "",
+    "en": "ZhuNengShi",
     "cn": "",
     "nameKey": "Relic/Individual/156_cfe0a41211d8a2742b8e1c6b3455c8ad/Name",
     "descKey": "Relic/Individual/156_cfe0a41211d8a2742b8e1c6b3455c8ad/Description",
@@ -20902,7 +20902,7 @@
    },
    {
     "id": 157,
-    "en": "",
+    "en": "LianHuaFan",
     "cn": "",
     "nameKey": "Relic/Individual/157_c596a02ff3fe9d44d8900e32f8fce85c/Name",
     "descKey": "Relic/Individual/157_c596a02ff3fe9d44d8900e32f8fce85c/Description",
@@ -20918,7 +20918,7 @@
    },
    {
     "id": 158,
-    "en": "",
+    "en": "LianHuaGuan",
     "cn": "",
     "nameKey": "Relic/Individual/158_1c3374b1c5984c940bc1ac06a1d25a88/Name",
     "descKey": "Relic/Individual/158_1c3374b1c5984c940bc1ac06a1d25a88/Description",
@@ -21296,7 +21296,7 @@
    },
    {
     "id": 10001,
-    "en": "",
+    "en": "YueGuangBaoHeSuiPian",
     "cn": "",
     "nameKey": "Relic/Individual/10001_3bf64e67e58bdeb4796d549cf7af6eea/Name",
     "descKey": "Relic/Individual/10001_3bf64e67e58bdeb4796d549cf7af6eea/Description",
@@ -21312,7 +21312,7 @@
    },
    {
     "id": 10002,
-    "en": "",
+    "en": "BianXingFu",
     "cn": "",
     "nameKey": "Relic/Individual/10002_5c56a15bacf990741acb3cdbf29a400a/Name",
     "descKey": "Relic/Individual/10002_5c56a15bacf990741acb3cdbf29a400a/Description",
@@ -21328,7 +21328,7 @@
    },
    {
     "id": 10003,
-    "en": "",
+    "en": "NvWaTu",
     "cn": "",
     "nameKey": "Relic/Individual/10003_e57270400a431e34696055369b6fd3e0/Name",
     "descKey": "Relic/Individual/10003_e57270400a431e34696055369b6fd3e0/Description",
@@ -21357,7 +21357,7 @@
    },
    {
     "id": 10005,
-    "en": "",
+    "en": "LingLongBaoTa",
     "cn": "",
     "nameKey": "Relic/Individual/10005_670693c7ce2324c4eb8f444107fd80a6/Name",
     "descKey": "Relic/Individual/10005_670693c7ce2324c4eb8f444107fd80a6/Description",
@@ -21373,7 +21373,7 @@
    },
    {
     "id": 10006,
-    "en": "",
+    "en": "ZiJinBoYu",
     "cn": "",
     "nameKey": "Relic/Individual/10006_3f0ea6cc541905f458fbfcfbfcbbc2ab/Name",
     "descKey": "Relic/Individual/10006_3f0ea6cc541905f458fbfcfbfcbbc2ab/Description",
@@ -21389,7 +21389,7 @@
    },
    {
     "id": 10007,
-    "en": "",
+    "en": "ZhaoYaoJing",
     "cn": "",
     "nameKey": "Relic/Individual/10007_2a1bfc33b671ec2429af4c4d6fc03dec/Name",
     "descKey": "Relic/Individual/10007_2a1bfc33b671ec2429af4c4d6fc03dec/Description",
@@ -21405,7 +21405,7 @@
    },
    {
     "id": 10008,
-    "en": "",
+    "en": "ShangHunRen",
     "cn": "",
     "nameKey": "Relic/Individual/10008_77f897d723fcbfb4b8a59b13f1c49f18/Name",
     "descKey": "Relic/Individual/10008_77f897d723fcbfb4b8a59b13f1c49f18/Description",
@@ -21421,7 +21421,7 @@
    },
    {
     "id": 10009,
-    "en": "",
+    "en": "YueGuangBaoHe",
     "cn": "",
     "nameKey": "Relic/Individual/10009_7715a551930da7d48abf839bad7d1ae5/Name",
     "descKey": "Relic/Individual/10009_7715a551930da7d48abf839bad7d1ae5/Description",
@@ -21437,7 +21437,7 @@
    },
    {
     "id": 10010,
-    "en": "",
+    "en": "BaiBaoXiang",
     "cn": "",
     "nameKey": "Relic/Individual/10010_6f8fbdfc6148b3f4f97ecd23b14f7fec/Name",
     "descKey": "Relic/Individual/10010_6f8fbdfc6148b3f4f97ecd23b14f7fec/Description",
@@ -21508,7 +21508,7 @@
    },
    {
     "id": 10015,
-    "en": "",
+    "en": "ShiHunZhu",
     "cn": "",
     "nameKey": "Relic/Individual/10015_23fff798fbf75444c95a300887ff5902/Name",
     "descKey": "Relic/Individual/10015_23fff798fbf75444c95a300887ff5902/Description",
@@ -21524,7 +21524,7 @@
    },
    {
     "id": 10016,
-    "en": "",
+    "en": "BaiYuShan",
     "cn": "",
     "nameKey": "Relic/Individual/10016_1b86350ece59b644680fc3b78b60a7de/Name",
     "descKey": "Relic/Individual/10016_1b86350ece59b644680fc3b78b60a7de/Description",
@@ -21540,7 +21540,7 @@
    },
    {
     "id": 10017,
-    "en": "",
+    "en": "ShenMiGongTai",
     "cn": "",
     "nameKey": "Relic/Individual/10017_b00a03e7e1c7e724681855c14d6ae866/Name",
     "descKey": "Relic/Individual/10017_b00a03e7e1c7e724681855c14d6ae866/Description",
@@ -21556,7 +21556,7 @@
    },
    {
     "id": 10018,
-    "en": "",
+    "en": "RanHunQiang",
     "cn": "",
     "nameKey": "Relic/Individual/10018_a93700b291b58c745b9f764a292bacfa/Name",
     "descKey": "Relic/Individual/10018_a93700b291b58c745b9f764a292bacfa/Description",
@@ -21572,7 +21572,7 @@
    },
    {
     "id": 10019,
-    "en": "",
+    "en": "LingDeng",
     "cn": "",
     "nameKey": "Relic/Individual/10019_40cca64078c299b4e94429ad82edcd67/Name",
     "descKey": "Relic/Individual/10019_40cca64078c299b4e94429ad82edcd67/Description",
@@ -21588,7 +21588,7 @@
    },
    {
     "id": 10020,
-    "en": "",
+    "en": "TaiShanShi",
     "cn": "",
     "nameKey": "Relic/Individual/10019_f9fbc151ce04eda4cbb0afd19484f9f6/Name",
     "descKey": "Relic/Individual/10019_f9fbc151ce04eda4cbb0afd19484f9f6/Description",
@@ -21604,7 +21604,7 @@
    },
    {
     "id": 10021,
-    "en": "",
+    "en": "ShouXiang",
     "cn": "",
     "nameKey": "Relic/Individual/10021_41a065026a595e6469a3ca3f2a32c700/Name",
     "descKey": "Relic/Individual/10021_41a065026a595e6469a3ca3f2a32c700/Description",
@@ -21620,7 +21620,7 @@
    },
    {
     "id": 10022,
-    "en": "",
+    "en": "SenLuoBaoJian",
     "cn": "",
     "nameKey": "Relic/Individual/10022_9508b961682afd9439601df102c97c0a/Name",
     "descKey": "Relic/Individual/10022_9508b961682afd9439601df102c97c0a/Description",
@@ -21636,7 +21636,7 @@
    },
    {
     "id": 10023,
-    "en": "",
+    "en": "QinGuangWangBaoJian",
     "cn": "",
     "nameKey": "Relic/Individual/10023_96eefedb752a6b544823b55a3d38db40/Name",
     "descKey": "Relic/Individual/10023_96eefedb752a6b544823b55a3d38db40/Description",
@@ -21652,7 +21652,7 @@
    },
    {
     "id": 10024,
-    "en": "",
+    "en": "YanLuoWangBaoJian",
     "cn": "",
     "nameKey": "Relic/Individual/10024_50f0d3245e93dd2459b3e3c3113ba9a5/Name",
     "descKey": "Relic/Individual/10024_50f0d3245e93dd2459b3e3c3113ba9a5/Description",
@@ -21668,7 +21668,7 @@
    },
    {
     "id": 10025,
-    "en": "",
+    "en": "DiZangWangBaoJian",
     "cn": "",
     "nameKey": "Relic/Individual/10025_673e57808dfbc494988298fed42bcdae/Name",
     "descKey": "Relic/Individual/10025_673e57808dfbc494988298fed42bcdae/Description",
@@ -21684,7 +21684,7 @@
    },
    {
     "id": 10026,
-    "en": "",
+    "en": "ManYue",
     "cn": "",
     "nameKey": "Relic/Individual/10026_69078b7a447b9bb4c9e6a3e4321e5658/Name",
     "descKey": "Relic/Individual/10026_69078b7a447b9bb4c9e6a3e4321e5658/Description",
@@ -21700,7 +21700,7 @@
    },
    {
     "id": 10027,
-    "en": "",
+    "en": "TaiShanWangBaoJian",
     "cn": "",
     "nameKey": "Relic/Individual/10027_31e507d5c0777d74bb03aee1c521ca95/Name",
     "descKey": "Relic/Individual/10027_31e507d5c0777d74bb03aee1c521ca95/Description",

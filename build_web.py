@@ -1001,7 +1001,7 @@ def offering_category(oid):
     return "其他"
 
 
-def merge_shared(data, shared, inspector_names):
+def merge_shared(data, shared, inspector_names, relic_enum):
     """把本体数据合并进 DLC 数据: 同 ID 以 bundle(DLC/更新) 为准, 其余追加。"""
     def union(cat, keyfn):
         existing = {keyfn(e): e for e in data[cat]}
@@ -1068,6 +1068,11 @@ def merge_shared(data, shared, inspector_names):
     data["relics"] = [e for e in data["relics"]
                       if e.get("src") != "enum" or e["id"] not in real_ids]
     print(f"  merge relics: +{added} from shared (替换占位 {replaced}, 删除冗余占位 {before - len(data['relics'])})")
+
+    # 补全所有遗物的 en 字段（拼音）
+    for e in data["relics"]:
+        if not e.get("en"):
+            e["en"] = relic_enum.get(e["id"], "")
 
 
 # ============================================================
@@ -1696,7 +1701,8 @@ def main():
 
     print("\n[3/5] extracting base-game data (sharedassets)...")
     shared = extract_shared_assets(enum_values)
-    merge_shared(data, shared, inspector_names)
+    relic_enum = enum_values.get("RelicId", {})
+    merge_shared(data, shared, inspector_names, relic_enum)
 
     print("\n[4/5] parsing I2 localization...")
     i2 = load_i2_terms()
