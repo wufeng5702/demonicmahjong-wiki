@@ -27,6 +27,7 @@ DemonicMahjong/
 
 # Python
 __pycache__/
+.venv/
 
 # 日志文件
 *.log

@@ -5,17 +5,20 @@
 ## 快速开始
 
 ```bash
-# 1. 安装依赖
-pip install unitypy
+# 1. 安装 uv（如未安装）
+pip install uv
 
-# 2. 配置环境
+# 2. 安装依赖
+uv sync
+
+# 3. 配置环境
 cp .env.example .env
 # 编辑 .env，设置 GAME_DIR 指向游戏安装目录
 
-# 3. 构建
-python build_web.py
+# 4. 构建
+uv run python build_web.py
 
-# 4. 预览
+# 5. 预览
 # 打开 web_src/index.html（开发版）
 # 或打开 output/site/index.html（部署版）
 ```
@@ -44,11 +47,11 @@ python build_web.py
 ## 常用命令
 
 ```bash
-python build_web.py             # 完整构建（3-5分钟）
-python build_web.py --web-only  # 仅同步前端（改代码后快速刷新）
-python deploy.py                # 部署（压缩图片、转 AVIF）
-python calibrate.py             # 校准 rawparse（游戏更新后）
-python extract_enums.py         # 提取枚举到 assets/enums.json
+uv run python build_web.py             # 完整构建（3-5分钟）
+uv run python build_web.py --web-only  # 仅同步前端（改代码后快速刷新）
+uv run python deploy.py                # 部署（压缩图片、转 AVIF）
+uv run python calibrate.py             # 校准 rawparse（游戏更新后）
+uv run python extract_enums.py         # 提取枚举到 assets/enums.json
 ```
 
 ## 数据规模
@@ -78,7 +81,7 @@ python extract_enums.py         # 提取枚举到 assets/enums.json
 ## 环境要求
 
 - Python 3.14+
-- UnityPy（`pip install unitypy`）
+- uv（`pip install uv`）
 - 游戏安装目录（Steam）
 - Node.js（可选，用于校验 JS 语法）
 

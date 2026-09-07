@@ -11,13 +11,19 @@
 ## 快速开始
 
 ```bash
-# 1. 配置环境
+# 1. 安装 uv（如未安装）
+pip install uv
+
+# 2. 安装依赖
+uv sync
+
+# 3. 配置环境
 cp .env.example .env   # 编辑 GAME_DIR 等路径
 
-# 2. 完整构建
-python build_web.py
+# 4. 完整构建
+uv run python build_web.py
 
-# 3. 预览
+# 5. 预览
 打开 web_src/index.html（可直接预览）
 或打开 output/site/index.html（部署版本）
 ```
@@ -74,7 +80,7 @@ FONT_PATHS=你的字体路径
 
 依赖：
 - Python 3.14
-- `pip install unitypy`
+- uv（`pip install uv`，然后 `uv sync` 安装依赖）
 - Node.js（可选，用于校验 JS 语法）
 
 ---
@@ -84,8 +90,8 @@ FONT_PATHS=你的字体路径
 ### build_web.py — 一键构建图鉴
 
 ```bash
-python build_web.py             # 完整构建（3-5分钟）
-python build_web.py --web-only  # 仅同步前端（改 app.js/style.css 后快速刷新）
+uv run python build_web.py             # 完整构建（3-5分钟）
+uv run python build_web.py --web-only  # 仅同步前端（改 app.js/style.css 后快速刷新）
 ```
 
 构建流程：
@@ -105,8 +111,8 @@ python build_web.py --web-only  # 仅同步前端（改 app.js/style.css 后快�
 ### calibrate.py — rawparse 校准
 
 ```bash
-python calibrate.py            # 自动查找 bundle，输出 probe_out.txt
-python calibrate.py --bundle <path>  # 指定 bundle
+uv run python calibrate.py            # 自动查找 bundle，输出 probe_out.txt
+uv run python calibrate.py --bundle <path>  # 指定 bundle
 ```
 
 使用时机（无需每次构建都跑，仅在以下情况手动调用）：
@@ -121,14 +127,14 @@ python calibrate.py --bundle <path>  # 指定 bundle
 ### deploy.py — 部署
 
 ```bash
-python deploy.py   # 压缩图片、转 AVIF，输出到 output/site_deploy/
+uv run python deploy.py   # 压缩图片、转 AVIF，输出到 output/site_deploy/
 ```
 
 ### extract_enums.py — 提取枚举定义
 
 ```bash
-python extract_enums.py              # 从 dump.cs 提取 → assets/enums.json
-python extract_enums.py path/to/dump.cs  # 指定 dump.cs 路径
+uv run python extract_enums.py              # 从 dump.cs 提取 → assets/enums.json
+uv run python extract_enums.py path/to/dump.cs  # 指定 dump.cs 路径
 ```
 
 生成的 `assets/enums.json`（~58KB）包含 Tag、Rarity、CharacterID 等枚举定义，可提交 git。build_web.py 优先读此文件，不再依赖 40MB 的 dump.cs。

@@ -1,0 +1,10 @@
+[project]
+name = "demonicmahjong-wiki"
+version = "0.1.0"
+description = "我在地府打麻将 Wiki & 数据提取工具"
+requires-python = ">=3.14"
+dependencies = [
+    "unitypy>=1.25.3",
+    "Pillow>=11.0.0",
+    "numpy>=2.0.0",
+]
