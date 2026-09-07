@@ -124,10 +124,3 @@ poetry.lock         text eol=lf
 *.sqlite3      binary
 # 编译后的语言文件（若使用 gettext）
 *.mo           binary
-
-# ============================================================
-# 5. git-crypt 加密规则（游戏资源，不公开）
-# ============================================================
-assets/lingyong_card/*.png filter=git-crypt diff=git-crypt
-assets/enums.json filter=git-crypt diff=git-crypt
-web_src/data.json filter=git-crypt diff=git-crypt
