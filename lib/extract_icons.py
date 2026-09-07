@@ -14,6 +14,7 @@
 import math
 import re
 import sys
+from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageFilter
@@ -605,6 +606,7 @@ def extract_character_skill_icons():
     sf = bf.files[cab_keys[0]]
 
     sprite_map = {}
+    sprite_by_lower = {}
     for obj in sf.objects.values():
         if obj.type.name == "Sprite":
             try:
@@ -612,21 +614,32 @@ def extract_character_skill_icons():
                 nm = getattr(d, "m_Name", "")
                 if nm:
                     sprite_map[nm] = obj
+                    if nm.lower().startswith("iconskill"):
+                        sprite_by_lower[nm.lower()] = obj
             except Exception:
                 pass
 
     count = 0
     seen = set()
 
-    def _save_passive(xid, sub):
+    def _save_passive(xid, sub, mname=""):
         nonlocal count
-        if xid < 20000 or xid in seen or not sub:
+        # 角色主动和被动 xid 是 20000~30000
+        if xid < 20000 or xid in seen or xid > 30000:
             return
-        if sub not in sprite_map:
+        obj = None
+        if sub and sub in sprite_map:
+            obj = sprite_map[sub]
+        elif not sub and mname:
+            base = re.sub(r"\d+$", "", mname)
+            predicted = f"IconSkill{base}".lower()
+            if predicted in sprite_by_lower:
+                obj = sprite_by_lower[predicted]
+        if obj is None:
             return
         seen.add(xid)
         try:
-            img = sprite_map[sub].read().image
+            img = obj.read().image
             img.save(str(out_dir / f"{xid}_passive.png"))
             count += 1
         except Exception:
@@ -646,7 +659,8 @@ def extract_character_skill_icons():
             if ic is None:
                 continue
             sub = getattr(ic, "m_SubObjectName", "") or ""
-            _save_passive(xid, sub)
+            mname = getattr(d, "m_Name", "") or ""
+            _save_passive(xid, sub, mname)
         except Exception:
             continue
 
@@ -665,7 +679,8 @@ def extract_character_skill_icons():
             xid = int(pd.get("id", 0))
             ic = pd.get("iconReference") or {}
             sub = ic.get("sub", "")
-            _save_passive(xid, sub)
+            mname = pd.get("m_Name", "")
+            _save_passive(xid, sub, mname)
         except Exception:
             continue
     print(f"  character skill icons: {count} extracted")
@@ -967,3 +982,38 @@ def extract_baopai_icons():
         except Exception:
             continue
     print(f"  baopai icons: {count} extracted")
+
+
+def composite_skill_icons():
+    """把角色技能 icon 合成到底图上，覆盖 icons/character_skill/。"""
+    assets = Path(__file__).resolve().parent.parent / "assets"
+    bg_passive = Image.open(assets / "skill_bg" / "SelectPopBgA11.png").convert("RGBA")
+    bg_active = Image.open(assets / "skill_bg" / "SelectPopBgA12.png").convert("RGBA")
+    icons_dir = SITE_DIR / "icons" / "character_skill"
+    if not icons_dir.exists():
+        return
+    bg_w, bg_h = bg_passive.size
+    center_x, center_y = bg_w // 2, int(bg_h * 0.585)
+    circle_radius = 85
+    count = 0
+    for p in icons_dir.glob("*.png"):
+        if "_passive.png" in p.name:
+            bg = bg_passive
+        elif "_active.png" in p.name:
+            bg = bg_active
+        else:
+            continue
+        try:
+            icon = Image.open(p).convert("RGBA")
+            iw, ih = icon.size
+            scale = (circle_radius * 2) / max(iw, ih)
+            icon_resized = icon.resize((int(iw * scale), int(ih * scale)), Image.LANCZOS)
+            result = bg.copy()
+            x = center_x - icon_resized.width // 2
+            y = center_y - icon_resized.height // 2
+            result.paste(icon_resized, (x, y), icon_resized)
+            result.save(p)
+            count += 1
+        except Exception:
+            pass
+    print(f"  skill icons composited: {count}")

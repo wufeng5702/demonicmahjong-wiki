@@ -574,19 +574,11 @@ main {
   white-space: pre-wrap;
 }
 .subh-icon {
-  width: 40px;
-  height: 60px;
+  width: 90px;
+  height: 58px;
   border-radius: 4px;
   object-fit: contain;
-  background: var(--bg2);
-  border: 1px solid var(--line);
   flex-shrink: 0;
-}
-.subh-passive .subh-icon {
-  border-color: var(--passive-color);
-}
-.subh-active .subh-icon {
-  border-color: var(--active-color);
 }
 .subh-text {
   display: flex;

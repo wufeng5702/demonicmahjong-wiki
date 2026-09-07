@@ -43,7 +43,7 @@ from extract_icons import (
     extract_character_avatars, extract_character_skill_icons,
     extract_relic_icons, extract_offering_icons,
     extract_offering_skill_icons, extract_baopai_icons,
-    render_pailing_icons,
+    render_pailing_icons, composite_skill_icons,
 )
 
 DUMP_CS = Path(os.environ.get("DUMP_CS",
@@ -215,6 +215,9 @@ def main():
         render_pailing_icons(BUNDLE_PATH, SITE_DIR / "icons")
     except Exception as e:
         print(f"  [WARN] pailing icon rendering failed: {e}")
+
+    # 技能图标合成到底图上
+    composite_skill_icons()
 
     copy_web_files()
     print("\n[DONE]")
