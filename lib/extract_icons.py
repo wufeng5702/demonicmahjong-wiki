@@ -475,9 +475,14 @@ def extract_lingyong_icons():
     count = 0
     seen = set()
 
-    def _save_icon(xid, sub):
+    def _save_icon(xid, sub, en_name=""):
         nonlocal count
-        if xid in seen or xid == 0 or not sub:
+        if xid in seen or xid == 0:
+            return
+        # 如果 sub 为空，尝试用 ID{xxx}{en_name} 格式查找
+        if not sub and en_name:
+            sub = f"ID{xid:04d}{en_name}"
+        if not sub:
             return
         if sub not in sprite_map:
             return
@@ -495,6 +500,14 @@ def extract_lingyong_icons():
         except Exception:
             pass
 
+    def _find_sprite_by_pattern(xid):
+        """当 sub 为空时，按 ID{xxx} 模式查找 sprite"""
+        prefix = f"ID{xid:04d}"
+        for name in sprite_map:
+            if name.startswith(prefix):
+                return name
+        return None
+
     for obj in sf.objects.values():
         if obj.type != ClassIDType.MonoBehaviour:
             continue
@@ -509,7 +522,8 @@ def extract_lingyong_icons():
             if ic is None:
                 continue
             sub = getattr(ic, "m_SubObjectName", "") or ""
-            _save_icon(xid, sub)
+            en_name = getattr(d, "m_Name", "") or ""
+            _save_icon(xid, sub, en_name)
         except Exception:
             continue
 
@@ -528,7 +542,10 @@ def extract_lingyong_icons():
             xid = int(pd.get("id", 0))
             ic = pd.get("iconReference") or {}
             sub = ic.get("sub", "")
-            _save_icon(xid, sub)
+            en_name = pd.get("m_Name", "")
+            if not sub:
+                sub = _find_sprite_by_pattern(xid)
+            _save_icon(xid, sub, en_name)
         except Exception:
             continue
 
@@ -547,7 +564,10 @@ def extract_lingyong_icons():
             xid = int(pd.get("id", 0))
             ic = pd.get("iconReference") or {}
             sub = ic.get("sub", "")
-            _save_icon(xid, sub)
+            en_name = pd.get("m_Name", "")
+            if not sub:
+                sub = _find_sprite_by_pattern(xid)
+            _save_icon(xid, sub, en_name)
         except Exception:
             continue
 
