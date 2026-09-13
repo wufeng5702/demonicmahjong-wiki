@@ -108,16 +108,32 @@ def paste_center(base, overlay, y_offset=0):
 
 
 def wrap_text(text, font, max_width, draw):
-    """自动换行，返回行列表"""
+    """自动换行，返回行列表（行首禁则标点移到上一行末尾，行尾运算符移到下一行）"""
+    # 行首禁则标点
+    _NO_START = set("。，、！？）》」』】〉〉～…：；"",.!?)]}")
+    # 行尾禁则运算符
+    _NO_END = set("+-×÷")
     lines = []
     current_line = ""
-    for char in text:
+    for i, char in enumerate(text):
         test_line = current_line + char
         bbox = draw.textbbox((0, 0), test_line, font=font)
         if bbox[2] - bbox[0] > max_width:
             if current_line:
-                lines.append(current_line)
-            current_line = char
+                # 行尾禁则：如果上一行末尾是运算符，移到下一行
+                if current_line and current_line[-1] in _NO_END:
+                    # 把运算符移到下一行
+                    lines.append(current_line[:-1])
+                    current_line = current_line[-1] + char
+                # 行首禁则：如果当前字符是禁则标点，移到上一行末尾
+                elif char in _NO_START and len(current_line) > 0:
+                    lines.append(current_line + char)
+                    current_line = ""
+                else:
+                    lines.append(current_line)
+                    current_line = char
+            else:
+                current_line = char
         else:
             current_line = test_line
     if current_line:
@@ -125,13 +141,16 @@ def wrap_text(text, font, max_width, draw):
     return lines
 
 
-def draw_text_with_highlight(draw, text, x, y, font, fill="#FFFFFF", highlight_fill="#FF6B35", max_width=438):
+def draw_text_with_highlight(draw, text, x, y, font, fill="#FFFFFF", highlight_fill="#FF6B35", max_width=438, justify=True):
     """
     绘制文本，按 \n 换行，超出 max_width 时自动折行，并高亮数字。
+    justify=True 时两端对齐（非末行均匀加空格）。
     返回文本总高度。
     """
     import re as _re
-    pattern = _re.compile(r'([+-]?\d+(?:\.\d+)?%?)')
+    pattern = _re.compile(r'([+-×]?\d+(?:\.\d+)?%?)')
+    _NO_START = set("。，、！？）》」』】〉〉～…：；"",.!?)]}%")
+    _NO_END = set("+-×÷")
 
     # 先按 \n 拆分成段落
     paragraphs = text.split("\n")
@@ -163,25 +182,60 @@ def draw_text_with_highlight(draw, text, x, y, font, fill="#FFFFFF", highlight_f
                 test_line = temp_line + char
                 bbox = draw.textbbox((0, 0), test_line, font=font)
                 if bbox[2] - bbox[0] > max_width and temp_line:
-                    line_segments.append(temp_segs[:])
-                    temp_line = char
-                    temp_segs = [(char, seg_type == "highlight")]
+                    # 行尾禁则：如果上一行末尾是运算符，移到下一行
+                    if temp_segs and temp_segs[-1][0] in _NO_END:
+                        # 把运算符移到下一行
+                        op_char, op_hl = temp_segs.pop()
+                        if temp_segs:
+                            line_segments.append(temp_segs[:])
+                        temp_line = op_char + char
+                        temp_segs = [(op_char, op_hl), (char, seg_type == "highlight")]
+                    # 行首禁则：如果当前字符是禁则标点，移到上一行末尾
+                    elif char in _NO_START and temp_segs:
+                        temp_segs.append((char, seg_type == "highlight"))
+                        line_segments.append(temp_segs[:])
+                        temp_line = ""
+                        temp_segs = []
+                    else:
+                        line_segments.append(temp_segs[:])
+                        temp_line = char
+                        temp_segs = [(char, seg_type == "highlight")]
                 else:
                     temp_line = test_line
                     temp_segs.append((char, seg_type == "highlight"))
         if temp_segs:
             line_segments.append(temp_segs)
 
+    # 计算每行自然宽度
+    def line_natural_width(segs):
+        w = 0
+        for char, _ in segs:
+            bbox = draw.textbbox((0, 0), char, font=font)
+            w += bbox[2] - bbox[0]
+        return w
+
     # 绘制
     total_height = 0
     line_height = font.size + 8
-    for segs in line_segments:
+    num_lines = len(line_segments)
+    for idx, segs in enumerate(line_segments):
+        is_last = (idx == num_lines - 1)
+        natural_w = line_natural_width(segs)
+
+        # 两端对齐：非末行且有多个字符时，计算字符间距
+        # 仅对较长行两端对齐，短行（不足85%宽度）保持原样
+        if justify and not is_last and len(segs) > 1 and natural_w >= max_width * 0.85:
+            extra = max_width - natural_w
+            gap = extra / (len(segs) - 1)
+        else:
+            gap = 0
+
         x_offset = 0
-        for char, is_hl in segs:
+        for i, (char, is_hl) in enumerate(segs):
             color = highlight_fill if is_hl else fill
             draw.text((x + x_offset, y + total_height), char, font=font, fill=color)
             bbox = draw.textbbox((0, 0), char, font=font)
-            x_offset += bbox[2] - bbox[0]
+            x_offset += (bbox[2] - bbox[0]) + gap
         total_height += line_height
 
     return total_height
@@ -224,7 +278,7 @@ def generate_card(entry, font_name, font_desc, bg_base, rarity_bgs, bg_name):
     icon_path = ICONS_DIR / f"{entry['id']}.png"
     if icon_path.exists():
         icon = load_image(icon_path)
-        icon_max = 280
+        icon_max = 340
         icon_scale = min(icon_max / icon.width, icon_max / icon.height)
         icon = icon.resize((int(icon.width * icon_scale), int(icon.height * icon_scale)), Image.LANCZOS)
         paste_center(card, icon, y_offset=-180)
@@ -264,9 +318,9 @@ def generate_card(entry, font_name, font_desc, bg_base, rarity_bgs, bg_name):
 
     # 5. 描述区域 - 从底部上方300像素开始，无暗色背景，两端对齐
     desc = entry.get("desc", "")
-    desc_area_y = CARD_H - 300
-    desc_x = 100  # 左边距100像素
-    max_text_w = CARD_W - 200  # 左右各100像素边距
+    desc_area_y = CARD_H - 320
+    desc_x = 60  # 左边距60像素
+    max_text_w = CARD_W - desc_x*2  # 左右各60像素边距
 
     # 绘制描述文字（带高亮）
     draw_text_with_highlight(draw, desc, desc_x, desc_area_y, font_desc,
@@ -289,8 +343,8 @@ def main():
     print(f"使用字体: {font_path}")
 
     # 加载字体
-    font_name = ImageFont.truetype(font_path, 42)
-    font_desc = ImageFont.truetype(font_path, 32)
+    font_name = ImageFont.truetype(font_path, 56)
+    font_desc = ImageFont.truetype(font_path, 36)
 
     # 加载灵佣数据
     entries = load_data()
