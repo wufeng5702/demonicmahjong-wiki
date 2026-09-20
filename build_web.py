@@ -57,7 +57,7 @@ def copy_web_files():
     from config import SITE_DIR as _sd
     WEB_SRC = Path(__file__).parent / "web_src"
     repo_url = os.environ.get("REPO_URL", "")
-    for f in ("index.html", "app.js", "style.css", "data.json"):
+    for f in ("index.html", "app.js", "style.css", "data.json", "favicon.png"):
         src = WEB_SRC / f
         if not src.exists():
             continue
@@ -70,10 +70,14 @@ def copy_web_files():
                 print(f"  web_src/{f} formatted")
             except subprocess.CalledProcessError as e:
                 print(f"  web_src/{f} prettier format failed: {e.stderr.strip()}")
-        content = src.read_text(encoding="utf-8")
-        if repo_url:
-            content = content.replace("__REPO_URL__", repo_url)
-        (_sd / f).write_text(content, encoding="utf-8")
+        if f.endswith(".png") or f.endswith(".ico"):
+            import shutil
+            shutil.copy2(src, _sd / f)
+        else:
+            content = src.read_text(encoding="utf-8")
+            if repo_url:
+                content = content.replace("__REPO_URL__", repo_url)
+            (_sd / f).write_text(content, encoding="utf-8")
         print(f"  site/{f} copied")
 
 
