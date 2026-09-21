@@ -755,13 +755,18 @@ function bindMiniTopbar() {
     }, 600);
   });
 
+  let scrollTimer = null;
   window.addEventListener(
     "scroll",
     () => {
       if (window.innerWidth > 768 || manualOverride) return;
-      const y = window.scrollY;
-      if (y > 120 && !collapsed) setCollapsed(true);
-      else if (y < 40 && collapsed) setCollapsed(false);
+      if (scrollTimer) return;
+      scrollTimer = setTimeout(() => {
+        scrollTimer = null;
+        const y = window.scrollY;
+        if (y > 120 && !collapsed) setCollapsed(true);
+        else if (y < 40 && collapsed) setCollapsed(false);
+      }, 80);
     },
     { passive: true },
   );

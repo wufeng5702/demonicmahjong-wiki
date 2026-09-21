@@ -135,8 +135,15 @@ nav#tabs {
   .topbar-toggle {
     display: block;
   }
+  .topbar-body {
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height 0.25s ease-out, opacity 0.2s ease-out;
+    opacity: 1;
+  }
   body.nav-collapsed .topbar-body {
-    display: none;
+    max-height: 0;
+    opacity: 0;
   }
 }
 .tab {
