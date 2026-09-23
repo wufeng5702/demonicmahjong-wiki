@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """神秘事件提取: EventNode 图 + 事件_* TextAsset JSON + 图标提取。"""
 import json
+import re
 
 from UnityPy import AssetsManager
 
@@ -42,6 +43,11 @@ ctx_baoling = {1: "红宝牌", 2: "蓝宝牌", 3: "绿宝牌", 4: "金宝牌", 5
 
 _data_relic_names = []
 _data_offering_names = []
+
+_EVENT_NAME_RE = re.compile(r"^(事件|常规)_(.+)$")
+_MRP_NAME_RE = re.compile(r"^(事件|常规)(\d+)_(.+)$")
+_GAMEEVENT_SPEC = [("id", "s"), ("rarity", "i"), ("displayName", "s"),
+                   ("eventType", "i"), ("description", "s"), ("memo", "s")]
 
 
 def set_data_names(relic_names, offering_names):
@@ -207,6 +213,51 @@ def _extract_buff_icons(bsf):
     return count > 0
 
 
+def _collect_event_ids(*sfs):
+    """从多个 SerializedFile 收集事件数值 ID: MapRandomPoolItem(优先) + GameEvent(回退)。"""
+    ge_ids = {}
+    mrp_ids = {}
+    for sf in sfs:
+        if sf is None:
+            continue
+        for pid, obj in sf.objects.items():
+            if obj.type.name != "MonoBehaviour":
+                continue
+            try:
+                d = obj.read(check_read=False)
+                mn = getattr(d, "m_Name", "") or ""
+                cn = getattr(d.m_Script.read(), "m_ClassName", "")
+            except Exception:
+                continue
+            raw = obj.get_raw_data()
+            if cn == "MapRandomPoolItem":
+                m = _MRP_NAME_RE.match(mn)
+                if not m:
+                    continue
+                try:
+                    _, _, _, _, pos = rp.mb_header(raw)
+                    sid = rp.RawReader(raw, pos).string()
+                    num = int(sid) if sid.isdigit() else int(m.group(2))
+                    mrp_ids[(m.group(1), m.group(3))] = num
+                except Exception:
+                    pass
+            elif cn == "GameEvent":
+                m = _EVENT_NAME_RE.match(mn)
+                if not m:
+                    continue
+                try:
+                    _, _, _, _, pos = rp.mb_header(raw)
+                    f = rp.parse_fields(raw, pos, _GAMEEVENT_SPEC)
+                    sid = str(f.get("id", ""))
+                    if sid.isdigit():
+                        ge_ids[(m.group(1), m.group(2))] = int(sid)
+                except Exception:
+                    pass
+    ids = dict(ge_ids)
+    ids.update(mrp_ids)  # MapRandomPoolItem 覆盖 GameEvent（避免 GE id 冲突）
+    return ids
+
+
 def extract_events(i2):
     """神秘事件 v4: EventNode 图 + TextAsset JSON。"""
     print("  loading event graph (bundle CAB)...")
@@ -303,6 +354,9 @@ def extract_events(i2):
             continue
         event_jsons[nm] = j
     print(f"  event JSONs loaded: {len(event_jsons)} (from bundle + sharedassets4)")
+
+    event_ids = _collect_event_ids(bsf, sf4)
+    print(f"  event numeric IDs collected: {len(event_ids)}")
 
     def _fmt_effect_inner(n, ctx):
         t = n["type"]
@@ -449,8 +503,9 @@ def extract_events(i2):
 
         if not texts and not options:
             continue
+        eid = event_ids.get((kind, title))
         ev = {
-            "id": title,
+            "id": eid if eid is not None else 0,
             "name": title,
             "kind": kind,
             "limits": sorted(set(l for l in limits if l)),
@@ -460,6 +515,6 @@ def extract_events(i2):
         if ev_icon:
             ev["icon"] = ev_icon
         events.append(ev)
-    events.sort(key=lambda e: (e["kind"], e["name"]))
+    events.sort(key=lambda e: (e["kind"], e["id"] if e["id"] else 10**9, e["name"]))
     print(f"  events extracted: {len(events)}")
     return events
