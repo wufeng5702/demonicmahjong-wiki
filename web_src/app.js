@@ -173,8 +173,11 @@ function entryHaystack(e, cat) {
   const parts = [e.name, e.cn, e.en, e.id, e.desc, e.rar, e.tags];
   if (cat === "characters") {
     parts.push(e.unlock);
-    for (const g of ["passives", "actives"])
+    for (const g of ["passives", "actives"]) {
       for (const s of e[g] || []) parts.push(s.name, s.desc);
+      const ups = e.skillUpgrades?.[g];
+      if (ups) parts.push(ups["12"], ups["23"]);
+    }
   }
   if (e.fanList) parts.push(e.fanList.join(" "));
   if (cat === "fanzhong")
@@ -441,8 +444,17 @@ function cardHtml(e, cat, q) {
               g === "actives" && s.adds && s.adds.soulCost
                 ? ` <span class="badge r4">魂力 ${s.adds.soulCost}</span>`
                 : "";
+            const upTxt =
+              lvl === "2"
+                ? e.skillUpgrades?.[g]?.["12"]
+                : lvl === "3"
+                  ? e.skillUpgrades?.[g]?.["23"]
+                  : "";
+            const up = upTxt
+              ? `<span class="skill-up">${hl(upTxt.replace(/\n+/g, " "), q)}</span>`
+              : "";
             detail += `<div class="skillbox">
-              <div class="skill-lv"><span class="tl">Lv${lvl}</span>${soul}</div>
+              <div class="skill-lv"><span class="tl">Lv${lvl}</span>${soul}${up}</div>
               <div class="sd">${hl(s.desc || "（无描述）", q)}</div>
             </div>`;
           }

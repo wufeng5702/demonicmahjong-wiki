@@ -121,12 +121,31 @@ def main():
         print(f"  {cat}: {len(entries)} entries ({miss} keys unresolved)")
 
     # 角色解锁条件: 仅可操控角色输出; 无游戏文案则写「无」
+    # 技能升级说明: CharacterDevelopment/UpgradeDesc/{slug}/{Passive|Active}Skill12|23
     for ch in data["characters"]:
         if ch.get("src") == "enum":
             ch.pop("unlock", None)
             ch.pop("unlockKey", None)
-        elif not (ch.get("unlock") or "").strip():
+            continue
+        if not (ch.get("unlock") or "").strip():
             ch["unlock"] = "无"
+        m = re.match(r"RoleAvatar/(\d+_[A-Za-z]+)/Name", ch.get("nameKey") or "")
+        if not m:
+            continue
+        slug = m.group(1)
+        upgrades = {}
+        for grp, prefix in (("passives", "PassiveSkill"), ("actives", "ActiveSkill")):
+            pair = {}
+            for step in ("12", "23"):
+                txt = tr(f"CharacterDevelopment/UpgradeDesc/{slug}/{prefix}{step}", i2)
+                if txt:
+                    pair[step] = txt
+            if pair:
+                upgrades[grp] = pair
+        if upgrades:
+            ch["skillUpgrades"] = upgrades
+    n_up = sum(1 for ch in data["characters"] if ch.get("skillUpgrades"))
+    print(f"  character skillUpgrades: {n_up}")
 
     # 神秘事件: 依赖已翻译的遗物/祭品/宝牌名称（须在 apply_text 之后）
     relic_names = [(e["id"], e.get("name") or e.get("cn") or e.get("en", ""))

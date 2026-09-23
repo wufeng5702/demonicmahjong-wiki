@@ -618,6 +618,11 @@ main {
 .skill-lv .tl {
   margin-right: 6px;
 }
+.skill-lv .skill-up {
+  color: var(--dim);
+  font-weight: 400;
+  margin-left: 8px;
+}
 .skillbox .sd {
   color: #cfc7e6;
   white-space: pre-wrap;
