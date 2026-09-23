@@ -275,10 +275,6 @@ function cardHtml(e, cat, q) {
     badges += `<span class="badge">共 ${e.tiers.length} 级</span>`;
 
   if (e.fan) badges += `<span class="badge r4">番数 ${e.fan}</span>`;
-  if (cat === "events") {
-    for (const l of e.limits || [])
-      badges += `<span class="badge warn">${esc(l)}</span>`;
-  }
   if (e.src === "enum")
     badges += `<span class="badge warn">仅枚举·无数据</span>`;
 
@@ -334,7 +330,7 @@ function cardHtml(e, cat, q) {
   let detail = "";
   if (open) {
     const kvs = [];
-    kvs.push(["ID", e.id]);
+    if (cat !== "events") kvs.push(["ID", e.id]);
     if (e.en) kvs.push(["枚举名", e.en]);
     if (e.cn && e.cn !== e.name) kvs.push(["中文名(枚举)", e.cn]);
     if (e.skin) kvs.push(["皮肤ID", e.skin]);
@@ -344,23 +340,54 @@ function cardHtml(e, cat, q) {
       kvs.push(["牌型", e.paiNames.join(" ")]);
     if (e.fanZhong) kvs.push(["关联番种ID", e.fanZhong]);
     if (e.nameKey) kvs.push(["名称Key", e.nameKey]);
-    detail +=
-      `<div class="kv">` +
-      kvs
-        .map(
-          ([k, v]) =>
-            `<div>${k}: <b title="${esc(v)}">${esc(String(v).slice(0, 60))}</b></div>`,
-        )
-        .join("") +
-      `</div>`;
+    if (kvs.length) {
+      detail +=
+        `<div class="kv">` +
+        kvs
+          .map(
+            ([k, v]) =>
+              `<div>${k}: <b title="${esc(v)}">${esc(String(v).slice(0, 60))}</b></div>`,
+          )
+          .join("") +
+        `</div>`;
+    }
     if (cat === "events" && e.options?.length) {
       detail += `<div class="subh">选项与结果</div>`;
-      for (const o of e.options) {
-        const resultText = o.result || "";
-        detail += `<div class="skillbox"><div class="hd"><span class="sn">${hl(o.text || "（无文本）", q)}</span></div>
-          ${resultText ? `<div class="sd">${hl(resultText, q)}</div>` : ""}
-          ${o.effects?.length ? `<div class="sd dim">${o.effects.map((x) => esc(x)).join("<br>")}</div>` : ""}</div>`;
-      }
+      e.options.forEach((o) => {
+        const rawText = o.text || "（无文本）";
+        const resultText = (o.result || "").trim();
+        const effects = (o.effects || []).filter(Boolean);
+        const hasBody = resultText || effects.length;
+        detail += `<div class="opt-card">
+          <div class="opt-head">
+            <span class="opt-title">${hl(rawText, q)}</span>
+          </div>
+          ${
+            hasBody
+              ? `<div class="opt-rule" aria-hidden="true"></div>
+          ${
+            resultText
+              ? `<div class="opt-result">${hl(resultText, q)}</div>`
+              : ""
+          }
+          ${
+            effects.length
+              ? `${
+                  resultText
+                    ? `<div class="opt-rule" aria-hidden="true"></div>`
+                    : ""
+                }<div class="opt-fx">
+            <div class="opt-fx-label">实际效果</div>
+            <div class="opt-fx-body">${effects
+              .map((x) => `<div class="opt-fx-line">${esc(x)}</div>`)
+              .join("")}</div>
+          </div>`
+              : ""
+          }`
+              : ""
+          }
+        </div>`;
+      });
     }
     if (e.fanList && e.fanList.length) {
       const validFans = e.fanList.filter((f) => FZ.has(f));

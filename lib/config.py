@@ -28,7 +28,10 @@ if _env_path.exists():
     GAME_DATA_DIR = GAME_DIR / "Demonic Mahjong_Data"
     AA_DIR = GAME_DATA_DIR / "StreamingAssets/aa/StandaloneWindows64"
     CATALOG = GAME_DATA_DIR / "StreamingAssets/aa/catalog.json"
+    SHARED0 = GAME_DATA_DIR / "sharedassets0.assets"
     SHARED1 = GAME_DATA_DIR / "sharedassets1.assets"
+    SHARED2 = GAME_DATA_DIR / "sharedassets2.assets"
+    SHARED3 = GAME_DATA_DIR / "sharedassets3.assets"
     SHARED4 = GAME_DATA_DIR / "sharedassets4.assets"
     DUMP_CS = Path(os.environ.get("DUMP_CS", GAME_DIR.parent / "dump_output/dump.cs"))
     SITE_DIR = Path(__file__).resolve().parent.parent / "output" / "site"

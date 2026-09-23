@@ -580,6 +580,80 @@ main {
   color: #cfc7e6;
   white-space: pre-wrap;
 }
+
+/* 神秘事件选项卡片 */
+.opt-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 14px 0;
+  font-size: 12.5px;
+}
+.opt-card + .opt-card {
+  margin-top: 18px;
+}
+.opt-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.opt-card:not(:has(.opt-rule)) .opt-head {
+  margin-bottom: 0;
+}
+.opt-title {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--text);
+}
+.opt-rule {
+  height: 0;
+  border-top: 1px dashed var(--line);
+  margin: 8px 0;
+}
+.opt-result {
+  color: #cfc7e6;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+.opt-fx {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 12px;
+  align-items: start;
+}
+.opt-fx-label {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 12px;
+  white-space: nowrap;
+  padding-top: 1px;
+}
+.opt-fx-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.opt-fx-line {
+  color: #ffe6b0;
+  background: rgba(232, 179, 75, 0.08);
+  border: 1px solid rgba(232, 179, 75, 0.22);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-weight: 600;
+}
+.opt-fx.is-empty .opt-fx-label {
+  color: var(--dim);
+  font-weight: 600;
+}
+.opt-empty {
+  color: var(--dim);
+  font-style: normal;
+  opacity: 0.85;
+}
+
 .subh-icon {
   width: 90px;
   height: 58px;

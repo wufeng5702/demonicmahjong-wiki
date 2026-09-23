@@ -112,14 +112,6 @@ def main():
     print("\n[4/5] parsing I2 localization...")
     i2 = load_i2_terms()
 
-    # 神秘事件: 依赖遗物/祭品/灵佣名称
-    relic_names = [(e["id"], e.get("name") or e.get("cn") or e.get("en", ""))
-                   for e in data["relics"]]
-    offering_names = [(e["id"], e.get("name") or e.get("en", ""))
-                      for e in data["offerings"]]
-    set_data_names(relic_names, offering_names)
-    data["events"] = extract_events(i2)
-
     total_missing = 0
     for cat, entries in data.items():
         if not isinstance(entries, list):
@@ -127,6 +119,18 @@ def main():
         miss = apply_text(entries, i2)
         total_missing += miss
         print(f"  {cat}: {len(entries)} entries ({miss} keys unresolved)")
+
+    # 神秘事件: 依赖已翻译的遗物/祭品/宝牌名称（须在 apply_text 之后）
+    relic_names = [(e["id"], e.get("name") or e.get("cn") or e.get("en", ""))
+                   for e in data["relics"]]
+    offering_names = [(e["id"], e.get("name") or e.get("en", ""))
+                      for e in data["offerings"]]
+    baopai_names = {e["id"]: e.get("name") or e.get("en", "")
+                    for e in data.get("baopai", [])}
+    pailing_names = {e["id"]: e.get("name") or e.get("en", "")
+                     for e in data.get("pailing", [])}
+    set_data_names(relic_names, offering_names, baopai_names, pailing_names)
+    data["events"] = extract_events(i2)
 
     # BOSS灵俑: level 从1开始
     for e in data["lingyong"]:

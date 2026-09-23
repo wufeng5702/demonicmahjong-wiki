@@ -261,7 +261,7 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 ## 已知限制
 
 1. 部分角色（牛头马面/黑白无常等 NPC）没有技能数据
-2. 神秘事件效果链留空（效果节点无标签无法跨事件归属）
+2. 神秘事件选项效果由 EventNode 子图 BFS 提取（按 GameEvent.node_refs + textContentTag 挂接）；纯叙事/离开类选项效果为空属正常
 3. 传说灵佣金色边框由 RarityEffect 动态渲染，静态合成需另做
 
 ---
