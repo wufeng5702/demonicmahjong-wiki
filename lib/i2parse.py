@@ -88,7 +88,8 @@ def parse_i2_source(raw):
 
 
 def load_i2_terms():
-    am = AssetsManager()
+    from config import GAME_DATA_DIR
+    am = AssetsManager(path=str(GAME_DATA_DIR))
     bf = am.load_file(str(SHARED1))
     pid = locate_i2_object(bf)
     if pid is None:
@@ -125,11 +126,12 @@ def tr(term_key, i2):
 
 
 def apply_text(entries, i2, id_fields=("nameKey", "descKey")):
-    """对所有条目应用 I2 翻译 (name/desc)。"""
+    """对所有条目应用 I2 翻译 (name/desc/unlock)。"""
     missing = 0
     for e in entries:
         nk, dk = e.get("nameKey", ""), e.get("descKey", "")
-        if not nk and not dk:
+        uk = e.get("unlockKey", "")
+        if not nk and not dk and not uk:
             continue
         name_txt = tr(nk, i2)
         desc_txt = tr(dk, i2)
@@ -142,6 +144,11 @@ def apply_text(entries, i2, id_fields=("nameKey", "descKey")):
                     e["descKey"] = dk
         e["name"] = name_txt if name_txt is not None else ""
         e["desc"] = desc_txt if desc_txt is not None else ""
+        if uk:
+            unlock_txt = tr(uk, i2)
+            e["unlock"] = unlock_txt if unlock_txt is not None else ""
+            if unlock_txt is None:
+                missing += 1
         if (nk and name_txt is None) or (dk and desc_txt is None):
             missing += 1
     return missing

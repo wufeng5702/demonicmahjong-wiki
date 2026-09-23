@@ -51,10 +51,23 @@ def merge_shared(data, shared, inspector_names, relic_enum):
         ch["cn"] = inspector_names.get(f"CharacterID.{ch['id']}", "")
         data["characters"].append(ch)
         by_id[ch["id"]] = [ch]
+    # RoleAvatar 元数据回填: nameKey 全量; unlockKey 仅可操控角色
+    avatar_meta = shared.get("avatar_meta") or {}
     for ch in data["characters"]:
         if not ch.get("cn"):
             ch["cn"] = inspector_names.get(f"CharacterID.{ch['id']}", "")
-    print(f"  merge characters: total={len(data['characters'])}")
+        meta = avatar_meta.get(ch["id"])
+        if not meta:
+            continue
+        if meta.get("nameKey") and not ch.get("nameKey"):
+            ch["nameKey"] = meta["nameKey"]
+        if ch.get("src") == "enum":
+            # 仅枚举·无数据 = 非玩家可操控, 不带解锁条件
+            ch.pop("unlockKey", None)
+        elif not ch.get("unlockKey"):
+            ch["unlockKey"] = meta.get("unlockKey", "")
+    print(f"  merge characters: total={len(data['characters'])}, "
+          f"avatar_meta applied: {sum(1 for ch in data['characters'] if ch.get('src') != 'enum')} playable")
 
     # 遗物: displayId+kind 合并
     def relic_key(e):

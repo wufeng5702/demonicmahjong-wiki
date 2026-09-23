@@ -172,6 +172,7 @@ function hl(text, q) {
 function entryHaystack(e, cat) {
   const parts = [e.name, e.cn, e.en, e.id, e.desc, e.rar, e.tags];
   if (cat === "characters") {
+    parts.push(e.unlock);
     for (const g of ["passives", "actives"])
       for (const s of e[g] || []) parts.push(s.name, s.desc);
   }
@@ -282,6 +283,17 @@ function cardHtml(e, cat, q) {
     badges += `<span class="badge">${esc(t)}</span>`;
 
   const name = e.name || e.cn || "(未命名)";
+  let unlockHtml = "";
+  if (cat === "characters" && e.unlock) {
+    const unlock = e.unlock.trim();
+    if (unlock === "无") {
+      unlockHtml = `<div class="unlock-cond"><span class="ulabel">解锁条件</span><span class="uinitial">无</span></div>`;
+    } else if (/^初始角色/.test(unlock)) {
+      unlockHtml = `<div class="unlock-cond initial">${hl(unlock, q)}</div>`;
+    } else {
+      unlockHtml = `<div class="unlock-cond"><span class="ulabel">解锁条件</span>${hl(unlock, q)}</div>`;
+    }
+  }
   let bodyDesc;
   if (cat === "offerings" && e.tiers) {
     // 祭品(含单级)统一用 tier 行渲染, 各级文本左对齐 (需求 #15)
@@ -453,6 +465,7 @@ function cardHtml(e, cat, q) {
   return `<article class="card ${open ? "open" : ""}" data-key="${cat}:${e.id}${keySuffix}">
     ${topBlock}
     ${badges ? `<div class="badges">${badges}</div>` : ""}
+    ${unlockHtml}
     ${bodyDesc}
     <div class="detail">${detail}</div>
   </article>`;

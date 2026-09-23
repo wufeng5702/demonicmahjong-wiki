@@ -120,6 +120,14 @@ def main():
         total_missing += miss
         print(f"  {cat}: {len(entries)} entries ({miss} keys unresolved)")
 
+    # 角色解锁条件: 仅可操控角色输出; 无游戏文案则写「无」
+    for ch in data["characters"]:
+        if ch.get("src") == "enum":
+            ch.pop("unlock", None)
+            ch.pop("unlockKey", None)
+        elif not (ch.get("unlock") or "").strip():
+            ch["unlock"] = "无"
+
     # 神秘事件: 依赖已翻译的遗物/祭品/宝牌名称（须在 apply_text 之后）
     relic_names = [(e["id"], e.get("name") or e.get("cn") or e.get("en", ""))
                    for e in data["relics"]]

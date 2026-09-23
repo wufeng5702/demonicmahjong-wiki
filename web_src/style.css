@@ -138,7 +138,9 @@ nav#tabs {
   .topbar-body {
     overflow: hidden;
     max-height: 500px;
-    transition: max-height 0.25s ease-out, opacity 0.2s ease-out;
+    transition:
+      max-height 0.25s ease-out,
+      opacity 0.2s ease-out;
     opacity: 1;
   }
   body.nav-collapsed .topbar-body {
@@ -415,6 +417,38 @@ main {
   border-color: #a66;
 }
 
+.unlock-cond {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: var(--text);
+  opacity: 0.95;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.unlock-cond .ulabel {
+  flex-shrink: 0;
+  color: var(--gold);
+  font-weight: 600;
+}
+.unlock-cond.initial {
+  border-left-color: var(--accent);
+  color: var(--dim);
+  font-style: italic;
+}
+.unlock-cond .uinitial {
+  color: var(--dim);
+  font-style: italic;
+}
+
 .desc {
   color: var(--text);
   opacity: 0.92;
@@ -457,13 +491,21 @@ main {
   font-size: 13px;
   padding: 4px 14px;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(88, 80, 120, 0.4), rgba(60, 55, 90, 0.4));
+  background: linear-gradient(
+    135deg,
+    rgba(88, 80, 120, 0.4),
+    rgba(60, 55, 90, 0.4)
+  );
   border: 1px solid rgba(160, 140, 220, 0.3);
   color: #d8d0f0;
   font-weight: 500;
 }
 .fan-stats .stat:hover {
-  background: linear-gradient(135deg, rgba(110, 95, 160, 0.6), rgba(80, 70, 130, 0.6));
+  background: linear-gradient(
+    135deg,
+    rgba(110, 95, 160, 0.6),
+    rgba(80, 70, 130, 0.6)
+  );
   border-color: var(--accent);
   color: #fff;
   transform: translateY(-1px);

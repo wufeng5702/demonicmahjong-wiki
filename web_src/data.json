@@ -21839,8 +21839,10 @@
     ],
     "roleAvatar_pid": 103367,
     "src": "shared",
+    "unlockKey": "RoleAvatar/1_TanChiJiangShi/UnlockCondition",
     "name": "僵尸·馋宝",
-    "desc": ""
+    "desc": "",
+    "unlock": "击败难度0第1章头目后解锁。"
    },
    {
     "id": 2,
@@ -21930,8 +21932,10 @@
     ],
     "roleAvatar_pid": 103366,
     "src": "shared",
+    "unlockKey": "RoleAvatar/2_TanCaiJiangShi/UnlockCondition",
     "name": "僵尸·满宝",
-    "desc": ""
+    "desc": "",
+    "unlock": "初始角色。"
    },
    {
     "id": 4,
@@ -22018,8 +22022,10 @@
     ],
     "roleAvatar_pid": 103338,
     "src": "shared",
+    "unlockKey": "RoleAvatar/4_BuRangPengJiangShi/UnlockCondition",
     "name": "僵尸·砰砰",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度2解锁。"
    },
    {
     "id": 5,
@@ -22106,8 +22112,10 @@
     ],
     "roleAvatar_pid": 103375,
     "src": "shared",
+    "unlockKey": "RoleAvatar/5_ZiBiNvGui/UnlockCondition",
     "name": "水鬼·幽汐",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度5解锁。"
    },
    {
     "id": 7,
@@ -22203,8 +22211,10 @@
     ],
     "roleAvatar_pid": 103373,
     "src": "shared",
+    "unlockKey": "RoleAvatar/7_YuanNianNvGui/UnlockCondition",
     "name": "怨鬼·红绫",
-    "desc": ""
+    "desc": "",
+    "unlock": "持有6个念灵通关解锁。"
    },
    {
     "id": 8,
@@ -22303,8 +22313,10 @@
     ],
     "roleAvatar_pid": 103369,
     "src": "shared",
+    "unlockKey": "RoleAvatar/8_XiongENvGui/UnlockCondition",
     "name": "厉鬼·祟姑",
-    "desc": ""
+    "desc": "",
+    "unlock": "每回合摸牌数为6时解锁。"
    },
    {
     "id": 9,
@@ -22397,8 +22409,10 @@
     ],
     "roleAvatar_pid": 103360,
     "src": "shared",
+    "unlockKey": "RoleAvatar/9_NiuTou/UnlockCondition",
     "name": "牛头·阿傍",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度6解锁。"
    },
    {
     "id": 10,
@@ -22494,8 +22508,10 @@
     ],
     "roleAvatar_pid": 103357,
     "src": "shared",
+    "unlockKey": "RoleAvatar/10_MaMian/UnlockCondition",
     "name": "马面·阿骐",
-    "desc": ""
+    "desc": "",
+    "unlock": "击败难度0第1章头目后解锁。"
    },
    {
     "id": 11,
@@ -22588,8 +22604,10 @@
     ],
     "roleAvatar_pid": 103351,
     "src": "shared",
+    "unlockKey": "RoleAvatar/11_HeiWuChang/UnlockCondition",
     "name": "黑无常",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度0解锁。"
    },
    {
     "id": 12,
@@ -22689,8 +22707,10 @@
     ],
     "roleAvatar_pid": 103336,
     "src": "shared",
+    "unlockKey": "RoleAvatar/12_BaiWuChang/UnlockCondition",
     "name": "白无常",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度1解锁。"
    },
    {
     "id": 17,
@@ -22783,8 +22803,10 @@
     ],
     "roleAvatar_pid": 103341,
     "src": "shared",
+    "unlockKey": "RoleAvatar/17_DiTing/UnlockCondition",
     "name": "谛听",
-    "desc": ""
+    "desc": "",
+    "unlock": "在各轮游戏中累计达成10次天和解锁。"
    },
    {
     "id": 18,
@@ -22905,8 +22927,10 @@
     ],
     "roleAvatar_pid": 103359,
     "src": "shared",
+    "unlockKey": "RoleAvatar/20_MengPo/UnlockCondition",
     "name": "孟婆",
-    "desc": ""
+    "desc": "",
+    "unlock": "在孟婆奶茶店与解忧茶铺喝过10种不同的奶茶解锁。"
    },
    {
     "id": 21,
@@ -22999,8 +23023,10 @@
     ],
     "roleAvatar_pid": 103361,
     "src": "shared",
+    "unlockKey": "RoleAvatar/21_QinGuangWang/UnlockCondition",
     "name": "秦广王",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度8解锁。"
    },
    {
     "id": 22,
@@ -23093,8 +23119,10 @@
     ],
     "roleAvatar_pid": 103370,
     "src": "shared",
+    "unlockKey": "RoleAvatar/22_YanLuoWang/UnlockCondition",
     "name": "阎罗王",
-    "desc": ""
+    "desc": "",
+    "unlock": "在难度8击败拥有至少24个和牌槽的阎罗王解锁。"
    },
    {
     "id": 23,
@@ -23187,8 +23215,10 @@
     ],
     "roleAvatar_pid": 103343,
     "src": "shared",
+    "unlockKey": "RoleAvatar/23_DiZangWangPuSa/UnlockCondition",
     "name": "地藏王",
-    "desc": ""
+    "desc": "",
+    "unlock": "使用9个不同的角色通关难度8解锁。"
    },
    {
     "id": 24,
@@ -23281,8 +23311,10 @@
     ],
     "roleAvatar_pid": 103339,
     "src": "shared",
+    "unlockKey": "RoleAvatar/24_ChaChaSi/UnlockCondition",
     "name": "察查判官·陆之",
-    "desc": ""
+    "desc": "",
+    "unlock": "持有4个迷幻牌通关解锁。"
    },
    {
     "id": 25,
@@ -23369,8 +23401,10 @@
     ],
     "roleAvatar_pid": 103346,
     "src": "shared",
+    "unlockKey": "RoleAvatar/25_FaESi/UnlockCondition",
     "name": "罚恶判官·钟馗",
-    "desc": ""
+    "desc": "",
+    "unlock": "累计在3轮游戏中失败后解锁。\n（击败难度0第1章头目后可使用该角色）"
    },
    {
     "id": 26,
@@ -23463,8 +23497,10 @@
     ],
     "roleAvatar_pid": 103352,
     "src": "shared",
+    "unlockKey": "RoleAvatar/26_HenDuJiangShi/UnlockCondition",
     "name": "僵尸·荼荼",
-    "desc": ""
+    "desc": "",
+    "unlock": "使敌人具有10层【尸毒】解锁。"
    },
    {
     "id": 27,
@@ -23551,8 +23587,10 @@
     ],
     "roleAvatar_pid": 103354,
     "src": "shared",
+    "unlockKey": "RoleAvatar/27_JiKeNvGui/UnlockCondition",
     "name": "饿鬼·渴儿",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度4解锁。"
    },
    {
     "id": 28,
@@ -23656,8 +23694,10 @@
     ],
     "roleAvatar_pid": 103363,
     "src": "shared",
+    "unlockKey": "RoleAvatar/29_ShangShanSi/UnlockCondition",
     "name": "赏善判官·魏征",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度3解锁。"
    },
    {
     "id": 31,
@@ -23757,8 +23797,10 @@
     ],
     "roleAvatar_pid": 103372,
     "src": "shared",
+    "unlockKey": "RoleAvatar/31_YinLvSi/UnlockCondition",
     "name": "阴律判官·崔珏",
-    "desc": ""
+    "desc": "",
+    "unlock": "通关难度7解锁。"
    },
    {
     "id": 32,
@@ -23769,7 +23811,10 @@
     "passives": [],
     "actives": [],
     "fanList": [],
-    "src": "enum"
+    "src": "enum",
+    "nameKey": "RoleAvatar/32_DiZangWangPuSa2/Name",
+    "name": "真·地藏王",
+    "desc": ""
    },
    {
     "id": 33,
@@ -23865,8 +23910,10 @@
     ],
     "roleAvatar_pid": 103349,
     "src": "shared",
+    "unlockKey": "RoleAvatar/33_GuiXinNiangXu/UnlockCondition",
     "name": "鬼新娘·魖",
-    "desc": ""
+    "desc": "",
+    "unlock": "在任意难度击败底分为0的最终头目解锁。"
    },
    {
     "id": 34,
@@ -23959,8 +24006,10 @@
     ],
     "roleAvatar_pid": 103347,
     "src": "shared",
+    "unlockKey": "RoleAvatar/34_GuiXinNiangKui/UnlockCondition",
     "name": "鬼新娘·傀",
-    "desc": ""
+    "desc": "",
+    "unlock": "在各轮游戏中累计达成三色三同刻、三色三同顺、三色三节高、三色三步高、三色双龙会解锁。"
    },
    {
     "id": 35,
@@ -24053,8 +24102,10 @@
     ],
     "roleAvatar_pid": 103350,
     "src": "shared",
+    "unlockKey": "RoleAvatar/35_GuiXinNiangYan/UnlockCondition",
     "name": "鬼新娘·魇",
-    "desc": ""
+    "desc": "",
+    "unlock": "魂力上限达到200解锁。"
    },
    {
     "id": 36,
@@ -24153,8 +24204,10 @@
     ],
     "roleAvatar_pid": 103348,
     "src": "shared",
+    "unlockKey": "RoleAvatar/36_GuiXinNiangMei/UnlockCondition",
     "name": "鬼新娘·魅",
-    "desc": ""
+    "desc": "",
+    "unlock": "在各轮游戏中累计达成10次绿一色解锁。"
    },
    {
     "id": 37,
@@ -24250,8 +24303,10 @@
     ],
     "roleAvatar_pid": 103362,
     "src": "shared",
+    "unlockKey": "RoleAvatar/37_RiYouShen/UnlockCondition",
     "name": "日游神",
-    "desc": ""
+    "desc": "",
+    "unlock": "在各轮游戏中累计达成10次奇数番型解锁。"
    },
    {
     "id": 38,
@@ -24344,8 +24399,10 @@
     ],
     "roleAvatar_pid": 103371,
     "src": "shared",
+    "unlockKey": "RoleAvatar/38_YeYouShen/UnlockCondition",
     "name": "夜游神",
-    "desc": ""
+    "desc": "",
+    "unlock": "在各轮游戏中累计达成10次偶数番型解锁。"
    },
    {
     "id": 39,
@@ -24435,8 +24492,10 @@
     ],
     "roleAvatar_pid": 103365,
     "src": "shared",
+    "unlockKey": "RoleAvatar/39_TaiShanWang/UnlockCondition",
     "name": "泰山王",
-    "desc": ""
+    "desc": "",
+    "unlock": "在难度8达成古役·连开花的情况下击败泰山王解锁。"
    },
    {
     "id": 40,
@@ -24532,7 +24591,12 @@
      132,
      137
     ],
-    "src": "bundle"
+    "src": "bundle",
+    "nameKey": "RoleAvatar/40_ManTuLuo/Name",
+    "unlockKey": "RoleAvatar/40_ManTuLuo/UnlockCondition",
+    "name": "曼荼罗",
+    "desc": "",
+    "unlock": "一次打出5张一筒或以5张一筒计分解锁。"
    },
    {
     "id": 41,
@@ -24628,7 +24692,12 @@
      134,
      135
     ],
-    "src": "bundle"
+    "src": "bundle",
+    "nameKey": "RoleAvatar/41_LongYanCao/Name",
+    "unlockKey": "",
+    "name": "龙蜒草",
+    "desc": "",
+    "unlock": "无"
    },
    {
     "id": 42,
@@ -24724,7 +24793,12 @@
      125,
      124
     ],
-    "src": "bundle"
+    "src": "bundle",
+    "nameKey": "RoleAvatar/42_TuMi/Name",
+    "unlockKey": "RoleAvatar/42_TuMi/UnlockCondition",
+    "name": "荼蘼",
+    "desc": "",
+    "unlock": "在一轮游戏中累计计分10次解锁。"
    },
    {
     "id": 43,
@@ -24814,7 +24888,12 @@
      99999,
      99999
     ],
-    "src": "bundle"
+    "src": "bundle",
+    "nameKey": "RoleAvatar/43_ShuiJingLan/Name",
+    "unlockKey": "RoleAvatar/43_ShuiJingLan/UnlockCondition",
+    "name": "水晶兰",
+    "desc": "",
+    "unlock": "在1回合内使用6个祭品解锁。"
    },
    {
     "id": 44,
@@ -24910,7 +24989,12 @@
      127,
      125
     ],
-    "src": "bundle"
+    "src": "bundle",
+    "nameKey": "RoleAvatar/44_BiAnHua/Name",
+    "unlockKey": "RoleAvatar/44_BiAnHua/UnlockCondition",
+    "name": "彼岸花",
+    "desc": "",
+    "unlock": "持有3个武器遗物通关解锁。"
    },
    {
     "id": 45,
@@ -25000,7 +25084,12 @@
      99999,
      99999
     ],
-    "src": "bundle"
+    "src": "bundle",
+    "nameKey": "RoleAvatar/45_DuShiWang/Name",
+    "unlockKey": "RoleAvatar/45_DuShiWang/UnlockCondition",
+    "name": "都市王",
+    "desc": "",
+    "unlock": "在难度8击败恭顺倍率达到128倍的都市王解锁。"
    },
    {
     "id": 101,
@@ -25011,7 +25100,10 @@
     "passives": [],
     "actives": [],
     "fanList": [],
-    "src": "enum"
+    "src": "enum",
+    "nameKey": "RoleAvatar/26_HenDuJiangShi/Name",
+    "name": "僵尸·荼荼",
+    "desc": ""
    },
    {
     "id": 102,
@@ -25022,7 +25114,10 @@
     "passives": [],
     "actives": [],
     "fanList": [],
-    "src": "enum"
+    "src": "enum",
+    "nameKey": "RoleAvatar/17_DiTing/Name",
+    "name": "谛听",
+    "desc": ""
    },
    {
     "id": 103,
@@ -25033,7 +25128,10 @@
     "passives": [],
     "actives": [],
     "fanList": [],
-    "src": "enum"
+    "src": "enum",
+    "nameKey": "RoleAvatar/7_YuanNianNvGui/Name",
+    "name": "怨鬼·红绫",
+    "desc": ""
    },
    {
     "id": 104,
@@ -25044,7 +25142,10 @@
     "passives": [],
     "actives": [],
     "fanList": [],
-    "src": "enum"
+    "src": "enum",
+    "nameKey": "RoleAvatar/24_ChaChaSi/Name",
+    "name": "察查判官·陆之",
+    "desc": ""
    }
   ],
   "pailing": [

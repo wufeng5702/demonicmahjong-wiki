@@ -5,7 +5,7 @@ import re
 from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
-from config import SHARED1, SHARED4
+from config import GAME_DATA_DIR, SHARED1, SHARED4
 from enums import _resolve_tag
 import rawparse as rp
 
@@ -141,7 +141,7 @@ def _character_from_raw(d):
 def extract_shared_assets(enum_values):
     """从 sharedassets1/4 提取本体数据。"""
     print("  loading sharedassets1 ...")
-    am1 = AssetsManager()
+    am1 = AssetsManager(path=str(GAME_DATA_DIR))
     bf1 = am1.load_file(str(SHARED1))
     sf1 = bf1
     cls1, pid1 = classify_monobehaviours(sf1)
@@ -190,7 +190,7 @@ def extract_shared_assets(enum_values):
 
     # ---- sharedassets4: 角色 / 遗物 / RoleAvatar / 灵佣·祭品补充 ----
     print("  loading sharedassets4 ...")
-    am4 = AssetsManager()
+    am4 = AssetsManager(path=str(GAME_DATA_DIR))
     sf4 = am4.load_file(str(SHARED4))
     cls4, pid4 = classify_monobehaviours(sf4)
 
@@ -230,8 +230,8 @@ def extract_shared_assets(enum_values):
           "achievements": len(cls4.get("AchievementPayload", []))}
     print(f"  shared4 payloads: {n4}")
 
-    # 角色名映射: 从 RoleAvatar 提取 I2 localizedNameTerm
-    avatar_name_keys = {}
+    # 角色名/解锁条件映射: 从 RoleAvatar 提取 I2 term
+    avatar_meta = {}
     for o in sf4.objects.values():
         if o.type.name != "MonoBehaviour":
             continue
@@ -241,10 +241,16 @@ def extract_shared_assets(enum_values):
             cid = int(d2.get("characterID", 0))
             lnt = str(d2.get("localizedNameTerm", ""))
             if cid and lnt.startswith("RoleAvatar/"):
-                avatar_name_keys[cid] = lnt
+                meta = avatar_meta.setdefault(cid, {"nameKey": "", "unlockKey": ""})
+                meta["nameKey"] = lnt
+                uct = str(d2.get("localizedUnlockConditionTerm", "") or "")
+                if uct:
+                    meta["unlockKey"] = uct
         except Exception:
             pass
-    print(f"  avatar name keys: {len(avatar_name_keys)}")
+    out["avatar_meta"] = avatar_meta
+    print(f"  avatar meta: {len(avatar_meta)} (unlock keys: "
+          f"{sum(1 for m in avatar_meta.values() if m.get('unlockKey'))})")
 
     # 角色
     for pid in cls4.get("CharacterPayload", []):
@@ -253,7 +259,9 @@ def extract_shared_assets(enum_values):
         except Exception:
             continue
         entry = _character_from_raw(d)
-        entry["nameKey"] = avatar_name_keys.get(entry["id"], "")
+        meta = avatar_meta.get(entry["id"], {})
+        entry["nameKey"] = meta.get("nameKey", "")
+        entry["unlockKey"] = meta.get("unlockKey", "")
         passives = []
         for ref in d.get("passiveSkill", []) or []:
             tpid = (ref or {}).get("path_id")
