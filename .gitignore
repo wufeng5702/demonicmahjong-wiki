@@ -29,6 +29,9 @@ DemonicMahjong/
 __pycache__/
 .venv/
 
+# Node (pnpm 符号链接会让 git status 报目录打不开)
+node_modules/
+
 # 日志文件
 *.log
 
