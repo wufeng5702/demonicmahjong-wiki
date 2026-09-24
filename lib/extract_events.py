@@ -171,6 +171,8 @@ def _fmt_effect(n, ctx):
             parts.append(f"血上限{hv:+d}")
         else:
             parts.append(f"血{hv:+d}")
+    elif t in (14, 24):
+        return ""
     if t in (15, 25) and n.get("hun"):
         hv = -abs(n["hun"]) if cal == "-" else abs(n["hun"]) if cal == "+" else n["hun"]
         if n.get("ceiling"):
@@ -664,6 +666,8 @@ def extract_events(i2):
                 parts.append(f"血上限{hv:+d}")
             else:
                 parts.append(f"血{hv:+d}")
+        elif t in (14, 24):
+            return ""
         if t in (15, 25) and n.get("hun") is not None and n.get("hun") != 0:
             hv = -abs(n["hun"]) if cal == "-" else abs(n["hun"]) if cal == "+" else n["hun"]
             if n.get("ceiling"):

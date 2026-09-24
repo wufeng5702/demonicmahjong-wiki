@@ -22,15 +22,12 @@ def _pixels_differ(a, b):
 
 
 def _optimize_one(src_png):
-    """将单张 PNG 裁剪为 avif, avif 更大则保留原图。"""
+    """将单张 PNG 裁剪为 avif (始终保留, 页面只引用 avif)。"""
     img = Image.open(src_png)
     ratio = ICON_HEIGHT / img.height
     new_w = max(1, int(img.width * ratio))
     img = img.resize((new_w, ICON_HEIGHT), Image.LANCZOS)
-    avif_path = src_png.with_suffix(".avif")
-    img.save(avif_path, "AVIF", quality=75)
-    if avif_path.stat().st_size >= src_png.stat().st_size:
-        avif_path.unlink()
+    img.save(src_png.with_suffix(".avif"), "AVIF", quality=75)
 
 
 def _sync_site(src, dst):
@@ -113,11 +110,27 @@ def sync_and_optimize(src_dir, dst_dir):
 def update_references(deploy_dir):
     """把 HTML/JS/CSS/JSON 中图标 .png 引用改为 .avif（仅当对应 avif 存在）。"""
     count = 0
+    prefix_ok = {}
+
+    def _prefix_all_avif(prefix):
+        """动态模板路径 (含 ${}) 的静态前缀下是否全部 png 都有 avif。"""
+        if prefix not in prefix_ok:
+            pdir = deploy_dir / prefix
+            pngs = list(pdir.rglob("*.png")) if pdir.is_dir() else []
+            prefix_ok[prefix] = bool(pngs) and all(p.with_suffix(".avif").exists() for p in pngs)
+            if not prefix_ok[prefix]:
+                print(f"  warning: missing avif under {prefix}, keeping .png refs")
+        return prefix_ok[prefix]
 
     def _repl(m):
-        avif = deploy_dir / (m.group(1) + ".avif")
-        if avif.exists():
-            return m.group(1) + ".avif"
+        path = m.group(1)
+        if "${" in path:
+            # 动态模板 (如 icons/${dir}/${id}.png): 前缀下全部有 avif 才改写
+            if _prefix_all_avif(path.split("${", 1)[0]):
+                return path + ".avif"
+            return m.group(0)
+        if (deploy_dir / (path + ".avif")).exists():
+            return path + ".avif"
         return m.group(0)
 
     for f in list(deploy_dir.rglob("*.html")) + list(deploy_dir.rglob("*.js")) + list(deploy_dir.rglob("*.css")) + list(deploy_dir.rglob("*.json")):
