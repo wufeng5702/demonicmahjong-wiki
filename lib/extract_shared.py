@@ -8,6 +8,7 @@ from UnityPy.enums import ClassIDType
 from config import GAME_DATA_DIR, SHARED1, SHARED4
 from enums import _resolve_tag
 from logwarn import warn, flush_warns
+from schema import offering_entry, relic_entry
 import rawparse as rp
 
 XIAOCHOU_ADD_FIELDS = [
@@ -79,19 +80,19 @@ def _offering_from_raw(d):
         if isinstance(v, (int, float)) and v:
             adds[f] = int(v) if float(v).is_integer() else round(v, 4)
     icon = d.get("icon") or {}
-    return {
-        "id": int(d.get("displayId", 0)),
-        "en": d.get("m_Name", ""),
-        "level": int(d.get("level", 0)),
-        "nameKey": d.get("displayNameTerm", "") or "",
-        "descKey": d.get("descriptionTerm", "") or "",
-        "adds": adds,
-        "fanZhong": int(d.get("fanZhong", 0)),
-        "useTiming": int(d.get("offeringUsageTiming", 0)),
-        "useType": int(d.get("useType", 0)),
-        "icon_pid": icon.get("path_id"),
-        "src": "shared",
-    }
+    return offering_entry(
+        id=int(d.get("displayId", 0)),
+        en=d.get("m_Name", ""),
+        level=int(d.get("level", 0)),
+        nameKey=d.get("displayNameTerm", "") or "",
+        descKey=d.get("descriptionTerm", "") or "",
+        adds=adds,
+        fanZhong=int(d.get("fanZhong", 0)),
+        useTiming=int(d.get("offeringUsageTiming", 0)),
+        useType=int(d.get("useType", 0)),
+        icon_pid=icon.get("path_id"),
+        src="shared",
+    )
 
 
 def _offskill_from_raw(d):
@@ -329,18 +330,16 @@ def extract_shared_assets(enum_values):
                 kind2 = kind or ("诅咒" if script_sn in CURSED_RELIC_SCRIPTS else
                                  "神秘" if script_sn in MYSTERIOUS_RELIC_SCRIPTS else "")
                 rid = int(rd.get("displayId", 0))
-                out["relics"].append({
-                    "id": rid,
-                    "en": "",
-                    "cn": "",
-                    "nameKey": rd.get("displayNameTerm", "") or "",
-                    "descKey": rd.get("descriptionTerm", "") or "",
-                    "rarity": int(rd.get("rarity", 0)),
-                    "stack": int(rd.get("SameItemLoadCount", 0)),
-                    "src": "shared",
-                    "kind": kind2,
-                    "icon_pid": (rd.get("icon") or {}).get("path_id"),
-                })
+                out["relics"].append(relic_entry(
+                    id=rid,
+                    nameKey=rd.get("displayNameTerm", "") or "",
+                    descKey=rd.get("descriptionTerm", "") or "",
+                    rarity=int(rd.get("rarity", 0)),
+                    stack=int(rd.get("SameItemLoadCount", 0)),
+                    kind=kind2,
+                    src="shared",
+                    icon_pid=(rd.get("icon") or {}).get("path_id"),
+                ))
     print(f"  shared4 relics: {len(out['relics'])}")
     flush_warns("extract_shared_assets")
     return out

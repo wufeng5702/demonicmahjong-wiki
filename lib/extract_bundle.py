@@ -7,6 +7,7 @@ from UnityPy.enums import ClassIDType
 
 from config import AA_DIR, BUNDLE_PATH
 from logwarn import warn, flush_warns
+from schema import offering_entry, relic_entry
 
 XIAOCHOU_ADD_FIELDS = [
     "addBaseScore", "addBaseScore2", "addBaseMagnification", "addBaseMagnification2",
@@ -142,17 +143,17 @@ def extract_bundle(enum_values, inspector_names):
     off_enum = enum_values.get("Offering", {})
     for pid, d in buckets.get("OfferingPayload", []):
         oid = int(getattr(d, "displayId", 0))
-        data["offerings"].append({
-            "id": oid,
-            "en": off_enum.get(oid, getattr(d, "m_Name", "")),
-            "level": int(getattr(d, "level", 0)),
-            "nameKey": term_key_of(getattr(d, "displayNameTerm", None)),
-            "descKey": term_key_of(getattr(d, "descriptionTerm", None)),
-            "adds": collect_adds(d, OFFERING_ADD_FIELDS),
-            "fanZhong": int(getattr(d, "fanZhong", 0)),
-            "useTiming": int(getattr(d, "offeringUsageTiming", 0)),
-            "useType": int(getattr(d, "useType", 0)),
-        })
+        data["offerings"].append(offering_entry(
+            id=oid,
+            en=off_enum.get(oid, getattr(d, "m_Name", "")),
+            level=int(getattr(d, "level", 0)),
+            nameKey=term_key_of(getattr(d, "displayNameTerm", None)),
+            descKey=term_key_of(getattr(d, "descriptionTerm", None)),
+            adds=collect_adds(d, OFFERING_ADD_FIELDS),
+            fanZhong=int(getattr(d, "fanZhong", 0)),
+            useTiming=int(getattr(d, "offeringUsageTiming", 0)),
+            useType=int(getattr(d, "useType", 0)),
+        ))
 
     # ---- 遗物 ----
     relic_bundle = {}
@@ -179,46 +180,47 @@ def extract_bundle(enum_values, inspector_names):
     seen_rids = set()
     for (did, kind), (rd, rpid) in relic_bundle.items():
         seen_rids.add(did)
-        data["relics"].append({
-            "id": did,
-            "en": relic_enum.get(did, ""),
-            "cn": inspector_names.get(f"RelicId.{did}", ""),
-            "nameKey": term_key_of(getattr(rd, "displayNameTerm", None)),
-            "descKey": term_key_of(getattr(rd, "descriptionTerm", None)),
-            "rarity": int(getattr(rd, "rarity", 0)),
-            "stack": int(getattr(rd, "SameItemLoadCount", 0)),
-            "kind": kind,
-            "icon_pid": rpid,
-            "src": "bundle",
-        })
+        data["relics"].append(relic_entry(
+            id=did,
+            en=relic_enum.get(did, ""),
+            cn=inspector_names.get(f"RelicId.{did}", ""),
+            nameKey=term_key_of(getattr(rd, "displayNameTerm", None)),
+            descKey=term_key_of(getattr(rd, "descriptionTerm", None)),
+            rarity=int(getattr(rd, "rarity", 0)),
+            stack=int(getattr(rd, "SameItemLoadCount", 0)),
+            kind=kind,
+            icon_pid=rpid,
+            src="bundle",
+        ))
     for pid, rd in relic_loose:
         did = int(getattr(rd, "displayId", 0))
         if did == 0 or did in seen_rids:
             continue
         seen_rids.add(did)
         sn = script_name(rd)
-        data["relics"].append({
-            "id": did,
-            "en": relic_enum.get(did, ""),
-            "cn": inspector_names.get(f"RelicId.{did}", ""),
-            "nameKey": term_key_of(getattr(rd, "displayNameTerm", None)),
-            "descKey": term_key_of(getattr(rd, "descriptionTerm", None)),
-            "rarity": int(getattr(rd, "rarity", 0)),
-            "stack": int(getattr(rd, "SameItemLoadCount", 0)),
-            "kind": ("诅咒" if sn in CURSED_RELIC_SCRIPTS else
-                     "神秘" if sn in MYSTERIOUS_RELIC_SCRIPTS else ""),
-            "icon_pid": pid,
-            "src": "bundle",
-        })
+        data["relics"].append(relic_entry(
+            id=did,
+            en=relic_enum.get(did, ""),
+            cn=inspector_names.get(f"RelicId.{did}", ""),
+            nameKey=term_key_of(getattr(rd, "displayNameTerm", None)),
+            descKey=term_key_of(getattr(rd, "descriptionTerm", None)),
+            rarity=int(getattr(rd, "rarity", 0)),
+            stack=int(getattr(rd, "SameItemLoadCount", 0)),
+            kind=("诅咒" if sn in CURSED_RELIC_SCRIPTS else
+                  "神秘" if sn in MYSTERIOUS_RELIC_SCRIPTS else ""),
+            icon_pid=pid,
+            src="bundle",
+        ))
     for rid in sorted(relic_enum.keys()):
         if rid == 0 or rid in seen_rids:
             continue
-        data["relics"].append({
-            "id": rid, "en": relic_enum.get(rid, ""),
-            "cn": inspector_names.get(f"RelicId.{rid}", ""),
-            "nameKey": "", "descKey": "", "rarity": 0, "stack": 0, "kind": "",
-            "src": "enum",
-        })
+        data["relics"].append(relic_entry(
+            id=rid,
+            en=relic_enum.get(rid, ""),
+            cn=inspector_names.get(f"RelicId.{rid}", ""),
+            nameKey="", descKey="", rarity=0, stack=0, kind="",
+            src="enum",
+        ))
 
     # ---- 牌灵 / 宝牌 / 业镜Buff / 成就 / 番种 ----
     def simple(bucket, id_attr, cat):
