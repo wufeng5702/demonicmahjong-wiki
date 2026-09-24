@@ -1,4 +1,5 @@
 """部署脚本: 裁剪压缩图标 → output/site_deploy/"""
+import json
 import re
 import shutil
 from pathlib import Path
@@ -31,9 +32,18 @@ def _optimize_one(src_png):
 
 
 def _sync_site(src, dst):
-    """同步 site → site_deploy 中非图标文件 (按修改时间判断)。"""
+    """同步 site → site_deploy 中非图标文件 (源 mtime 清单增量)。
+
+    用 .sync_manifest.json 记录源文件 mtime: deploy 改写产物后不会导致
+    下次误判"源变了"而反复复制 (旧 mtime 对比方案的问题)。
+    """
+    manifest_path = dst / ".sync_manifest.json"
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except Exception:
+        manifest = {}
     src_files = set()
-    copied = removed = 0
+    copied = removed = changed = 0
     for root, _, files in src.walk():
         rel_dir = Path(root).relative_to(src)
         if rel_dir.parts and rel_dir.parts[0] == "icons":
@@ -43,19 +53,29 @@ def _sync_site(src, dst):
             rel = s.relative_to(src)
             d = dst / rel
             src_files.add(rel)
-            if not d.exists() or s.stat().st_mtime != d.stat().st_mtime:
-                d.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(s, d)
-                copied += 1
+            if d.exists() and manifest.get(str(rel)) == s.stat().st_mtime:
+                continue
+            d.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(s, d)
+            manifest[str(rel)] = s.stat().st_mtime
+            copied += 1
+            changed = True
     for f in dst.rglob("*"):
         if not f.is_file():
             continue
         rel = f.relative_to(dst)
-        if rel.parts[0] == "icons":
+        if rel.parts[0] == "icons" or rel.name == ".sync_manifest.json":
             continue
         if rel not in src_files:
             f.unlink()
             removed += 1
+    for k in list(manifest):
+        if Path(k) not in src_files:
+            del manifest[k]
+            changed = True
+    if changed:
+        manifest_path.write_text(
+            json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
     if copied or removed:
         print(f"  site: {copied} copied, {removed} removed")
 
@@ -107,38 +127,52 @@ def sync_and_optimize(src_dir, dst_dir):
     print(f"  icons: {copied} copied, {optimized} optimized, {skipped} unchanged (skipped), {removed} removed")
 
 
-def update_references(deploy_dir):
-    """把 HTML/JS/CSS/JSON 中图标 .png 引用改为 .avif（仅当对应 avif 存在）。"""
-    count = 0
-    prefix_ok = {}
+def _all_icons_have_avif(site_dir, deploy_dir):
+    """site 的每个图标 png 是否都有对应 deploy avif。"""
+    site_icons = site_dir / "icons"
+    deploy_icons = deploy_dir / "icons"
+    if not site_icons.is_dir():
+        return False
+    pngs = list(site_icons.rglob("*.png"))
+    if not pngs:
+        return False
+    return all(
+        (deploy_icons / p.relative_to(site_icons).with_suffix(".avif")).exists()
+        for p in pngs
+    )
 
-    def _prefix_all_avif(prefix):
-        """动态模板路径 (含 ${}) 的静态前缀下是否全部 png 都有 avif。"""
-        if prefix not in prefix_ok:
-            pdir = deploy_dir / prefix
-            pngs = list(pdir.rglob("*.png")) if pdir.is_dir() else []
-            prefix_ok[prefix] = bool(pngs) and all(p.with_suffix(".avif").exists() for p in pngs)
-            if not prefix_ok[prefix]:
-                print(f"  warning: missing avif under {prefix}, keeping .png refs")
-        return prefix_ok[prefix]
+
+def update_references(deploy_dir):
+    """把引用切到 avif:
+    - app.js: 改 ICON_EXT 常量 (全部图标有 avif 才切换), 动态模板统一走常量
+    - html/css/json: 字面 .png → .avif (逐文件按 avif 存在性判断)
+    """
+    count = 0
+
+    app_js = deploy_dir / "app.js"
+    if app_js.exists():
+        text = app_js.read_text(encoding="utf-8")
+        if 'ICON_EXT = ".png"' in text:
+            if _all_icons_have_avif(SITE, deploy_dir):
+                app_js.write_text(
+                    text.replace('ICON_EXT = ".png"', 'ICON_EXT = ".avif"'),
+                    encoding="utf-8")
+                count += 1
+            else:
+                print("  warning: 部分图标缺 avif, ICON_EXT 保持 .png")
 
     def _repl(m):
-        path = m.group(1)
-        if "${" in path:
-            # 动态模板 (如 icons/${dir}/${id}.png): 前缀下全部有 avif 才改写
-            if _prefix_all_avif(path.split("${", 1)[0]):
-                return path + ".avif"
-            return m.group(0)
-        if (deploy_dir / (path + ".avif")).exists():
-            return path + ".avif"
+        if (deploy_dir / (m.group(1) + ".avif")).exists():
+            return m.group(1) + ".avif"
         return m.group(0)
 
-    for f in list(deploy_dir.rglob("*.html")) + list(deploy_dir.rglob("*.js")) + list(deploy_dir.rglob("*.css")) + list(deploy_dir.rglob("*.json")):
-        text = f.read_text(encoding="utf-8")
-        new = re.sub(r"(icons/[^\"'`\s]+)\.png", _repl, text)
-        if new != text:
-            f.write_text(new, encoding="utf-8")
-            count += 1
+    for pat in ("*.html", "*.css", "*.json"):
+        for f in deploy_dir.rglob(pat):
+            text = f.read_text(encoding="utf-8")
+            new = re.sub(r"(icons/[^\"'`\s]+)\.png", _repl, text)
+            if new != text:
+                f.write_text(new, encoding="utf-8")
+                count += 1
     print(f"  references: {count} files updated (.png → .avif)")
 
 

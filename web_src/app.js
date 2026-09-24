@@ -6,6 +6,9 @@ const SITE_CONFIG = {
   repoUrl: "__REPO_URL__", // 仓库地址，构建时从 .env 替换
 };
 
+/* 图标格式: 本地 site 用 .png; deploy.py 会把 site_deploy/app.js 的此常量改为 .avif */
+const ICON_EXT = ".png";
+
 const TABS = [
   { key: "characters", label: "角色" },
   { key: "lingyong", label: "灵佣" },
@@ -256,7 +259,7 @@ function avatarHtml(e, cat) {
     dir =
       e._src === "宝牌" ? "baopai" : e._src === "业镜Buff" ? "buff" : "pailing";
   else dir = cat;
-  const src = `icons/${dir}/${encodeURIComponent(e.id)}.png`;
+  const src = `icons/${dir}/${encodeURIComponent(e.id)}${ICON_EXT}`;
   return `<img class="avatar" loading="lazy" src="${src}"
     onerror="this.outerHTML='<div class=\\'avatar placeholder\\'>${glyph}</div>'
     alt="${glyph}">`;
@@ -431,7 +434,7 @@ function cardHtml(e, cat, q) {
           const firstId = skills[0]?.id;
           const suffix = g === "passives" ? "_passive" : "_active";
           const iconSrc = firstId
-            ? `icons/character_skill/${firstId}${suffix}.png`
+            ? `icons/character_skill/${firstId}${suffix}${ICON_EXT}`
             : "";
           const iconHtml = iconSrc
             ? `<img class="subh-icon" src="${iconSrc}" onerror="this.style.display='none'" alt="">`
