@@ -195,7 +195,12 @@ def _fmt_effect(n, ctx):
         if names: parts.append("".join(names) if t != 41 else "失去" + "".join(names))
     if t in (32, 42) and n.get("baoLingGetList"):
         kind = _baoling_kind(n)
-        parts.append(f"{kind} " + "/".join(_baoling_name(i) for i in n["baoLingGetList"]))
+        ids = n["baoLingGetList"]
+        names = "/".join(_baoling_name(i) for i in ids)
+        verb = "失去" if t == 42 else "获得"
+        if len(ids) > 1:
+            return f"{verb}随机{kind}"
+        return f"{verb}{kind}({names})"
     if t in (33, 43) and n.get("relicGetList"):
         parts.append("遗物 " + "/".join(_relic_name(ctx, i) for i in n["relicGetList"]))
     if t in (34, 44) and n.get("offeringGetList"):
@@ -703,6 +708,8 @@ def extract_events(i2):
                     names.append(str(nm))
             verb = "失去" if t == 42 else "获得"
             if names:
+                if len(ids) > 1:
+                    return f"{verb}随机{kind}"
                 return f"{verb}{kind}({'/'.join(names)})"
             if n.get("randomType"):
                 return f"{verb}随机{kind}"
