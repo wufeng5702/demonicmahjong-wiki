@@ -36,7 +36,7 @@ def _sync_site(src, dst):
     copied = removed = 0
     for root, _, files in src.walk():
         rel_dir = Path(root).relative_to(src)
-        if rel_dir == Path("icons") or str(rel_dir).startswith("icons" + "/"):
+        if rel_dir.parts and rel_dir.parts[0] == "icons":
             continue
         for f in files:
             s = Path(root) / f
