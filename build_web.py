@@ -262,6 +262,11 @@ def main():
     composite_skill_icons()
 
     copy_web_files()
+
+    # 汇总打印各提取阶段收集的解析失败 (正常时无输出)
+    from logwarn import flush_warns
+    flush_warns("build")
+
     _run_check()
     print("\n[DONE]")
 

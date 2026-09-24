@@ -6,6 +6,7 @@ from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
 from config import AA_DIR, BUNDLE_PATH
+from logwarn import warn, flush_warns
 
 XIAOCHOU_ADD_FIELDS = [
     "addBaseScore", "addBaseScore2", "addBaseMagnification", "addBaseMagnification2",
@@ -49,6 +50,7 @@ def collect_adds(d, fields):
         try:
             v = getattr(d, f)
         except Exception:
+            warn()
             continue
         if isinstance(v, (int, float)) and v != 0:
             out[f] = fnum(v)
@@ -81,6 +83,7 @@ def extract_bundle(enum_values, inspector_names):
             d = obj.read()
             sn = script_name(d)
         except Exception:
+            warn()
             continue
         if sn and sn != "?":
             b = buckets.setdefault(sn, [])
@@ -170,6 +173,7 @@ def extract_bundle(enum_values, inspector_names):
                           "神秘" if sn in MYSTERIOUS_RELIC_SCRIPTS else kind)
                     relic_bundle[(did, k2)] = (rd, rpid)
                 except Exception:
+                    warn()
                     pass
     relic_enum = enum_values.get("RelicId", {})
     seen_rids = set()
@@ -332,4 +336,5 @@ def extract_bundle(enum_values, inspector_names):
                     })
         data["characters"].append(entry)
 
+    flush_warns("extract_bundle")
     return data

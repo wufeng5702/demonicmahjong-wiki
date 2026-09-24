@@ -7,6 +7,7 @@ from UnityPy.enums import ClassIDType
 
 from config import GAME_DATA_DIR, SHARED1, SHARED4
 from enums import _resolve_tag
+from logwarn import warn, flush_warns
 import rawparse as rp
 
 XIAOCHOU_ADD_FIELDS = [
@@ -34,6 +35,7 @@ def classify_monobehaviours(sf):
             ms = getattr(d, "m_Script", None)
             sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
         except Exception:
+            warn()
             continue
         by_cls.setdefault(sn, []).append(pid)
         by_pid[pid] = sn
@@ -160,18 +162,21 @@ def extract_shared_assets(enum_values):
             if int(d.get("id", 0)) == 0:
                 continue
         except Exception:
+            warn()
             continue
         out["lingyong"].append(_xc_from_raw(d, enum_values))
     for pid in cls1.get("OfferingPayload", []):
         try:
             d = parse_one(sf1, pid, "OfferingPayload")
         except Exception:
+            warn()
             continue
         out["offerings"].append(_offering_from_raw(d))
     for pid in cls1.get("AchievementPayload", []):
         try:
             d = parse_one(sf1, pid, "AchievementPayload")
         except Exception:
+            warn()
             continue
         nk = d.get("displayNameTerm", "") or ""
         dk = d.get("descriptionTerm", "") or ""
@@ -200,18 +205,21 @@ def extract_shared_assets(enum_values):
             if int(d.get("id", 0)) == 0:
                 continue
         except Exception:
+            warn()
             continue
         out["lingyong"].append(_xc_from_raw(d, enum_values))
     for pid in cls4.get("OfferingPayload", []):
         try:
             d = parse_one(sf4, pid, "OfferingPayload")
         except Exception:
+            warn()
             continue
         out["offerings"].append(_offering_from_raw(d))
     for pid in cls4.get("AchievementPayload", []):
         try:
             d = parse_one(sf4, pid, "AchievementPayload")
         except Exception:
+            warn()
             continue
         nk = d.get("displayNameTerm", "") or ""
         dk = d.get("descriptionTerm", "") or ""
@@ -247,6 +255,7 @@ def extract_shared_assets(enum_values):
                 if uct:
                     meta["unlockKey"] = uct
         except Exception:
+            warn()
             pass
     out["avatar_meta"] = avatar_meta
     print(f"  avatar meta: {len(avatar_meta)} (unlock keys: "
@@ -257,6 +266,7 @@ def extract_shared_assets(enum_values):
         try:
             d = parse_one(sf4, pid, "CharacterPayload")
         except Exception:
+            warn()
             continue
         entry = _character_from_raw(d)
         meta = avatar_meta.get(entry["id"], {})
@@ -270,6 +280,7 @@ def extract_shared_assets(enum_values):
                     sd = parse_one(sf4, tpid, "XiaoChouPaiPayload")
                     passives.append(_skill_from_raw(sd))
                 except Exception:
+                    warn()
                     pass
         actives = []
         for ref in d.get("activeSkill", []) or []:
@@ -284,6 +295,7 @@ def extract_shared_assets(enum_values):
                         pd = parse_one(sf4, ppid, "OfferingPayload")
                         actives.append(_offskill_from_raw(pd))
             except Exception:
+                warn()
                 pass
         entry["passives"] = passives
         entry["actives"] = actives
@@ -306,9 +318,12 @@ def extract_shared_assets(enum_values):
                 rpid = (ref or {}).get("path_id")
                 if not rpid or rpid not in sf4.objects:
                     continue
+                if sf4.objects[rpid].type != ClassIDType.MonoBehaviour:
+                    continue  # 列表混有 GameObject 引用, 非 RelicDisplay, 跳过
                 try:
                     rd = parse_one(sf4, rpid, "RelicDisplay")
                 except Exception:
+                    warn()
                     continue
                 script_sn = pid4.get(rpid, "")
                 kind2 = kind or ("诅咒" if script_sn in CURSED_RELIC_SCRIPTS else
@@ -327,4 +342,5 @@ def extract_shared_assets(enum_values):
                     "icon_pid": (rd.get("icon") or {}).get("path_id"),
                 })
     print(f"  shared4 relics: {len(out['relics'])}")
+    flush_warns("extract_shared_assets")
     return out

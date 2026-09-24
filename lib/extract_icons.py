@@ -25,6 +25,7 @@ from UnityPy.enums import ClassIDType
 
 from config import (AA_DIR, BUNDLE_PATH, GAME_DATA_DIR, SHARED0, SHARED1,
                     SHARED2, SHARED3, SHARED4, SITE_DIR)
+from logwarn import warn, flush_warns
 import rawparse as rp
 
 SIZE = 512
@@ -105,6 +106,7 @@ def collect_parts(objs, root_pid):
                 go_name[pid] = d.m_Name
                 go_comps[pid] = [(c.path_id) for c in (d.m_Components or [])]
             except Exception:
+                warn()
                 pass
     tr_data = {}
     for pid, o in objs.items():
@@ -114,6 +116,7 @@ def collect_parts(objs, root_pid):
             d = o.read()
             tr_data[d.m_GameObject.path_id] = (pid, d, [c.path_id for c in (d.m_Children or [])])
         except Exception:
+            warn()
             pass
 
     def comps(go_pid):
@@ -142,6 +145,7 @@ def collect_parts(objs, root_pid):
                     elif key == "_MaskTex":
                         mask = img
         except Exception:
+            warn()
             pass
         return main, mask
 
@@ -169,6 +173,7 @@ def collect_parts(objs, root_pid):
                 try:
                     cgo = objs[ch].read().m_GameObject.path_id
                 except Exception:
+                    warn()
                     continue
                 walk(cgo, WM)
 
@@ -377,6 +382,7 @@ def render_pailing_icons(bundle_path, out_dir):
             ms = getattr(d, "m_Script", None)
             sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
         except Exception:
+            warn()
             continue
         if sn == "PaiLingPayload":
             pls.append(d)
@@ -406,6 +412,7 @@ def render_pailing_icons(bundle_path, out_dir):
         ok += 1
         print(f"{pid}: rendered {im.size} parts={len(parts)}")
     print(f"pailing: ok={ok}")
+    flush_warns("render_pailing_icons")
     return ok
 
 
@@ -440,8 +447,10 @@ def extract_achievement_icons():
             img.save(str(out_dir / f"{icon_id}.png"))
             count += 1
         except Exception:
+            warn()
             continue
     print(f"  achievement icons: {count} extracted to {out_dir}")
+    flush_warns("extract_achievement_icons")
 
 
 def extract_lingyong_icons():
@@ -470,6 +479,7 @@ def extract_lingyong_icons():
                 if nm:
                     sprite_map[nm] = obj
             except Exception:
+                warn()
                 pass
 
     count = 0
@@ -498,6 +508,7 @@ def extract_lingyong_icons():
             img.save(str(target / f"{xid}.png"))
             count += 1
         except Exception:
+            warn()
             pass
 
     def _find_sprite_by_pattern(xid):
@@ -525,6 +536,7 @@ def extract_lingyong_icons():
             en_name = getattr(d, "m_Name", "") or ""
             _save_icon(xid, sub, en_name)
         except Exception:
+            warn()
             continue
 
     env1 = UnityPy.load(str(SHARED1))
@@ -547,6 +559,7 @@ def extract_lingyong_icons():
                 sub = _find_sprite_by_pattern(xid)
             _save_icon(xid, sub, en_name)
         except Exception:
+            warn()
             continue
 
     env4 = UnityPy.load(str(SHARED4))
@@ -569,9 +582,11 @@ def extract_lingyong_icons():
                 sub = _find_sprite_by_pattern(xid)
             _save_icon(xid, sub, en_name)
         except Exception:
+            warn()
             continue
 
     print(f"  lingyong icons: {count} extracted")
+    flush_warns("extract_lingyong_icons")
 
 
 def extract_character_avatars():
@@ -605,8 +620,10 @@ def extract_character_avatars():
                     count += 1
                     break
         except Exception:
+            warn()
             continue
     print(f"  character avatars: {count} extracted")
+    flush_warns("extract_character_avatars")
 
 
 def extract_character_skill_icons():
@@ -637,6 +654,7 @@ def extract_character_skill_icons():
                     if nm.lower().startswith("iconskill"):
                         sprite_by_lower[nm.lower()] = obj
             except Exception:
+                warn()
                 pass
 
     count = 0
@@ -663,6 +681,7 @@ def extract_character_skill_icons():
             img.save(str(out_dir / f"{xid}_passive.png"))
             count += 1
         except Exception:
+            warn()
             pass
 
     for obj in sf.objects.values():
@@ -682,6 +701,7 @@ def extract_character_skill_icons():
             mname = getattr(d, "m_Name", "") or ""
             _save_passive(xid, sub, mname)
         except Exception:
+            warn()
             continue
 
     env4 = UnityPy.load(str(SHARED4))
@@ -702,8 +722,10 @@ def extract_character_skill_icons():
             mname = pd.get("m_Name", "")
             _save_passive(xid, sub, mname)
         except Exception:
+            warn()
             continue
     print(f"  character skill icons: {count} extracted")
+    flush_warns("extract_character_skill_icons")
 
 
 def extract_relic_icons():
@@ -731,8 +753,11 @@ def extract_relic_icons():
                     try:
                         env = UnityPy.load(str(dep_path))
                         objs = {o.path_id: o for o in env.objects}
-                    except Exception:
+                    except Exception as e:
+                        warn(f"依赖 {dep_path.name} 加载失败: {e}")
                         objs = {}
+                else:
+                    warn(f"依赖 {externals[fid - 1].path} 不存在")
             dep_map[fid] = objs
         return objs.get(ipid)
 
@@ -752,6 +777,7 @@ def extract_relic_icons():
             count += 1
             seen.add(did)
         except Exception:
+            warn()
             pass
 
     list_names = ["RelicDisplayList", "RelicDisplayMysteriousList", "RelicDisplayOutsiderList"]
@@ -773,6 +799,8 @@ def extract_relic_icons():
                     if not rpid or rpid not in pid_map:
                         continue
                     ro = pid_map[rpid]
+                    if ro.type.name != "MonoBehaviour":
+                        continue  # 列表混有 GameObject 引用, 非 RelicDisplay, 跳过
                     try:
                         rraw = ro.get_raw_data()
                         rd = rp.parse_payload(rraw, "RelicDisplay")
@@ -788,8 +816,10 @@ def extract_relic_icons():
                         if io is not None:
                             _save_icon(did, io)
                     except Exception:
+                        warn()
                         pass
             except Exception:
+                warn()
                 continue
 
     bpath = BUNDLE_PATH
@@ -826,9 +856,11 @@ def extract_relic_icons():
                         _save_icon(did, io)
                         break
             except Exception:
+                warn()
                 continue
 
     print(f"  relic icons: {count} extracted")
+    flush_warns("extract_relic_icons")
 
 
 def extract_offering_icons():
@@ -865,8 +897,10 @@ def extract_offering_icons():
                     count += 1
                     break
         except Exception:
+            warn()
             continue
     print(f"  offering icons: {count} extracted")
+    flush_warns("extract_offering_icons")
 
 
 def extract_offering_skill_icons():
@@ -912,13 +946,16 @@ def extract_offering_skill_icons():
                             count += 1
                             resolved = True
                         except Exception:
+                            warn()
                             pass
                         break
                 if resolved:
                     break
         except Exception:
+            warn()
             continue
     print(f"  offering skill icons: {count} extracted")
+    flush_warns("extract_offering_skill_icons")
 
 
 def extract_baopai_icons():
@@ -1021,8 +1058,10 @@ def extract_baopai_icons():
             final.save(str(out_dir / f"{bid}.png"))
             count += 1
         except Exception:
+            warn()
             continue
     print(f"  baopai icons: {count} extracted")
+    flush_warns("extract_baopai_icons")
 
 
 def composite_skill_icons():
@@ -1056,5 +1095,7 @@ def composite_skill_icons():
             result.save(p)
             count += 1
         except Exception:
+            warn()
             pass
     print(f"  skill icons composited: {count}")
+    flush_warns("composite_skill_icons")

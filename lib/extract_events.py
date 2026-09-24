@@ -13,6 +13,7 @@ from extract_shared import classify_monobehaviours
 from i2parse import tr, clean_markup
 from enums import TAG_ID_CN, RARITY_CN
 from catalog import Catalog
+from logwarn import warn, flush_warns
 import rawparse as rp
 
 NODE_TYPE_LABELS = {
@@ -281,6 +282,7 @@ def _extract_event_icons(bsf, title_to_sprite=None):
                     sprite_objs[nm] = obj
                     sprite_lower.setdefault(nm.lower(), nm)
             except Exception:
+                warn()
                 pass
 
     # type6 解析失败的事件回退到硬编码表（几乎不再命中）
@@ -353,6 +355,7 @@ def _extract_event_icons(bsf, title_to_sprite=None):
             result[cn_name] = f"icons/events/{fname}"
             count += 1
         except Exception:
+            warn()
             pass
     print(f"  event icons: {count} extracted to {out_dir}")
     return result
@@ -372,6 +375,7 @@ def _extract_buff_icons(bsf):
                 if nm.startswith("Buff"):
                     sprite_objs[nm] = obj
             except Exception:
+                warn()
                 pass
 
     count = 0
@@ -382,6 +386,7 @@ def _extract_buff_icons(bsf):
             img.save(str(out_dir / fname))
             count += 1
         except Exception:
+            warn()
             pass
     print(f"  buff icons: {count} extracted to {out_dir}")
     return count > 0
@@ -402,6 +407,7 @@ def _collect_event_ids(*sfs):
                 mn = getattr(d, "m_Name", "") or ""
                 cn = getattr(d.m_Script.read(), "m_ClassName", "")
             except Exception:
+                warn()
                 continue
             raw = obj.get_raw_data()
             if cn == "MapRandomPoolItem":
@@ -414,6 +420,7 @@ def _collect_event_ids(*sfs):
                     num = int(sid) if sid.isdigit() else int(m.group(2))
                     mrp_ids[(m.group(1), m.group(3))] = num
                 except Exception:
+                    warn()
                     pass
             elif cn == "GameEvent":
                 m = _EVENT_NAME_RE.match(mn)
@@ -426,6 +433,7 @@ def _collect_event_ids(*sfs):
                     if sid.isdigit():
                         ge_ids[(m.group(1), m.group(2))] = int(sid)
                 except Exception:
+                    warn()
                     pass
     ids = dict(ge_ids)
     ids.update(mrp_ids)  # MapRandomPoolItem 覆盖 GameEvent（避免 GE id 冲突）
@@ -482,6 +490,7 @@ def _load_graph_sfs():
         try:
             sf = amN.load_file(str(path))
         except Exception:
+            warn()
             continue
         sfs.append((tag, sf, amN))
     return sfs, bsf
@@ -507,6 +516,7 @@ def _index_graph_objects(sfs):
                     continue
                 cn = getattr(ms.read(), "m_ClassName", "")
             except Exception:
+                warn()
                 continue
             if cn not in ("EventNode", "NodePort"):
                 continue
@@ -525,6 +535,7 @@ def _index_graph_objects(sfs):
                     port_by_key[(tag, pid)] = p
                     port_by_pid.setdefault(pid, []).append(p)
             except Exception:
+                warn()
                 pass
     return node_by_key, port_by_pid, port_by_key
 
@@ -540,6 +551,7 @@ def _collect_gameevents(sfs):
                 mn = getattr(d, "m_Name", "") or ""
                 cn = getattr(d.m_Script.read(), "m_ClassName", "")
             except Exception:
+                warn()
                 continue
             if cn != "GameEvent":
                 continue
@@ -628,6 +640,7 @@ def extract_events(i2):
         try:
             cls, _ = classify_monobehaviours(sf)
         except Exception:
+            warn()
             continue
         for pid in cls.get("XiaoChouPaiPayload", []):
             try:
@@ -636,6 +649,7 @@ def extract_events(i2):
                 if nm:
                     ctx["xc_names"][pid] = nm
             except Exception:
+                warn()
                 pass
     for e in _data_relic_names:
         ctx["relic_names"][e[0]] = e[1]
@@ -847,6 +861,7 @@ def extract_events(i2):
                 d = obj.read()
                 nm, data = d.m_Name, d.m_Script
             except Exception:
+                warn()
                 continue
             if isinstance(data, str):
                 data = data.encode("utf-8", "ignore")
@@ -860,6 +875,7 @@ def extract_events(i2):
             try:
                 event_jsons[nm] = json.loads(data)
             except Exception:
+                warn()
                 pass
 
     _load_event_jsons(bsf)
@@ -1054,4 +1070,5 @@ def extract_events(i2):
         f"  events extracted: {len(events)} | options={fx_stats['opt']} "
         f"with_effects={fx_stats['with_fx']} no_ge={fx_stats['no_ge']}"
     )
+    flush_warns("extract_events")
     return events
