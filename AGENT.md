@@ -34,8 +34,9 @@ uv run python build_web.py
 
 ```
 wiki\
-├── build_web.py                 # 主构建脚本 ⭐
-├── deploy.py                    # 部署脚本（压缩图片、转 AVIF）
+├── build_web.py                 # 主构建脚本 ⭐（结尾自动跑 check_site）
+├── deploy.py                    # 部署脚本（压缩图片、转 AVIF、ICON_EXT 切换）
+├── check_site.py                # 站点完整性校验 ⭐（图标缺口/avif 引用，失败即非零退出）
 ├── calibrate.py                 # rawparse 校准器
 ├── extract_enums.py             # 从 dump.cs 提取枚举 → assets/enums.json
 ├── generate_lingyong_cards.py   # 灵佣卡片图生成（独立工具）
@@ -43,7 +44,11 @@ wiki\
 ├── lib/                         # 可复用模块
 │   ├── rawparse.py              # MonoBehaviour 字节解析器
 │   ├── catalog.py               # Addressables catalog 解析
+│   ├── logwarn.py               # 解析失败汇总（替代裸 except pass）
+│   ├── schema.py                # data.json 条目构造单一来源（bundle/shared 共用）
 │   └── render_pl_icons.py       # 牌灵 3D 头像渲染
+│
+├── tests/                       # stdlib unittest（uv run python -m unittest discover -s tests）
 │
 ├── assets/                      # 静态资源
 │   ├── enums.json               # 枚举定义（58KB，可提交 git）
@@ -51,11 +56,12 @@ wiki\
 │
 ├── web_src/                     # 前端源码
 │   ├── index.html
-│   ├── app.js
+│   ├── app.js                   # 图标路径统一走 ICON_EXT 常量
 │   ├── style.css
 │   └── data.json                # 构建生成的纯 JSON 数据
 │
-├── output/site/                 # 构建产物（不入 git）
+├── output/site/                 # 构建产物（png 引用，不入 git）
+├── output/site_deploy/          # 部署产物（avif 引用，不入 git）
 │
 ├── .env                         # 本地配置（不入 git）
 ├── .env.example                 # 配置模板
@@ -129,6 +135,25 @@ uv run python calibrate.py --bundle <path>  # 指定 bundle
 ```bash
 uv run python deploy.py   # 压缩图片、转 AVIF，输出到 output/site_deploy/
 ```
+
+部署时 `update_references()` 只改 `app.js` 的 `ICON_EXT = ".png"` 常量（要求全部图标 avif 就位），html/css/json 里的字面 `icons/*.png` 按 avif 存在性逐条改写；重复执行应稳定输出 `0 copied / 0 files updated`。
+
+### check_site.py — 站点校验
+
+```bash
+uv run python check_site.py          # 校验 output/site（png 引用）
+uv run python check_site.py deploy   # 校验 output/site_deploy（avif 引用 + 孤儿/残留检查）
+```
+
+build_web.py 与 deploy.py 结尾自动执行，图标缺口/引用残留会直接构建失败，不必肉眼找缺口。路由规则（灵佣 ID 区间、offerings 0<id<20000、src=="enum" 免图标等）镜像 app.js 的 getEntries，改动前端分类逻辑必须同步 `check_site._entries`。
+
+### tests/ — 单元测试
+
+```bash
+uv run python -m unittest discover -s tests -v
+```
+
+覆盖：logwarn、schema 条目构造、check_site 路由、deploy 引用改写、_baoling_kind。改这四处逻辑后必须跑一遍。
 
 ### extract_enums.py — 提取枚举定义
 
@@ -254,7 +279,16 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 ## 开发规范
 
 - **阶段性修改及时提交**：完成一个功能/修复后立即 `git commit`，不要积攒大量修改一次性提交
-- 提交信息格式：`feat/fix/chore: 简要描述`，如 `feat: 番种 tooltip 卡片`
+- 提交信息格式：`feat/fix/chore/refactor/test: 简要描述`，如 `feat: 番种 tooltip 卡片`
+
+### 修 bug 纪律
+
+1. **grep 同类**：修任何 bug 后，先全局搜同类模式再收工（一次 onerror 引号缺失 = 检查文件里全部 onerror）
+2. **完成标准 = 校验通过**：`build_web.py` / `deploy.py` 结尾的 check_site 必须 OK；改前端分类路由须同步 `check_site._entries`
+3. **禁止裸 `except: pass`**：用 `lib/logwarn.py` 的 `warn(str(e))` + 函数尾 `flush_warns("上下文")`；刻意探测型失败（如 i2parse 属性探测）除外
+4. **图标引用单一来源**：动态拼图标路径必须走 `${ICON_EXT}` 常量，不写字面 `.png`/`.avif`；deploy 只翻转 app.js 这一处
+5. **web_src → site 同步必须走** `build_web.py --web-only`（含 REPO_URL 替换 + prettier），不要裸 `cp`
+6. **动了 lib/tests 的逻辑就跑** `uv run python -m unittest discover -s tests -v`
 
 ---
 
