@@ -159,6 +159,11 @@ def main():
     print("\nupdating references...")
     update_references(DEPLOY)
 
+    # 4. 完整性校验 (avif 引用/文件一致性, 缺口则非零退出)
+    print("\nchecking...")
+    import check_site
+    check_site.report("deploy", check_site.collect_deploy_errors())
+
     print("\n[DONE]")
 
 

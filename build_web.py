@@ -81,6 +81,12 @@ def copy_web_files():
         print(f"  site/{f} copied")
 
 
+def _run_check():
+    """完整性校验: 图标缺口 / 引用异常 → 打印清单并以非零退出。"""
+    import check_site
+    check_site.report("site", check_site.collect_errors(SITE_DIR, ".png"))
+
+
 def main():
     web_only = "--web-only" in sys.argv
     export_events = "--export-events" in sys.argv
@@ -93,6 +99,7 @@ def main():
         if not (Path(__file__).parent / "web_src" / "data.json").exists():
             print("  [WARN] web_src/data.json 不存在, 请先不带参数运行一次完整构建")
         copy_web_files()
+        _run_check()
         print("\n[DONE]")
         return
 
@@ -255,6 +262,7 @@ def main():
     composite_skill_icons()
 
     copy_web_files()
+    _run_check()
     print("\n[DONE]")
 
 
