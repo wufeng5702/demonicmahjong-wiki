@@ -1,16 +1,19 @@
 """
-catalog.py - Unity Addressables JSON catalog 解析器
-====================================================
+catalog.py - Unity Addressables catalog 解析器
+================================================
 格式参考 AddressablesTools/AddressablesToolsPy (nesrak1/anosu)。
 
 用法:
-    cat = Catalog.load(path)
-    addr = cat.guid_to_address(guid)   # GUID -> Assets/... 地址
+    cat = Catalog.load(path)              # JSON catalog
+    cat = Catalog.load_bin(path)          # 二进制 catalog.bin (Addressables v2)
+    addr = cat.guid_to_address(guid)      # GUID -> Assets/... 地址
+    stem = cat.guid_to_sprite_stem(guid)  # GUID -> EventImage 文件名 stem
 """
 
 import base64
 import json
 import struct
+from pathlib import Path
 
 
 class _R:
@@ -140,8 +143,34 @@ class Catalog:
     def load(cls, path):
         return cls(path)
 
+    @classmethod
+    def load_bin(cls, path):
+        """从 Addressables 二进制 catalog.bin 加载（走 addressablestools）。"""
+        from addressablestools import parse_binary
+
+        raw = Path(path).read_bytes()
+        parsed = parse_binary(raw)
+        inst = cls.__new__(cls)
+        inst._bin_resources = parsed.resources
+        inst._bin_guid_to_path = {}
+        for key, locs in parsed.resources.items():
+            if not isinstance(key, str) or len(key) != 32:
+                continue
+            try:
+                int(key, 16)
+            except ValueError:
+                continue
+            for loc in locs:
+                iid = getattr(loc, "internal_id", None) or ""
+                if iid:
+                    inst._bin_guid_to_path.setdefault(key.lower(), iid)
+        return inst
+
     def guid_to_address(self, guid):
         """GUID -> (Assets/... 地址, internal_id)；无结果返回 (None, None)"""
+        if hasattr(self, "_bin_guid_to_path"):
+            iid = self._bin_guid_to_path.get(guid.lower())
+            return (iid, iid) if iid else (None, None)
         info = self.by_guid.get(guid.lower())
         if not info:
             return None, None
@@ -149,7 +178,28 @@ class Catalog:
 
     def guid_to_internal_ids(self, guid):
         """GUID -> 资源在 bundle 内的地址集合 (即 container 键)"""
+        if hasattr(self, "_bin_guid_to_path"):
+            iid = self._bin_guid_to_path.get(guid.lower())
+            return {iid} if iid else set()
         info = self.by_guid.get(guid.lower())
         if not info:
             return set()
         return {info["internal_id"]} if info.get("internal_id") else set()
+
+    def guid_to_sprite_stem(self, guid):
+        """GUID -> EventImage 资源文件名 stem（如 Yingshoujiangjin）；无结果 None。"""
+        if not guid:
+            return None
+        iid = None
+        if hasattr(self, "_bin_guid_to_path"):
+            iid = self._bin_guid_to_path.get(guid.lower())
+        else:
+            info = self.by_guid.get(guid.lower())
+            iid = info.get("internal_id") if info else None
+        if not iid:
+            return None
+        name = str(iid).replace("\\", "/").rsplit("/", 1)[-1]
+        for ext in (".png", ".jpg", ".jpeg", ".PNG", ".JPG", ".JPEG"):
+            if name.endswith(ext):
+                return name[: -len(ext)]
+        return None

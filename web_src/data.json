@@ -1,5 +1,5 @@
 {
- "_comment": "本文件由 build_web.py 于 2026-09-24 10:03:00 自动生成, 请勿手动修改",
+ "_comment": "本文件由 build_web.py 于 2026-09-24 10:53:35 自动生成, 请勿手动修改",
  "meta": {
   "game": "我在地府打麻将",
   "build": "build_web.py"
@@ -31972,7 +31972,7 @@
       "result": "“进门有礼！”当你正准备离开的时候，门口的推销员热情地塞给你一件祭品为促销礼。"
      }
     ],
-    "icon": "icons/events/Jipinchuxiao.png"
+    "icon": "icons/events/JiPinCuXiao.png"
    },
    {
     "id": 15,

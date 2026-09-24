@@ -7,4 +7,5 @@ dependencies = [
     "unitypy>=1.25.3",
     "Pillow>=11.0.0",
     "numpy>=2.0.0",
+    "addressablestools>=1.1.1",
 ]

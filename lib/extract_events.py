@@ -8,10 +8,11 @@ from pathlib import Path
 
 from UnityPy import AssetsManager
 
-from config import AA_DIR, BUNDLE_PATH, SHARED0, SHARED1, SHARED2, SHARED3, SHARED4, SITE_DIR
+from config import AA_DIR, BUNDLE_PATH, CATALOG_BIN, SHARED0, SHARED1, SHARED2, SHARED3, SHARED4, SITE_DIR
 from extract_shared import classify_monobehaviours
 from i2parse import tr, clean_markup
 from enums import TAG_ID_CN, RARITY_CN
+from catalog import Catalog
 import rawparse as rp
 
 NODE_TYPE_LABELS = {
@@ -210,12 +211,60 @@ def _fmt_effect(n, ctx):
     return f"{lab}({', '.join(parts)})" if lab not in parts[0] else parts[0]
 
 
-def _extract_event_icons(bsf):
-    """从 bundle 中提取事件插图 (Sprite -> PNG) 到 site/icons/events/。"""
+def _load_catalog():
+    """加载 Addressables catalog.bin（GUID -> EventImage 路径）。失败返回 None。"""
+    try:
+        if CATALOG_BIN and Path(CATALOG_BIN).exists():
+            return Catalog.load_bin(CATALOG_BIN)
+    except Exception as e:
+        print(f"  catalog.bin load failed: {e}")
+    return None
+
+
+def _event_title_from_gname(nm):
+    """GameEvent m_Name (事件_xxx / 常规_xxx) -> 事件标题；非事件返回 None。"""
+    m = _EVENT_NAME_RE.match(nm or "")
+    return m.group(2) if m else None
+
+
+def _collect_type6_icons(ge_by_name, resolve_node, catalog):
+    """从各 GameEvent 的 type=6 (EventImage) 节点 spriteGUID 解析封面图。
+
+    返回 {事件标题: sprite 文件名 stem}。catalog 缺失或 GUID 无效则跳过。
+    """
+    if catalog is None:
+        return {}
+    result = {}
+    for nm, ge in ge_by_name.items():
+        title = _event_title_from_gname(nm)
+        if not title:
+            continue
+        gfile = ge.get("_file", "")
+        t6 = []
+        for fid, pid in ge.get("node_refs") or []:
+            n = resolve_node(gfile, fid, pid)
+            if n is not None and n.get("type") == 6:
+                t6.append(n)
+        if not t6:
+            continue
+        pick = next((n for n in t6 if n.get("id") == "1"), t6[0])
+        stem = catalog.guid_to_sprite_stem(pick.get("spriteGUID") or "")
+        if stem:
+            result[title] = stem
+    return result
+
+
+def _extract_event_icons(bsf, title_to_sprite=None):
+    """从 bundle 中提取事件插图 (Sprite -> PNG) 到 site/icons/events/。
+
+    title_to_sprite: {中文事件名: sprite 文件名 stem}；由 type6 spriteGUID
+    经 catalog 解析得到。缺省时回退到内置 EVENT_ICON_MAP。
+    """
     out_dir = SITE_DIR / "icons" / "events"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     sprite_objs = {}
+    sprite_lower = {}
     for obj in bsf.objects.values():
         if obj.type.name == "Sprite":
             try:
@@ -223,9 +272,11 @@ def _extract_event_icons(bsf):
                 nm = getattr(d, "m_Name", "")
                 if nm:
                     sprite_objs[nm] = obj
+                    sprite_lower.setdefault(nm.lower(), nm)
             except Exception:
                 pass
 
+    # type6 解析失败的事件回退到硬编码表（几乎不再命中）
     EVENT_ICON_MAP = {
         "三张戏面": "SanZhangXiMian",
         "压轴好戏": "YaZhouHaoXi",
@@ -274,14 +325,23 @@ def _extract_event_icons(bsf):
         "风灵珠": "Dingfengzhu",
     }
 
+    merged = dict(EVENT_ICON_MAP)
+    if title_to_sprite:
+        merged.update(title_to_sprite)
+
     result = {}
     count = 0
-    for cn_name, sprite_name in EVENT_ICON_MAP.items():
-        if sprite_name not in sprite_objs:
+    for cn_name, sprite_name in merged.items():
+        actual = sprite_name
+        obj = sprite_objs.get(actual)
+        if obj is None:
+            actual = sprite_lower.get(sprite_name.lower())
+            obj = sprite_objs.get(actual) if actual else None
+        if obj is None or not actual:
             continue
         try:
-            img = sprite_objs[sprite_name].read().image
-            fname = f"{sprite_name}.png"
+            img = obj.read().image
+            fname = f"{actual}.png"
             img.save(str(out_dir / fname))
             result[cn_name] = f"icons/events/{fname}"
             count += 1
@@ -550,7 +610,10 @@ def extract_events(i2):
         if cur_ok > prev_ok or (cur_ok == prev_ok and prev.get("_file") != "bundle" and g.get("_file") == "bundle"):
             ge_by_name[name] = g
 
-    icon_map = _extract_event_icons(bsf)
+    catalog = _load_catalog()
+    type6_icons = _collect_type6_icons(ge_by_name, _resolve_node, catalog)
+    print(f"  type6 spriteGUID icons: {len(type6_icons)} resolved via catalog")
+    icon_map = _extract_event_icons(bsf, type6_icons)
     _extract_buff_icons(bsf)
 
     ctx = {"xc_names": {}, "relic_names": {}, "offering_names": {}}
