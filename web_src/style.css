@@ -102,6 +102,14 @@ header {
   border-radius: 8px;
   font-size: 14px;
   outline: none;
+  appearance: textfield;
+  -webkit-appearance: textfield;
+}
+#search::-webkit-search-cancel-button,
+#search::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }
 #search:focus {
   border-color: var(--accent);

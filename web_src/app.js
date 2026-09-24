@@ -467,7 +467,7 @@ function cardHtml(e, cat, q) {
   const showEn = e.en && cat !== "achievements";
   let topBlock;
   if (cat === "events" && e.icon) {
-    topBlock = `<div class="card-top"><img class="avatar" loading="lazy" src="${esc(e.icon)}" alt="event"><div class="titles"><div class="name">${hl(name, q)}${showEn ? `<span class="en">${hl(e.en, q)}</span>` : ""}</div><div class="idline">ID ${hl(e.id, q)}${e.tiers && e.tiers.length > 1 ? ` · ${e.tiers.length}个等级` : e.level ? ` · Lv.${e.level}` : ""}</div></div></div>`;
+    topBlock = `<div class="card-top"><img class="avatar" loading="lazy" src="${esc(e.icon)}" onerror="this.outerHTML='<div class=\\'avatar placeholder\\'>?</div>'" alt="event"><div class="titles"><div class="name">${hl(name, q)}${showEn ? `<span class="en">${hl(e.en, q)}</span>` : ""}</div><div class="idline">ID ${hl(e.id, q)}${e.tiers && e.tiers.length > 1 ? ` · ${e.tiers.length}个等级` : e.level ? ` · Lv.${e.level}` : ""}</div></div></div>`;
   } else if (avatar) {
     topBlock = `<div class="card-top">${avatar}<div class="titles"><div class="name">${hl(name, q)}${showEn ? `<span class="en">${hl(e.en, q)}</span>` : ""}</div><div class="idline">ID ${hl(e.id, q)}${e.tiers && e.tiers.length > 1 ? ` · ${e.tiers.length}个等级` : e.level ? ` · Lv.${e.level}` : ""}</div></div></div>`;
   } else {

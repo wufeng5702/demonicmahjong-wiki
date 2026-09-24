@@ -74,9 +74,15 @@ def sync_and_optimize(src_dir, dst_dir):
         dst_png = dst_dir / rel
         src_pngs.add(rel)
 
-        # 非首次且像素未变 → 跳过
+        # 非首次且像素未变 → 跳过; 但若 avif 缺失(上次中断)则补生成
         if not first_run and dst_png.exists() and not _pixels_differ(src_img, dst_png):
             skipped += 1
+            avif = dst_png.with_suffix(".avif")
+            if not avif.exists():
+                _optimize_one(dst_png)
+                if avif.exists():
+                    optimized += 1
+                    skipped -= 1
             continue
 
         # 像素变化或首次部署 → 复制并生成 avif
@@ -105,11 +111,18 @@ def sync_and_optimize(src_dir, dst_dir):
 
 
 def update_references(deploy_dir):
-    """把 HTML/JS/CSS/JSON 中图标 .png 引用改为 .avif。"""
+    """把 HTML/JS/CSS/JSON 中图标 .png 引用改为 .avif（仅当对应 avif 存在）。"""
     count = 0
+
+    def _repl(m):
+        avif = deploy_dir / (m.group(1) + ".avif")
+        if avif.exists():
+            return m.group(1) + ".avif"
+        return m.group(0)
+
     for f in list(deploy_dir.rglob("*.html")) + list(deploy_dir.rglob("*.js")) + list(deploy_dir.rglob("*.css")) + list(deploy_dir.rglob("*.json")):
         text = f.read_text(encoding="utf-8")
-        new = re.sub(r'(icons/[^"\'`\s]+)\.png', r'\1.avif', text)
+        new = re.sub(r"(icons/[^\"'`\s]+)\.png", _repl, text)
         if new != text:
             f.write_text(new, encoding="utf-8")
             count += 1

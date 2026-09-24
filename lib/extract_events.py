@@ -66,9 +66,11 @@ EVENT_TYPE_CN = {
     1020: "编成灵俑", 1021: "编成遗物", 1022: "编成祭品",
 }
 
-ctx_baoling = {1: "红宝牌", 2: "蓝宝牌", 3: "绿宝牌", 4: "金宝牌", 5: "骷髅牌", 6: "红玉牌",
-               7: "迷音牌", 8: "炸药牌", 9: "毒宝牌", 10: "无宝牌", 11: "水晶牌", 12: "迷幻牌",
-               13: "黑玉牌", 14: "黑莲牌", 15: "幸运牌", 16: "真言牌"}
+# 宝牌 ID → 中文名（与 data.json baopai 一致; ID 5/8/9/10... 曾整体错位, 真言牌实为 9999）
+ctx_baoling = {1: "红宝牌", 2: "蓝宝牌", 3: "绿宝牌", 4: "金宝牌", 5: "螺钿牌",
+               8: "红玉牌", 9: "银宝牌", 10: "炸药牌", 11: "毒宝牌", 12: "雾宝牌",
+               29: "水晶牌", 33: "迷幻牌", 34: "黑玉牌", 35: "黑莲牌", 37: "幸运牌",
+               9999: "真言牌"}
 
 _data_relic_names = []
 _data_offering_names = []
@@ -132,6 +134,29 @@ def _baoling_name(bid):
     return ctx_baoling.get(bid, str(bid))
 
 
+def _baoling_kind(n):
+    """判定 type 32/42 效果是宝牌还是牌灵。
+
+    baoPai/paiLing 可能同时为真（游戏数据如此），此时按 ID 空间判定:
+    牌灵 ID >= 10000, 宝牌 ID < 10000。
+    """
+    ids = n.get("baoLingGetList") or []
+    if ids:
+        if all(int(i) >= 10000 for i in ids):
+            return "牌灵"
+        if all(int(i) < 10000 for i in ids):
+            return "宝牌"
+    is_pal = bool(n.get("paiLing"))
+    is_bao = bool(n.get("baoPai"))
+    if is_pal and not is_bao:
+        return "牌灵"
+    if is_bao and not is_pal:
+        return "宝牌"
+    if is_pal:
+        return "牌灵"
+    return "宝牌"
+
+
 def _fmt_effect(n, ctx):
     t = n["type"]
     lab = NODE_TYPE_LABELS.get(t, f"效果{t}")
@@ -168,7 +193,8 @@ def _fmt_effect(n, ctx):
         names = [x for x in names if x]
         if names: parts.append("".join(names) if t != 41 else "失去" + "".join(names))
     if t in (32, 42) and n.get("baoLingGetList"):
-        parts.append("宝牌 " + "/".join(_baoling_name(i) for i in n["baoLingGetList"]))
+        kind = _baoling_kind(n)
+        parts.append(f"{kind} " + "/".join(_baoling_name(i) for i in n["baoLingGetList"]))
     if t in (33, 43) and n.get("relicGetList"):
         parts.append("遗物 " + "/".join(_relic_name(ctx, i) for i in n["relicGetList"]))
     if t in (34, 44) and n.get("offeringGetList"):
@@ -602,19 +628,12 @@ def extract_events(i2):
                 return f"{verb}{rnd}{kind}({filt})"
             return f"{verb}{kind}"
         if t in (32, 42):
-            is_pal = bool(n.get("paiLing"))
-            is_bao = bool(n.get("baoPai"))
-            if is_pal and not is_bao:
-                kind = "牌灵"
-            elif is_bao and not is_pal:
-                kind = "宝牌"
-            else:
-                kind = "宝牌"
+            kind = _baoling_kind(n)
             ids = n.get("baoLingGetList") or []
             names = []
             for i in ids:
                 if kind == "牌灵":
-                    nm = _data_pailing_names.get(i)
+                    nm = _data_pailing_names.get(i) or _data_baopai_names.get(i) or ctx_baoling.get(i)
                 else:
                     nm = _data_baopai_names.get(i) or ctx_baoling.get(i) or _data_pailing_names.get(i)
                 if nm:
