@@ -128,14 +128,6 @@ def _offering_name(ctx, oid):
     return ctx["offering_names"].get(oid, str(oid))
 
 
-def _baoling_name(bid):
-    if bid in _data_baopai_names:
-        return _data_baopai_names[bid]
-    if bid in _data_pailing_names:
-        return _data_pailing_names[bid]
-    return ctx_baoling.get(bid, str(bid))
-
-
 def _baoling_kind(n):
     """判定 type 32/42 效果是宝牌还是牌灵。
 
@@ -157,66 +149,6 @@ def _baoling_kind(n):
     if is_pal:
         return "牌灵"
     return "宝牌"
-
-
-def _fmt_effect(n, ctx):
-    t = n["type"]
-    lab = NODE_TYPE_LABELS.get(t, f"效果{t}")
-    parts = []
-    cal = n.get("calSymbol") or ""
-    if t in (10, 20) and n.get("baseScore"): parts.append(f"底分{n['baseScore']:+d}")
-    if t in (11, 21) and n.get("fan"): parts.append(f"番{n['fan']:+d}")
-    if t in (14, 24) and n.get("hp"):
-        hv = -abs(n["hp"]) if cal == "-" else abs(n["hp"]) if cal == "+" else n["hp"]
-        if n.get("ceiling"):
-            parts.append(f"血上限{hv:+d}")
-        else:
-            parts.append(f"血{hv:+d}")
-    elif t in (14, 24):
-        return ""
-    if t in (15, 25) and n.get("hun"):
-        hv = -abs(n["hun"]) if cal == "-" else abs(n["hun"]) if cal == "+" else n["hun"]
-        if n.get("ceiling"):
-            parts.append(f"魂力上限{hv:+g}")
-        else:
-            parts.append(f"魂{hv:+g}")
-    if t == 23:
-        fv = n.get("floatValue") or 0.0
-        if not fv and n.get("range"):
-            fv = float(n["range"][0] or 0.0)
-        if fv:
-            cal = n.get("calSymbol") or ""
-            if cal == "-":
-                fv = -abs(fv)
-            elif cal == "+":
-                fv = abs(fv)
-            parts.append(f"金币{fv:+g}")
-    if t in (31, 35, 41):
-        names = [_lingyou_name_by_pid(ctx, (r or {}).get("path_id"))
-                 for r in (n.get("xiaoChouPaiGetList") or [])]
-        names = [x for x in names if x]
-        if names: parts.append("".join(names) if t != 41 else "失去" + "".join(names))
-    if t in (32, 42) and n.get("baoLingGetList"):
-        kind = _baoling_kind(n)
-        ids = n["baoLingGetList"]
-        names = "/".join(_baoling_name(i) for i in ids)
-        verb = "失去" if t == 42 else "获得"
-        if len(ids) > 1:
-            return f"{verb}随机{kind}"
-        return f"{verb}{kind}({names})"
-    if t in (33, 43) and n.get("relicGetList"):
-        parts.append("遗物 " + "/".join(_relic_name(ctx, i) for i in n["relicGetList"]))
-    if t in (34, 44) and n.get("offeringGetList"):
-        parts.append("祭品 " + "/".join(_offering_name(ctx, i) for i in n["offeringGetList"]))
-    if t == 49: parts.append(f"层数 {n.get('level', '?')}")
-    if t == 52: parts.append(f"难度 {n.get('level', '?')}")
-    if t == 450 and n.get("characterID"): parts.append(f"角色{n['characterID']}等级{n.get('level','')}")
-    if t == 79: parts.append("麻将对局")
-    if t in (500, 510): parts.append("商店")
-    if t in (600, 610): parts.append("当铺")
-    if not parts:
-        return lab
-    return f"{lab}({', '.join(parts)})" if lab not in parts[0] else parts[0]
 
 
 def _load_catalog():
