@@ -14,16 +14,27 @@
 from __future__ import annotations
 
 import inspect
+import sys
 from pathlib import Path
 
 _WARN: list[str] = []
 CAP = 20
 
 
-def warn(msg: str = "解析失败") -> None:
-    """收集一条解析失败 (自动附调用处 文件名:行号)。"""
+def warn(msg: str | None = None) -> None:
+    """收集一条解析失败 (自动附调用处 文件名:行号)。
+
+    msg 省略且正处于 except 块时, 自动带上异常类型与内容。
+    """
     frame = inspect.currentframe().f_back
     loc = f"{Path(frame.f_code.co_filename).name}:{frame.f_lineno}"
+    if msg is None:
+        exc = sys.exc_info()[1]
+        if exc is not None:
+            detail = f"{type(exc).__name__}: {exc}"
+            msg = f"解析失败 ({detail[:120]})"
+        else:
+            msg = "解析失败"
     _WARN.append(f"{loc} {msg}")
 
 

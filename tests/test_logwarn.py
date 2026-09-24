@@ -27,6 +27,14 @@ class TestLogwarn(unittest.TestCase):
         logwarn.warn()
         self.assertIn("解析失败", logwarn._WARN[0])
 
+    def test_warn_captures_active_exception(self):
+        try:
+            raise ValueError("bad news")
+        except Exception:
+            logwarn.warn()
+        self.assertIn("ValueError", logwarn._WARN[0])
+        self.assertIn("bad news", logwarn._WARN[0])
+
     def test_flush_prints_and_clears(self):
         logwarn.warn("a")
         logwarn.warn("b")

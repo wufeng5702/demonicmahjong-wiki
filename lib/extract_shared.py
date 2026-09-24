@@ -241,11 +241,10 @@ def extract_shared_assets(enum_values):
 
     # 角色名/解锁条件映射: 从 RoleAvatar 提取 I2 term
     avatar_meta = {}
-    for o in sf4.objects.values():
-        if o.type.name != "MonoBehaviour":
-            continue
+    # 只试 classify 已归入 RoleAvatar 的对象, 不对全表 MB 试解析
+    for pid in cls4.get("RoleAvatar", []):
         try:
-            raw = o.get_raw_data()
+            raw = sf4.objects[pid].get_raw_data()
             d2 = rp.parse_payload(raw, "RoleAvatar")
             cid = int(d2.get("characterID", 0))
             lnt = str(d2.get("localizedNameTerm", ""))

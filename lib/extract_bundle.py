@@ -48,11 +48,8 @@ def fnum(v):
 def collect_adds(d, fields):
     out = {}
     for f in fields:
-        try:
-            v = getattr(d, f)
-        except Exception:
-            warn()
-            continue
+        # 字段在异构 payload 上不存在是预期, 不走异常路径
+        v = getattr(d, f, None)
         if isinstance(v, (int, float)) and v != 0:
             out[f] = fnum(v)
     return out
