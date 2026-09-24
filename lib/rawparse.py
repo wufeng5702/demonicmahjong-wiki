@@ -14,7 +14,12 @@ Unity 序列化的字节布局规则 (由 dump.cs 字段声明顺序 + 字节校
     PPtr = file_id(i32) + path_id(i64);
     List<T>/T[] = count(i32) + N×T;
     LocalizedString(struct) = mTerm(str) + bool + i32 + bool + bool
-    SaintsDictionary(空表时) = 固定 7×4B (两个空 List + 2 enum + version + 2 空 List)
+    SaintsDictionary = 按主 bundle typetree 完整布局 (空表恰 7×4B, 非空含 SaintsWrap):
+      _saintsKeys[] + _wrapTypeKey + _saintsValues[] + _wrapTypeValue
+      + saintsSerializedVersion + _keys[] + _values[]
+      SaintsWrap = value(str) + valueField(SSP) + valueArray(SSP[]) + valueList(SSP[]) + wrapType(i32)
+      SSP = propertyType(i32) + longValue(i64) + uLongValue(u64) + stringValue(str)
+            + intValues(i32[]) + V(pptr12) + VRef(i64) + IsVRef(bool align4)
 
 字段规格 SPECS 来自 dump_output/dump.cs 中各类的声明顺序。
 """
@@ -41,6 +46,18 @@ class RawReader:
         self.p += 4
         return v
 
+    def i64(self):
+        self._align()
+        v = struct.unpack_from("<q", self.b, self.p)[0]
+        self.p += 8
+        return v
+
+    def u64(self):
+        self._align()
+        v = struct.unpack_from("<Q", self.b, self.p)[0]
+        self.p += 8
+        return v
+
     def f32(self):
         self._align()
         v = struct.unpack_from("<f", self.b, self.p)[0]
@@ -58,6 +75,11 @@ class RawReader:
     def string(self):
         self._align()
         n = struct.unpack_from("<i", self.b, self.p)[0]
+        if n == -1:
+            # Unity null string: 只写长度 -1, 无字节载荷
+            self.p += 4
+            self._align()
+            return ""
         if n < 0 or n > 1_000_000:
             raise ParseError(f"bad strlen {n} @{self.p}")
         s = self.b[self.p + 4:self.p + 4 + n].decode("utf-8", "replace")
@@ -91,6 +113,70 @@ class RawReader:
         """AssetReference(SerializeReference 实测): [guid][subName][类型名字符串]"""
         return {"guid": self.string(), "sub": self.string(), "type": self.string()}
 
+    def _vec_len(self, name="vec"):
+        self._align()
+        n = struct.unpack_from("<i", self.b, self.p)[0]
+        if n < 0 or n > 100_000:
+            raise ParseError(f"{name}: bad vec len {n} @{self.p}")
+        self.p += 4
+        return n
+
+    def saints_prop(self):
+        """SaintsSerializedProperty (bundle typetree, 52B when empty)。"""
+        pt = self.i32()
+        lv = self.i64()
+        uv = self.u64()
+        sv = self.string()
+        ivn = self._vec_len("intValues")
+        self.p += 4 * ivn  # int 数组, 已 4 对齐
+        self._align()
+        v = self.pptr()
+        vref = self.i64()
+        is_vref = self.b1()  # UInt8 + align4 (MetaFlag 0x4100)
+        return {"propertyType": pt, "longValue": lv, "uLongValue": uv,
+                "stringValue": sv, "V": v, "VRef": vref, "IsVRef": is_vref}
+
+    def saints_wrap(self):
+        """SaintsWrap: value + valueField + valueArray[] + valueList[] + wrapType。"""
+        value = self.string()
+        value_field = self.saints_prop()
+        nan = self._vec_len("valueArray")
+        value_array = [self.saints_prop() for _ in range(nan)]
+        nln = self._vec_len("valueList")
+        value_list = [self.saints_prop() for _ in range(nln)]
+        wrap_type = self.i32()
+        return {"value": value, "valueField": value_field,
+                "valueArray": value_array, "valueList": value_list,
+                "wrapType": wrap_type}
+
+    def saints_dict(self):
+        """SaintsDictionary`2 (bundle typetree 权威布局)。
+
+        返回 {key: value} 平行表配对; 空表恰消费 28B。
+        """
+        nk = self._vec_len("saintsKeys")
+        keys = [self.saints_wrap() for _ in range(nk)]
+        wtk = self.i32()
+        nv = self._vec_len("saintsValues")
+        vals = [self.saints_wrap() for _ in range(nv)]
+        wtv = self.i32()
+        ver = self.i32()
+        # Array MetaFlag 带 align → 长度读取后/元素后对齐 (空表时 nop)
+        n_ok = self._vec_len("_keys")
+        legacy_keys = [self.string() for _ in range(n_ok)]
+        self._align()
+        n_ov = self._vec_len("_values")
+        legacy_vals = [self.string() for _ in range(n_ov)]
+        self._align()
+        out = {}
+        for i, k in enumerate(keys):
+            if i < len(vals):
+                out[k["value"]] = vals[i]["value"]
+        if not out and legacy_keys:
+            for i, k in enumerate(legacy_keys):
+                out[k] = legacy_vals[i] if i < len(legacy_vals) else ""
+        return out
+
 
 def read_typed(r: RawReader, t):
     """按类型码读一个值。"""
@@ -110,9 +196,8 @@ def read_typed(r: RawReader, t):
         return r.v2()
     if t == "v3":
         return r.v3()
-    if t == "sd28":  # SaintsDictionary 假定空表
-        r.i32(); r.i32(); r.i32(); r.i32(); r.i32(); r.i32(); r.i32()
-        return {}
+    if t == "sd":  # SaintsDictionary (可变长, 空表 28B)
+        return r.saints_dict()
     if t == "ar":
         return r.asset_ref()
     raise ParseError(f"unknown type {t}")
@@ -173,7 +258,7 @@ LS = "ls"
 XIAOCHOU_SPEC = [
     ("id", "i"), ("rarity", "i"),
     ("displayNameTerm", LS), ("descriptionTerm", LS),
-    ("descriptionTranslation", "sd28"),
+    ("descriptionTranslation", "sd"),
     ("dynamicDescriptionTerm", LS), ("dynamicDescriptionTerms", "vls"),
     ("tags", "vi"), ("skillLevel", "i"),
     ("iconReference", "ar"), ("modelReference", "ar"), ("prefabReference", "ar"),

@@ -337,7 +337,8 @@ def _collect_event_ids(*sfs):
             try:
                 d = obj.read(check_read=False)
                 mn = getattr(d, "m_Name", "") or ""
-                cn = getattr(d.m_Script.read(), "m_ClassName", "")
+                ms = getattr(d, "m_Script", None)
+                cn = getattr(ms.read(), "m_ClassName", "") if ms and ms.path_id else ""
             except Exception:
                 warn()
                 continue
@@ -481,7 +482,8 @@ def _collect_gameevents(sfs):
             try:
                 d = obj.read(check_read=False)
                 mn = getattr(d, "m_Name", "") or ""
-                cn = getattr(d.m_Script.read(), "m_ClassName", "")
+                ms = getattr(d, "m_Script", None)
+                cn = getattr(ms.read(), "m_ClassName", "") if ms and ms.path_id else ""
             except Exception:
                 warn()
                 continue
