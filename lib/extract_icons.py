@@ -23,8 +23,8 @@ import UnityPy
 from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
-from config import (AA_DIR, BUNDLE_PATH, SHARED0, SHARED1, SHARED2, SHARED3,
-                    SHARED4, SITE_DIR)
+from config import (AA_DIR, BUNDLE_PATH, GAME_DATA_DIR, SHARED0, SHARED1,
+                    SHARED2, SHARED3, SHARED4, SITE_DIR)
 import rawparse as rp
 
 SIZE = 512
@@ -715,6 +715,26 @@ def extract_relic_icons():
     seen = set()
 
     pid_map = {o.path_id: o for o in env4.objects}
+    sf4 = list(env4.files.values())[0]
+    externals = list(getattr(sf4, "externals", None) or [])
+    dep_map = {}  # file_id -> {path_id: obj}, 图标可跨文件引用 (如 sharedassets1)
+
+    def _resolve_icon(ipid, fid):
+        if fid == 0:
+            return pid_map.get(ipid)
+        objs = dep_map.get(fid)
+        if objs is None:
+            objs = {}
+            if 0 < fid <= len(externals):
+                dep_path = GAME_DATA_DIR / externals[fid - 1].path
+                if dep_path.is_file():
+                    try:
+                        env = UnityPy.load(str(dep_path))
+                        objs = {o.path_id: o for o in env.objects}
+                    except Exception:
+                        objs = {}
+            dep_map[fid] = objs
+        return objs.get(ipid)
 
     def _save_icon(did, io):
         nonlocal count
@@ -762,10 +782,11 @@ def extract_relic_icons():
                         icon = rd.get("icon") or {}
                         ipid = icon.get("path_id", 0)
                         fid = icon.get("file_id", 0)
-                        if ipid == 0 or fid != 0:
+                        if ipid == 0:
                             continue
-                        if ipid in pid_map:
-                            _save_icon(did, pid_map[ipid])
+                        io = _resolve_icon(ipid, fid)
+                        if io is not None:
+                            _save_icon(did, io)
                     except Exception:
                         pass
             except Exception:
