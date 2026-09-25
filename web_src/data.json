@@ -1,5 +1,5 @@
 {
- "_comment": "本文件由 build_web.py 于 2026-09-24 13:52:29 自动生成, 请勿手动修改",
+ "_comment": "本文件由 build_web.py 于 2026-09-25 10:59:53 自动生成, 请勿手动修改",
  "meta": {
   "game": "我在地府打麻将",
   "build": "build_web.py"
@@ -19143,6 +19143,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "祭品槽"
+    ],
     "icon_pid": 2803,
     "src": "shared",
     "name": "竹餐篮",
@@ -19159,6 +19162,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "祭品槽"
+    ],
     "icon_pid": 2449,
     "src": "shared",
     "name": "雕花食盒",
@@ -19175,6 +19181,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣槽",
+     "莲花"
+    ],
     "icon_pid": 2471,
     "src": "shared",
     "name": "莲台",
@@ -19191,6 +19201,9 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "摸牌总量"
+    ],
     "icon_pid": 2870,
     "src": "shared",
     "name": "七星灯",
@@ -19207,6 +19220,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "底分",
+     "武器"
+    ],
     "icon_pid": 3026,
     "src": "shared",
     "name": "青冥剑",
@@ -19223,6 +19240,9 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "血量"
+    ],
     "icon_pid": 2868,
     "src": "shared",
     "name": "长命锁",
@@ -19239,6 +19259,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "番数",
+     "武器"
+    ],
     "icon_pid": 2730,
     "src": "shared",
     "name": "金刚杵",
@@ -19255,6 +19279,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "和牌槽",
+     "幡"
+    ],
     "icon_pid": 3023,
     "src": "shared",
     "name": "招魂幡",
@@ -19271,6 +19299,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "地图节点",
+     "刷新"
+    ],
     "icon_pid": 3097,
     "src": "shared",
     "name": "孔雀翎",
@@ -19287,6 +19319,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19300,6 +19333,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19313,6 +19347,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "地图节点"
+    ],
     "icon_pid": 2589,
     "src": "shared",
     "name": "聚宝盆",
@@ -19329,6 +19366,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "地图节点",
+     "刷新"
+    ],
     "icon_pid": 2784,
     "src": "shared",
     "name": "拂尘",
@@ -19345,6 +19386,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "地图节点"
+    ],
     "icon_pid": 2723,
     "src": "shared",
     "name": "钱牌",
@@ -19361,6 +19405,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19374,6 +19419,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "地图节点",
+     "遗物"
+    ],
     "icon_pid": 3058,
     "src": "shared",
     "name": "锦盒",
@@ -19390,6 +19439,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "地图节点"
+    ],
     "icon_pid": 2816,
     "src": "shared",
     "name": "玉佛",
@@ -19406,6 +19458,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "金币"
+    ],
     "icon_pid": 2523,
     "src": "shared",
     "name": "摇钱树",
@@ -19422,6 +19477,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "金币"
+    ],
     "icon_pid": 1421,
     "src": "shared",
     "name": "储蓄罐",
@@ -19438,6 +19496,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "金币"
+    ],
     "icon_pid": 2805,
     "src": "shared",
     "name": "金葫芦",
@@ -19454,6 +19515,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "金币"
+    ],
     "icon_pid": 2721,
     "src": "shared",
     "name": "玉葫芦",
@@ -19470,6 +19534,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "遗物",
+     "地图节点"
+    ],
     "icon_pid": 3145,
     "src": "shared",
     "name": "宝瓶",
@@ -19486,6 +19554,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19499,6 +19568,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "血量"
+    ],
     "icon_pid": -1504780973964015066,
     "src": "bundle",
     "name": "夜明珠",
@@ -19515,6 +19587,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "移除",
+     "牌灵"
+    ],
     "icon_pid": 3028,
     "src": "shared",
     "name": "地府藤",
@@ -19531,6 +19607,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "移除",
+     "宝牌"
+    ],
     "icon_pid": 2919,
     "src": "shared",
     "name": "迷魂香",
@@ -19547,6 +19627,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "遗物"
+    ],
     "icon_pid": 2595,
     "src": "shared",
     "name": "吉祥结",
@@ -19563,6 +19646,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣",
+     "刷新"
+    ],
     "icon_pid": 2451,
     "src": "shared",
     "name": "鸡毛掸",
@@ -19579,6 +19666,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "祭品"
+    ],
     "icon_pid": 2966,
     "src": "shared",
     "name": "铁饭碗",
@@ -19595,6 +19685,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "祭品"
+    ],
     "icon_pid": 3123,
     "src": "shared",
     "name": "金饭碗",
@@ -19611,6 +19704,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣"
+    ],
     "icon_pid": 3046,
     "src": "shared",
     "name": "玉如意",
@@ -19627,6 +19723,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣"
+    ],
     "icon_pid": 2734,
     "src": "shared",
     "name": "金如意",
@@ -19643,6 +19742,9 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "宝牌"
+    ],
     "icon_pid": 2546,
     "src": "shared",
     "name": "白法螺",
@@ -19659,6 +19761,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "削弱对手"
+    ],
     "icon_pid": 3065,
     "src": "shared",
     "name": "法尺",
@@ -19675,6 +19780,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "地图节点"
+    ],
     "icon_pid": 2899,
     "src": "shared",
     "name": "法印",
@@ -19691,6 +19800,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19704,6 +19814,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19717,6 +19828,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19730,6 +19842,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19743,6 +19856,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19756,6 +19870,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19769,6 +19884,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -19782,6 +19898,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "符石"
+    ],
     "icon_pid": 2625,
     "src": "shared",
     "name": "万之石",
@@ -19798,6 +19918,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "符石"
+    ],
     "icon_pid": 3039,
     "src": "shared",
     "name": "筒之石",
@@ -19814,6 +19938,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "符石"
+    ],
     "icon_pid": 2953,
     "src": "shared",
     "name": "索之石",
@@ -19830,6 +19958,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "符石"
+    ],
     "icon_pid": 3101,
     "src": "shared",
     "name": "字之石",
@@ -19846,6 +19978,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "符石"
+    ],
     "icon_pid": 2812,
     "src": "shared",
     "name": "象之石",
@@ -19862,6 +19998,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "符石"
+    ],
     "icon_pid": 2929,
     "src": "shared",
     "name": "兔之石",
@@ -19878,6 +20018,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "符石"
+    ],
     "icon_pid": 3109,
     "src": "shared",
     "name": "鼠之石",
@@ -19894,6 +20038,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": -25061141777494560,
     "src": "bundle",
     "name": "刻令",
@@ -19910,6 +20058,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": 3141,
     "src": "shared",
     "name": "万令",
@@ -19926,6 +20078,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": 2986,
     "src": "shared",
     "name": "筒令",
@@ -19942,6 +20098,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": 3036,
     "src": "shared",
     "name": "索令",
@@ -19958,6 +20118,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": -965957749911729539,
     "src": "bundle",
     "name": "风令",
@@ -19974,6 +20138,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": 2704590682809280669,
     "src": "bundle",
     "name": "龙令",
@@ -19990,6 +20158,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "宝牌"
+    ],
     "icon_pid": 2853,
     "src": "shared",
     "name": "镇纸",
@@ -20006,6 +20178,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "削弱对手",
+     "武器"
+    ],
     "icon_pid": 2576,
     "src": "shared",
     "name": "桃木剑",
@@ -20022,6 +20198,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -20035,6 +20212,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "毒",
+     "念灵",
+     "削弱对手"
+    ],
     "icon_pid": 3129,
     "src": "shared",
     "name": "邪面具",
@@ -20051,6 +20233,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "独立",
+     "宝牌",
+     "武器"
+    ],
     "icon_pid": 2484,
     "src": "shared",
     "name": "宝石匕首",
@@ -20067,6 +20254,9 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌灵"
+    ],
     "icon_pid": -2068241118135794850,
     "src": "bundle",
     "name": "马良神笔",
@@ -20083,6 +20273,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "削弱对手",
+     "武器",
+     "毒"
+    ],
     "icon_pid": 2630,
     "src": "shared",
     "name": "咒毒刃",
@@ -20099,6 +20294,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "血量"
+    ],
     "icon_pid": 3149,
     "src": "shared",
     "name": "平安扣",
@@ -20115,6 +20313,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "独立"
+    ],
     "icon_pid": 2987,
     "src": "shared",
     "name": "磨刀石",
@@ -20131,6 +20332,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "摸牌数",
+     "莲花"
+    ],
     "icon_pid": 2969,
     "src": "shared",
     "name": "莲灯",
@@ -20147,6 +20352,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "开局调换数"
+    ],
     "icon_pid": 3006,
     "src": "shared",
     "name": "转经筒",
@@ -20163,6 +20371,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌灵"
+    ],
     "icon_pid": 2620,
     "src": "shared",
     "name": "镇魂铃",
@@ -20179,6 +20390,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "摸牌总量"
+    ],
     "icon_pid": 2444,
     "src": "shared",
     "name": "天灯",
@@ -20195,6 +20409,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣"
+    ],
     "icon_pid": 2519,
     "src": "shared",
     "name": "奉献宝箱",
@@ -20211,6 +20428,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "遗物",
+     "念灵"
+    ],
     "icon_pid": 2716,
     "src": "shared",
     "name": "低语宝箱",
@@ -20227,6 +20448,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "独立",
+     "血量",
+     "武器"
+    ],
     "icon_pid": -8688452169527958581,
     "src": "bundle",
     "name": "双刃剑",
@@ -20243,6 +20469,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "摸牌总量",
+     "念灵"
+    ],
     "icon_pid": 2878,
     "src": "shared",
     "name": "骷髅烛台",
@@ -20259,6 +20489,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "摸牌数",
+     "摸牌总量"
+    ],
     "icon_pid": 3033,
     "src": "shared",
     "name": "恐怖蜡烛",
@@ -20275,6 +20509,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣槽",
+     "供台"
+    ],
     "icon_pid": 2487,
     "src": "shared",
     "name": "怪异供台",
@@ -20291,6 +20529,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣槽",
+     "供台"
+    ],
     "icon_pid": 2997,
     "src": "shared",
     "name": "不祥供台",
@@ -20307,6 +20549,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "金币"
+    ],
     "icon_pid": 3052,
     "src": "shared",
     "name": "阴司币",
@@ -20323,6 +20568,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "和牌槽",
+     "幡",
+     "魂力"
+    ],
     "icon_pid": 2726,
     "src": "shared",
     "name": "恶鬼幡",
@@ -20339,6 +20589,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "诅咒",
+    "tags": [
+     "和牌槽",
+     "诅咒"
+    ],
     "icon_pid": 2670,
     "src": "shared",
     "name": "巫蛊娃娃",
@@ -20355,6 +20609,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "诅咒",
+    "tags": [
+     "摸牌总量",
+     "诅咒"
+    ],
     "icon_pid": 2600,
     "src": "shared",
     "name": "走马灯",
@@ -20371,6 +20629,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "诅咒",
+    "tags": [
+     "摸牌数",
+     "诅咒"
+    ],
     "icon_pid": 2692,
     "src": "shared",
     "name": "手铐",
@@ -20387,6 +20649,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "诅咒",
+    "tags": [
+     "祭品槽",
+     "诅咒"
+    ],
     "icon_pid": 3110,
     "src": "shared",
     "name": "破碗",
@@ -20403,6 +20669,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "诅咒",
+    "tags": [
+     "独立",
+     "诅咒"
+    ],
     "icon_pid": 2580,
     "src": "shared",
     "name": "生锈钉子",
@@ -20419,6 +20689,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "诅咒",
+    "tags": [
+     "开局调换数",
+     "诅咒"
+    ],
     "icon_pid": 2851,
     "src": "shared",
     "name": "纸人",
@@ -20435,6 +20709,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "诅咒",
+    "tags": [
+     "地图节点",
+     "诅咒"
+    ],
     "icon_pid": 2992,
     "src": "shared",
     "name": "鬼秤",
@@ -20451,6 +20729,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "特殊事件",
+     "魂力"
+    ],
     "icon_pid": 2614,
     "src": "shared",
     "name": "太岁",
@@ -20467,6 +20749,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -20480,6 +20763,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -20493,6 +20777,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": -5045694460850066368,
     "src": "bundle",
     "name": "顺令",
@@ -20509,6 +20797,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌"
+    ],
     "icon_pid": 2959,
     "src": "shared",
     "name": "朱雀印",
@@ -20525,6 +20816,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "番数",
+     "武器"
+    ],
     "icon_pid": 2977,
     "src": "shared",
     "name": "乾坤圈",
@@ -20541,6 +20836,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "供台",
+     "灵佣槽",
+     "宝牌"
+    ],
     "icon_pid": 2848,
     "src": "shared",
     "name": "剧毒供台",
@@ -20557,6 +20857,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "供台",
+     "灵佣槽",
+     "宝牌"
+    ],
     "icon_pid": 2616,
     "src": "shared",
     "name": "迷雾供台",
@@ -20573,6 +20878,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "供台",
+     "灵佣槽",
+     "念灵"
+    ],
     "icon_pid": 2724,
     "src": "shared",
     "name": "低语供台",
@@ -20589,6 +20899,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "供台",
+     "灵佣槽"
+    ],
     "icon_pid": 2631,
     "src": "shared",
     "name": "牺牲供台",
@@ -20605,6 +20919,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "金币"
+    ],
     "icon_pid": 8275935520229312560,
     "src": "bundle",
     "name": "金珠",
@@ -20621,6 +20938,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "魂力"
+    ],
     "icon_pid": 3567346632807539674,
     "src": "bundle",
     "name": "清灵冠",
@@ -20637,6 +20957,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌灵"
+    ],
     "icon_pid": 6147192310431125919,
     "src": "bundle",
     "name": "混元镜",
@@ -20653,6 +20976,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "魂力"
+    ],
     "icon_pid": 4660588639886518539,
     "src": "bundle",
     "name": "缺月佩",
@@ -20669,6 +20995,11 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "幡",
+     "和牌槽",
+     "摸牌数"
+    ],
     "icon_pid": -5231072968669326269,
     "src": "bundle",
     "name": "龙魂幡",
@@ -20685,6 +21016,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "幡",
+     "和牌槽"
+    ],
     "icon_pid": 2858,
     "src": "shared",
     "name": "幽暗幡",
@@ -20701,6 +21036,11 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "武器",
+     "毒",
+     "削弱对手"
+    ],
     "icon_pid": -6973442692233767608,
     "src": "bundle",
     "name": "淬毒针",
@@ -20717,6 +21057,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌灵"
+    ],
     "icon_pid": -475060786607644561,
     "src": "bundle",
     "name": "同顺珠",
@@ -20733,6 +21076,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "独立",
+     "武器"
+    ],
     "icon_pid": 611691177782291377,
     "src": "bundle",
     "name": "升天棍",
@@ -20749,6 +21096,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "地图节点",
+     "魂力"
+    ],
     "icon_pid": 1270351676063437346,
     "src": "bundle",
     "name": "步云履",
@@ -20765,6 +21116,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "底分",
+     "武器"
+    ],
     "icon_pid": -2364645736578566777,
     "src": "bundle",
     "name": "九环锡杖",
@@ -20781,6 +21136,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": 2947,
     "src": "shared",
     "name": "象令",
@@ -20797,6 +21156,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": 2525,
     "src": "shared",
     "name": "兔令",
@@ -20813,6 +21176,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "额外牌",
+     "令牌"
+    ],
     "icon_pid": 2542,
     "src": "shared",
     "name": "鼠令",
@@ -20829,6 +21196,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "遗物"
+    ],
     "icon_pid": 2880,
     "src": "shared",
     "name": "诅咒宝箱",
@@ -20845,6 +21215,11 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "番数",
+     "念灵",
+     "武器"
+    ],
     "icon_pid": 2437259489760657051,
     "src": "bundle",
     "name": "噬念刀",
@@ -20861,6 +21236,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "独立",
+     "武器"
+    ],
     "icon_pid": 3063,
     "src": "shared",
     "name": "红缨枪",
@@ -20877,6 +21256,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "祭品"
+    ],
     "icon_pid": 2647,
     "src": "shared",
     "name": "玉碗",
@@ -20893,6 +21275,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌灵"
+    ],
     "icon_pid": 3009,
     "src": "shared",
     "name": "笔山",
@@ -20909,6 +21294,11 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "番数",
+     "念灵",
+     "武器"
+    ],
     "icon_pid": 3124,
     "src": "shared",
     "name": "低语匕首",
@@ -20925,6 +21315,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -20938,6 +21329,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "和牌"
+    ],
     "icon_pid": 2511,
     "src": "shared",
     "name": "残月盘",
@@ -20954,6 +21348,9 @@
     "rarity": 4,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "和牌"
+    ],
     "icon_pid": 2691,
     "src": "shared",
     "name": "捞月篮",
@@ -20970,6 +21367,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "念灵",
+     "灵佣"
+    ],
     "icon_pid": 2604,
     "src": "shared",
     "name": "痴念宝箱",
@@ -20986,6 +21387,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌灵"
+    ],
     "icon_pid": 3108,
     "src": "shared",
     "name": "风灵珠",
@@ -21002,6 +21406,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌灵"
+    ],
     "icon_pid": 2808,
     "src": "shared",
     "name": "龙珠",
@@ -21018,6 +21425,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "牌基础分",
+     "地图节点"
+    ],
     "icon_pid": 2678,
     "src": "shared",
     "name": "注能石",
@@ -21034,6 +21445,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "和牌槽",
+     "莲花",
+     "地图节点"
+    ],
     "icon_pid": 2915,
     "src": "shared",
     "name": "莲花幡",
@@ -21050,6 +21466,11 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "和牌槽",
+     "魂力",
+     "莲花"
+    ],
     "icon_pid": 2681,
     "src": "shared",
     "name": "莲花冠",
@@ -21066,6 +21487,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -21079,6 +21501,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -21092,6 +21515,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "宝牌"
+    ],
     "icon_pid": -463310884586593301,
     "src": "bundle",
     "name": "幸运草",
@@ -21108,6 +21534,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "宝牌"
+    ],
     "icon_pid": -2333161591188771235,
     "src": "bundle",
     "name": "幸运石",
@@ -21124,6 +21553,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "宝牌"
+    ],
     "icon_pid": 6210427366896763697,
     "src": "bundle",
     "name": "幸运符",
@@ -21140,6 +21572,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "宝牌"
+    ],
     "icon_pid": -5094072094000808928,
     "src": "bundle",
     "name": "鼻烟壶",
@@ -21156,6 +21591,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣"
+    ],
     "icon_pid": 3809082621579225857,
     "src": "bundle",
     "name": "惊吓盒子",
@@ -21172,6 +21610,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "念灵",
+     "灵佣"
+    ],
     "icon_pid": -2099800289513575692,
     "src": "bundle",
     "name": "惊喜盒子",
@@ -21188,6 +21630,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣",
+     "蛋"
+    ],
     "icon_pid": 7144183010256119056,
     "src": "bundle",
     "name": "孵蛋器",
@@ -21204,6 +21650,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "血量",
+     "念灵"
+    ],
     "icon_pid": 723709047126577247,
     "src": "bundle",
     "name": "念珠",
@@ -21220,6 +21670,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣槽",
+     "供台",
+     "念灵"
+    ],
     "icon_pid": -450168622615811145,
     "src": "bundle",
     "name": "杂乱供台",
@@ -21236,6 +21691,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "独立",
+     "武器"
+    ],
     "icon_pid": -3069830615580194351,
     "src": "bundle",
     "name": "大木锤",
@@ -21252,6 +21711,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "底分",
+     "武器"
+    ],
     "icon_pid": 4204139707345534398,
     "src": "bundle",
     "name": "杂耍飞刀",
@@ -21268,6 +21731,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "魂力",
+     "宝牌"
+    ],
     "icon_pid": -4319847592481634808,
     "src": "bundle",
     "name": "彩虹糖",
@@ -21284,6 +21751,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣",
+     "宝牌"
+    ],
     "icon_pid": 7794906714451324242,
     "src": "bundle",
     "name": "迷幻宝箱",
@@ -21300,6 +21771,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "金币",
+     "灵佣"
+    ],
     "icon_pid": 3318252254549220202,
     "src": "bundle",
     "name": "福袋",
@@ -21316,6 +21791,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣"
+    ],
     "icon_pid": 3365767739674176072,
     "src": "bundle",
     "name": "盲盒",
@@ -21332,6 +21810,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "魂力"
+    ],
     "icon_pid": -8055065918200132497,
     "src": "bundle",
     "name": "逍遥巾",
@@ -21348,6 +21829,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "宝牌"
+    ],
     "icon_pid": 5884487356742977964,
     "src": "bundle",
     "name": "玄龟印",
@@ -21364,6 +21848,11 @@
     "rarity": 2,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "番数",
+     "武器",
+     "摸牌数"
+    ],
     "icon_pid": -3240295617453068306,
     "src": "bundle",
     "name": "盘龙鞭",
@@ -21380,6 +21869,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "摸牌总量"
+    ],
     "icon_pid": -4765224304617493683,
     "src": "bundle",
     "name": "冥灯",
@@ -21396,6 +21888,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣槽",
+     "供台",
+     "摸牌总量"
+    ],
     "icon_pid": 1934261102925286858,
     "src": "bundle",
     "name": "押命供台",
@@ -21412,6 +21909,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "灵佣槽",
+     "供台",
+     "念灵"
+    ],
     "icon_pid": -2097486025893067273,
     "src": "bundle",
     "name": "寒冰供台",
@@ -21428,6 +21930,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "地图节点"
+    ],
     "icon_pid": 2766,
     "src": "shared",
     "name": "月光宝盒碎片",
@@ -21444,6 +21949,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "遗物",
+     "变形"
+    ],
     "icon_pid": 2508,
     "src": "shared",
     "name": "变形符",
@@ -21460,6 +21969,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "遗物",
+     "变形"
+    ],
     "icon_pid": 3143,
     "src": "shared",
     "name": "女娲土",
@@ -21476,6 +21989,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -21489,6 +22003,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "宝牌"
+    ],
     "icon_pid": 2762,
     "src": "shared",
     "name": "玲珑宝塔",
@@ -21505,6 +22022,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "祭品槽",
+     "祭品"
+    ],
     "icon_pid": 3007,
     "src": "shared",
     "name": "紫金钵盂",
@@ -21521,6 +22042,9 @@
     "rarity": 2,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "削弱对手"
+    ],
     "icon_pid": 2881,
     "src": "shared",
     "name": "照妖镜",
@@ -21537,6 +22061,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "底分",
+     "武器",
+     "魂力"
+    ],
     "icon_pid": 2680,
     "src": "shared",
     "name": "伤魂刃",
@@ -21553,6 +22082,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "地图节点"
+    ],
     "icon_pid": 2944,
     "src": "shared",
     "name": "月光宝盒",
@@ -21569,6 +22101,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "灵佣",
+     "祭品"
+    ],
     "icon_pid": 2590,
     "src": "shared",
     "name": "百宝箱",
@@ -21585,6 +22121,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -21598,6 +22135,10 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "血量",
+     "魂力"
+    ],
     "icon_pid": -7283451999116125632,
     "src": "bundle",
     "name": "凝魂珠",
@@ -21614,6 +22155,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -21627,6 +22169,7 @@
     "rarity": 0,
     "stack": 0,
     "kind": "",
+    "tags": [],
     "src": "enum",
     "rar": "",
     "rar2": ""
@@ -21640,6 +22183,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "魂力",
+     "牌基础分"
+    ],
     "icon_pid": 2777,
     "src": "shared",
     "name": "噬魂珠",
@@ -21656,6 +22203,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "地图节点",
+     "刷新"
+    ],
     "icon_pid": 3003,
     "src": "shared",
     "name": "黑羽扇",
@@ -21672,6 +22223,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "供台",
+     "灵佣槽",
+     "宝牌"
+    ],
     "icon_pid": 2913,
     "src": "shared",
     "name": "神秘供台",
@@ -21688,6 +22244,11 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "底分",
+     "武器",
+     "魂力"
+    ],
     "icon_pid": 3103,
     "src": "shared",
     "name": "燃魂枪",
@@ -21704,6 +22265,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "摸牌数",
+     "宝牌"
+    ],
     "icon_pid": 2618,
     "src": "shared",
     "name": "灵灯",
@@ -21720,6 +22285,10 @@
     "rarity": 2,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "牌灵",
+     "摸牌数"
+    ],
     "icon_pid": 2702,
     "src": "shared",
     "name": "泰山石",
@@ -21736,6 +22305,9 @@
     "rarity": 3,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "血量"
+    ],
     "icon_pid": 2527,
     "src": "shared",
     "name": "寿香",
@@ -21752,6 +22324,9 @@
     "rarity": 1,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "宝鉴"
+    ],
     "icon_pid": 2887,
     "src": "shared",
     "name": "森罗宝鉴",
@@ -21768,6 +22343,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "宝鉴",
+     "牌基础分"
+    ],
     "icon_pid": 2946,
     "src": "shared",
     "name": "秦广王宝鉴",
@@ -21784,6 +22363,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "宝鉴",
+     "牌基础分"
+    ],
     "icon_pid": 2483,
     "src": "shared",
     "name": "阎罗王宝鉴",
@@ -21800,6 +22383,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "宝鉴",
+     "宝牌"
+    ],
     "icon_pid": 3024,
     "src": "shared",
     "name": "地藏王宝鉴",
@@ -21816,6 +22403,10 @@
     "rarity": 1,
     "stack": 1,
     "kind": "",
+    "tags": [
+     "和牌槽",
+     "摸牌数"
+    ],
     "icon_pid": 2739,
     "src": "shared",
     "name": "满月灯",
@@ -21832,6 +22423,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "宝鉴",
+     "牌灵"
+    ],
     "icon_pid": 2436,
     "src": "shared",
     "name": "泰山王宝鉴",
@@ -21848,6 +22443,9 @@
     "rarity": 4,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "地图节点"
+    ],
     "icon_pid": -8649554304200174797,
     "src": "bundle",
     "name": "轩辕宝镜",
@@ -21864,6 +22462,10 @@
     "rarity": 4,
     "stack": 1,
     "kind": "神秘",
+    "tags": [
+     "宝鉴",
+     "宝牌"
+    ],
     "icon_pid": 7799131025704495992,
     "src": "bundle",
     "name": "都市王宝鉴",
@@ -32631,7 +33233,7 @@
      {
       "text": "[回收1个符石] 获得2个随机祭品",
       "effects": [
-       "失去随机遗物(令牌)",
+       "失去随机遗物(符石)",
        "获得祭品"
       ],
       "result": "“符石入冥，赠汝奇物。”"
@@ -32644,7 +33246,7 @@
      {
       "text": "[回收2个符石] 获得1个随机成长灵俑",
       "effects": [
-       "失去随机遗物(令牌)",
+       "失去随机遗物(符石)",
        "获得随机灵佣(成长)"
       ],
       "result": "“符石已得，灵俑助能，客官何不看看自己的灵俑。”"
@@ -32652,7 +33254,7 @@
      {
       "text": "[回收3个符石] 随机获得1件传说遗物",
       "effects": [
-       "失去随机遗物(令牌)",
+       "失去随机遗物(符石)",
        "获得随机遗物(传说)"
       ],
       "result": "“符石牵引幽冥之力，一件传说中的遗物现世，归于君手。”"

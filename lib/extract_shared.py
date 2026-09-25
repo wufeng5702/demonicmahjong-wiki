@@ -337,6 +337,7 @@ def extract_shared_assets(enum_values):
                     stack=int(rd.get("SameItemLoadCount", 0)),
                     kind=kind2,
                     src="shared",
+                    tags=_resolve_tag(rd.get("tags") or [], enum_values),
                     icon_pid=(rd.get("icon") or {}).get("path_id"),
                 ))
     print(f"  shared4 relics: {len(out['relics'])}")

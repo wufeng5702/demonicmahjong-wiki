@@ -232,7 +232,9 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 
 ### Tag 系统
 
-标签分组定义在 `web_src/app.js` 的 `TAG_GROUPS` 中：
+带 `tags` 字段、可按标签筛选的栏目：灵佣、BOSS灵佣、遗物（`web_src/app.js` 的 `TAG_TABS`）。
+
+标签分组定义在 `web_src/app.js` 的 `TAG_GROUPS`（灵佣/BOSS）与 `RELIC_TAG_GROUPS`（遗物）中：
 - 牌型：刻子/顺子/对子/杠子/和牌/门前清/吃/碰
 - 花色：万/筒/索/字/风/三元/数牌
 - 动物：鸟/狐/龙/牛/猫/狗/猴/马/蛇/兔/龟/鹤/猪/象/鼠/鱼
@@ -240,8 +242,22 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 - 机制：打出/可计分/金币/血量/牌灵/奇数/偶数/摸牌数/额外牌/魂力
 - 数值：成长/宝牌/毒/牌基础分/金币强化/祭品
 - 其他：蛋/衍生/独立/空巢/蜡烛/容器/付费强化/念灵/灵佣/BOSS被动/BOSS主动/BOSS灵佣
+- 遗物-类别：莲花/武器/幡/供台/诅咒/遗物/符石/令牌/宝鉴/祭品/灵佣/牌灵/念灵/宝牌
+- 遗物-槽位：灵佣槽/祭品槽/和牌槽
+- 遗物-数值：底分/番数/摸牌数/摸牌总量/开局调换数/牌基础分/血量/魂力/金币
+- 遗物-机制：刷新/移除/更新/独立/额外牌/削弱对手/地图节点/特殊事件
 
-枚举值在 `build_web.py` 的 `TAG_CN`（英文→中文）和 `TAG_ID_CN`（ID→中文）中定义。
+中文化映射在 `lib/enums.py` 的 `TAG_CN`（英文名→中文）与 `TAG_ID_CN`（ID→中文）中定义，
+`_resolve_tag()` 统一解析；新增 tag 必须两表同步（`tests/test_relic_tags.py` 会校验一致性）。
+
+遗物的 `tags` 来自游戏 `RelicDisplay.tags`（`rawparse.RELIC_SPEC`），由
+`lib/extract_shared.py` / `lib/extract_bundle.py` 经 `schema.relic_entry(tags=...)` 输出；
+「莲花类遗物」= `Tag.Lotus(43101)`，当前为 莲台(3)/莲灯(67)/莲花幡(157)/莲花冠(158)。
+
+游戏数据里有 43 件已实装遗物 `tags` 为空（已扫描全部 `sharedassets*.assets` + 主 bundle 确认，
+不是解析遗漏），由 `lib/relic_tags.py` 的 `EXTRA_RELIC_TAGS` 人工补齐 —— **只在游戏标签为空时补写，
+游戏有标签的一律以游戏数据为准**。新版本游戏更新后若出现新的无标签遗物，
+`tests/test_relic_tags.py::TestRelicTagCoverage` 会直接失败（验收标准：已实装遗物 100% 有标签）。
 
 ---
 

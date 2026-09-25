@@ -28,6 +28,24 @@ class TestRelicEntry(unittest.TestCase):
         e = relic_entry(id="5", rarity="1", stack="2", kind="", src="shared")
         self.assertEqual((e["id"], e["rarity"], e["stack"]), (5, 1, 2))
 
+    def test_tags_written_after_kind_and_stringified(self):
+        e = relic_entry(id=3, rarity=4, stack=1, kind="", src="shared",
+                        tags=["莲花", 43101])
+        self.assertEqual(
+            list(e.keys()),
+            ["id", "en", "cn", "nameKey", "descKey", "rarity", "stack",
+             "kind", "tags", "src"],
+        )
+        self.assertEqual(e["tags"], ["莲花", "43101"])
+
+    def test_empty_tags_kept_as_list(self):
+        e = relic_entry(id=4, rarity=0, stack=0, kind="", src="enum", tags=[])
+        self.assertEqual(e["tags"], [])
+
+    def test_tags_omitted_when_none(self):
+        e = relic_entry(id=5, rarity=0, stack=0, kind="", src="enum")
+        self.assertNotIn("tags", e)
+
 
 class TestOfferingEntry(unittest.TestCase):
     def test_bundle_shape_has_no_icon_or_src(self):

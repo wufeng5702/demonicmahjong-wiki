@@ -186,6 +186,7 @@ def extract_bundle(enum_values, inspector_names):
             rarity=int(getattr(rd, "rarity", 0)),
             stack=int(getattr(rd, "SameItemLoadCount", 0)),
             kind=kind,
+            tags=_resolve_tag(getattr(rd, "tags", None) or [], enum_values),
             icon_pid=rpid,
             src="bundle",
         ))
@@ -205,6 +206,7 @@ def extract_bundle(enum_values, inspector_names):
             stack=int(getattr(rd, "SameItemLoadCount", 0)),
             kind=("诅咒" if sn in CURSED_RELIC_SCRIPTS else
                   "神秘" if sn in MYSTERIOUS_RELIC_SCRIPTS else ""),
+            tags=_resolve_tag(getattr(rd, "tags", None) or [], enum_values),
             icon_pid=pid,
             src="bundle",
         ))
@@ -216,6 +218,7 @@ def extract_bundle(enum_values, inspector_names):
             en=relic_enum.get(rid, ""),
             cn=inspector_names.get(f"RelicId.{rid}", ""),
             nameKey="", descKey="", rarity=0, stack=0, kind="",
+            tags=[],
             src="enum",
         ))
 

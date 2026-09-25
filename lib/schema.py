@@ -5,13 +5,13 @@ extract_shared (本体 sharedassets) 与 extract_bundle (DLC 主 bundle) 必须
 
 约定:
 - 必填字段用 keyword-only 传入
-- 可选字段 (icon_pid / src) 为 None 时不写入 key
+- 可选字段 (tags / icon_pid / src) 为 None 时不写入 key
 """
 from __future__ import annotations
 
 
 def relic_entry(*, id, rarity, stack, kind, src,
-                nameKey="", descKey="", en="", cn="", icon_pid=None):
+                nameKey="", descKey="", en="", cn="", icon_pid=None, tags=None):
     e = {
         "id": int(id),
         "en": en,
@@ -22,6 +22,8 @@ def relic_entry(*, id, rarity, stack, kind, src,
         "stack": int(stack),
         "kind": kind,
     }
+    if tags is not None:
+        e["tags"] = [str(t) for t in tags]
     if icon_pid is not None:
         e["icon_pid"] = icon_pid
     e["src"] = src

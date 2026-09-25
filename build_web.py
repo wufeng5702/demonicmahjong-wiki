@@ -116,6 +116,13 @@ def main():
     relic_enum = enum_values.get("RelicId", {})
     merge_shared(data, shared, inspector_names, relic_enum)
 
+    from relic_tags import apply_relic_tags
+    n_filled, n_fixed = apply_relic_tags(data["relics"])
+    n_untagged = sum(1 for e in data["relics"]
+                     if e.get("src") != "enum" and not e.get("tags"))
+    print(f"  relic tags: {n_filled} filled, {n_fixed} fixed, "
+          f"{n_untagged} implemented relics still untagged")
+
     print("\n[4/5] parsing I2 localization...")
     i2 = load_i2_terms()
 

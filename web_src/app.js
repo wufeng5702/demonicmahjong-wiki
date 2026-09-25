@@ -75,6 +75,58 @@ function getEntries(cat) {
   return d[cat] || [];
 }
 
+/* 带 tags 字段、可按标签筛选的栏目 */
+const TAG_TABS = ["lingyong", "bosslingyong", "relics"];
+function hasTagFilter(cat) {
+  return TAG_TABS.includes(cat);
+}
+
+/* 遗物标签分组 (RelicDisplay.tags) */
+const RELIC_TAG_GROUPS = {
+  类别: [
+    "莲花",
+    "武器",
+    "幡",
+    "供台",
+    "诅咒",
+    "遗物",
+    "符石",
+    "令牌",
+    "宝鉴",
+    "祭品",
+    "灵佣",
+    "牌灵",
+    "念灵",
+    "宝牌",
+    "蛋",
+  ],
+  槽位: ["灵佣槽", "祭品槽", "和牌槽"],
+  数值: [
+    "底分",
+    "番数",
+    "摸牌数",
+    "摸牌总量",
+    "开局调换数",
+    "牌基础分",
+    "血量",
+    "魂力",
+    "金币",
+    "毒",
+  ],
+  机制: [
+    "刷新",
+    "移除",
+    "变形",
+    "和牌",
+    "独立",
+    "额外牌",
+    "削弱对手",
+    "地图节点",
+    "特殊事件",
+  ],
+};
+const TAG_DEFAULT_OPEN = { relics: ["类别"], lingyong: ["机制", "数值"] };
+
 function byRarity(a, b) {
   const ra = RAR_ORDER[a.rar] ?? 9,
     rb = RAR_ORDER[b.rar] ?? 9;
@@ -196,7 +248,7 @@ function entryHaystack(e, cat) {
 function matches(e, cat, q) {
   const cm = chipModel(cat);
   if (state.chip && cm && !cm.test(e, state.chip)) return false;
-  if ((cat === "lingyong" || cat === "bosslingyong") && state.tagChips.length) {
+  if (hasTagFilter(cat) && state.tagChips.length) {
     const tags = e.tags || [];
     if (!state.tagChips.some((t) => tags.includes(t))) return false;
   }
@@ -547,7 +599,7 @@ function renderFilters() {
 
 function renderTagFilters() {
   const box = document.getElementById("tag-filters");
-  if (state.tab !== "lingyong" && state.tab !== "bosslingyong") {
+  if (!hasTagFilter(state.tab)) {
     box.innerHTML = "";
     return;
   }
@@ -565,66 +617,77 @@ function renderTagFilters() {
   const TAG_GROUPS =
     state.tab === "bosslingyong"
       ? { 分类: ["BOSS主动", "BOSS被动"] }
-      : {
-          牌型: ["刻子", "顺子", "对子", "杠子", "和牌", "门前清", "吃", "碰"],
-          花色: ["万", "筒", "索", "字", "风", "三元", "数牌"],
-          动物: [
-            "鸟",
-            "狐",
-            "龙",
-            "牛",
-            "猫",
-            "狗",
-            "猴",
-            "马",
-            "蛇",
-            "兔",
-            "龟",
-            "鹤",
-            "猪",
-            "象",
-            "鼠",
-            "鱼",
-          ],
-          仙妖: [
-            "狐仙",
-            "风怪",
-            "地仙",
-            "仙",
-            "四凶",
-            "娃娃",
-            "小妖",
-            "鬼俑",
-            "人俑",
-          ],
-          机制: [
-            "打出",
-            "可计分",
-            "金币",
-            "血量",
-            "牌灵",
-            "奇数",
-            "偶数",
-            "摸牌数",
-            "额外牌",
-            "魂力",
-          ],
-          数值: ["成长", "宝牌", "毒", "牌基础分", "金币强化", "祭品"],
-          其他: [
-            "蛋",
-            "衍生",
-            "独立",
-            "空巢",
-            "蜡烛",
-            "容器",
-            "付费强化",
-            "念灵",
-            "灵佣",
-            "BOSS被动",
-            "BOSS主动",
-            "BOSS灵佣",
-          ],
-        };
+      : state.tab === "relics"
+        ? RELIC_TAG_GROUPS
+        : {
+            牌型: [
+              "刻子",
+              "顺子",
+              "对子",
+              "杠子",
+              "和牌",
+              "门前清",
+              "吃",
+              "碰",
+            ],
+            花色: ["万", "筒", "索", "字", "风", "三元", "数牌"],
+            动物: [
+              "鸟",
+              "狐",
+              "龙",
+              "牛",
+              "猫",
+              "狗",
+              "猴",
+              "马",
+              "蛇",
+              "兔",
+              "龟",
+              "鹤",
+              "猪",
+              "象",
+              "鼠",
+              "鱼",
+            ],
+            仙妖: [
+              "狐仙",
+              "风怪",
+              "地仙",
+              "仙",
+              "四凶",
+              "娃娃",
+              "小妖",
+              "鬼俑",
+              "人俑",
+            ],
+            机制: [
+              "打出",
+              "可计分",
+              "金币",
+              "血量",
+              "牌灵",
+              "奇数",
+              "偶数",
+              "摸牌数",
+              "额外牌",
+              "魂力",
+            ],
+            数值: ["成长", "宝牌", "毒", "牌基础分", "金币强化", "祭品"],
+            其他: [
+              "蛋",
+              "衍生",
+              "独立",
+              "空巢",
+              "蜡烛",
+              "容器",
+              "付费强化",
+              "念灵",
+              "灵佣",
+              "BOSS被动",
+              "BOSS主动",
+              "BOSS灵佣",
+            ],
+          };
   const inGroup = new Set();
   const groups = [];
   for (const [label, members] of Object.entries(TAG_GROUPS)) {
@@ -735,10 +798,8 @@ function bindEvents() {
     const tg = ev.target.closest("[data-tg]");
     if (tg) {
       const g = tg.dataset.tg;
-      state.tagExpanded[g] = !(
-        state.tagExpanded[g] ??
-        (g === "机制" || g === "数值")
-      );
+      const defOpen = TAG_DEFAULT_OPEN[state.tab] || [];
+      state.tagExpanded[g] = !(state.tagExpanded[g] ?? defOpen.includes(g));
       renderTagFilters();
       return;
     }
