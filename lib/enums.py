@@ -28,7 +28,7 @@ TAG_CN = {
     "FengGuai": "风怪", "DiXian": "地仙", "Xian": "仙",
     "Odd": "奇数", "Even": "偶数", "Egg": "蛋", "Candle": "蜡烛",
     "HP": "血量", "DrawCount": "摸牌数",
-    "Container": "容器", "Independent": "独立", "PayedEnhance": "付费强化",
+    "Container": "容器", "Independent": "倍率", "PayedEnhance": "付费强化",
     "Pataka": "幡", "Altar": "供台",
     # 遗物标签 (RelicDisplay.tags)
     "BaseScore": "底分", "Fan": "番数",

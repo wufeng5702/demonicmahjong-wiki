@@ -10,7 +10,7 @@ from enums import TAG_CN, TAG_ID_CN, _resolve_tag
 from relic_tags import EXTRA_RELIC_TAGS, FIX_RELIC_TAGS, apply_relic_tags
 
 TAG_ENUM = {
-    63: "BaseScore", 64: "Fan", 76: "HuSlot", 77: "LingYongSlot",
+    63: "BaseScore", 64: "Fan", 65: "Independent", 76: "HuSlot", 77: "LingYongSlot",
     78: "OfferingSlot", 2000: "Relic", 42000: "Weapon", 43101: "Lotus",
     47000: "Runestone", 47001: "Token", 47010: "TreasureMirror",
     50500: "MapNode", 56000: "Curse",
