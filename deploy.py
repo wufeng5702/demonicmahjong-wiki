@@ -9,6 +9,12 @@ SITE = Path(__file__).parent / "output" / "site"
 DEPLOY = Path(__file__).parent / "output" / "site_deploy"
 ICON_HEIGHT = 128  # 裁剪目标高度 (网页显示64px, 2x适配)
 
+# 部署输出图片格式 (单一来源, check_site/tests 引用同一常量)
+IMG_FORMATS = {".webp": "WEBP", ".avif": "AVIF"}
+IMG_EXT = ".webp"
+IMG_QUALITY = 75
+LEGACY_EXTS = tuple(e for e in IMG_FORMATS if e != IMG_EXT)  # 换格式后清理旧产物
+
 
 def _pixels_differ(a, b):
     """逐像素比较两张图片是否不同 (忽略 EXIF 等元数据)。"""
@@ -23,12 +29,12 @@ def _pixels_differ(a, b):
 
 
 def _optimize_one(src_png):
-    """将单张 PNG 裁剪为 avif (始终保留, 页面只引用 avif)。"""
+    """将单张 PNG 裁剪为部署格式 (始终保留 png, 页面只引用 IMG_EXT)。"""
     img = Image.open(src_png)
     ratio = ICON_HEIGHT / img.height
     new_w = max(1, int(img.width * ratio))
     img = img.resize((new_w, ICON_HEIGHT), Image.LANCZOS)
-    img.save(src_png.with_suffix(".avif"), "AVIF", quality=75)
+    img.save(src_png.with_suffix(IMG_EXT), IMG_FORMATS[IMG_EXT], quality=IMG_QUALITY)
 
 
 def _sync_site(src, dst):
@@ -81,54 +87,58 @@ def _sync_site(src, dst):
 
 
 def sync_and_optimize(src_dir, dst_dir):
-    """增量同步 + 优化: 像素变化才复制并生成 avif, 未变化则跳过。"""
+    """增量同步 + 优化: 像素变化才复制并生成 IMG_EXT, 未变化则跳过。"""
     src_pngs = set()
     copied = removed = optimized = skipped = 0
-    first_run = not any(dst_dir.rglob("*.avif"))
+    first_run = not any(dst_dir.rglob(f"*{IMG_EXT}"))
 
     for src_img in src_dir.rglob("*.png"):
         rel = src_img.relative_to(src_dir)
         dst_png = dst_dir / rel
         src_pngs.add(rel)
 
-        # 非首次且像素未变 → 跳过; 但若 avif 缺失(上次中断)则补生成
+        # 非首次且像素未变 → 跳过; 但若目标格式缺失(上次中断)则补生成
         if not first_run and dst_png.exists() and not _pixels_differ(src_img, dst_png):
             skipped += 1
-            avif = dst_png.with_suffix(".avif")
-            if not avif.exists():
+            opt = dst_png.with_suffix(IMG_EXT)
+            if not opt.exists():
                 _optimize_one(dst_png)
-                if avif.exists():
+                if opt.exists():
                     optimized += 1
                     skipped -= 1
             continue
 
-        # 像素变化或首次部署 → 复制并生成 avif
+        # 像素变化或首次部署 → 复制并生成目标格式
         dst_png.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src_img, dst_png)
         copied += 1
         _optimize_one(dst_png)
         optimized += 1
 
-    # 删除源中已无的文件 (png 及其对应的 avif)
+    # 删除源中已无的文件 (png 及其对应产物), 以及旧格式残留
     for f in dst_dir.rglob("*"):
         if not f.is_file():
             continue
         rel = f.relative_to(dst_dir)
         if rel.suffix == ".png" and rel not in src_pngs:
             f.unlink()
-            avif = f.with_suffix(".avif")
-            if avif.exists():
-                avif.unlink()
+            for ext in IMG_FORMATS:
+                stale = f.with_suffix(ext)
+                if stale.exists():
+                    stale.unlink()
             removed += 1
-        elif rel.suffix == ".avif" and rel.with_suffix(".png") not in src_pngs:
+        elif rel.suffix in LEGACY_EXTS:
+            f.unlink()
+            removed += 1
+        elif rel.suffix == IMG_EXT and rel.with_suffix(".png") not in src_pngs:
             f.unlink()
             removed += 1
 
     print(f"  icons: {copied} copied, {optimized} optimized, {skipped} unchanged (skipped), {removed} removed")
 
 
-def _all_icons_have_avif(site_dir, deploy_dir):
-    """site 的每个图标 png 是否都有对应 deploy avif。"""
+def _all_icons_have_opt(site_dir, deploy_dir):
+    """site 的每个图标 png 是否都有对应部署格式产物。"""
     site_icons = site_dir / "icons"
     deploy_icons = deploy_dir / "icons"
     if not site_icons.is_dir():
@@ -137,43 +147,51 @@ def _all_icons_have_avif(site_dir, deploy_dir):
     if not pngs:
         return False
     return all(
-        (deploy_icons / p.relative_to(site_icons).with_suffix(".avif")).exists()
+        (deploy_icons / p.relative_to(site_icons).with_suffix(IMG_EXT)).exists()
         for p in pngs
     )
 
 
 def update_references(deploy_dir):
-    """把引用切到 avif:
-    - app.js: 改 ICON_EXT 常量 (全部图标有 avif 才切换), 动态模板统一走常量
-    - html/css/json: 字面 .png → .avif (逐文件按 avif 存在性判断)
+    """把引用统一到 IMG_EXT:
+    - app.js: 改 ICON_EXT 常量 (全部图标就位才切换), 动态模板统一走常量
+    - html/css/json: 字面 icons/*.png|旧格式 → IMG_EXT (按产物存在性判断)
+    产物缺失时回退 .png, 让 check_site 报缺口而不是留下 404 的旧格式引用。
     """
     count = 0
+    opt_icon = f'ICON_EXT = "{IMG_EXT}"'
 
     app_js = deploy_dir / "app.js"
     if app_js.exists():
         text = app_js.read_text(encoding="utf-8")
-        if 'ICON_EXT = ".png"' in text:
-            if _all_icons_have_avif(SITE, deploy_dir):
+        m = re.search(r'ICON_EXT = "(\.\w+)"', text)
+        if m and m.group(0) != opt_icon:
+            if _all_icons_have_opt(SITE, deploy_dir):
                 app_js.write_text(
-                    text.replace('ICON_EXT = ".png"', 'ICON_EXT = ".avif"'),
-                    encoding="utf-8")
+                    text.replace(m.group(0), opt_icon), encoding="utf-8")
                 count += 1
             else:
-                print("  warning: 部分图标缺 avif, ICON_EXT 保持 .png")
+                print(f"  warning: 部分图标缺 {IMG_EXT}, ICON_EXT 保持 {m.group(1)}")
+
+    known = "|".join([e.lstrip(".") for e in IMG_FORMATS] + ["png"])
+    icon_ref = re.compile(rf"(icons/[^\"'`\s]+)\.({known})")
 
     def _repl(m):
-        if (deploy_dir / (m.group(1) + ".avif")).exists():
-            return m.group(1) + ".avif"
-        return m.group(0)
+        base = m.group(1)
+        if (deploy_dir / (base + IMG_EXT)).exists():
+            return base + IMG_EXT
+        if m.group(2) == "png":
+            return m.group(0)
+        return base + ".png"
 
     for pat in ("*.html", "*.css", "*.json"):
         for f in deploy_dir.rglob(pat):
             text = f.read_text(encoding="utf-8")
-            new = re.sub(r"(icons/[^\"'`\s]+)\.png", _repl, text)
+            new = icon_ref.sub(_repl, text)
             if new != text:
                 f.write_text(new, encoding="utf-8")
                 count += 1
-    print(f"  references: {count} files updated (.png → .avif)")
+    print(f"  references: {count} files updated (→ {IMG_EXT})")
 
 
 def main():
@@ -193,7 +211,7 @@ def main():
     print("\nupdating references...")
     update_references(DEPLOY)
 
-    # 4. 完整性校验 (avif 引用/文件一致性, 缺口则非零退出)
+    # 4. 完整性校验 (IMG_EXT 引用/文件一致性, 缺口则非零退出)
     print("\nchecking...")
     import check_site
     check_site.report("deploy", check_site.collect_deploy_errors())

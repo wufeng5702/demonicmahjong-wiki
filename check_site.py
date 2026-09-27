@@ -5,7 +5,7 @@
 
 检查项:
   site 模式:    data.json 条目按 web_src/app.js 的分类路由必须有对应图标文件
-  deploy 模式:  以上 (针对 site_deploy) + 图标引用全部为 .avif + png↔avif 一一对应
+  deploy 模式:  以上 (针对 site_deploy) + 图标引用全部为部署格式 + png↔产物一一对应
 
 用法:
   uv run python check_site.py            # 校验 output/site
@@ -82,7 +82,7 @@ def _icon_rel(cat: str, e: dict) -> str | None:
 
 
 def collect_errors(root: Path, suffix: str) -> list[str]:
-    """校验 root 目录 (data.json + 图标), 返回错误列表。suffix: .png / .avif"""
+    """校验 root 目录 (data.json + 图标), 返回错误列表。suffix: .png / deploy.IMG_EXT"""
     data_path = root / "data.json"
     if not data_path.exists():
         return [f"{data_path} 不存在"]
@@ -104,22 +104,30 @@ def collect_errors(root: Path, suffix: str) -> list[str]:
 
 
 def collect_deploy_errors() -> list[str]:
-    """deploy 模式: site 校验 + avif 引用/文件一致性。"""
-    errs = collect_errors(DEPLOY, ".avif")
+    """deploy 模式: site 校验 + 部署格式引用/文件一致性。"""
+    from deploy import IMG_EXT, LEGACY_EXTS  # 局部导入: 格式单一来源在 deploy
 
-    # 1) site 的每个图标 png 在 deploy 必须有对应 avif (反向孤儿也报错)
+    errs = collect_errors(DEPLOY, IMG_EXT)
+
+    # 1) site 的每个图标 png 在 deploy 必须有对应产物 (反向孤儿也报错)
     site_icons = SITE / "icons"
     deploy_icons = DEPLOY / "icons"
     if site_icons.is_dir():
         for png in site_icons.rglob("*.png"):
-            rel = png.relative_to(site_icons).with_suffix(".avif")
+            rel = png.relative_to(site_icons).with_suffix(IMG_EXT)
             if not (deploy_icons / rel).exists():
                 errs.append(f"icons/{rel} 缺失 (site 有对应 png)")
     if deploy_icons.is_dir():
-        for avif in deploy_icons.rglob("*.avif"):
-            rel = avif.relative_to(deploy_icons).with_suffix(".png")
+        for opt in deploy_icons.rglob(f"*{IMG_EXT}"):
+            rel = opt.relative_to(deploy_icons).with_suffix(".png")
             if not (site_icons / rel).exists():
-                errs.append(f"icons/{avif.relative_to(deploy_icons)} 孤儿 avif (site 无对应 png)")
+                errs.append(
+                    f"icons/{opt.relative_to(deploy_icons)} 孤儿 {IMG_EXT} (site 无对应 png)")
+        # 旧格式残留 (换格式后 deploy 未清理干净)
+        for ext in LEGACY_EXTS:
+            for stale in deploy_icons.rglob(f"*{ext}"):
+                errs.append(
+                    f"icons/{stale.relative_to(deploy_icons)} 残留旧格式 {ext} (应为 {IMG_EXT})")
 
     # 2) 引用中不得残留 icons/*.png
     png_ref = re.compile(r"icons/[^\"'`\s]+\.png")
@@ -133,8 +141,9 @@ def collect_deploy_errors() -> list[str]:
     app_js = DEPLOY / "app.js"
     if app_js.exists():
         text = app_js.read_text(encoding="utf-8", errors="ignore")
-        if "ICON_EXT" in text and 'ICON_EXT = ".avif"' not in text:
-            errs.append('app.js: ICON_EXT 未切换为 ".avif"')
+        want = f'ICON_EXT = "{IMG_EXT}"'
+        if "ICON_EXT" in text and want not in text:
+            errs.append(f'app.js: ICON_EXT 未切换为 "{IMG_EXT}"')
 
     return errs
 

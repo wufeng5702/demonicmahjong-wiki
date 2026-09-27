@@ -6,7 +6,7 @@ const SITE_CONFIG = {
   repoUrl: "__REPO_URL__", // 仓库地址，构建时从 .env 替换
 };
 
-/* 图标格式: 本地 site 用 .png; deploy.py 会把 site_deploy/app.js 的此常量改为 .avif */
+/* 图标格式: 本地 site 用 .png; deploy.py 会把 site_deploy/app.js 的此常量改为部署格式 (deploy.IMG_EXT, 当前 .webp) */
 const ICON_EXT = ".png";
 
 const TABS = [

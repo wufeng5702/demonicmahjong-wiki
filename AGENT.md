@@ -35,8 +35,8 @@ uv run python build_web.py
 ```
 wiki\
 ├── build_web.py                 # 主构建脚本 ⭐（结尾自动跑 check_site）
-├── deploy.py                    # 部署脚本（压缩图片、转 AVIF、ICON_EXT 切换）
-├── check_site.py                # 站点完整性校验 ⭐（图标缺口/avif 引用，失败即非零退出）
+├── deploy.py                    # 部署脚本（压缩图片、转 WebP、ICON_EXT 切换）
+├── check_site.py                # 站点完整性校验 ⭐（图标缺口/引用格式，失败即非零退出）
 ├── calibrate.py                 # rawparse 校准器
 ├── extract_enums.py             # 从 dump.cs 提取枚举 → assets/enums.json
 ├── generate_lingyong_cards.py   # 灵佣卡片图生成（独立工具）
@@ -61,7 +61,7 @@ wiki\
 │   └── data.json                # 构建生成的纯 JSON 数据
 │
 ├── output/site/                 # 构建产物（png 引用，不入 git）
-├── output/site_deploy/          # 部署产物（avif 引用，不入 git）
+├── output/site_deploy/          # 部署产物（webp 引用，不入 git）
 │
 ├── .env                         # 本地配置（不入 git）
 ├── .env.example                 # 配置模板
@@ -133,16 +133,30 @@ uv run python calibrate.py --bundle <path>  # 指定 bundle
 ### deploy.py — 部署
 
 ```bash
-uv run python deploy.py   # 压缩图片、转 AVIF，输出到 output/site_deploy/
+uv run python deploy.py   # 压缩图片、转 WebP，输出到 output/site_deploy/
 ```
 
-部署时 `update_references()` 只改 `app.js` 的 `ICON_EXT = ".png"` 常量（要求全部图标 avif 就位），html/css/json 里的字面 `icons/*.png` 按 avif 存在性逐条改写；重复执行应稳定输出 `0 copied / 0 files updated`。
+部署输出格式由 `deploy.IMG_EXT`（当前 `.webp`，同族常量 `IMG_FORMATS`/`IMG_QUALITY`/`LEGACY_EXTS`）单一控制，
+`check_site.collect_deploy_errors()` 与 tests 引用同一常量；换格式只改这一行，下次 deploy 自动清理旧格式残留。
+
+部署时 `update_references()` 只改 `app.js` 的 `ICON_EXT = ".png"` 常量（要求全部图标产物就位），html/css/json 里的字面 `icons/*.png` 按产物存在性逐条改写；重复执行应稳定输出 `0 copied / 0 files updated`。
+
+格式选型（997 张图标，同一 resize 管线，`q=75`）：
+
+| 指标 | WebP | AVIF |
+|------|------|------|
+| 总体积 | 5.78 MB | 5.17 MB（等感知质量下 WebP 约大 40%） |
+| 全量编码耗时 | ~10s | ~31s |
+| 解码耗时（300 张抽样） | 0.12s | 0.69s |
+| 老旧内核支持（X5/微信内核、Safari < 16） | 广泛 | 差 |
+
+当前取 WebP：编码快 3 倍、解码快 5 倍、兼容面更宽，代价是同画质体积约大 30–40%（本项目图标总量约 5–7 MB，可接受）。
 
 ### check_site.py — 站点校验
 
 ```bash
 uv run python check_site.py          # 校验 output/site（png 引用）
-uv run python check_site.py deploy   # 校验 output/site_deploy（avif 引用 + 孤儿/残留检查）
+uv run python check_site.py deploy   # 校验 output/site_deploy（webp 引用 + 孤儿/残留检查）
 ```
 
 build_web.py 与 deploy.py 结尾自动执行，图标缺口/引用残留会直接构建失败，不必肉眼找缺口。路由规则（灵佣 ID 区间、offerings 0<id<20000、src=="enum" 免图标等）镜像 app.js 的 getEntries，改动前端分类逻辑必须同步 `check_site._entries`。
@@ -306,7 +320,7 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 1. **grep 同类**：修任何 bug 后，先全局搜同类模式再收工（一次 onerror 引号缺失 = 检查文件里全部 onerror）
 2. **完成标准 = 校验通过**：`build_web.py` / `deploy.py` 结尾的 check_site 必须 OK；改前端分类路由须同步 `check_site._entries`
 3. **禁止裸 `except: pass`**：用 `lib/logwarn.py` 的 `warn(str(e))` + 函数尾 `flush_warns("上下文")`；刻意探测型失败（如 i2parse 属性探测）除外
-4. **图标引用单一来源**：动态拼图标路径必须走 `${ICON_EXT}` 常量，不写字面 `.png`/`.avif`；deploy 只翻转 app.js 这一处
+4. **图标引用单一来源**：动态拼图标路径必须走 `${ICON_EXT}` 常量，不写字面 `.png`/`.webp`；deploy 只翻转 app.js 这一处，输出格式只认 `deploy.IMG_EXT`
 5. **web_src → site 同步必须走** `build_web.py --web-only`（含 REPO_URL 替换 + prettier），不要裸 `cp`
 6. **动了 lib/tests 的逻辑就跑** `uv run python -m unittest discover -s tests -v`
 

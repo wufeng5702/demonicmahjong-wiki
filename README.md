@@ -27,7 +27,7 @@ uv run python build_web.py
 
 ```
 ├── build_web.py              # 主构建脚本
-├── deploy.py                 # 部署（压缩图片、转 AVIF）
+├── deploy.py                 # 部署（压缩图片、转 WebP）
 ├── calibrate.py              # rawparse 校准器
 ├── extract_enums.py          # 提取枚举定义
 ├── lib/                      # 可复用模块
@@ -49,7 +49,7 @@ uv run python build_web.py
 ```bash
 uv run python build_web.py             # 完整构建（3-5分钟）
 uv run python build_web.py --web-only  # 仅同步前端（改代码后快速刷新）
-uv run python deploy.py                # 部署（压缩图片、转 AVIF）
+uv run python deploy.py                # 部署（压缩图片、转 WebP）
 uv run python calibrate.py             # 校准 rawparse（游戏更新后）
 uv run python extract_enums.py         # 提取枚举到 assets/enums.json
 ```
