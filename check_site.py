@@ -81,6 +81,29 @@ def _icon_rel(cat: str, e: dict) -> str | None:
     return f"icons/{sub}/{e['id']}"
 
 
+def _event_errors(data: dict) -> list[str]:
+    """检查事件数据是否仍可用于详情页和选项效果展示。"""
+    events = data.get("events") or []
+    if not events:
+        return []
+
+    errs = []
+    invalid = [e for e in events if not isinstance(e.get("id"), int) or e["id"] <= 0]
+    if invalid:
+        labels = ", ".join(str(e.get("cn") or e.get("name") or e.get("id")) for e in invalid[:5])
+        errs.append(f"events: {len(invalid)} 个事件 ID 非正整数 ({labels})")
+
+    ids = [e.get("id") for e in events]
+    duplicates = sorted({event_id for event_id in ids if ids.count(event_id) > 1}, key=str)
+    if duplicates:
+        errs.append(f"events: ID 重复 {duplicates[:10]}")
+
+    options = [option for event in events for option in (event.get("options") or [])]
+    if options and not any(option.get("effects") for option in options):
+        errs.append(f"events: {len(options)} 个选项的 effects 全部为空")
+    return errs
+
+
 def collect_errors(root: Path, suffix: str) -> list[str]:
     """校验 root 目录 (data.json + 图标), 返回错误列表。suffix: .png / deploy.IMG_EXT"""
     data_path = root / "data.json"
@@ -91,7 +114,7 @@ def collect_errors(root: Path, suffix: str) -> list[str]:
     except Exception as e:
         return [f"data.json 解析失败: {e}"]
 
-    errs = []
+    errs = _event_errors(data)
     for cat, entries in _entries(data).items():
         for e in entries:
             rel = _icon_rel(cat, e)

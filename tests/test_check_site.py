@@ -88,5 +88,32 @@ class TestCollectErrors(unittest.TestCase):
             self.assertEqual(check_site.collect_errors(root, ".png"), [])
 
 
+class TestEventErrors(unittest.TestCase):
+    def test_healthy_events(self):
+        data = {"events": [
+            {"id": 1, "options": [{"effects": ["获得遗物"]}]},
+            {"id": 2, "options": [{"effects": []}]},
+        ]}
+        self.assertEqual(check_site._event_errors(data), [])
+
+    def test_invalid_and_duplicate_ids_reported(self):
+        data = {"events": [
+            {"id": 0, "name": "事件甲", "options": []},
+            {"id": 0, "name": "事件乙", "options": []},
+        ]}
+        errs = check_site._event_errors(data)
+        self.assertTrue(any("ID 非正整数" in e for e in errs))
+        self.assertTrue(any("ID 重复" in e for e in errs))
+
+    def test_all_empty_effects_reported(self):
+        data = {"events": [
+            {"id": 1, "options": [{"effects": []}, {"effects": []}]},
+        ]}
+        self.assertEqual(
+            check_site._event_errors(data),
+            ["events: 2 个选项的 effects 全部为空"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

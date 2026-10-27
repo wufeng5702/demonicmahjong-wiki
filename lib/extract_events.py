@@ -8,7 +8,18 @@ from pathlib import Path
 
 from UnityPy import AssetsManager
 
-from config import AA_DIR, BUNDLE_PATH, CATALOG_BIN, SHARED0, SHARED1, SHARED2, SHARED3, SHARED4, SITE_DIR
+from config import (
+    AA_DIR,
+    BUNDLE_PATH,
+    CATALOG_BIN,
+    GAME_DATA_DIR,
+    SHARED0,
+    SHARED1,
+    SHARED2,
+    SHARED3,
+    SHARED4,
+    SITE_DIR,
+)
 from extract_shared import classify_monobehaviours
 from i2parse import tr, clean_markup
 from enums import TAG_ID_CN, RARITY_CN
@@ -419,7 +430,7 @@ def _load_graph_sfs():
                       ("s3", SHARED3), ("s4", SHARED4)):
         if path is None or not Path(path).exists():
             continue
-        amN = AssetsManager()
+        amN = AssetsManager(path=str(GAME_DATA_DIR))
         try:
             sf = amN.load_file(str(path))
         except Exception:
@@ -513,7 +524,6 @@ def extract_events(i2):
     """神秘事件 v5: 按 GameEvent 圈定子图 + 端口选项 + 效果 BFS。"""
     print("  loading event graph...")
     sfs, bsf = _load_graph_sfs()
-    sf4 = next((sf for tag, sf, _am in sfs if tag == "s4"), None)
     node_by_key, port_by_pid, port_by_key = _index_graph_objects(sfs)
     print(f"  EventNode={len(node_by_key)}, NodePort={len(port_by_key)}")
 
@@ -818,7 +828,7 @@ def extract_events(i2):
             _load_event_jsons(sf)
     print(f"  event JSONs loaded: {len(event_jsons)}")
 
-    event_ids = _collect_event_ids(bsf, sf4)
+    event_ids = _collect_event_ids(*(sf for _tag, sf, _am in sfs))
     print(f"  event numeric IDs collected: {len(event_ids)}")
 
     events = []
