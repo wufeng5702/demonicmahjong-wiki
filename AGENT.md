@@ -35,6 +35,7 @@ uv run python build_web.py
 ```
 wiki\
 ├── build_web.py                 # 主构建脚本 ⭐（结尾自动跑 check_site）
+├── build_icons.py               # 独立图标提取脚本（每步独立子进程，避免 MemoryError）
 ├── deploy.py                    # 部署脚本（压缩图片、转 WebP、ICON_EXT 切换）
 ├── check_site.py                # 站点完整性校验 ⭐（图标缺口/引用格式，失败即非零退出）
 ├── calibrate.py                 # rawparse 校准器
@@ -49,9 +50,13 @@ wiki\
 │   └── render_pl_icons.py       # 牌灵 3D 头像渲染
 │
 ├── tests/                       # stdlib unittest（uv run python -m unittest discover -s tests）
+│   ├── test_build_icons.py      # 图标子进程退出码
+│   ├── test_dlc_assets.py       # DLC 图标 GUID 回落 / 10038 朝向 / DLC 遗物覆盖
+│   ├── test_tag_filters.js      # 前端标签分组（node --test）
+│   └── ...
 │
 ├── assets/                      # 静态资源
-│   ├── enums.json               # 枚举定义（58KB，可提交 git）
+│   ├── enums.json               # 枚举定义（可提交 git）
 │   └── lingyong_card/           # 卡片背景素材
 │
 ├── web_src/                     # 前端源码
@@ -109,10 +114,10 @@ uv run python build_web.py --web-only  # 仅同步前端（改 app.js/style.css 
 6. 写入 `web_src/data.json`，复制到 `output/site/`
 
 当前数据规模：
-- 灵佣 591（玩家 264 / BOSS 155 / 角色技能 172）
-- 祭品 181（栏内展示 79）
-- 遗物 197（本体 131 + DLC 23 + 神秘 24）
-- 角色 42、番种 136、牌灵 18、宝牌 16、成就 177、事件 45
+- 灵佣 654（玩家可获 / BOSS / 角色技能，含 DLC 月圆之夜）
+- 祭品 203（栏内展示 79）
+- 遗物 191（本体 + DLC 23 + 神秘 24，DLC 列表已合并）
+- 角色 48、番种 138、牌灵 19、宝牌 16、成就 190、事件 45
 
 ### calibrate.py — rawparse 校准
 
@@ -167,7 +172,12 @@ build_web.py 与 deploy.py 结尾自动执行，图标缺口/引用残留会直�
 uv run python -m unittest discover -s tests -v
 ```
 
-覆盖：logwarn、schema 条目构造、check_site 路由、deploy 引用改写、_baoling_kind。改这四处逻辑后必须跑一遍。
+覆盖：logwarn、schema 条目构造、check_site 路由、deploy 引用改写、_baoling_kind、图标子进程退出码、DLC 图标 GUID 回落、牌灵朝向、灵俑标签分组。改这几处逻辑后必须跑一遍。
+
+前端 JS 测试（独立）：
+```bash
+node --test tests/test_tag_filters.js
+```
 
 ### extract_enums.py — 提取枚举定义
 
@@ -228,10 +238,10 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 
 | 数据源 | 位置 | 说明 |
 |--------|------|------|
-| 主 bundle | `defaultlocalgroup_assets_all_*.bundle`（3GB） | DLC 数据，类型树完整 |
-| sharedassets1 | `sharedassets1.assets` | 本体数据（类型树剥离，需 rawparse） |
-| sharedassets4 | `sharedassets4.assets` | 角色/BOSS/遗物列表（类型树剥离） |
-| I2 语言表 | sharedassets1 #13761 | 4692 词条，6 语言 |
+| 主 bundle | `defaultlocalgroup_assets_all_*.bundle`（2.1GB） | DLC 数据，类型树完整 |
+| sharedassets0 | `sharedassets0.assets` | 本体数据：灵佣/祭品/成就（类型树剥离，需 rawparse） |
+| sharedassets3 | `sharedassets3.assets` | 本体数据：角色/BOSS/遗物列表（类型树剥离） |
+| I2 语言表 | sharedassets0 #13840 | 5018 词条，6 语言 |
 
 ### ID 区段语义
 
@@ -255,7 +265,7 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 - 仙妖：狐仙/风怪/地仙/仙/四凶/娃娃/小妖/鬼俑/人俑
 - 机制：打出/可计分/金币/血量/牌灵/奇数/偶数/摸牌数/额外牌/魂力
 - 数值：成长/宝牌/毒/牌基础分/金币强化/祭品
-- 其他：蛋/衍生/倍率/空巢/蜡烛/容器/付费强化/念灵/灵佣/BOSS被动/BOSS主动/BOSS灵佣
+- 其他：由自动归类生成（未命中上述任何分组的标签，如“童话”等）
 - 遗物-类别：武器/幡/供台/符石/令牌/宝鉴/诅咒
 - 遗物-槽位：灵佣槽/祭品槽/和牌槽
 - 遗物-数值：底分/番数/牌基础分/倍率/削弱对手
@@ -267,6 +277,7 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 
 中文化映射在 `lib/enums.py` 的 `TAG_CN`（英文名→中文）与 `TAG_ID_CN`（ID→中文）中定义，
 `_resolve_tag()` 统一解析；新增 tag 必须两表同步（`tests/test_relic_tags.py` 会校验一致性）。
+示例：`TongHua(37000)` → `"童话"`。
 
 遗物的 `tags` 来自游戏 `RelicDisplay.tags`（`rawparse.RELIC_SPEC`），由
 `lib/extract_shared.py` / `lib/extract_bundle.py` 经 `schema.relic_entry(tags=...)` 输出；
@@ -303,10 +314,12 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 
 ### 图标提取
 
-图标在 `build_web.py` 的 `extract_all_icons()` 中统一提取：
-- 灵佣/祭品/遗物：通过 iconReference GUID 解析到具体资源
+图标提取拆为独立脚本 `build_icons.py`，每步（achievement/lingyong/character/relic/offering/baopai/pailing/composite 等）在独立子进程运行，避免主进程反复加载 2GB bundle 导致内存累积（MemoryError）。`build_web.py` 结尾通过 `subprocess.run(..., check=True)` 调用，任一步骤失败会导致构建非零退出。
+
+- 灵佣/祭品/遗物：通过 iconReference GUID 解析到具体资源；sub 为空时优先按 `catalog.bin` GUID 回退 sprite，再回退 `ID{id}{name}` 命名
 - 角色头像：从 RoleAvatar 的 headIcon PPtr 提取
 - 事件/Buff/成就：从 bundle 中按名称匹配 Sprite
+- 牌灵 3D 头像：从 bundle 模型光栅化，新增角色可写入 `FACE_ANCHOR` / `ROLL` 校准朝向（如恶念 10038）
 
 ---
 
