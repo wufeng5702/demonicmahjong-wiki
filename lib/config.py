@@ -58,7 +58,7 @@ def locate_bundle():
 
 BUNDLE_PATH = locate_bundle()
 
-I2_OBJECT_PATH_ID = 13759
+I2_OBJECT_PATH_ID = 13840
 
 
 def locate_i2_object(bf):

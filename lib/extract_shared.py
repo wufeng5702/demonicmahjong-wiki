@@ -5,7 +5,7 @@ import re
 from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
-from config import GAME_DATA_DIR, SHARED1, SHARED4
+from config import GAME_DATA_DIR, SHARED0, SHARED3
 from enums import _resolve_tag
 from logwarn import warn, flush_warns
 from schema import offering_entry, relic_entry
@@ -142,10 +142,10 @@ def _character_from_raw(d):
 
 
 def extract_shared_assets(enum_values):
-    """从 sharedassets1/4 提取本体数据。"""
-    print("  loading sharedassets1 ...")
+    """从 sharedassets0/3 提取本体数据。"""
+    print("  loading sharedassets0 ...")
     am1 = AssetsManager(path=str(GAME_DATA_DIR))
-    bf1 = am1.load_file(str(SHARED1))
+    bf1 = am1.load_file(str(SHARED0))
     sf1 = bf1
     cls1, pid1 = classify_monobehaviours(sf1)
 
@@ -156,7 +156,7 @@ def extract_shared_assets(enum_values):
         raw = sf.objects[pid].get_raw_data()
         return rp.parse_payload(raw, cls)
 
-    # ---- sharedassets1: 灵佣 / 祭品 / 成就 ----
+    # ---- sharedassets0: 灵佣 / 祭品 / 成就 ----
     for pid in cls1.get("XiaoChouPaiPayload", []):
         try:
             d = parse_one(sf1, pid, "XiaoChouPaiPayload")
@@ -192,12 +192,12 @@ def extract_shared_assets(enum_values):
             "src": "shared",
         })
     n1 = {k: len(v) for k, v in out.items() if isinstance(v, list)}
-    print(f"  shared1 parsed: {n1}")
+    print(f"  shared0 parsed: {n1}")
 
-    # ---- sharedassets4: 角色 / 遗物 / RoleAvatar / 灵佣·祭品补充 ----
-    print("  loading sharedassets4 ...")
+    # ---- sharedassets3: 角色 / 遗物 / RoleAvatar / 灵佣·祭品补充 ----
+    print("  loading sharedassets3 ...")
     am4 = AssetsManager(path=str(GAME_DATA_DIR))
-    sf4 = am4.load_file(str(SHARED4))
+    sf4 = am4.load_file(str(SHARED3))
     cls4, pid4 = classify_monobehaviours(sf4)
 
     for pid in cls4.get("XiaoChouPaiPayload", []):
@@ -232,12 +232,12 @@ def extract_shared_assets(enum_values):
             "en": d.get("m_Name", ""),
             "nameKey": nk,
             "descKey": dk,
-            "src": "shared4",
+            "src": "shared3",
         })
     n4 = {"lingyong": len(cls4.get("XiaoChouPaiPayload", [])),
           "offerings": len(cls4.get("OfferingPayload", [])),
           "achievements": len(cls4.get("AchievementPayload", []))}
-    print(f"  shared4 payloads: {n4}")
+    print(f"  shared3 payloads: {n4}")
 
     # 角色名/解锁条件映射: 从 RoleAvatar 提取 I2 term
     avatar_meta = {}
@@ -301,7 +301,7 @@ def extract_shared_assets(enum_values):
         entry["actives"] = actives
         entry["src"] = "shared"
         out["characters"].append(entry)
-    print(f"  shared4 characters: {len(out['characters'])}")
+    print(f"  shared3 characters: {len(out['characters'])}")
 
     # 遗物: 三个本体列表 (普通/神秘/外乡人)
     for list_name, kind in (("RelicDisplayList", ""), ("RelicDisplayMysteriousList", "神秘"),
@@ -340,6 +340,6 @@ def extract_shared_assets(enum_values):
                     tags=_resolve_tag(rd.get("tags") or [], enum_values),
                     icon_pid=(rd.get("icon") or {}).get("path_id"),
                 ))
-    print(f"  shared4 relics: {len(out['relics'])}")
+    print(f"  shared3 relics: {len(out['relics'])}")
     flush_warns("extract_shared_assets")
     return out

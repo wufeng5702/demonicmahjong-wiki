@@ -24,7 +24,7 @@ from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
 from config import (AA_DIR, BUNDLE_PATH, GAME_DATA_DIR, SHARED0, SHARED1,
-                    SHARED2, SHARED3, SHARED4, SITE_DIR)
+                    SHARED2, SHARED3, SITE_DIR)
 from logwarn import warn, flush_warns
 import rawparse as rp
 
@@ -539,7 +539,7 @@ def extract_lingyong_icons():
             warn()
             continue
 
-    env1 = UnityPy.load(str(SHARED1))
+    env1 = UnityPy.load(str(SHARED0))
     for obj in env1.objects:
         if obj.type.name != "MonoBehaviour":
             continue
@@ -562,7 +562,7 @@ def extract_lingyong_icons():
             warn()
             continue
 
-    env4 = UnityPy.load(str(SHARED4))
+    env4 = UnityPy.load(str(SHARED3))
     for obj in env4.objects:
         if obj.type.name != "MonoBehaviour":
             continue
@@ -593,7 +593,7 @@ def extract_character_avatars():
     out_dir = SITE_DIR / "icons" / "character"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env4 = UnityPy.load(str(SHARED4))
+    env4 = UnityPy.load(str(SHARED3))
     count = 0
     for obj in env4.objects:
         if obj.type.name != "MonoBehaviour":
@@ -704,7 +704,7 @@ def extract_character_skill_icons():
             warn()
             continue
 
-    env4 = UnityPy.load(str(SHARED4))
+    env4 = UnityPy.load(str(SHARED3))
     for obj in env4.objects:
         if obj.type.name != "MonoBehaviour":
             continue
@@ -732,7 +732,7 @@ def extract_relic_icons():
     out_dir = SITE_DIR / "icons" / "relics"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env4 = UnityPy.load(str(SHARED4))
+    env4 = UnityPy.load(str(SHARED3))
     count = 0
     seen = set()
 
@@ -867,7 +867,7 @@ def extract_offering_icons():
     out_dir = SITE_DIR / "icons" / "offerings"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env1 = UnityPy.load(str(SHARED1))
+    env1 = UnityPy.load(str(SHARED0))
     count = 0
     seen = set()
     for obj in env1.objects:
@@ -907,10 +907,10 @@ def extract_offering_skill_icons():
     out_dir = SITE_DIR / "icons" / "character_skill"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env4 = UnityPy.load(str(SHARED4))
-    env1 = UnityPy.load(str(SHARED1))
+    env4 = UnityPy.load(str(SHARED3))
+    env1 = UnityPy.load(str(SHARED0))
     other_envs = []
-    for sa in [SHARED0, SHARED2, SHARED3]:
+    for sa in [SHARED1, SHARED2]:
         if sa.exists():
             other_envs.append(UnityPy.load(str(sa)))
     count = 0

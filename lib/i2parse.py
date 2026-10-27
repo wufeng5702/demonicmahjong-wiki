@@ -5,7 +5,7 @@ import struct
 
 from UnityPy import AssetsManager
 
-from config import SHARED1, locate_i2_object, I2_OBJECT_PATH_ID
+from config import SHARED0, locate_i2_object, I2_OBJECT_PATH_ID
 
 LANG_ZH = 0
 LANG_EN = 1
@@ -90,10 +90,10 @@ def parse_i2_source(raw):
 def load_i2_terms():
     from config import GAME_DATA_DIR
     am = AssetsManager(path=str(GAME_DATA_DIR))
-    bf = am.load_file(str(SHARED1))
+    bf = am.load_file(str(SHARED0))
     pid = locate_i2_object(bf)
     if pid is None:
-        raise RuntimeError("未找到 I2 LanguageSource (sharedassets1 中无匹配对象)")
+        raise RuntimeError(f"未找到 I2 LanguageSource (在 {SHARED0} 中无匹配对象)")
     if pid != I2_OBJECT_PATH_ID:
         print(f"  [warn] I2 path_id 漂移: {I2_OBJECT_PATH_ID} -> {pid} (已自动定位)")
     raw = bf.objects[pid].get_raw_data()

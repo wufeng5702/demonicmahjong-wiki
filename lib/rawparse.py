@@ -292,18 +292,22 @@ OFFERING_SPEC = [
     ("count", "i"), ("count2", "i"), ("discardLimitedCount", "i"),
     ("addBaseScore", "f"), ("addFan", "f"), ("addPaiMainNum", "f"),
     ("soulCost", "f"), ("accMultiIndependent", "f"),
+    ("huaSes", "vi"),
     ("fanZhong", "i"), ("multi", "f"), ("range", "v2"),
     ("dynamicDescriptionTerms", "vls"),
+    ("geShengAdd", "vp"),
 ]
 
 CHARACTER_SPEC = [
     ("starLevel", "i"), ("characterID", "i"), ("skinId", "i"),
+    ("baseCharacterID", "i"),
     ("roleAvatar", "p"),
     ("passiveSkill", "vp"), ("activeSkill", "vp"),
     ("fanZhongList", "vi"), ("skillUsageTiming", "i"),
     ("StartRelicEvent", "p"), ("targetPassiveXiaoChouDisplay", "p"),
     ("modelReference", "ar"), ("lingyongRewardsEvent", "p"),
     ("url_Walkthrough", "s"),
+    ("jiFenBank", "p"), ("jiFenPlay", "p"), ("jiFenStop", "p"),
 ]
 
 ACHIEVEMENT_SPEC = [

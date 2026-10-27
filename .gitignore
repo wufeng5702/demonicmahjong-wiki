@@ -6,6 +6,17 @@ tools/
 
 # ===== Il2CppDumper 输出（可用工具重新生成，见 AGENT.md）=====
 /dump_output/
+/dump.cs
+/DummyDll/
+/config.json
+/script.json
+/stringliteral.json
+/il2cpp.h
+/Il2CppDumper.deps.json
+/Il2CppDumper.runtimeconfig.json
+/ghidra*.py
+/ida*.py
+/il2cpp_header_to_ghidra.py
 
 *.zip
 
