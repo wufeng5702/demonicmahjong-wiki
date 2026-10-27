@@ -56,16 +56,21 @@ def main():
     if "--only" in sys.argv:
         only = sys.argv[sys.argv.index("--only") + 1]
 
+    failed = []
     for name, fn in ICON_STEPS:
         if only and name != only:
             continue
         # 每个步骤独立子进程运行
         rc = subprocess.run([sys.executable, str(Path(__file__).resolve()), "--step", name]).returncode
         if rc != 0:
+            failed.append(name)
             print(f"  [WARN] {name} icon extraction subprocess exited with code {rc}")
 
     from logwarn import flush_warns
     flush_warns("icons")
+    if failed:
+        print(f"\n[ICONS FAILED: {', '.join(failed)}]")
+        sys.exit(1)
     print("\n[ICONS DONE]")
 
 

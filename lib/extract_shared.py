@@ -303,9 +303,11 @@ def extract_shared_assets(enum_values):
         out["characters"].append(entry)
     print(f"  shared3 characters: {len(out['characters'])}")
 
-    # 遗物: 三个本体列表 (普通/神秘/外乡人)
+    # 遗物: 本体三个列表 (普通/神秘/外乡人) + DLC 列表 (月圆之夜)
     for list_name, kind in (("RelicDisplayList", ""), ("RelicDisplayMysteriousList", "神秘"),
-                            ("RelicDisplayOutsiderList", "外乡人")):
+                            ("RelicDisplayOutsiderList", "外乡人"),
+                            ("Dlc_RelicDisplayList", ""),
+                            ("Dlc_RelicDisplayMysteriousList", "神秘")):
         for lpid in cls4.get(list_name, []):
             try:
                 raw = sf4.objects[lpid].get_raw_data()

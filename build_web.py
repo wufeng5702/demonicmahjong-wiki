@@ -31,20 +31,13 @@ from pathlib import Path
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 sys.path.insert(0, str(Path(__file__).parent / "lib"))
 
-from config import BUNDLE_PATH, SITE_DIR
+from config import SITE_DIR
 from enums import parse_all_enums, rarity_name
 from i2parse import load_i2_terms, tr, apply_text
 from extract_bundle import extract_bundle
 from extract_shared import extract_shared_assets
 from merge import merge_shared, offering_category
 from extract_events import extract_events, set_data_names
-from extract_icons import (
-    extract_achievement_icons, extract_lingyong_icons,
-    extract_character_avatars, extract_character_skill_icons,
-    extract_relic_icons, extract_offering_icons,
-    extract_offering_skill_icons, extract_baopai_icons,
-    render_pailing_icons, composite_skill_icons,
-)
 
 DUMP_CS = Path(os.environ.get("DUMP_CS",
     Path(__file__).resolve().parent.parent / "dump_output" / "dump.cs"
@@ -252,21 +245,9 @@ def main():
     print(f"  web_src/data.json written ({size:,} bytes)")
 
     print("\n[6/6] extracting icons...")
-    extract_achievement_icons()
-    extract_lingyong_icons()
-    extract_character_avatars()
-    extract_character_skill_icons()
-    extract_relic_icons()
-    extract_offering_icons()
-    extract_offering_skill_icons()
-    extract_baopai_icons()
-    try:
-        render_pailing_icons(BUNDLE_PATH, SITE_DIR / "icons")
-    except Exception as e:
-        print(f"  [WARN] pailing icon rendering failed: {e}")
-
-    # 技能图标合成到底图上
-    composite_skill_icons()
+    # 每步在独立进程提取, 避免反复加载主 bundle 导致内存累积。
+    icons_script = Path(__file__).parent / "build_icons.py"
+    subprocess.run([sys.executable, str(icons_script)], check=True)
 
     copy_web_files()
 

@@ -23,7 +23,8 @@ import UnityPy
 from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
-from config import (AA_DIR, BUNDLE_PATH, GAME_DATA_DIR, SHARED0, SHARED1,
+from catalog import Catalog
+from config import (AA_DIR, BUNDLE_PATH, CATALOG_BIN, GAME_DATA_DIR, SHARED0, SHARED1,
                     SHARED2, SHARED3, SITE_DIR)
 from logwarn import warn, flush_warns
 import rawparse as rp
@@ -181,22 +182,23 @@ def collect_parts(objs, root_pid):
     return parts
 
 
-FACE_ANCHOR = {10036: [(0.5615, 0.5850), (0.8398, 0.5508)], 10037: (0.68, 0.62)}
+FACE_ANCHOR = {10036: [(0.5615, 0.5850), (0.8398, 0.5508)], 10037: (0.68, 0.62),
+               10038: (0.17, 0.51)}
 ROLL = {10015: 5, 10025: -5, 10028: 6, 10030: -5, 10036: 202, 10037: 90}
 
 
 def face_basis(parts, anchor=None):
     mesh_obj, main, mask, WM = parts[0]
     anchors = []
-    if main is not None and mask is not None and mask.size[0] > 4:
+    if anchor:
+        anchors = list(anchor) if isinstance(anchor[0], (tuple, list)) else [anchor]
+    elif main is not None and mask is not None and mask.size[0] > 4:
         ma = np.asarray(mask.convert("L"), np.float32) / 255.0
         ys, xs = np.where(ma > 0.5)
         if len(xs) > 0:
             anchors = [(xs.mean() / ma.shape[1], 1 - ys.mean() / ma.shape[0])]
     if not anchors:
-        if not anchor:
-            return None
-        anchors = list(anchor) if isinstance(anchor[0], (tuple, list)) else [anchor]
+        return None
     text = mesh_obj.read().export("obj")
     vs, vts, vns, tris = parse_obj(text)
     wv = (WM @ np.hstack([vs, np.ones((len(vs), 1))]).T).T[:, :3]
@@ -453,6 +455,21 @@ def extract_achievement_icons():
     flush_warns("extract_achievement_icons")
 
 
+def _lingyong_sprite_name(sprite_map, xid, sub, en_name="", guid="", catalog=None):
+    """优先使用子资源名或 catalog GUID, 仅在无匹配时回退到 ID 命名。"""
+    if sub in sprite_map:
+        return sub
+    if guid and catalog is not None:
+        name = catalog.guid_to_sprite_stem(guid)
+        if name in sprite_map:
+            return name
+    name = f"ID{xid:04d}{en_name}"
+    if name in sprite_map:
+        return name
+    prefix = f"ID{xid:04d}"
+    return next((name for name in sprite_map if name.startswith(prefix)), None)
+
+
 def extract_lingyong_icons():
     out_dir = SITE_DIR / "icons"
     (out_dir / "lingyong").mkdir(parents=True, exist_ok=True)
@@ -484,21 +501,22 @@ def extract_lingyong_icons():
 
     count = 0
     seen = set()
+    catalog = None
+    if CATALOG_BIN.exists():
+        try:
+            catalog = Catalog.load_bin(CATALOG_BIN)
+        except Exception as e:
+            warn(f"catalog.bin 加载失败: {e}")
 
-    def _save_icon(xid, sub, en_name=""):
+    def _save_icon(xid, sub, en_name="", guid=""):
         nonlocal count
         if xid in seen or xid == 0:
             return
-        # 如果 sub 为空，尝试用 ID{xxx}{en_name} 格式查找
-        if not sub and en_name:
-            sub = f"ID{xid:04d}{en_name}"
-        if not sub:
-            return
-        if sub not in sprite_map:
-            return
         if 20000 <= xid < 30000:
             return
-        seen.add(xid)
+        sub = _lingyong_sprite_name(sprite_map, xid, sub, en_name, guid, catalog)
+        if not sub:
+            return
         try:
             img = sprite_map[sub].read().image
             if (10000 <= xid < 20000) or (30000 <= xid < 40000):
@@ -507,17 +525,10 @@ def extract_lingyong_icons():
                 target = out_dir / "lingyong"
             img.save(str(target / f"{xid}.png"))
             count += 1
+            seen.add(xid)
         except Exception:
             warn()
             pass
-
-    def _find_sprite_by_pattern(xid):
-        """当 sub 为空时，按 ID{xxx} 模式查找 sprite"""
-        prefix = f"ID{xid:04d}"
-        for name in sprite_map:
-            if name.startswith(prefix):
-                return name
-        return None
 
     for obj in sf.objects.values():
         if obj.type != ClassIDType.MonoBehaviour:
@@ -534,7 +545,7 @@ def extract_lingyong_icons():
                 continue
             sub = getattr(ic, "m_SubObjectName", "") or ""
             en_name = getattr(d, "m_Name", "") or ""
-            _save_icon(xid, sub, en_name)
+            _save_icon(xid, sub, en_name, getattr(ic, "m_AssetGUID", "") or "")
         except Exception:
             warn()
             continue
@@ -555,9 +566,7 @@ def extract_lingyong_icons():
             ic = pd.get("iconReference") or {}
             sub = ic.get("sub", "")
             en_name = pd.get("m_Name", "")
-            if not sub:
-                sub = _find_sprite_by_pattern(xid)
-            _save_icon(xid, sub, en_name)
+            _save_icon(xid, sub, en_name, ic.get("guid", ""))
         except Exception:
             warn()
             continue
@@ -578,9 +587,7 @@ def extract_lingyong_icons():
             ic = pd.get("iconReference") or {}
             sub = ic.get("sub", "")
             en_name = pd.get("m_Name", "")
-            if not sub:
-                sub = _find_sprite_by_pattern(xid)
-            _save_icon(xid, sub, en_name)
+            _save_icon(xid, sub, en_name, ic.get("guid", ""))
         except Exception:
             warn()
             continue
@@ -780,7 +787,8 @@ def extract_relic_icons():
             warn()
             pass
 
-    list_names = ["RelicDisplayList", "RelicDisplayMysteriousList", "RelicDisplayOutsiderList"]
+    list_names = ["RelicDisplayList", "RelicDisplayMysteriousList", "RelicDisplayOutsiderList",
+                  "Dlc_RelicDisplayList", "Dlc_RelicDisplayMysteriousList"]
     for ln in list_names:
         for obj in env4.objects:
             if obj.type.name != "MonoBehaviour":
