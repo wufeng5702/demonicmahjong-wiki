@@ -1,5 +1,5 @@
 {
- "_comment": "本文件由 build_web.py 于 2026-10-26 20:48:49 自动生成, 请勿手动修改",
+ "_comment": "本文件由 build_web.py 于 2026-10-27 11:01:39 自动生成, 请勿手动修改",
  "meta": {
   "game": "我在地府打麻将",
   "build": "build_web.py"
@@ -7142,7 +7142,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "宝箱怪",
@@ -7167,7 +7167,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "匹诺曹",
@@ -7193,7 +7193,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "小矮人",
@@ -7216,7 +7216,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "小美人鱼",
@@ -7239,7 +7239,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "夜莺",
@@ -7262,7 +7262,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "贪吃国王",
@@ -7287,7 +7287,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "一号小猪",
@@ -7312,7 +7312,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "二号小猪",
@@ -7340,7 +7340,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "三号小猪",
@@ -7365,7 +7365,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "青蛙",
@@ -7390,7 +7390,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "王子",
@@ -7415,7 +7415,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "柴郡猫",
@@ -7440,7 +7440,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "三月兔",
@@ -7465,7 +7465,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "铁皮人",
@@ -7490,7 +7490,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "狮子",
@@ -7515,7 +7515,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "稻草人",
@@ -7540,7 +7540,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "冤孽",
@@ -7563,7 +7563,7 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "TongHua"
+     "童话"
     ],
     "src": "shared",
     "name": "小木匠",
@@ -23812,211 +23812,295 @@
     "id": 184,
     "en": "HuangDiDeXinZhuang",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/184_6f16d7a499d20cd4f9d928cbeda65383/Name",
+    "descKey": "Relic/Individual/184_6f16d7a499d20cd4f9d928cbeda65383/Description",
+    "rarity": 3,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "魂力",
+     "诅咒"
+    ],
+    "icon_pid": 3204,
+    "src": "shared",
+    "name": "皇帝的新装",
+    "desc": "魂力上限+50。\n你的命减少时，销毁本遗物，随机获得3个诅咒遗物。",
+    "rar": "史诗",
+    "rar2": "史诗"
    },
    {
     "id": 185,
     "en": "ShuiJingXie",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/185_1723c67b97e732747b1ecd81a3394941/Name",
+    "descKey": "Relic/Individual/185_1723c67b97e732747b1ecd81a3394941/Description",
+    "rarity": 2,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "宝牌"
+    ],
+    "icon_pid": 3023,
+    "src": "shared",
+    "name": "水晶鞋",
+    "desc": "拾起时，选择你牌组中的3种牌，将它们永久变为【水晶牌】。",
+    "rar": "稀有",
+    "rar2": "稀有"
    },
    {
     "id": 186,
     "en": "HongWuXie",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/186_5da7509be292d8d498d45d5ab56791b4/Name",
+    "descKey": "Relic/Individual/186_5da7509be292d8d498d45d5ab56791b4/Description",
+    "rarity": 3,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "血量",
+     "念灵"
+    ],
+    "icon_pid": 2540,
+    "src": "shared",
+    "name": "红舞鞋",
+    "desc": "拾起时，恢复1点命。对局开始时，随机为你手牌中的3张牌附上临时的【痴念】。",
+    "rar": "史诗",
+    "rar2": "史诗"
    },
    {
     "id": 187,
     "en": "HuoChaiHe",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/187_f8102738d1ee8454fab75d3f2d42db70/Name",
+    "descKey": "Relic/Individual/187_f8102738d1ee8454fab75d3f2d42db70/Description",
+    "rarity": 2,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "祭品"
+    ],
+    "icon_pid": 2613,
+    "src": "shared",
+    "name": "火柴盒",
+    "desc": "拾起时，获得3根【火柴】。",
+    "rar": "稀有",
+    "rar2": "稀有"
    },
    {
     "id": 188,
     "en": "WaiPoDeZhuFu",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/188_bac78f7fa7b2578458a2dd0e56ac666e/Name",
+    "descKey": "Relic/Individual/188_bac78f7fa7b2578458a2dd0e56ac666e/Description",
+    "rarity": 4,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "供台",
+     "灵佣",
+     "童话"
+    ],
+    "icon_pid": 3184,
+    "src": "shared",
+    "name": "外婆的祝福",
+    "desc": "拾起时，随机获得1个供台和1个童话灵俑。",
+    "rar": "传说",
+    "rar2": "传说"
    },
    {
     "id": 189,
     "en": "FaMuFu",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/189_eeaaeb99e3703b44f8378ca82b6e9147/Name",
+    "descKey": "Relic/Individual/189_eeaaeb99e3703b44f8378ca82b6e9147/Description",
+    "rarity": 1,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "武器"
+    ],
+    "icon_pid": 2734,
+    "src": "shared",
+    "name": "伐木斧",
+    "desc": "底分+40。",
+    "rar": "普通",
+    "rar2": "普通"
    },
    {
     "id": 190,
     "en": "EMoDaoRen",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/190_d21b0fb28a41417469180d59e365db40/Name",
+    "descKey": "Relic/Individual/190_d21b0fb28a41417469180d59e365db40/Description",
+    "rarity": 2,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "武器"
+    ],
+    "icon_pid": 2901,
+    "src": "shared",
+    "name": "恶魔刀刃",
+    "desc": "倍率×125%；和牌槽-1。",
+    "rar": "稀有",
+    "rar2": "稀有"
    },
    {
     "id": 191,
     "en": "ShiHunLian",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/191_7c63ef779ebbd3e4882cf3c8554abe74/Name",
+    "descKey": "Relic/Individual/191_7c63ef779ebbd3e4882cf3c8554abe74/Description",
+    "rarity": 3,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "武器"
+    ],
+    "icon_pid": 2818,
+    "src": "shared",
+    "name": "噬魂镰",
+    "desc": "倍率×150%；拾起时，魂力上限×50%。",
+    "rar": "史诗",
+    "rar2": "史诗"
    },
    {
     "id": 192,
     "en": "XunDaoZhiJian",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/192_9fb53bea1a954634d8a927e9309cdd57/Name",
+    "descKey": "Relic/Individual/192_9fb53bea1a954634d8a927e9309cdd57/Description",
+    "rarity": 4,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "武器"
+    ],
+    "icon_pid": 2671,
+    "src": "shared",
+    "name": "殉道之剑",
+    "desc": "倍率×200%；对局失败时，额外减少1点命。",
+    "rar": "传说",
+    "rar2": "传说"
    },
    {
     "id": 193,
     "en": "MoDou",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/193_ce7b885559845b8499564d99cddac9b5/Name",
+    "descKey": "Relic/Individual/193_ce7b885559845b8499564d99cddac9b5/Description",
+    "rarity": 1,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "地图节点",
+     "祭品",
+     "花草"
+    ],
+    "icon_pid": 3209,
+    "src": "shared",
+    "name": "魔豆",
+    "desc": "每当你进入【神秘事件】时，随机获得1个花草类祭品。",
+    "rar": "普通",
+    "rar2": "普通"
    },
    {
     "id": 194,
     "en": "HuTaoJiaZi",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/194_3427e428ee7d055498f19ad7cfdf3133/Name",
+    "descKey": "Relic/Individual/194_3427e428ee7d055498f19ad7cfdf3133/Description",
+    "rarity": 1,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "移除",
+     "遗物"
+    ],
+    "icon_pid": 2568,
+    "src": "shared",
+    "name": "胡桃夹子",
+    "desc": "拾起时，选择并销毁1件遗物。",
+    "rar": "普通",
+    "rar2": "普通"
    },
    {
     "id": 195,
     "en": "YinKeDao",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/195_47de700a625b2d64990da9ba2657e13f/Name",
+    "descKey": "Relic/Individual/195_47de700a625b2d64990da9ba2657e13f/Description",
+    "rarity": 2,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "武器"
+    ],
+    "icon_pid": 2889,
+    "src": "shared",
+    "name": "银刻刀",
+    "desc": "对局开始时，获得3层【蓄力】。",
+    "rar": "稀有",
+    "rar2": "稀有"
    },
    {
     "id": 196,
     "en": "XieEGongTai",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/196_291ed292d72f15e44be7bc094eb958c4/Name",
+    "descKey": "Relic/Individual/196_291ed292d72f15e44be7bc094eb958c4/Description",
+    "rarity": 3,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "灵佣槽",
+     "供台",
+     "念灵"
+    ],
+    "icon_pid": 3143,
+    "src": "shared",
+    "name": "邪恶供台",
+    "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机将牌组中的1种牌永久附上【恶念】。",
+    "rar": "史诗",
+    "rar2": "史诗"
    },
    {
     "id": 197,
     "en": "ZuZhouFangChui",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/197_21b10afbf1b87774399275f7fb549e90/Name",
+    "descKey": "Relic/Individual/197_21b10afbf1b87774399275f7fb549e90/Description",
+    "rarity": 1,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "诅咒"
+    ],
+    "icon_pid": 2915,
+    "src": "shared",
+    "name": "诅咒纺锤",
+    "desc": "对局开始时，随机为你手牌中的1张牌附上临时的【恶念】。",
+    "rar": "普通",
+    "rar2": "普通"
    },
    {
     "id": 198,
     "en": "MiDaSiDiaoXiang",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
+    "nameKey": "Relic/Individual/198_4ee88fb8704d0a443abd67a10aea11ea/Name",
+    "descKey": "Relic/Individual/198_4ee88fb8704d0a443abd67a10aea11ea/Description",
+    "rarity": 1,
+    "stack": 1,
     "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "tags": [
+     "诅咒"
+    ],
+    "icon_pid": 2493,
+    "src": "shared",
+    "name": "弥达斯雕像",
+    "desc": "拾起时，魂力上限-10。",
+    "rar": "普通",
+    "rar2": "普通"
    },
    {
     "id": 10001,
@@ -24571,15 +24655,20 @@
     "id": 10030,
     "en": "BianChengWangBaoJian",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
-    "kind": "",
-    "tags": [],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "nameKey": "Relic/Individual/10030_0b44d0558e2abc04891a7761556ae1fe/Name",
+    "descKey": "Relic/Individual/10030_0b44d0558e2abc04891a7761556ae1fe/Description",
+    "rarity": 4,
+    "stack": 1,
+    "kind": "神秘",
+    "tags": [
+     "宝鉴"
+    ],
+    "icon_pid": 2751,
+    "src": "shared",
+    "name": "卞城王宝鉴",
+    "desc": "宝鉴中出现了卞城王的影子。\n（拾起时，你的所有筒牌牌面分+5）",
+    "rar": "神秘",
+    "rar2": "传说"
    }
   ],
   "characters": [
