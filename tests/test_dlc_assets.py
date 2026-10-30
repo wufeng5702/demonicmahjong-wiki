@@ -46,6 +46,16 @@ class TestLingyongSpriteName(unittest.TestCase):
         self.assertIsNone(self.resolve(guid="unknown", catalog=self.catalog))
 
 
+class TestCharacterSkillSprite(unittest.TestCase):
+    def test_payload_skill_suffix_is_ignored(self):
+        sprite = object()
+        sprites = {"iconskillshangjin": sprite}
+        self.assertIs(
+            extract_icons._character_skill_sprite(sprites, "ShangJinSkill1"),
+            sprite,
+        )
+
+
 class TestPailingFaceAnchor(unittest.TestCase):
     def test_manual_face_anchor_overrides_emission_mask(self):
         obj = "\n".join([
