@@ -33,6 +33,16 @@ SIZE = 512
 SS = 2  # 超采样倍数
 
 
+def _character_skill_sprite(sprite_by_lower, mname):
+    base = re.sub(r"\d+$", "", mname)
+    candidates = (base, re.sub(r"Skill$", "", base, flags=re.IGNORECASE))
+    for name in candidates:
+        obj = sprite_by_lower.get(f"IconSkill{name}".lower())
+        if obj is not None:
+            return obj
+    return None
+
+
 # ============================================================
 # 牌灵 3D 渲染 (原 render_pl_icons.py)
 # ============================================================
@@ -676,10 +686,7 @@ def extract_character_skill_icons():
         if sub and sub in sprite_map:
             obj = sprite_map[sub]
         elif not sub and mname:
-            base = re.sub(r"\d+$", "", mname)
-            predicted = f"IconSkill{base}".lower()
-            if predicted in sprite_by_lower:
-                obj = sprite_by_lower[predicted]
+            obj = _character_skill_sprite(sprite_by_lower, mname)
         if obj is None:
             return
         seen.add(xid)
