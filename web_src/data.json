@@ -1,5 +1,5 @@
 {
- "_comment": "本文件由 build_web.py 于 2026-10-27 12:49:03 自动生成, 请勿手动修改",
+ "_comment": "本文件由 build_web.py 于 2026-10-31 09:01:58 自动生成, 请勿手动修改",
  "meta": {
   "game": "我在地府打麻将",
   "build": "build_web.py"
@@ -7171,7 +7171,7 @@
     ],
     "src": "shared",
     "name": "匹诺曹",
-    "desc": "在每局麻将中，当你第一次和牌或计分时，手牌中每有1张牌面发生过变化的牌，该灵俑提供的倍率永久+5%。",
+    "desc": "在每局麻将中，当你第一次和牌或计分时，手牌中每有1张牌面发生过变化的牌，该灵俑提供的独立倍率永久+5%。",
     "rar": "稀有"
    },
    {
@@ -7356,7 +7356,7 @@
     "descKey": "LingYong/Individual/309_8cbdab4c68dcf5c479be340e879f67a8/Description",
     "iconGUID": "5dd97720604768743bdbe7557b7057b6",
     "adds": {
-     "count": 9
+     "count": 6
     },
     "fanZhong": 0,
     "fanList": [],
@@ -7369,7 +7369,7 @@
     ],
     "src": "shared",
     "name": "青蛙",
-    "desc": "每当你打出3个【痴念】时，对局结束后获得1颗【金珠】。若已累计打出9个【痴念】，对局结束后，变身为【王子】。",
+    "desc": "每当你打出2个【痴念】时，对局结束后获得1颗【金珠】。若已累计打出6个【痴念】，对局结束后，变身为【王子】。",
     "rar": "普通"
    },
    {
@@ -7390,11 +7390,12 @@
     "number": 0,
     "isZi": false,
     "tags": [
-     "童话"
+     "童话",
+     "衍生"
     ],
     "src": "shared",
     "name": "王子",
-    "desc": "当你打出【痴念】时，将其净化；每净化1个【痴念】，该灵俑提供的独立倍率+25%。",
+    "desc": "当你打出【痴念】时，将其净化；每净化1个【痴念】，该灵俑提供的独立倍率永久+25%。",
     "rar": "史诗"
    },
    {
@@ -7519,7 +7520,7 @@
     ],
     "src": "shared",
     "name": "稻草人",
-    "desc": "当你和索牌或计分的牌都是索牌时，你每有1组手牌，独立倍率+2%。",
+    "desc": "当你和索牌或计分的牌都是索牌时，你每有1张手牌，独立倍率+2%。",
     "rar": "稀有"
    },
    {
@@ -12248,7 +12249,7 @@
     ],
     "src": "shared",
     "name": "月圆",
-    "desc": "对局开始时，为玩家牌库中的5万、5索、5筒附上【恶念】。如果玩家打出的牌不是筒牌，将它们都变为筒牌。",
+    "desc": "对局开始时，为玩家牌库中的5万、5索、5筒附上【恶念】。如果玩家打出的牌不是筒牌，将它们都变为随机筒牌。",
     "rar": "普通"
    },
    {
@@ -18662,7 +18663,7 @@
     "fanZhong": 0,
     "useTiming": 1,
     "useType": 12,
-    "icon_pid": 3155,
+    "icon_pid": 3166,
     "src": "shared",
     "name": "投喂 lv.1",
     "desc": "（你的吃碰阶段）\n向对手打出区置入2张你可以吃的数牌。（每回合限使用1次）。",
@@ -18681,7 +18682,7 @@
     "fanZhong": 0,
     "useTiming": 1,
     "useType": 12,
-    "icon_pid": 3155,
+    "icon_pid": 3166,
     "src": "shared",
     "name": "投喂 lv.2",
     "desc": "（你的吃碰阶段）\n向对手打出区置入3张你可以吃的数牌。",
@@ -18700,7 +18701,7 @@
     "fanZhong": 0,
     "useTiming": 1,
     "useType": 12,
-    "icon_pid": 3155,
+    "icon_pid": 3166,
     "src": "shared",
     "name": "投喂 lv.3",
     "desc": "（你的吃碰阶段）\n向对手打出区置入3张你可以吃的数牌，并临时变为随机宝牌。",
@@ -18719,7 +18720,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2483,
+    "icon_pid": 2493,
     "src": "shared",
     "name": "万贯 lv.1",
     "desc": "（你的阶段）\n将你手牌中的1张牌变为万牌（每回合限使用1次）。",
@@ -18738,7 +18739,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2483,
+    "icon_pid": 2493,
     "src": "shared",
     "name": "万贯 lv.2",
     "desc": "（你的阶段）\n将你手牌中的1张牌变为万牌（每回合限使用1次）。",
@@ -18757,7 +18758,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2483,
+    "icon_pid": 2493,
     "src": "shared",
     "name": "万贯 lv.3",
     "desc": "（你的阶段）\n将你手牌中的1张牌变为万牌。",
@@ -18777,7 +18778,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3203,
+    "icon_pid": 3214,
     "src": "shared",
     "name": "毒焰 lv.1",
     "desc": "（你的阶段）\n对手每有1层【尸毒】，你的倍率+15%。",
@@ -18797,7 +18798,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3203,
+    "icon_pid": 3214,
     "src": "shared",
     "name": "毒焰 lv.2",
     "desc": "（你的阶段）\n对手每有1层【尸毒】，你的倍率+20%。",
@@ -18817,7 +18818,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3203,
+    "icon_pid": 3214,
     "src": "shared",
     "name": "毒焰 lv.3",
     "desc": "（你的阶段）\n对手每有1层【尸毒】，你的倍率+25%。",
@@ -18836,7 +18837,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3044,
+    "icon_pid": 3055,
     "src": "shared",
     "name": "我碰 lv.1",
     "desc": "（你的吃碰阶段）\n随机将对手打出区1张牌变为你手牌中数量最多的牌。",
@@ -18855,7 +18856,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3044,
+    "icon_pid": 3055,
     "src": "shared",
     "name": "我碰 lv.2",
     "desc": "（你的吃碰阶段）\n随机将对手打出区1张牌变为你手牌中数量最多的牌。",
@@ -18874,7 +18875,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3044,
+    "icon_pid": 3055,
     "src": "shared",
     "name": "我碰 lv.3",
     "desc": "（你的吃碰阶段）\n随机将对手打出区1张牌变为你手牌中数量最多的牌。",
@@ -18893,7 +18894,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 6,
-    "icon_pid": 1388,
+    "icon_pid": 1405,
     "src": "shared",
     "name": "暗赠 lv.1",
     "desc": "（你的阶段）\n选择你的1张手牌，与对手的弃牌区的1张牌交换（每回合限使用1次）。",
@@ -18912,7 +18913,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 6,
-    "icon_pid": 1388,
+    "icon_pid": 1405,
     "src": "shared",
     "name": "暗赠 lv.2",
     "desc": "（你的阶段）\n选择你的1张手牌，与对手的弃牌区的1张牌交换。",
@@ -18931,7 +18932,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 6,
-    "icon_pid": 1388,
+    "icon_pid": 1405,
     "src": "shared",
     "name": "暗赠 lv.3",
     "desc": "（你的阶段）\n选择你的最多2张手牌，与对手的弃牌区对应数量的牌交换。",
@@ -19002,7 +19003,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2721,
+    "icon_pid": 2732,
     "src": "shared",
     "name": "滞怨 lv.1",
     "desc": "（你的阶段）\n选择你手牌中的1张牌，随机为这张牌及其对应种类的牌永久附上念灵，并使其牌面分+5。",
@@ -19022,7 +19023,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2721,
+    "icon_pid": 2732,
     "src": "shared",
     "name": "滞怨 lv.2",
     "desc": "（你的阶段）\n选择你手牌中的1张牌，随机为这张牌及其对应种类的牌永久附上念灵，并使其牌面分+10。",
@@ -19042,7 +19043,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2721,
+    "icon_pid": 2732,
     "src": "shared",
     "name": "滞怨 lv.3",
     "desc": "（你的阶段）\n选择你手牌中的1张牌，随机为这张牌及其对应种类的牌永久附上念灵，并使其牌面分+10。",
@@ -19063,7 +19064,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 14,
-    "icon_pid": 3094,
+    "icon_pid": 3105,
     "src": "shared",
     "name": "恶煞 lv.1",
     "desc": "（你的换牌阶段）\n选择换牌区的1张数牌，将对应数值的剩余可摸牌数交给对手；剩余可摸牌数每减少1，倍率永久+2%（每回合限使用1次）。",
@@ -19084,7 +19085,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 14,
-    "icon_pid": 3094,
+    "icon_pid": 3105,
     "src": "shared",
     "name": "恶煞 lv.2",
     "desc": "（你的换牌阶段）\n选择换牌区的1张数牌，将对应数值的剩余可摸牌数交给对手；剩余可摸牌数每减少1，倍率永久+3%（每回合限使用1次）。",
@@ -19105,7 +19106,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 14,
-    "icon_pid": 3094,
+    "icon_pid": 3105,
     "src": "shared",
     "name": "恶煞 lv.3",
     "desc": "（你的换牌阶段）\n选择换牌区的1张数牌，将对应数值的剩余可摸牌数交给对手；剩余可摸牌数每减少1，倍率永久+3%。",
@@ -19124,7 +19125,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 13,
-    "icon_pid": 2505,
+    "icon_pid": 2515,
     "src": "shared",
     "name": "混淆 lv.1",
     "desc": "（你的吃碰阶段）\n选择对手打出区的1张牌，将你手牌最左侧的2张【雾宝牌】变为该牌并进行碰。",
@@ -19143,7 +19144,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 13,
-    "icon_pid": 2505,
+    "icon_pid": 2515,
     "src": "shared",
     "name": "混淆 lv.2",
     "desc": "（你的吃碰阶段）\n选择对手打出区的1张牌，将你手牌最左侧的2张【雾宝牌】变为该牌并进行碰。",
@@ -19162,7 +19163,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 16,
-    "icon_pid": 2505,
+    "icon_pid": 2515,
     "src": "shared",
     "name": "混淆 lv.3",
     "desc": "（你的吃碰阶段）\n选择对手的弃牌区中的1张牌，将你手牌最左侧的2张【雾宝牌】变为该牌并进行碰。",
@@ -19181,7 +19182,7 @@
     "fanZhong": 26,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2539,
+    "icon_pid": 2549,
     "src": "shared",
     "name": "暗许 lv.1",
     "desc": "（你的换牌阶段）\n复制你换牌区里数量最少的牌（每回合限使用1次）。",
@@ -19200,7 +19201,7 @@
     "fanZhong": 26,
     "useTiming": 0,
     "useType": 14,
-    "icon_pid": 2539,
+    "icon_pid": 2549,
     "src": "shared",
     "name": "暗许 lv.2",
     "desc": "（你的换牌阶段）\n选择并复制你换牌区里的1张牌（每回合限使用1次）。",
@@ -19219,7 +19220,7 @@
     "fanZhong": 26,
     "useTiming": 0,
     "useType": 14,
-    "icon_pid": 2539,
+    "icon_pid": 2549,
     "src": "shared",
     "name": "暗许 lv.3",
     "desc": "（你的换牌阶段）\n选择并复制你换牌区里的1张牌。",
@@ -19238,7 +19239,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2723,
+    "icon_pid": 2734,
     "src": "shared",
     "name": "强掷 lv.1",
     "desc": "（你的阶段）\n将你明牌中的所有顺子和刻子移回手牌。",
@@ -19257,7 +19258,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2723,
+    "icon_pid": 2734,
     "src": "shared",
     "name": "强掷 lv.2",
     "desc": "（你的阶段）\n将你明牌中的所有顺子和刻子移回手牌。",
@@ -19276,7 +19277,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2723,
+    "icon_pid": 2734,
     "src": "shared",
     "name": "强掷 lv.3",
     "desc": "（你的阶段）\n将你明牌中的所有顺子和刻子移回手牌。",
@@ -19296,7 +19297,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2748,
+    "icon_pid": 2759,
     "src": "shared",
     "name": "舔牌 lv.1",
     "desc": "（你的阶段）\n将你手牌中最多2张数牌数字临时+2（每回合限使用1次）。",
@@ -19316,7 +19317,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2748,
+    "icon_pid": 2759,
     "src": "shared",
     "name": "舔牌 lv.2",
     "desc": "（你的阶段）\n将你手牌中最多2张数牌数字临时+3（每回合限使用1次）。",
@@ -19337,7 +19338,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2748,
+    "icon_pid": 2759,
     "src": "shared",
     "name": "舔牌 lv.3",
     "desc": "（你的阶段）\n将你手牌中的最多2张数牌数字临时+3。",
@@ -19357,7 +19358,7 @@
     "fanZhong": 0,
     "useTiming": 3,
     "useType": 2,
-    "icon_pid": 2973,
+    "icon_pid": 2984,
     "src": "shared",
     "name": "赏善 lv.1",
     "desc": "（你的换牌阶段）\n选择手牌中的1张数牌，将1张与它同花色且数字+1的额外牌置入你的换牌区（每回合限使用1次）。",
@@ -19377,7 +19378,7 @@
     "fanZhong": 0,
     "useTiming": 3,
     "useType": 2,
-    "icon_pid": 2973,
+    "icon_pid": 2984,
     "src": "shared",
     "name": "赏善 lv.2",
     "desc": "（你的换牌阶段）\n选择手牌中的1张数牌，将1张与它同花色且数字+1的额外牌置入你的换牌区（每回合限使用1次）。",
@@ -19397,7 +19398,7 @@
     "fanZhong": 0,
     "useTiming": 3,
     "useType": 2,
-    "icon_pid": 2973,
+    "icon_pid": 2984,
     "src": "shared",
     "name": "赏善 lv.3",
     "desc": "（你的换牌阶段）\n选择手牌中的1张数牌，将1张与它同花色且数字+1的额外牌置入你的换牌区。",
@@ -19416,7 +19417,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3134,
+    "icon_pid": 3145,
     "src": "shared",
     "name": "罚恶 lv.1",
     "desc": "（你的阶段）\n选择手牌中最多3张数牌弃掉，免费摸等量的牌。",
@@ -19435,7 +19436,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3134,
+    "icon_pid": 3145,
     "src": "shared",
     "name": "罚恶 lv.2",
     "desc": "（你的阶段）\n选择手牌中最多4张数牌弃掉，免费摸等量的牌。",
@@ -19454,7 +19455,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3134,
+    "icon_pid": 3145,
     "src": "shared",
     "name": "罚恶 lv.3",
     "desc": "（你的阶段）\n选择手牌中最多4张牌弃掉，免费摸等量的牌。",
@@ -19475,7 +19476,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 15,
-    "icon_pid": 2911,
+    "icon_pid": 2922,
     "src": "shared",
     "name": "改命 lv.1",
     "desc": "（你的换牌阶段）\n查看你弃牌区中的后16张牌，从中选择最多2张移回换牌区（每回合限使用1次）。",
@@ -19495,7 +19496,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 15,
-    "icon_pid": 2911,
+    "icon_pid": 2922,
     "src": "shared",
     "name": "改命 lv.2",
     "desc": "（你的换牌阶段）\n查看你弃牌区中的后20张牌，从中选择最多3张移回换牌区（每回合限使用1次）。",
@@ -19515,7 +19516,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 15,
-    "icon_pid": 2911,
+    "icon_pid": 2922,
     "src": "shared",
     "name": "改命 lv.3",
     "desc": "（你的换牌阶段）\n查看你弃牌区中的后24张牌，从中选择最多3张移回换牌区。",
@@ -19534,7 +19535,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3126,
+    "icon_pid": 3137,
     "src": "shared",
     "name": "换心 lv.1",
     "desc": "（你的换牌阶段）\n将你换牌区的所有牌随机变成其他牌（每回合限使用1次）。",
@@ -19553,7 +19554,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3126,
+    "icon_pid": 3137,
     "src": "shared",
     "name": "换心 lv.2",
     "desc": "（你的换牌阶段）\n将你换牌区的所有牌随机变成其他牌。",
@@ -19572,7 +19573,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3126,
+    "icon_pid": 3137,
     "src": "shared",
     "name": "换心 lv.3",
     "desc": "（你的换牌阶段）\n将你换牌区的所有牌随机变成其他牌，并将其中1张临时变为随机宝牌。",
@@ -19592,7 +19593,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3025,
+    "icon_pid": 3036,
     "src": "shared",
     "name": "鉴听 lv.1",
     "desc": "（你的换牌阶段）\n随机将你的牌替换为一副可以听的牌，番数小于8番。",
@@ -19612,7 +19613,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3025,
+    "icon_pid": 3036,
     "src": "shared",
     "name": "鉴听 lv.2",
     "desc": "（你的换牌阶段）\n随机将你的牌替换为一副可以听的牌，番数小于16番。",
@@ -19632,7 +19633,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3025,
+    "icon_pid": 3036,
     "src": "shared",
     "name": "鉴听 lv.3",
     "desc": "（你的换牌阶段）\n选择手牌中的2张数牌，随机将你的牌替换为一副可以听的牌，番数等于这2个数字之和。",
@@ -19653,7 +19654,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2655,
+    "icon_pid": 2666,
     "src": "shared",
     "name": "调制 lv.1",
     "desc": "（你的阶段）\n随机获得2个奶茶类祭品（每回合限使用1次）。",
@@ -19674,7 +19675,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2655,
+    "icon_pid": 2666,
     "src": "shared",
     "name": "调制 lv.2",
     "desc": "（你的阶段）\n随机获得2个高级奶茶类祭品（每回合限使用1次）。",
@@ -19695,7 +19696,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2655,
+    "icon_pid": 2666,
     "src": "shared",
     "name": "调制 lv.3",
     "desc": "（你的阶段）\n随机获得2个高级奶茶类祭品。",
@@ -19716,7 +19717,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3011,
+    "icon_pid": 3022,
     "src": "shared",
     "name": "批红 lv.1",
     "desc": "（你的换牌阶段）\n将2张额外的红中洗入牌库，并在你的换牌区生成1张红中。",
@@ -19737,7 +19738,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3011,
+    "icon_pid": 3022,
     "src": "shared",
     "name": "批红 lv.2",
     "desc": "（你的换牌阶段）\n将2张额外的红中洗入牌库，并在你的换牌区生成1张红中。",
@@ -19758,7 +19759,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3011,
+    "icon_pid": 3022,
     "src": "shared",
     "name": "批红 lv.3",
     "desc": "（你的换牌阶段）\n将3张额外的红中洗入牌库，并在你的换牌区生成1张红中。",
@@ -19779,7 +19780,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3170,
+    "icon_pid": 3181,
     "src": "shared",
     "name": "昭雪 lv.1",
     "desc": "（你的换牌阶段）\n在你的换牌区随机生成2张不同的额外牌，优先生成尚未摸过的牌。（每回合限使用1次）。",
@@ -19800,7 +19801,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3170,
+    "icon_pid": 3181,
     "src": "shared",
     "name": "昭雪 lv.2",
     "desc": "（你的换牌阶段）\n在你的换牌区随机生成2张不同的额外牌，优先生成尚未摸过的牌。",
@@ -19821,7 +19822,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3170,
+    "icon_pid": 3181,
     "src": "shared",
     "name": "昭雪 lv.3",
     "desc": "（你的换牌阶段）\n在你的换牌区随机生成3张不同的额外牌，优先生成尚未摸过的牌。",
@@ -19840,7 +19841,7 @@
     "fanZhong": 0,
     "useTiming": 1,
     "useType": 12,
-    "icon_pid": 3173,
+    "icon_pid": 3184,
     "src": "shared",
     "name": "诵经 lv.1",
     "desc": "（你的换牌阶段）\n祝福形态：为你换牌区的所有牌附上临时的【顺灵】，切换为黑莲形态。\n黑莲形态：为你换牌区的所有牌附上临时的【风灵】，切换为祝福形态。",
@@ -19859,7 +19860,7 @@
     "fanZhong": 0,
     "useTiming": 1,
     "useType": 12,
-    "icon_pid": 3173,
+    "icon_pid": 3184,
     "src": "shared",
     "name": "诵经 lv.2",
     "desc": "（你的换牌阶段）\n祝福形态：为你换牌区的所有牌附上临时的【顺灵】，切换为黑莲形态。\n黑莲形态：为你换牌区的所有牌附上临时的【风灵】，切换为祝福形态。",
@@ -19878,7 +19879,7 @@
     "fanZhong": 0,
     "useTiming": 1,
     "useType": 12,
-    "icon_pid": 3173,
+    "icon_pid": 3184,
     "src": "shared",
     "name": "诵经 lv.3",
     "desc": "（你的换牌阶段）\n祝福形态：为你换牌区的所有牌附上临时的【顺灵】，切换为黑莲形态。\n黑莲形态：为你换牌区的所有牌附上临时的【风灵】，切换为祝福形态。",
@@ -19898,7 +19899,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3195,
+    "icon_pid": 3206,
     "src": "shared",
     "name": "噬血 lv.1",
     "desc": "（你的阶段）\n吸取对手1%的倍率并获得对应的倍率成长。",
@@ -19918,7 +19919,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3195,
+    "icon_pid": 3206,
     "src": "shared",
     "name": "噬血 lv.2",
     "desc": "（你的阶段）\n吸取对手1%的倍率并获得对应的倍率成长。",
@@ -19938,7 +19939,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 3195,
+    "icon_pid": 3206,
     "src": "shared",
     "name": "噬血 lv.3",
     "desc": "（你的阶段）\n吸取对手2%的倍率并获得对应的倍率成长。",
@@ -19957,7 +19958,7 @@
     "fanZhong": 26,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2508,
+    "icon_pid": 2518,
     "src": "shared",
     "name": "变脸 lv.1",
     "desc": "（你的阶段）\n选择手牌中的最多2张牌，随机将它们的花色变为万筒索中的一种。",
@@ -19976,7 +19977,7 @@
     "fanZhong": 26,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2508,
+    "icon_pid": 2518,
     "src": "shared",
     "name": "变脸 lv.2",
     "desc": "（你的阶段）\n选择手牌中的最多2张牌，随机将它们的花色变为万筒索中的一种。",
@@ -19995,7 +19996,7 @@
     "fanZhong": 26,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2508,
+    "icon_pid": 2518,
     "src": "shared",
     "name": "变脸 lv.3",
     "desc": "（你的阶段）\n选择手牌中的最多2张牌，随机将它们的花色变为万筒索中的一种。",
@@ -20015,7 +20016,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2722,
+    "icon_pid": 2733,
     "src": "shared",
     "name": "燃魂 lv.1",
     "desc": "（你的阶段）\n消耗全部魂力，每消耗5魂力，番数+4。",
@@ -20035,7 +20036,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2722,
+    "icon_pid": 2733,
     "src": "shared",
     "name": "燃魂 lv.2",
     "desc": "（你的阶段）\n消耗全部魂力，每消耗5魂力，番数+6。",
@@ -20055,7 +20056,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2722,
+    "icon_pid": 2733,
     "src": "shared",
     "name": "燃魂 lv.3",
     "desc": "（你的阶段）\n消耗全部魂力，每消耗5魂力，番数+8。",
@@ -20077,7 +20078,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3219,
+    "icon_pid": 3230,
     "src": "shared",
     "name": "索求 lv.1",
     "desc": "（你的阶段）\n选择手牌中的1张索牌，复制3张额外牌洗入牌库。",
@@ -20099,7 +20100,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3219,
+    "icon_pid": 3230,
     "src": "shared",
     "name": "索求 lv.2",
     "desc": "（你的阶段）\n选择手牌中的1张索牌，复制3张额外牌洗入牌库。",
@@ -20121,7 +20122,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3219,
+    "icon_pid": 3230,
     "src": "shared",
     "name": "索求 lv.3",
     "desc": "（你的阶段）\n选择手牌中的1张索牌，复制3张额外牌洗入牌库。",
@@ -20142,7 +20143,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2655,
+    "icon_pid": 2666,
     "src": "shared",
     "name": "奇遇 lv.1",
     "desc": "（你的换牌阶段）\n随机将3张额外奇数牌置入你的换牌区（每回合限使用1次）。",
@@ -20163,7 +20164,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2655,
+    "icon_pid": 2666,
     "src": "shared",
     "name": "奇遇 lv.2",
     "desc": "（你的换牌阶段）\n随机将3张额外奇数牌置入你的换牌区（每回合限使用1次）。",
@@ -20184,7 +20185,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2655,
+    "icon_pid": 2666,
     "src": "shared",
     "name": "奇遇 lv.3",
     "desc": "（你的换牌阶段）\n随机将3张额外奇数牌置入你的换牌区。",
@@ -20205,7 +20206,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2663,
+    "icon_pid": 2674,
     "src": "shared",
     "name": "偶遇 lv.1",
     "desc": "（你的换牌阶段）\n免费摸2张牌，并把其中的非偶数牌变为随机偶数牌（每回合限使用1次）。",
@@ -20226,7 +20227,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2663,
+    "icon_pid": 2674,
     "src": "shared",
     "name": "偶遇 lv.2",
     "desc": "（你的换牌阶段）\n免费摸2张牌，并把其中的非偶数牌变为随机偶数牌（每回合限使用1次）。",
@@ -20247,7 +20248,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2663,
+    "icon_pid": 2674,
     "src": "shared",
     "name": "偶遇 lv.3",
     "desc": "（你的换牌阶段）\n免费摸2张牌，并把其中的非偶数牌变为随机偶数牌。",
@@ -20266,7 +20267,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2620,
+    "icon_pid": 2631,
     "src": "shared",
     "name": "复刻 lv.1",
     "desc": "（你的换牌阶段）\n随机复制你明牌中的1副刻子/杠子，将额外3张对应牌面的牌置入你的换牌区（每回合限使用1次）。",
@@ -20285,7 +20286,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2620,
+    "icon_pid": 2631,
     "src": "shared",
     "name": "复刻 lv.2",
     "desc": "（你的换牌阶段）\n随机复制你明牌中的1副刻子/杠子，将其中额外3张牌置入你的换牌区（每回合限使用1次）。",
@@ -20304,7 +20305,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 12,
-    "icon_pid": 2620,
+    "icon_pid": 2631,
     "src": "shared",
     "name": "复刻 lv.3",
     "desc": "（你的换牌阶段）\n随机复制你明牌中的1副刻子/杠子，将其中额外3张牌置入你的换牌区。",
@@ -20652,7 +20653,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2887,
+    "icon_pid": 2898,
     "src": "shared",
     "name": "洗礼 lv.1",
     "desc": "（你的阶段）\n选择手牌中最多2张牌弃掉，免费摸等量的牌，优先摸数牌。",
@@ -20673,7 +20674,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2887,
+    "icon_pid": 2898,
     "src": "shared",
     "name": "洗礼 lv.2",
     "desc": "（你的阶段）\n选择手牌中最多3张牌弃掉，免费摸等量的牌，优先摸数牌。",
@@ -20694,7 +20695,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2887,
+    "icon_pid": 2898,
     "src": "shared",
     "name": "洗礼 lv.3",
     "desc": "（你的阶段）\n选择手牌中最多3张牌弃掉，免费摸等量的牌，优先摸数牌。",
@@ -20715,7 +20716,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2570,
+    "icon_pid": 2581,
     "src": "shared",
     "name": "习武 lv.1",
     "desc": "（你的阶段）\n选择手牌中最多2张牌弃掉，免费摸等量的牌，优先摸万牌。",
@@ -20736,7 +20737,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2570,
+    "icon_pid": 2581,
     "src": "shared",
     "name": "习武 lv.2",
     "desc": "（你的阶段）\n选择手牌中最多3张牌弃掉，免费摸等量的牌，优先摸万牌。",
@@ -20757,7 +20758,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2570,
+    "icon_pid": 2581,
     "src": "shared",
     "name": "习武 lv.3",
     "desc": "（你的阶段）\n选择手牌中最多3张牌弃掉，免费摸等量的牌，优先摸万牌。",
@@ -20778,7 +20779,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3225,
+    "icon_pid": 3236,
     "src": "shared",
     "name": "狩猎 lv.1",
     "desc": "（你的阶段）\n选择手牌中最多2张牌弃掉，免费摸等量的牌，优先摸索牌。",
@@ -20799,7 +20800,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3225,
+    "icon_pid": 3236,
     "src": "shared",
     "name": "狩猎 lv.2",
     "desc": "（你的阶段）\n选择手牌中最多2张牌弃掉，免费摸等量的牌，优先摸索牌。",
@@ -20820,7 +20821,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3225,
+    "icon_pid": 3236,
     "src": "shared",
     "name": "狩猎 lv.3",
     "desc": "（你的阶段）\n选择手牌中最多2张牌弃掉，免费摸等量的牌，优先摸索牌。",
@@ -20841,7 +20842,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2984,
+    "icon_pid": 2995,
     "src": "shared",
     "name": "调灵 lv.1",
     "desc": "（你的阶段）\n选择你手牌中的1张牌，随机为这张牌及其对应种类的牌永久附上随机的牌灵。",
@@ -20862,7 +20863,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2984,
+    "icon_pid": 2995,
     "src": "shared",
     "name": "调灵 lv.2",
     "desc": "（你的阶段）\n选择你手牌中的1张牌，随机为这张牌及其对应种类的牌永久附上随机的牌灵。",
@@ -20883,7 +20884,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2984,
+    "icon_pid": 2995,
     "src": "shared",
     "name": "调灵 lv.3",
     "desc": "（你的阶段）\n选择你手牌中的1张牌，随机为这张牌及其对应种类的牌永久附上随机的牌灵。",
@@ -20904,7 +20905,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3167,
+    "icon_pid": 3178,
     "src": "shared",
     "name": "黑化 lv.1",
     "desc": "（你的阶段）\n将你手牌中的1张牌变为随机黑色的牌（八筒、东、南、西、北）。",
@@ -20925,7 +20926,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3167,
+    "icon_pid": 3178,
     "src": "shared",
     "name": "黑化 lv.2",
     "desc": "（你的阶段）\n将你手牌中的2张牌变为随机黑色的牌（八筒、东、南、西、北）。",
@@ -20946,7 +20947,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 3167,
+    "icon_pid": 3178,
     "src": "shared",
     "name": "黑化 lv.3",
     "desc": "（你的阶段）\n将你手牌中的2张牌变为随机黑色的牌（八筒、东、南、西、北）。",
@@ -20967,7 +20968,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2544,
+    "icon_pid": 2554,
     "src": "shared",
     "name": "判罪 lv.1",
     "desc": "（你的阶段）\n选择手牌中3张附有念灵的牌，随机将它们的花色变为万筒索中的1种456顺子，置入明牌区，视为进行了1次吃（每回合限使用1次）。",
@@ -20988,7 +20989,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2544,
+    "icon_pid": 2554,
     "src": "shared",
     "name": "判罪 lv.2",
     "desc": "（你的阶段）\n选择手牌中3张附有念灵的牌，随机将它们的花色变为万筒索中的1种456顺子，置入明牌区，视为进行了1次吃。",
@@ -21009,7 +21010,7 @@
     "fanZhong": 0,
     "useTiming": 0,
     "useType": 2,
-    "icon_pid": 2544,
+    "icon_pid": 2554,
     "src": "shared",
     "name": "判罪 lv.3",
     "desc": "（你的阶段）\n选择手牌中3张附有念灵的牌，随机将它们的花色变为筒牌456顺子，置入明牌区，视为进行了1次吃。",
@@ -21029,7 +21030,7 @@
     "tags": [
      "祭品槽"
     ],
-    "icon_pid": 2869,
+    "icon_pid": 2880,
     "src": "shared",
     "name": "竹餐篮",
     "desc": "你的祭品槽+1（上限为8）。",
@@ -21048,7 +21049,7 @@
     "tags": [
      "祭品槽"
     ],
-    "icon_pid": 2495,
+    "icon_pid": 2505,
     "src": "shared",
     "name": "雕花食盒",
     "desc": "你的祭品槽+1（上限为8）。",
@@ -21068,7 +21069,7 @@
      "灵佣槽",
      "莲花"
     ],
-    "icon_pid": 2517,
+    "icon_pid": 2527,
     "src": "shared",
     "name": "莲台",
     "desc": "你的灵俑槽+1（上限为8）。",
@@ -21087,7 +21088,7 @@
     "tags": [
      "摸牌总量"
     ],
-    "icon_pid": 2943,
+    "icon_pid": 2954,
     "src": "shared",
     "name": "七星灯",
     "desc": "你的摸牌总量+7。",
@@ -21107,7 +21108,7 @@
      "底分",
      "武器"
     ],
-    "icon_pid": 3105,
+    "icon_pid": 3116,
     "src": "shared",
     "name": "青冥剑",
     "desc": "对局开始时，你的底分+200。",
@@ -21126,7 +21127,7 @@
     "tags": [
      "血量"
     ],
-    "icon_pid": 2941,
+    "icon_pid": 2952,
     "src": "shared",
     "name": "长命锁",
     "desc": "拾起时，你的命及命上限+1。",
@@ -21146,7 +21147,7 @@
      "番数",
      "武器"
     ],
-    "icon_pid": 2793,
+    "icon_pid": 2804,
     "src": "shared",
     "name": "金刚杵",
     "desc": "对局开始时，你获得番数+25。",
@@ -21166,7 +21167,7 @@
      "和牌槽",
      "幡"
     ],
-    "icon_pid": 3102,
+    "icon_pid": 3113,
     "src": "shared",
     "name": "招魂幡",
     "desc": "你的和牌槽+4。",
@@ -21186,7 +21187,7 @@
      "地图节点",
      "刷新"
     ],
-    "icon_pid": 3179,
+    "icon_pid": 3190,
     "src": "shared",
     "name": "孔雀翎",
     "desc": "【地府商人】、【俑道】、【宝箱】、【锻造台】、【幻灵台】、【注能台】的刷新价格递增变为5金币。",
@@ -21233,7 +21234,7 @@
     "tags": [
      "地图节点"
     ],
-    "icon_pid": 2645,
+    "icon_pid": 2656,
     "src": "shared",
     "name": "聚宝盆",
     "desc": "【锻造台】和【幻灵台】出现的增强选项+2（上限为12）。",
@@ -21253,7 +21254,7 @@
      "地图节点",
      "刷新"
     ],
-    "icon_pid": 2850,
+    "icon_pid": 2861,
     "src": "shared",
     "name": "拂尘",
     "desc": "【锻造台】、【幻灵台】可以免费刷新1次强化选项。",
@@ -21272,7 +21273,7 @@
     "tags": [
      "地图节点"
     ],
-    "icon_pid": 2786,
+    "icon_pid": 2797,
     "src": "shared",
     "name": "钱牌",
     "desc": "在商店购买的第一个商品免费。",
@@ -21306,7 +21307,7 @@
      "地图节点",
      "遗物"
     ],
-    "icon_pid": 3137,
+    "icon_pid": 3148,
     "src": "shared",
     "name": "锦盒",
     "desc": "拾起时，下2个【宝箱】内会有2件遗物。",
@@ -21325,7 +21326,7 @@
     "tags": [
      "地图节点"
     ],
-    "icon_pid": 2883,
+    "icon_pid": 2894,
     "src": "shared",
     "name": "玉佛",
     "desc": "你有更高的几率遇到【俑道】。",
@@ -21345,7 +21346,7 @@
      "金币",
      "地图节点"
     ],
-    "icon_pid": 2577,
+    "icon_pid": 2588,
     "src": "shared",
     "name": "摇钱树",
     "desc": "每当你进入【神秘事件】时，金币+20。",
@@ -21364,7 +21365,7 @@
     "tags": [
      "金币"
     ],
-    "icon_pid": 1436,
+    "icon_pid": 1453,
     "src": "shared",
     "name": "储蓄罐",
     "desc": "每当你进入一个事件，金币+20，一旦你在【地府商人】或神秘商店花费金币，该遗物被销毁。",
@@ -21383,7 +21384,7 @@
     "tags": [
      "金币"
     ],
-    "icon_pid": 2871,
+    "icon_pid": 2882,
     "src": "shared",
     "name": "金葫芦",
     "desc": "你在麻将对局内获得的金币增加20%。",
@@ -21402,7 +21403,7 @@
     "tags": [
      "金币"
     ],
-    "icon_pid": 2784,
+    "icon_pid": 2795,
     "src": "shared",
     "name": "玉葫芦",
     "desc": "你在麻将对局外获得的金币增加30%。",
@@ -21422,7 +21423,7 @@
      "遗物",
      "地图节点"
     ],
-    "icon_pid": 3231,
+    "icon_pid": 3242,
     "src": "shared",
     "name": "宝瓶",
     "desc": "每当你进入3个【神秘事件】后，获得1个随机的遗物。",
@@ -21475,7 +21476,7 @@
      "移除",
      "牌灵"
     ],
-    "icon_pid": 3107,
+    "icon_pid": 3118,
     "src": "shared",
     "name": "地府藤",
     "desc": "拾起时，选择并移除牌组中的1只牌灵。",
@@ -21495,7 +21496,7 @@
      "移除",
      "宝牌"
     ],
-    "icon_pid": 2994,
+    "icon_pid": 3005,
     "src": "shared",
     "name": "迷魂香",
     "desc": "拾起时，选择并移除牌组中的1个宝牌效果。",
@@ -21514,7 +21515,7 @@
     "tags": [
      "遗物"
     ],
-    "icon_pid": 2651,
+    "icon_pid": 2662,
     "src": "shared",
     "name": "吉祥结",
     "desc": "每局麻将结束后，获得遗物奖励时，选项的数量增加1个 （上限为5）。",
@@ -21534,7 +21535,7 @@
      "灵佣",
      "刷新"
     ],
-    "icon_pid": 2497,
+    "icon_pid": 2507,
     "src": "shared",
     "name": "鸡毛掸",
     "desc": "每局麻将胜利后，获得灵俑奖励时，允许免费刷新1次。",
@@ -21553,7 +21554,7 @@
     "tags": [
      "祭品"
     ],
-    "icon_pid": 3043,
+    "icon_pid": 3054,
     "src": "shared",
     "name": "铁饭碗",
     "desc": "每局麻将胜利后必定掉落祭品。",
@@ -21572,7 +21573,7 @@
     "tags": [
      "祭品"
     ],
-    "icon_pid": 3207,
+    "icon_pid": 3218,
     "src": "shared",
     "name": "金饭碗",
     "desc": "每当你在麻将对局外获得祭品时，将其升级。",
@@ -21591,7 +21592,7 @@
     "tags": [
      "灵佣"
     ],
-    "icon_pid": 3125,
+    "icon_pid": 3136,
     "src": "shared",
     "name": "玉如意",
     "desc": "提升你遇到史诗灵俑的几率。",
@@ -21610,7 +21611,7 @@
     "tags": [
      "灵佣"
     ],
-    "icon_pid": 2797,
+    "icon_pid": 2808,
     "src": "shared",
     "name": "金如意",
     "desc": "提升你遇到传说灵俑的几率。",
@@ -21629,7 +21630,7 @@
     "tags": [
      "宝牌"
     ],
-    "icon_pid": 2600,
+    "icon_pid": 2611,
     "src": "shared",
     "name": "白法螺",
     "desc": "拾起时，选择你牌组中的3种牌，将它们永久变为【螺钿牌】。",
@@ -21648,7 +21649,7 @@
     "tags": [
      "削弱对手"
     ],
-    "icon_pid": 3146,
+    "icon_pid": 3157,
     "src": "shared",
     "name": "法尺",
     "desc": "对局开始时，对手的底分-50。",
@@ -21668,7 +21669,7 @@
      "牌基础分",
      "地图节点"
     ],
-    "icon_pid": 2972,
+    "icon_pid": 2983,
     "src": "shared",
     "name": "法印",
     "desc": "每当你进入【神秘事件】时，随机使你牌组中的2种牌牌面分+10。",
@@ -21786,7 +21787,7 @@
      "牌基础分",
      "符石"
     ],
-    "icon_pid": 2683,
+    "icon_pid": 2694,
     "src": "shared",
     "name": "万之石",
     "desc": "拾起时，你的所有万牌牌面分+10。",
@@ -21806,7 +21807,7 @@
      "牌基础分",
      "符石"
     ],
-    "icon_pid": 3118,
+    "icon_pid": 3129,
     "src": "shared",
     "name": "筒之石",
     "desc": "拾起时，你的所有筒牌牌面分+10。",
@@ -21826,7 +21827,7 @@
      "牌基础分",
      "符石"
     ],
-    "icon_pid": 3030,
+    "icon_pid": 3041,
     "src": "shared",
     "name": "索之石",
     "desc": "拾起时，你的所有索牌牌面分+10。",
@@ -21846,7 +21847,7 @@
      "牌基础分",
      "符石"
     ],
-    "icon_pid": 3183,
+    "icon_pid": 3194,
     "src": "shared",
     "name": "字之石",
     "desc": "拾起时，你的所有字牌牌面分+10。",
@@ -21866,7 +21867,7 @@
      "牌基础分",
      "符石"
     ],
-    "icon_pid": 2879,
+    "icon_pid": 2890,
     "src": "shared",
     "name": "象之石",
     "desc": "拾起时，你的所有大数牌牌面分+10。",
@@ -21886,7 +21887,7 @@
      "牌基础分",
      "符石"
     ],
-    "icon_pid": 3004,
+    "icon_pid": 3015,
     "src": "shared",
     "name": "兔之石",
     "desc": "拾起时，你的所有中数牌牌面分+10。",
@@ -21906,7 +21907,7 @@
      "牌基础分",
      "符石"
     ],
-    "icon_pid": 3192,
+    "icon_pid": 3203,
     "src": "shared",
     "name": "鼠之石",
     "desc": "拾起时，你的所有小数牌牌面分+10。",
@@ -21946,7 +21947,7 @@
      "额外牌",
      "令牌"
     ],
-    "icon_pid": 3227,
+    "icon_pid": 3238,
     "src": "shared",
     "name": "万令",
     "desc": "你的初始手牌中必有3张随机的额外万牌。",
@@ -21966,7 +21967,7 @@
      "额外牌",
      "令牌"
     ],
-    "icon_pid": 3063,
+    "icon_pid": 3074,
     "src": "shared",
     "name": "筒令",
     "desc": "你的初始手牌中必有3张随机的额外筒牌。",
@@ -21986,7 +21987,7 @@
      "额外牌",
      "令牌"
     ],
-    "icon_pid": 3115,
+    "icon_pid": 3126,
     "src": "shared",
     "name": "索令",
     "desc": "你的初始手牌中必有3张随机的额外索牌。",
@@ -22046,7 +22047,7 @@
      "牌基础分",
      "宝牌"
     ],
-    "icon_pid": 2926,
+    "icon_pid": 2937,
     "src": "shared",
     "name": "镇纸",
     "desc": "麻将对局外，当1种牌变为宝牌时，其牌面分+20。",
@@ -22066,7 +22067,7 @@
      "削弱对手",
      "武器"
     ],
-    "icon_pid": 2632,
+    "icon_pid": 2643,
     "src": "shared",
     "name": "桃木剑",
     "desc": "对局开始时，对手的倍率×80%。",
@@ -22101,7 +22102,7 @@
      "念灵",
      "削弱对手"
     ],
-    "icon_pid": 3214,
+    "icon_pid": 3225,
     "src": "shared",
     "name": "邪面具",
     "desc": "对局开始时，你的牌组中每有1只念灵，向对手施加1层【尸毒】。",
@@ -22122,7 +22123,7 @@
      "宝牌",
      "武器"
     ],
-    "icon_pid": 2530,
+    "icon_pid": 2540,
     "src": "shared",
     "name": "宝石匕首",
     "desc": "对局开始时，你的牌组中每有1张宝牌，你的倍率+5%。",
@@ -22163,7 +22164,7 @@
      "武器",
      "毒"
     ],
-    "icon_pid": 2688,
+    "icon_pid": 2699,
     "src": "shared",
     "name": "咒毒刃",
     "desc": "对局开始时，你每有1个诅咒遗物，向对手施加2层【尸毒】。",
@@ -22182,7 +22183,7 @@
     "tags": [
      "血量"
     ],
-    "icon_pid": 3235,
+    "icon_pid": 3246,
     "src": "shared",
     "name": "平安扣",
     "desc": "当你的命为0时，销毁该遗物，你的命及命上限变为1。",
@@ -22201,7 +22202,7 @@
     "tags": [
      "倍率"
     ],
-    "icon_pid": 3064,
+    "icon_pid": 3075,
     "src": "shared",
     "name": "磨刀石",
     "desc": "在接下来的3局麻将开始时，获得倍率×70%；\n此后，对局开始时，获得倍率×150%。",
@@ -22221,7 +22222,7 @@
      "摸牌数",
      "莲花"
     ],
-    "icon_pid": 3046,
+    "icon_pid": 3057,
     "src": "shared",
     "name": "莲灯",
     "desc": "每回合摸牌数+1（上限为12）。",
@@ -22240,7 +22241,7 @@
     "tags": [
      "开局调换数"
     ],
-    "icon_pid": 3083,
+    "icon_pid": 3094,
     "src": "shared",
     "name": "转经筒",
     "desc": "对局开始时，你多调换1张牌（上限为13）。",
@@ -22259,7 +22260,7 @@
     "tags": [
      "牌灵"
     ],
-    "icon_pid": 2678,
+    "icon_pid": 2689,
     "src": "shared",
     "name": "镇魂铃",
     "desc": "拾起时，随机为你牌组中的3种牌永久附上【幽灵】，优先选择附有念灵的牌。",
@@ -22278,7 +22279,7 @@
     "tags": [
      "摸牌总量"
     ],
-    "icon_pid": 2487,
+    "icon_pid": 2497,
     "src": "shared",
     "name": "天灯",
     "desc": "当对局开始时，你和对手的摸牌总量各+4。",
@@ -22297,7 +22298,7 @@
     "tags": [
      "灵佣"
     ],
-    "icon_pid": 2572,
+    "icon_pid": 2583,
     "src": "shared",
     "name": "奉献宝箱",
     "desc": "拾起时，随机销毁2个灵俑，然后随机获得1个传说灵俑。（优先销毁灵俑仓库中的灵俑）",
@@ -22317,7 +22318,7 @@
      "遗物",
      "念灵"
     ],
-    "icon_pid": 2779,
+    "icon_pid": 2790,
     "src": "shared",
     "name": "低语宝箱",
     "desc": "拾起时，随机获得2件遗物，为牌组中的随机2种牌永久附上随机念灵。",
@@ -22358,7 +22359,7 @@
      "摸牌总量",
      "念灵"
     ],
-    "icon_pid": 2951,
+    "icon_pid": 2962,
     "src": "shared",
     "name": "骷髅烛台",
     "desc": "摸牌总量+4。 \n拾起时，为牌组中的随机2种牌永久附上随机念灵。",
@@ -22378,7 +22379,7 @@
      "摸牌数",
      "摸牌总量"
     ],
-    "icon_pid": 3112,
+    "icon_pid": 3123,
     "src": "shared",
     "name": "恐怖蜡烛",
     "desc": "你的每回合摸牌数+2（上限为12），但摸牌总量-4（下限为14）。",
@@ -22398,7 +22399,7 @@
      "灵佣槽",
      "供台"
     ],
-    "icon_pid": 2533,
+    "icon_pid": 2543,
     "src": "shared",
     "name": "怪异供台",
     "desc": "你的灵俑槽+1（上限为8）。\n每局麻将胜利后及在【俑道】中选择灵俑奖励时，选项的数量-1（下限为1）。",
@@ -22418,7 +22419,7 @@
      "灵佣槽",
      "供台"
     ],
-    "icon_pid": 3074,
+    "icon_pid": 3085,
     "src": "shared",
     "name": "不祥供台",
     "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机获得1个诅咒遗物。",
@@ -22437,7 +22438,7 @@
     "tags": [
      "金币"
     ],
-    "icon_pid": 3131,
+    "icon_pid": 3142,
     "src": "shared",
     "name": "阴司币",
     "desc": "拾起时，金币+1000。\n你不再能获得任何金币。",
@@ -22458,7 +22459,7 @@
      "幡",
      "魂力"
     ],
-    "icon_pid": 2789,
+    "icon_pid": 2800,
     "src": "shared",
     "name": "恶鬼幡",
     "desc": "你的和牌槽+3，魂力上限-10。",
@@ -22478,7 +22479,7 @@
      "和牌槽",
      "诅咒"
     ],
-    "icon_pid": 2729,
+    "icon_pid": 2740,
     "src": "shared",
     "name": "巫蛊娃娃",
     "desc": "你的和牌槽-1（下限为1）。",
@@ -22498,7 +22499,7 @@
      "摸牌总量",
      "诅咒"
     ],
-    "icon_pid": 2657,
+    "icon_pid": 2668,
     "src": "shared",
     "name": "走马灯",
     "desc": "你的摸牌总量-4（下限为14）。",
@@ -22518,7 +22519,7 @@
      "摸牌数",
      "诅咒"
     ],
-    "icon_pid": 2754,
+    "icon_pid": 2765,
     "src": "shared",
     "name": "手铐",
     "desc": "你的每回合摸牌数-1（下限为1）。",
@@ -22538,7 +22539,7 @@
      "祭品槽",
      "诅咒"
     ],
-    "icon_pid": 3193,
+    "icon_pid": 3204,
     "src": "shared",
     "name": "破碗",
     "desc": "你的祭品槽-1（下限为1）。",
@@ -22558,7 +22559,7 @@
      "倍率",
      "诅咒"
     ],
-    "icon_pid": 2636,
+    "icon_pid": 2647,
     "src": "shared",
     "name": "生锈钉子",
     "desc": "对局开始时，获得倍率×90%。",
@@ -22578,7 +22579,7 @@
      "开局调换数",
      "诅咒"
     ],
-    "icon_pid": 2923,
+    "icon_pid": 2934,
     "src": "shared",
     "name": "纸人",
     "desc": "对局开始时，你少调换1张牌（下限为1）。",
@@ -22598,7 +22599,7 @@
      "地图节点",
      "诅咒"
     ],
-    "icon_pid": 3069,
+    "icon_pid": 3080,
     "src": "shared",
     "name": "鬼秤",
     "desc": "【地府商人】的售价增加20%。",
@@ -22618,7 +22619,7 @@
      "特殊事件",
      "魂力"
     ],
-    "icon_pid": 2672,
+    "icon_pid": 2683,
     "src": "shared",
     "name": "太岁",
     "desc": "拾起时，魂力上限-10。\n魂力回复+10%。",
@@ -22685,7 +22686,7 @@
     "tags": [
      "额外牌"
     ],
-    "icon_pid": 3036,
+    "icon_pid": 3047,
     "src": "shared",
     "name": "朱雀印",
     "desc": "你的初始手牌中必有2张额外的1索。",
@@ -22705,7 +22706,7 @@
      "番数",
      "武器"
     ],
-    "icon_pid": 3054,
+    "icon_pid": 3065,
     "src": "shared",
     "name": "乾坤圈",
     "desc": "对局开始时，你获得番数+15。",
@@ -22726,7 +22727,7 @@
      "灵佣槽",
      "宝牌"
     ],
-    "icon_pid": 2920,
+    "icon_pid": 2931,
     "src": "shared",
     "name": "剧毒供台",
     "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机将你牌组中的2种牌永久变为【毒宝牌】。",
@@ -22747,7 +22748,7 @@
      "灵佣槽",
      "宝牌"
     ],
-    "icon_pid": 2674,
+    "icon_pid": 2685,
     "src": "shared",
     "name": "迷雾供台",
     "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机将你牌组中的2种牌永久变为【雾宝牌】。",
@@ -22768,7 +22769,7 @@
      "灵佣槽",
      "念灵"
     ],
-    "icon_pid": 2787,
+    "icon_pid": 2798,
     "src": "shared",
     "name": "低语供台",
     "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机为你牌组中的2种牌永久附上随机念灵。",
@@ -22789,7 +22790,7 @@
      "灵佣槽",
      "灵佣"
     ],
-    "icon_pid": 2689,
+    "icon_pid": 2700,
     "src": "shared",
     "name": "牺牲供台",
     "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机销毁1个你的灵俑。（灵俑仓库中的优先）",
@@ -22906,7 +22907,7 @@
      "幡",
      "和牌槽"
     ],
-    "icon_pid": 2931,
+    "icon_pid": 2942,
     "src": "shared",
     "name": "幽暗幡",
     "desc": "你的和牌槽数量+1",
@@ -23027,7 +23028,7 @@
      "额外牌",
      "令牌"
     ],
-    "icon_pid": 3024,
+    "icon_pid": 3035,
     "src": "shared",
     "name": "象令",
     "desc": "你的初始手牌中必有3张随机的额外大数牌。",
@@ -23047,7 +23048,7 @@
      "额外牌",
      "令牌"
     ],
-    "icon_pid": 2579,
+    "icon_pid": 2590,
     "src": "shared",
     "name": "兔令",
     "desc": "你的初始手牌中必有3张随机的额外中数牌。",
@@ -23067,7 +23068,7 @@
      "额外牌",
      "令牌"
     ],
-    "icon_pid": 2596,
+    "icon_pid": 2607,
     "src": "shared",
     "name": "鼠令",
     "desc": "你的初始手牌中必有3张随机的额外小数牌。",
@@ -23086,7 +23087,7 @@
     "tags": [
      "遗物"
     ],
-    "icon_pid": 2953,
+    "icon_pid": 2964,
     "src": "shared",
     "name": "诅咒宝箱",
     "desc": "拾起时，随机获得1个诅咒遗物和1个传说遗物。",
@@ -23127,7 +23128,7 @@
      "倍率",
      "武器"
     ],
-    "icon_pid": 3142,
+    "icon_pid": 3153,
     "src": "shared",
     "name": "红缨枪",
     "desc": "对局开始时，你的倍率+20%。",
@@ -23146,7 +23147,7 @@
     "tags": [
      "祭品"
     ],
-    "icon_pid": 2706,
+    "icon_pid": 2717,
     "src": "shared",
     "name": "玉碗",
     "desc": "每当你在麻将对局内获得祭品时，将其升级。",
@@ -23165,7 +23166,7 @@
     "tags": [
      "牌灵"
     ],
-    "icon_pid": 3087,
+    "icon_pid": 3098,
     "src": "shared",
     "name": "笔山",
     "desc": "拾起时，选择你牌组中的1种牌，为其永久附上【山灵】。",
@@ -23186,7 +23187,7 @@
      "念灵",
      "武器"
     ],
-    "icon_pid": 3208,
+    "icon_pid": 3219,
     "src": "shared",
     "name": "低语匕首",
     "desc": "拾起时，选择你牌组中的1种牌永久附上随机念灵。\n对局开始时，你获得番数+5。",
@@ -23219,7 +23220,7 @@
     "tags": [
      "和牌"
     ],
-    "icon_pid": 2560,
+    "icon_pid": 2571,
     "src": "shared",
     "name": "残月盘",
     "desc": "若你已经听牌，且还能摸牌，确保你可以和1次，之后移除本遗物。",
@@ -23238,7 +23239,7 @@
     "tags": [
      "和牌"
     ],
-    "icon_pid": 2753,
+    "icon_pid": 2764,
     "src": "shared",
     "name": "捞月篮",
     "desc": "若你已经听牌，确保你可以和1次。",
@@ -23258,7 +23259,7 @@
      "念灵",
      "灵佣"
     ],
-    "icon_pid": 2661,
+    "icon_pid": 2672,
     "src": "shared",
     "name": "痴念宝箱",
     "desc": "拾起时，随机为牌组中的1种牌永久附上【痴念】，随机获得1个史诗灵俑。",
@@ -23277,7 +23278,7 @@
     "tags": [
      "牌灵"
     ],
-    "icon_pid": 3191,
+    "icon_pid": 3202,
     "src": "shared",
     "name": "风灵珠",
     "desc": "拾起时，随机为牌组中的1种数牌永久附上【风灵】。\n【风灵】也会出现在你的【幻灵台】中。",
@@ -23296,7 +23297,7 @@
     "tags": [
      "牌灵"
     ],
-    "icon_pid": 2874,
+    "icon_pid": 2885,
     "src": "shared",
     "name": "龙珠",
     "desc": "拾起时，随机为牌组中的1种数牌附上1只【龙灵】。\n【龙灵】也会出现在你的【幻灵台】中。",
@@ -23316,7 +23317,7 @@
      "牌基础分",
      "地图节点"
     ],
-    "icon_pid": 2739,
+    "icon_pid": 2750,
     "src": "shared",
     "name": "注能石",
     "desc": "拾起时，随机使牌组中的3种牌的牌面分+20。你可以在【注能台】免费再进行1次注能。",
@@ -23337,7 +23338,7 @@
      "莲花",
      "地图节点"
     ],
-    "icon_pid": 2990,
+    "icon_pid": 3001,
     "src": "shared",
     "name": "莲花幡",
     "desc": "你的和牌槽+3。\n【地府商人】的售价增加10%。",
@@ -23358,7 +23359,7 @@
      "魂力",
      "莲花"
     ],
-    "icon_pid": 2742,
+    "icon_pid": 2753,
     "src": "shared",
     "name": "莲花冠",
     "desc": "你每有1个和牌槽，魂力回复+1%。",
@@ -23821,7 +23822,7 @@
      "魂力",
      "诅咒"
     ],
-    "icon_pid": 3204,
+    "icon_pid": 3215,
     "src": "shared",
     "name": "皇帝的新装",
     "desc": "魂力上限+50。\n你的命减少时，销毁本遗物，随机获得3个诅咒遗物。",
@@ -23840,10 +23841,10 @@
     "tags": [
      "宝牌"
     ],
-    "icon_pid": 3023,
+    "icon_pid": 3034,
     "src": "shared",
     "name": "水晶鞋",
-    "desc": "拾起时，选择你牌组中的3种牌，将它们永久变为【水晶牌】。",
+    "desc": "拾起时，选择你牌组中的2种牌，将它们永久变为【水晶牌】。",
     "rar": "稀有",
     "rar2": "稀有"
    },
@@ -23860,7 +23861,7 @@
      "血量",
      "念灵"
     ],
-    "icon_pid": 2540,
+    "icon_pid": 2550,
     "src": "shared",
     "name": "红舞鞋",
     "desc": "拾起时，恢复1点命。对局开始时，随机为你手牌中的3张牌附上临时的【痴念】。",
@@ -23879,7 +23880,7 @@
     "tags": [
      "祭品"
     ],
-    "icon_pid": 2613,
+    "icon_pid": 2624,
     "src": "shared",
     "name": "火柴盒",
     "desc": "拾起时，获得3根【火柴】。",
@@ -23900,7 +23901,7 @@
      "灵佣",
      "童话"
     ],
-    "icon_pid": 3184,
+    "icon_pid": 3195,
     "src": "shared",
     "name": "外婆的祝福",
     "desc": "拾起时，随机获得1个供台和1个童话灵俑。",
@@ -23919,7 +23920,7 @@
     "tags": [
      "武器"
     ],
-    "icon_pid": 2734,
+    "icon_pid": 2745,
     "src": "shared",
     "name": "伐木斧",
     "desc": "底分+40。",
@@ -23938,7 +23939,7 @@
     "tags": [
      "武器"
     ],
-    "icon_pid": 2901,
+    "icon_pid": 2912,
     "src": "shared",
     "name": "恶魔刀刃",
     "desc": "倍率×125%；和牌槽-1。",
@@ -23957,7 +23958,7 @@
     "tags": [
      "武器"
     ],
-    "icon_pid": 2818,
+    "icon_pid": 2829,
     "src": "shared",
     "name": "噬魂镰",
     "desc": "倍率×150%；拾起时，魂力上限×50%。",
@@ -23976,7 +23977,7 @@
     "tags": [
      "武器"
     ],
-    "icon_pid": 2671,
+    "icon_pid": 2682,
     "src": "shared",
     "name": "殉道之剑",
     "desc": "倍率×200%；对局失败时，额外减少1点命。",
@@ -23997,7 +23998,7 @@
      "祭品",
      "花草"
     ],
-    "icon_pid": 3209,
+    "icon_pid": 3220,
     "src": "shared",
     "name": "魔豆",
     "desc": "每当你进入【神秘事件】时，随机获得1个花草类祭品。",
@@ -24017,7 +24018,7 @@
      "移除",
      "遗物"
     ],
-    "icon_pid": 2568,
+    "icon_pid": 2579,
     "src": "shared",
     "name": "胡桃夹子",
     "desc": "拾起时，选择并销毁1件遗物。",
@@ -24036,7 +24037,7 @@
     "tags": [
      "武器"
     ],
-    "icon_pid": 2889,
+    "icon_pid": 2900,
     "src": "shared",
     "name": "银刻刀",
     "desc": "对局开始时，获得3层【蓄力】。",
@@ -24057,7 +24058,7 @@
      "供台",
      "念灵"
     ],
-    "icon_pid": 3143,
+    "icon_pid": 3154,
     "src": "shared",
     "name": "邪恶供台",
     "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机将牌组中的1种牌永久附上【恶念】。",
@@ -24076,7 +24077,7 @@
     "tags": [
      "诅咒"
     ],
-    "icon_pid": 2915,
+    "icon_pid": 2926,
     "src": "shared",
     "name": "诅咒纺锤",
     "desc": "对局开始时，随机为你手牌中的1张牌附上临时的【恶念】。",
@@ -24095,7 +24096,7 @@
     "tags": [
      "诅咒"
     ],
-    "icon_pid": 2493,
+    "icon_pid": 2503,
     "src": "shared",
     "name": "弥达斯雕像",
     "desc": "拾起时，魂力上限-10。",
@@ -24114,7 +24115,7 @@
     "tags": [
      "地图节点"
     ],
-    "icon_pid": 2832,
+    "icon_pid": 2843,
     "src": "shared",
     "name": "月光宝盒碎片",
     "desc": "你可以更换遇到的对手，之后销毁本遗物。",
@@ -24134,7 +24135,7 @@
      "遗物",
      "变形"
     ],
-    "icon_pid": 2557,
+    "icon_pid": 2568,
     "src": "shared",
     "name": "变形符",
     "desc": "拾起时，选择1件遗物，随机将它变为1件其它的遗物。",
@@ -24154,7 +24155,7 @@
      "遗物",
      "变形"
     ],
-    "icon_pid": 3229,
+    "icon_pid": 3240,
     "src": "shared",
     "name": "女娲土",
     "desc": "拾起时，随机变为1个史诗、传说或诅咒遗物。",
@@ -24187,7 +24188,7 @@
     "tags": [
      "宝牌"
     ],
-    "icon_pid": 2827,
+    "icon_pid": 2838,
     "src": "shared",
     "name": "玲珑宝塔",
     "desc": "对局开始时，随机将你的7张手牌临时变为随机的宝牌。",
@@ -24207,7 +24208,7 @@
      "祭品槽",
      "祭品"
     ],
-    "icon_pid": 3084,
+    "icon_pid": 3095,
     "src": "shared",
     "name": "紫金钵盂",
     "desc": "拾起时，随机获得2个高级祭品。\n你的祭品槽+2（上限为8）。",
@@ -24226,7 +24227,7 @@
     "tags": [
      "削弱对手"
     ],
-    "icon_pid": 2954,
+    "icon_pid": 2965,
     "src": "shared",
     "name": "照妖镜",
     "desc": "对局开始时，对手的倍率×80%。",
@@ -24247,7 +24248,7 @@
      "武器",
      "魂力"
     ],
-    "icon_pid": 2741,
+    "icon_pid": 2752,
     "src": "shared",
     "name": "伤魂刃",
     "desc": "底分+100，魂力上限-10。",
@@ -24266,7 +24267,7 @@
     "tags": [
      "地图节点"
     ],
-    "icon_pid": 3020,
+    "icon_pid": 3031,
     "src": "shared",
     "name": "月光宝盒",
     "desc": "你可以花费40金币，更换遇到的对手。",
@@ -24286,7 +24287,7 @@
      "灵佣",
      "祭品"
     ],
-    "icon_pid": 2646,
+    "icon_pid": 2657,
     "src": "shared",
     "name": "百宝箱",
     "desc": "拾起时，随机用灵俑和祭品填充满槽位。",
@@ -24368,7 +24369,7 @@
      "魂力",
      "牌基础分"
     ],
-    "icon_pid": 2843,
+    "icon_pid": 2854,
     "src": "shared",
     "name": "噬魂珠",
     "desc": "当你在麻将对局外获得魂力时，超出上限的部分会随机转化为1种牌的牌面分。",
@@ -24388,7 +24389,7 @@
      "地图节点",
      "刷新"
     ],
-    "icon_pid": 3080,
+    "icon_pid": 3091,
     "src": "shared",
     "name": "黑羽扇",
     "desc": "【神秘商店】可以免费刷新1次。",
@@ -24409,7 +24410,7 @@
      "灵佣槽",
      "宝牌"
     ],
-    "icon_pid": 2988,
+    "icon_pid": 2999,
     "src": "shared",
     "name": "神秘供台",
     "desc": "你的灵俑槽+1（上限为8）。\n拾起时，随机将你牌组中的2种牌永久变为【迷幻牌】。",
@@ -24430,7 +24431,7 @@
      "武器",
      "魂力"
     ],
-    "icon_pid": 3186,
+    "icon_pid": 3197,
     "src": "shared",
     "name": "燃魂枪",
     "desc": "你的魂力回复-5%（最低为0）。\n对局开始时，你的底分+150。",
@@ -24450,7 +24451,7 @@
      "摸牌数",
      "宝牌"
     ],
-    "icon_pid": 2676,
+    "icon_pid": 2687,
     "src": "shared",
     "name": "灵灯",
     "desc": "每回合摸牌数+2（上限为12）。\n拾起时，随机将你牌组中的2种牌永久变为【雾宝牌】。",
@@ -24470,7 +24471,7 @@
      "牌灵",
      "摸牌数"
     ],
-    "icon_pid": 2764,
+    "icon_pid": 2775,
     "src": "shared",
     "name": "泰山石",
     "desc": "拾起时，选择你牌组中的1种牌，为其永久附上【山灵】。\n每回合摸牌数-1。",
@@ -24489,7 +24490,7 @@
     "tags": [
      "血量"
     ],
-    "icon_pid": 2581,
+    "icon_pid": 2592,
     "src": "shared",
     "name": "寿香",
     "desc": "拾起时，恢复1点命。",
@@ -24508,7 +24509,7 @@
     "tags": [
      "宝鉴"
     ],
-    "icon_pid": 2960,
+    "icon_pid": 2971,
     "src": "shared",
     "name": "森罗宝鉴",
     "desc": "你将在宝鉴中看到你的最终对手。",
@@ -24528,7 +24529,7 @@
      "宝鉴",
      "牌基础分"
     ],
-    "icon_pid": 3022,
+    "icon_pid": 3033,
     "src": "shared",
     "name": "秦广王宝鉴",
     "desc": "宝鉴中出现了秦广王的影子。\n（拾起时，你的1索、5索、7索、9索、红中牌面分+10）",
@@ -24548,7 +24549,7 @@
      "宝鉴",
      "牌基础分"
     ],
-    "icon_pid": 2529,
+    "icon_pid": 2539,
     "src": "shared",
     "name": "阎罗王宝鉴",
     "desc": "宝鉴中出现了阎罗王的影子。\n（拾起时，你的所有幺九牌牌面分+5）",
@@ -24568,7 +24569,7 @@
      "宝鉴",
      "宝牌"
     ],
-    "icon_pid": 3103,
+    "icon_pid": 3114,
     "src": "shared",
     "name": "地藏王宝鉴",
     "desc": "宝鉴中出现了一朵莲花。\n（拾起时，将9万、9筒、9索变为真言牌）",
@@ -24588,7 +24589,7 @@
      "和牌槽",
      "摸牌数"
     ],
-    "icon_pid": 2803,
+    "icon_pid": 2814,
     "src": "shared",
     "name": "满月灯",
     "desc": "当你和满和牌槽后，即使有剩余可摸牌数，也不再继续摸牌。",
@@ -24599,18 +24600,20 @@
     "id": 10027,
     "en": "TaiShanWangBaoJian",
     "cn": "",
-    "nameKey": "",
-    "descKey": "",
-    "rarity": 0,
-    "stack": 0,
-    "kind": "",
+    "nameKey": "Relic/Individual/10027_31e507d5c0777d74bb03aee1c521ca95/Name",
+    "descKey": "Relic/Individual/10027_31e507d5c0777d74bb03aee1c521ca95/Description",
+    "rarity": 4,
+    "stack": 1,
+    "kind": "神秘",
     "tags": [
-     "宝鉴",
-     "牌灵"
+     "宝鉴"
     ],
-    "src": "enum",
-    "rar": "",
-    "rar2": ""
+    "icon_pid": 2489,
+    "src": "shared",
+    "name": "泰山王宝鉴",
+    "desc": "宝鉴中出现了泰山王的影子。\n（拾起时，随机为你牌组中的1种牌永久附上【狐灵】）",
+    "rar": "神秘",
+    "rar2": "传说"
    },
    {
     "id": 10028,
@@ -24641,8 +24644,7 @@
     "stack": 1,
     "kind": "神秘",
     "tags": [
-     "宝鉴",
-     "宝牌"
+     "宝鉴"
     ],
     "icon_pid": 7799131025704495992,
     "src": "bundle",
@@ -24663,7 +24665,7 @@
     "tags": [
      "宝鉴"
     ],
-    "icon_pid": 2751,
+    "icon_pid": 2762,
     "src": "shared",
     "name": "卞城王宝鉴",
     "desc": "宝鉴中出现了卞城王的影子。\n（拾起时，你的所有筒牌牌面分+5）",
@@ -24761,7 +24763,7 @@
      62,
      34
     ],
-    "roleAvatar_pid": 103715,
+    "roleAvatar_pid": 104079,
     "src": "shared",
     "unlockKey": "RoleAvatar/1_TanChiJiangShi/UnlockCondition",
     "name": "僵尸·馋宝",
@@ -24864,7 +24866,7 @@
      4,
      99999
     ],
-    "roleAvatar_pid": 103714,
+    "roleAvatar_pid": 104078,
     "src": "shared",
     "unlockKey": "RoleAvatar/2_TanCaiJiangShi/UnlockCondition",
     "name": "僵尸·满宝",
@@ -24964,7 +24966,7 @@
      5,
      99999
     ],
-    "roleAvatar_pid": 103685,
+    "roleAvatar_pid": 104049,
     "src": "shared",
     "unlockKey": "RoleAvatar/4_BuRangPengJiangShi/UnlockCondition",
     "name": "僵尸·砰砰",
@@ -25064,7 +25066,7 @@
      33,
      99999
     ],
-    "roleAvatar_pid": 103727,
+    "roleAvatar_pid": 104091,
     "src": "shared",
     "unlockKey": "RoleAvatar/5_ZiBiNvGui/UnlockCondition",
     "name": "水鬼·幽汐",
@@ -25173,7 +25175,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103725,
+    "roleAvatar_pid": 104089,
     "src": "shared",
     "unlockKey": "RoleAvatar/7_YuanNianNvGui/UnlockCondition",
     "name": "怨鬼·红绫",
@@ -25285,7 +25287,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103721,
+    "roleAvatar_pid": 104085,
     "src": "shared",
     "unlockKey": "RoleAvatar/8_XiongENvGui/UnlockCondition",
     "name": "厉鬼·祟姑",
@@ -25391,7 +25393,7 @@
      5,
      99999
     ],
-    "roleAvatar_pid": 103708,
+    "roleAvatar_pid": 104072,
     "src": "shared",
     "unlockKey": "RoleAvatar/9_NiuTou/UnlockCondition",
     "name": "牛头·阿傍",
@@ -25500,7 +25502,7 @@
      70,
      90
     ],
-    "roleAvatar_pid": 103705,
+    "roleAvatar_pid": 104069,
     "src": "shared",
     "unlockKey": "RoleAvatar/10_MaMian/UnlockCondition",
     "name": "马面·阿骐",
@@ -25606,7 +25608,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103699,
+    "roleAvatar_pid": 104063,
     "src": "shared",
     "unlockKey": "RoleAvatar/11_HeiWuChang/UnlockCondition",
     "name": "黑无常",
@@ -25719,7 +25721,7 @@
      41,
      99999
     ],
-    "roleAvatar_pid": 103682,
+    "roleAvatar_pid": 104046,
     "src": "shared",
     "unlockKey": "RoleAvatar/12_BaiWuChang/UnlockCondition",
     "name": "白无常",
@@ -25825,7 +25827,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103688,
+    "roleAvatar_pid": 104052,
     "src": "shared",
     "unlockKey": "RoleAvatar/17_DiTing/UnlockCondition",
     "name": "谛听",
@@ -25959,7 +25961,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103707,
+    "roleAvatar_pid": 104071,
     "src": "shared",
     "unlockKey": "RoleAvatar/20_MengPo/UnlockCondition",
     "name": "孟婆",
@@ -26065,7 +26067,7 @@
      57,
      75
     ],
-    "roleAvatar_pid": 103709,
+    "roleAvatar_pid": 104073,
     "src": "shared",
     "unlockKey": "RoleAvatar/21_QinGuangWang/UnlockCondition",
     "name": "秦广王",
@@ -26171,7 +26173,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103722,
+    "roleAvatar_pid": 104086,
     "src": "shared",
     "unlockKey": "RoleAvatar/22_YanLuoWang/UnlockCondition",
     "name": "阎罗王",
@@ -26277,7 +26279,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103690,
+    "roleAvatar_pid": 104054,
     "src": "shared",
     "unlockKey": "RoleAvatar/23_DiZangWangPuSa/UnlockCondition",
     "name": "地藏王",
@@ -26383,7 +26385,7 @@
      4,
      99999
     ],
-    "roleAvatar_pid": 103686,
+    "roleAvatar_pid": 104050,
     "src": "shared",
     "unlockKey": "RoleAvatar/24_ChaChaSi/UnlockCondition",
     "name": "察查判官·陆之",
@@ -26483,7 +26485,7 @@
      2,
      1
     ],
-    "roleAvatar_pid": 103693,
+    "roleAvatar_pid": 104057,
     "src": "shared",
     "unlockKey": "RoleAvatar/25_FaESi/UnlockCondition",
     "name": "罚恶判官·钟馗",
@@ -26589,7 +26591,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103700,
+    "roleAvatar_pid": 104064,
     "src": "shared",
     "unlockKey": "RoleAvatar/26_HenDuJiangShi/UnlockCondition",
     "name": "僵尸·荼荼",
@@ -26689,7 +26691,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103702,
+    "roleAvatar_pid": 104066,
     "src": "shared",
     "unlockKey": "RoleAvatar/27_JiKeNvGui/UnlockCondition",
     "name": "饿鬼·渴儿",
@@ -26806,7 +26808,7 @@
      4,
      99999
     ],
-    "roleAvatar_pid": 103711,
+    "roleAvatar_pid": 104075,
     "src": "shared",
     "unlockKey": "RoleAvatar/29_ShangShanSi/UnlockCondition",
     "name": "赏善判官·魏征",
@@ -26919,7 +26921,7 @@
      4,
      99999
     ],
-    "roleAvatar_pid": 103724,
+    "roleAvatar_pid": 104088,
     "src": "shared",
     "unlockKey": "RoleAvatar/31_YinLvSi/UnlockCondition",
     "name": "阴律判官·崔珏",
@@ -27042,7 +27044,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103696,
+    "roleAvatar_pid": 104060,
     "src": "shared",
     "unlockKey": "RoleAvatar/33_GuiXinNiangXu/UnlockCondition",
     "name": "鬼新娘·魖",
@@ -27148,7 +27150,7 @@
      62,
      99999
     ],
-    "roleAvatar_pid": 103694,
+    "roleAvatar_pid": 104058,
     "src": "shared",
     "unlockKey": "RoleAvatar/34_GuiXinNiangKui/UnlockCondition",
     "name": "鬼新娘·傀",
@@ -27254,7 +27256,7 @@
      99999,
      99999
     ],
-    "roleAvatar_pid": 103697,
+    "roleAvatar_pid": 104061,
     "src": "shared",
     "unlockKey": "RoleAvatar/35_GuiXinNiangYan/UnlockCondition",
     "name": "鬼新娘·魇",
@@ -27366,7 +27368,7 @@
      3,
      34
     ],
-    "roleAvatar_pid": 103695,
+    "roleAvatar_pid": 104059,
     "src": "shared",
     "unlockKey": "RoleAvatar/36_GuiXinNiangMei/UnlockCondition",
     "name": "鬼新娘·魅",
@@ -27475,7 +27477,7 @@
      115,
      116
     ],
-    "roleAvatar_pid": 103710,
+    "roleAvatar_pid": 104074,
     "src": "shared",
     "unlockKey": "RoleAvatar/37_RiYouShen/UnlockCondition",
     "name": "日游神",
@@ -27581,7 +27583,7 @@
      114,
      117
     ],
-    "roleAvatar_pid": 103723,
+    "roleAvatar_pid": 104087,
     "src": "shared",
     "unlockKey": "RoleAvatar/38_YeYouShen/UnlockCondition",
     "name": "夜游神",
@@ -27684,7 +27686,7 @@
      103,
      99999
     ],
-    "roleAvatar_pid": 103713,
+    "roleAvatar_pid": 104077,
     "src": "shared",
     "unlockKey": "RoleAvatar/39_TaiShanWang/UnlockCondition",
     "name": "泰山王",
@@ -28447,7 +28449,7 @@
      12,
      99999
     ],
-    "roleAvatar_pid": 103717,
+    "roleAvatar_pid": 104081,
     "src": "shared",
     "unlockKey": "RoleAvatar/44_BiAnHua/UnlockCondition",
     "name": "小红帽",
@@ -28562,7 +28564,7 @@
      35,
      99999
     ],
-    "roleAvatar_pid": 103718,
+    "roleAvatar_pid": 104082,
     "src": "shared",
     "unlockKey": "RoleAvatar/44_BiAnHua/UnlockCondition",
     "name": "小红帽·骑士",
@@ -28661,7 +28663,7 @@
      35,
      99999
     ],
-    "roleAvatar_pid": 103720,
+    "roleAvatar_pid": 104084,
     "src": "shared",
     "unlockKey": "RoleAvatar/44_BiAnHua/UnlockCondition",
     "name": "小红帽·游侠",
@@ -28760,7 +28762,7 @@
      35,
      99999
     ],
-    "roleAvatar_pid": 103719,
+    "roleAvatar_pid": 104083,
     "src": "shared",
     "unlockKey": "RoleAvatar/44_BiAnHua/UnlockCondition",
     "name": "小红帽·调灵师",
@@ -28865,7 +28867,7 @@
      99,
      99999
     ],
-    "roleAvatar_pid": 103698,
+    "roleAvatar_pid": 104062,
     "src": "shared",
     "unlockKey": "RoleAvatar/50_HeiTianE/UnlockCondition",
     "name": "黑天鹅",
@@ -28974,7 +28976,7 @@
      35,
      99999
     ],
-    "roleAvatar_pid": 103684,
+    "roleAvatar_pid": 104048,
     "src": "shared",
     "unlockKey": "RoleAvatar/51_BianChengWang/UnlockCondition",
     "name": "卞城王",
@@ -36864,7 +36866,7 @@
     "desc": "汤泉边，一个小鬼举着搓澡巾追着客人跑。\r\n它看到你，眼睛一亮：“客官！搓背吗？本店特色：搓灰、搓怨、搓诅咒，搓不干净不要钱！”\r\n你下意识护住了自己的牌组。",
     "options": [
      {
-      "text": "【普通搓背】 [魂力+30]",
+      "text": "【普通搓背】 魂力+30",
       "effects": [
        "设魂(魂+30)"
       ],
