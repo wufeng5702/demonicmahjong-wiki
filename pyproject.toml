@@ -9,3 +9,8 @@ dependencies = [
     "numpy>=2.0.0",
     "addressablestools>=1.1.1",
 ]
+
+[[tool.uv.index]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true

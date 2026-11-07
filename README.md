@@ -23,6 +23,8 @@ uv run python build_web.py
 # 或打开 output/site/index.html（部署版）
 ```
 
+项目在 `pyproject.toml` 中固定使用阿里云 PyPI 镜像，与 `uv.lock` 的来源保持一致，避免 `uv run` 默认切换到 PyPI 而重写锁文件。如需更换镜像，请同时更新项目索引配置并运行 `uv lock`。
+
 ## 项目结构
 
 ```
