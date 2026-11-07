@@ -29,6 +29,7 @@ from config import (AA_DIR, BUNDLE_PATH, CATALOG_BIN, GAME_DATA_DIR, SITE_DIR,
 from logwarn import warn, flush_warns
 import rawparse as rp
 from bundle_assets import load_bundle_assets
+from baoling import baoling_category
 
 SIZE = 512
 SS = 2  # 超采样倍数
@@ -397,7 +398,7 @@ def render_pailing_icons(bundle_path, out_dir):
         except Exception:
             warn()
             continue
-        if sn == "PaiLingPayload":
+        if baoling_category(sn, d) == "pailing":
             pls.append(d)
 
     pailing_dir = out_dir / "pailing"
@@ -969,7 +970,7 @@ def extract_baopai_icons():
             d = obj.read()
             ms = getattr(d, "m_Script", None)
             sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
-            if sn != "BaoPaiPayload":
+            if baoling_category(sn, d) != "baopai":
                 continue
             bid = int(getattr(d, "id", 0) or 0)
             if bid == 0:

@@ -115,6 +115,9 @@ def collect_errors(root: Path, suffix: str) -> list[str]:
         return [f"data.json 解析失败: {e}"]
 
     errs = _event_errors(data)
+    for cat, label in (("pailing", "牌灵"), ("baopai", "宝牌")):
+        if cat in data and not data[cat]:
+            errs.append(f"{cat}: {label}数据为空，可能未适配游戏 Payload 类型")
     for cat, entries in _entries(data).items():
         for e in entries:
             rel = _icon_rel(cat, e)

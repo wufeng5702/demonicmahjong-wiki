@@ -312,6 +312,12 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 - key 格式：`LingYong/Individual/{id}_{hash}/Name|Description`
 - 简中优先，英文回退
 
+### 牌灵 / 宝牌
+
+- 新版将 `PaiLingPayload` / `BaoPaiPayload` 合并为 `BaoLingPayload`，以 `baoLingType` 分类：0=宝牌，1=牌灵，2=念灵；牌灵与念灵共用图鉴的牌灵分类。
+- 数据、牌灵 3D 渲染与宝牌图标提取共用 `baoling.baoling_category()`；旧版独立类名仍兼容，重复 ID 优先使用新版 Payload。
+- 任一分类未提取到数据时在写入 JSON 前失败；站点校验也拒绝空的牌灵/宝牌分类，避免静默覆盖已有数据。
+
 ### 图标提取
 
 `bundle_assets.load_bundle_assets()` 加载主 bundle，并递归加载子目录中的 `shared_core`、`ui_icons`、`ui_event` bundle，兼容新版共享资源与 UI 拆包。数据与图标共用 `config.locate_shared_data_files()` 的本体/角色文件定位结果。

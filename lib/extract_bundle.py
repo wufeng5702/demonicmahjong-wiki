@@ -8,6 +8,7 @@ from UnityPy.enums import ClassIDType
 from config import AA_DIR, BUNDLE_PATH
 from logwarn import warn, flush_warns
 from schema import offering_entry, relic_entry
+from baoling import BAOLING_CLASSES, baoling_category
 
 XIAOCHOU_ADD_FIELDS = [
     "addBaseScore", "addBaseScore2", "addBaseMagnification", "addBaseMagnification2",
@@ -55,6 +56,34 @@ def collect_adds(d, fields):
     return out
 
 
+def extract_baoling_entries(buckets):
+    """兼容统一/独立 Payload，按类别与 ID 去重，新版资源优先。"""
+    data = {"pailing": [], "baopai": []}
+    seen = set()
+    for cls in BAOLING_CLASSES:
+        for _pid, payload in buckets.get(cls, []):
+            cat = baoling_category(cls, payload)
+            if cat is None:
+                continue
+            oid = int(payload.id)
+            key = (cat, oid)
+            if key in seen:
+                continue
+            seen.add(key)
+            data[cat].append({
+                "id": oid,
+                "en": getattr(payload, "m_Name", ""),
+                "nameKey": term_key_of(getattr(payload, "displayNameTerm", None)),
+                "descKey": term_key_of(getattr(payload, "descriptionTerm", None)),
+                "adds": collect_adds(payload, XIAOCHOU_ADD_FIELDS + OFFERING_ADD_FIELDS),
+            })
+    missing = [label for cat, label in (("pailing", "牌灵"), ("baopai", "宝牌"))
+               if not data[cat]]
+    if missing:
+        raise RuntimeError(f"未提取到{'、'.join(missing)}数据，请检查 BaoLing/PaiLing/BaoPai Payload 兼容性；拒绝输出空分类")
+    return data
+
+
 def extract_bundle(enum_values, inspector_names):
     print("  loading main bundle...")
     am = AssetsManager()
@@ -69,7 +98,7 @@ def extract_bundle(enum_values, inspector_names):
 
     KNOWN_PAYLOAD_CLASSES = {
         "CharacterPayload", "XiaoChouPaiPayload", "OfferingPayload",
-        "FanZhongPayload", "AchievementPayload", "PaiLingPayload",
+        "FanZhongPayload", "AchievementPayload", "BaoLingPayload", "PaiLingPayload",
         "BaoPaiPayload", "YeJingBuffPayload",
     }
     relic_loose = []
@@ -95,12 +124,13 @@ def extract_bundle(enum_values, inspector_names):
     counts = {
         k: len(v) for k, v in buckets.items()
         if k in ("CharacterPayload", "XiaoChouPaiPayload", "OfferingPayload", "FanZhongPayload",
-                 "PaiLingPayload", "BaoPaiPayload", "YeJingBuffPayload", "AchievementPayload")
+                  "BaoLingPayload", "PaiLingPayload", "BaoPaiPayload", "YeJingBuffPayload", "AchievementPayload")
     }
     print(f"  payloads: {counts}")
 
     data = {"lingyong": [], "offerings": [], "relics": [], "characters": [],
             "pailing": [], "baopai": [], "fanzhong": [], "yejingbuff": [], "achievements": []}
+    data.update(extract_baoling_entries(buckets))
 
     # Import tag resolver and add fields
     from enums import _resolve_tag
@@ -235,8 +265,6 @@ def extract_bundle(enum_values, inspector_names):
                 "adds": adds,
             })
 
-    simple("PaiLingPayload", "id", "pailing")
-    simple("BaoPaiPayload", "id", "baopai")
     simple("YeJingBuffPayload", "id", "yejingbuff")
 
     for pid, d in buckets.get("AchievementPayload", []):
