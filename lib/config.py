@@ -2,6 +2,7 @@
 """环境变量加载 + 路径常量 + bundle/I2 自动定位。"""
 import json
 import os
+from functools import lru_cache
 from pathlib import Path
 
 GAME_DIR = Path(r"E:\DemonicMahjong")
@@ -61,14 +62,42 @@ BUNDLE_PATH = locate_bundle()
 I2_OBJECT_PATH_ID = 13840
 
 
+@lru_cache(maxsize=1)
+def locate_shared_data_files():
+    """按脚本类定位本体与角色数据文件，不依赖 sharedassets 的编号。"""
+    from UnityPy import AssetsManager
+
+    best = {}
+    for path in sorted(GAME_DATA_DIR.glob("*.assets")):
+        am = AssetsManager(path=str(GAME_DATA_DIR))
+        bf = am.load_file(str(path))
+        counts = {"base": 0, "characters": 0}
+        for obj in bf.objects.values():
+            if obj.type.name != "MonoBehaviour":
+                continue
+            try:
+                d = obj.read(check_read=False)
+                cls = d.m_Script.read().m_ClassName
+            except Exception:
+                continue  # 定位探测：非数据脚本或不可读取的脚本引用
+            if cls == "AchievementPayload":
+                counts["base"] += 1
+            elif cls == "CharacterPayload":
+                counts["characters"] += 1
+        for kind, count in counts.items():
+            if count and (kind not in best or count > best[kind][0]):
+                best[kind] = (count, path)
+
+    missing = {"base", "characters"} - best.keys()
+    if missing:
+        raise RuntimeError(f"未找到 sharedassets 数据文件: {', '.join(sorted(missing))} ({GAME_DATA_DIR})")
+    paths = {kind: item[1] for kind, item in best.items()}
+    print(f"  shared data sources: base={paths['base'].name}, characters={paths['characters'].name}")
+    return paths
+
+
 def locate_i2_object(bf):
     """自动定位 I2 LanguageSource: 最大的含 I2 key 模式的 MonoBehaviour。"""
-    try:
-        raw = bf.objects[I2_OBJECT_PATH_ID].get_raw_data()
-        if len(raw) > 1_000_000 and b"/Name" in raw[:200000]:
-            return I2_OBJECT_PATH_ID
-    except Exception:
-        pass
     best = None
     for pid, obj in bf.objects.items():
         if obj.type.name != "MonoBehaviour":
@@ -77,7 +106,7 @@ def locate_i2_object(bf):
             raw = obj.get_raw_data()
         except Exception:
             continue
-        if len(raw) > 1_000_000 and b"/Name" in raw[:200000] and b"/Description" in raw:
+        if b"/Name" in raw and b"/Description" in raw:
             if best is None or len(raw) > best[1]:
                 best = (pid, len(raw))
     return best[0] if best else None

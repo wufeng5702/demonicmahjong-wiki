@@ -239,9 +239,9 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 | 数据源 | 位置 | 说明 |
 |--------|------|------|
 | 主 bundle | `defaultlocalgroup_assets_all_*.bundle`（2.1GB） | DLC 数据，类型树完整 |
-| sharedassets0 | `sharedassets0.assets` | 本体数据：灵佣/祭品/成就（类型树剥离，需 rawparse） |
-| sharedassets3 | `sharedassets3.assets` | 本体数据：角色/BOSS/遗物列表（类型树剥离） |
-| I2 语言表 | sharedassets0 #13840 | 5018 词条，6 语言 |
+| 本体 sharedassets | 按 AchievementPayload 数量自动定位（当前 sharedassets0） | 本体数据：灵佣/祭品/成就（类型树剥离，需 rawparse） |
+| 角色 sharedassets | 按 CharacterPayload 数量自动定位（当前 sharedassets3） | 本体数据：角色/BOSS/遗物列表（类型树剥离） |
+| I2 语言表 | 自动扫描游戏数据目录的 `.assets`，选择最大的可解析主表 | 不依赖文件名或 path_id，不合并语言顺序可能不同的场景副本 |
 
 ### ID 区段语义
 
@@ -313,6 +313,8 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 - 简中优先，英文回退
 
 ### 图标提取
+
+`bundle_assets.load_bundle_assets()` 加载主 bundle，并递归加载子目录中的 `shared_core`、`ui_icons`、`ui_event` bundle，兼容新版共享资源与 UI 拆包。数据与图标共用 `config.locate_shared_data_files()` 的本体/角色文件定位结果。
 
 图标提取拆为独立脚本 `build_icons.py`，每步（achievement/lingyong/character/relic/offering/baopai/pailing/composite 等）在独立子进程运行，避免主进程反复加载 2GB bundle 导致内存累积（MemoryError）。`build_web.py` 结尾通过 `subprocess.run(..., check=True)` 调用，任一步骤失败会导致构建非零退出。
 

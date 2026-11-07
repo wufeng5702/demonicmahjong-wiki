@@ -9,8 +9,6 @@ from pathlib import Path
 from UnityPy import AssetsManager
 
 from config import (
-    AA_DIR,
-    BUNDLE_PATH,
     CATALOG_BIN,
     GAME_DATA_DIR,
     SHARED0,
@@ -21,6 +19,7 @@ from config import (
     SITE_DIR,
 )
 from extract_shared import classify_monobehaviours
+from bundle_assets import load_bundle_assets
 from i2parse import tr, clean_markup
 from enums import TAG_ID_CN, RARITY_CN
 from catalog import Catalog
@@ -417,13 +416,7 @@ def _parse_gameevent_raw(raw, name):
 def _load_graph_sfs():
     """加载含 EventNode/NodePort/GameEvent 的 SerializedFile 列表。"""
     sfs = []
-    am = AssetsManager()
-    for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
-        am.load_file(str(ms_bf))
-        break
-    bf = am.load_file(str(BUNDLE_PATH))
-    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
-    bsf = bf.files[cab_keys[0]]
+    am, bsf = load_bundle_assets()
     sfs.append(("bundle", bsf, am))
 
     for tag, path in (("s0", SHARED0), ("s1", SHARED1), ("s2", SHARED2),

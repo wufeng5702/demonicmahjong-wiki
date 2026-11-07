@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""从 sharedassets1/4 提取本体数据 (类型树被剥离 -> rawparse 手工解析)。"""
+"""从自动定位的 sharedassets 提取本体数据 (类型树被剥离 -> rawparse 手工解析)。"""
 import re
 
 from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
-from config import GAME_DATA_DIR, SHARED0, SHARED3
+from config import GAME_DATA_DIR, locate_shared_data_files
 from enums import _resolve_tag
 from logwarn import warn, flush_warns
 from schema import offering_entry, relic_entry
@@ -142,10 +142,11 @@ def _character_from_raw(d):
 
 
 def extract_shared_assets(enum_values):
-    """从 sharedassets0/3 提取本体数据。"""
-    print("  loading sharedassets0 ...")
+    """从本体与角色数据文件提取，兼容更新后的资源编号。"""
+    paths = locate_shared_data_files()
+    print(f"  loading {paths['base'].name} ...")
     am1 = AssetsManager(path=str(GAME_DATA_DIR))
-    bf1 = am1.load_file(str(SHARED0))
+    bf1 = am1.load_file(str(paths["base"]))
     sf1 = bf1
     cls1, pid1 = classify_monobehaviours(sf1)
 
@@ -195,9 +196,9 @@ def extract_shared_assets(enum_values):
     print(f"  shared0 parsed: {n1}")
 
     # ---- sharedassets3: 角色 / 遗物 / RoleAvatar / 灵佣·祭品补充 ----
-    print("  loading sharedassets3 ...")
+    print(f"  loading {paths['characters'].name} ...")
     am4 = AssetsManager(path=str(GAME_DATA_DIR))
-    sf4 = am4.load_file(str(SHARED3))
+    sf4 = am4.load_file(str(paths["characters"]))
     cls4, pid4 = classify_monobehaviours(sf4)
 
     for pid in cls4.get("XiaoChouPaiPayload", []):
