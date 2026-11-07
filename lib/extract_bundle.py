@@ -9,6 +9,7 @@ from config import AA_DIR, BUNDLE_PATH
 from logwarn import warn, flush_warns
 from schema import offering_entry, relic_entry
 from baoling import BAOLING_CLASSES, baoling_category
+from relic_kind import relic_kind
 
 XIAOCHOU_ADD_FIELDS = [
     "addBaseScore", "addBaseScore2", "addBaseMagnification", "addBaseMagnification2",
@@ -18,11 +19,6 @@ XIAOCHOU_ADD_FIELDS = [
 ]
 OFFERING_ADD_FIELDS = ["soulCost", "addBaseScore", "addFan", "addPaiMainNum", "multi",
                        "accMultiIndependent", "count", "count2"]
-
-# 诅咒/神秘遗物的具体脚本类 (来自 dump.cs 继承链分析)
-CURSED_RELIC_SCRIPTS = {"GuiChengDisplay", "PoWanDisplay", "ShengXiuDingZiDisplay", "ShouKaoDisplay", "WuGuWaWaDisplay", "ZhiRenDisplay", "ZouMaDengDisplay"}
-MYSTERIOUS_RELIC_SCRIPTS = {"BaiBaoXiangDisplay", "BaiYuShanDisplay", "BianXingFuDisplay", "DiZangWangBaoJianDisplay", "DuShiWangBaoJianDisplay", "LingDengDisplay", "LingLongBaoTaDisplay", "NingHunZhuDisplay", "NvWaTuDisplay", "QinGuangWangBaoJianDisplay", "RanHunQiangDisplay", "SenLuoBaoJianDisplay", "ShangHunRenDisplay", "ShenMiGongTaiDisplay", "ShiHunZhuDisplay", "ShouXiangDisplay", "TaiShanShiDisplay", "TaiShanWangBaoJianDisplay", "XuanYuanBaoJingDisplay", "YanLuoWangBaoJianDisplay", "YueGuangBaoHeDisplay", "YueGuangBaoHeSuiPianDisplay", "ZhaoYaoJingDisplay", "ZiJinTiYuDisplay"}
-
 
 def script_name(data):
     ms = getattr(data, "m_Script", None)
@@ -197,8 +193,7 @@ def extract_bundle(enum_values, inspector_names):
                     rd = sf.objects[rpid].read()
                     did = int(getattr(rd, "displayId", 0))
                     sn = script_name(rd)
-                    k2 = ("诅咒" if sn in CURSED_RELIC_SCRIPTS else
-                          "神秘" if sn in MYSTERIOUS_RELIC_SCRIPTS else kind)
+                    k2 = relic_kind(sn, kind, getattr(rd, "tags", None))
                     relic_bundle[(did, k2)] = (rd, rpid)
                 except Exception:
                     warn()
@@ -234,8 +229,7 @@ def extract_bundle(enum_values, inspector_names):
             descKey=term_key_of(getattr(rd, "descriptionTerm", None)),
             rarity=int(getattr(rd, "rarity", 0)),
             stack=int(getattr(rd, "SameItemLoadCount", 0)),
-            kind=("诅咒" if sn in CURSED_RELIC_SCRIPTS else
-                  "神秘" if sn in MYSTERIOUS_RELIC_SCRIPTS else ""),
+            kind=relic_kind(sn, raw_tags=getattr(rd, "tags", None)),
             tags=_resolve_tag(getattr(rd, "tags", None) or [], enum_values),
             icon_pid=pid,
             src="bundle",

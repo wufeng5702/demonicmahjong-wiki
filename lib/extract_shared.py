@@ -9,6 +9,7 @@ from config import GAME_DATA_DIR, locate_shared_data_files
 from enums import _resolve_tag
 from logwarn import warn, flush_warns
 from schema import offering_entry, relic_entry
+from relic_kind import relic_kind
 import rawparse as rp
 
 XIAOCHOU_ADD_FIELDS = [
@@ -19,11 +20,6 @@ XIAOCHOU_ADD_FIELDS = [
 ]
 OFFERING_ADD_FIELDS = ["soulCost", "addBaseScore", "addFan", "addPaiMainNum", "multi",
                        "accMultiIndependent", "count", "count2"]
-
-# 诅咒/神秘遗物脚本类名
-CURSED_RELIC_SCRIPTS = {"GuiChengDisplay", "PoWanDisplay", "ShengXiuDingZiDisplay", "ShouKaoDisplay", "WuGuWaWaDisplay", "ZhiRenDisplay", "ZouMaDengDisplay"}
-MYSTERIOUS_RELIC_SCRIPTS = {"BaiBaoXiangDisplay", "BaiYuShanDisplay", "BianXingFuDisplay", "DiZangWangBaoJianDisplay", "DuShiWangBaoJianDisplay", "LingDengDisplay", "LingLongBaoTaDisplay", "NingHunZhuDisplay", "NvWaTuDisplay", "QinGuangWangBaoJianDisplay", "RanHunQiangDisplay", "SenLuoBaoJianDisplay", "ShangHunRenDisplay", "ShenMiGongTaiDisplay", "ShiHunZhuDisplay", "ShouXiangDisplay", "TaiShanShiDisplay", "TaiShanWangBaoJianDisplay", "XuanYuanBaoJingDisplay", "YanLuoWangBaoJianDisplay", "YueGuangBaoHeDisplay", "YueGuangBaoHeSuiPianDisplay", "ZhaoYaoJingDisplay", "ZiJinTiYuDisplay"}
-
 
 def classify_monobehaviours(sf):
     """按 MonoScript 类名分类所有 MonoBehaviour (不解析 body)。"""
@@ -329,8 +325,7 @@ def extract_shared_assets(enum_values):
                     warn()
                     continue
                 script_sn = pid4.get(rpid, "")
-                kind2 = kind or ("诅咒" if script_sn in CURSED_RELIC_SCRIPTS else
-                                 "神秘" if script_sn in MYSTERIOUS_RELIC_SCRIPTS else "")
+                kind2 = relic_kind(script_sn, kind, rd.get("tags"))
                 rid = int(rd.get("displayId", 0))
                 out["relics"].append(relic_entry(
                     id=rid,
