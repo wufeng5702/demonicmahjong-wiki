@@ -89,15 +89,34 @@ def parse_i2_source(raw):
 
 def load_i2_terms():
     from config import GAME_DATA_DIR
-    am = AssetsManager(path=str(GAME_DATA_DIR))
-    bf = am.load_file(str(SHARED0))
-    pid = locate_i2_object(bf)
-    if pid is None:
-        raise RuntimeError(f"未找到 I2 LanguageSource (在 {SHARED0} 中无匹配对象)")
+    # 更新后语言表可能跨文件移动；场景内还可能保留较小的旧版副本。
+    # 沿用最大语言表优先的规则，不合并语言顺序可能不同的副本。
+    paths = sorted(GAME_DATA_DIR.glob("*.assets"))
+    best = None
+    for path in paths:
+        am = AssetsManager(path=str(GAME_DATA_DIR))
+        bf = am.load_file(str(path))
+        pid = locate_i2_object(bf)
+        if pid is None:
+            continue
+        raw = bf.objects[pid].get_raw_data()
+        if best is not None and len(raw) <= best[0]:
+            continue
+        terms, ok, fail = parse_i2_source(raw)
+        if terms:
+            best = (len(raw), path, pid, terms, ok, fail)
+
+    if best is None:
+        raise RuntimeError(
+            f"未找到可解析的 I2 LanguageSource "
+            f"(已扫描 {GAME_DATA_DIR} 下 {len(paths)} 个 .assets 文件)"
+        )
+    _, path, pid, terms, ok, fail = best
+    print(f"  I2 source: {path.name} #{pid}")
+    if path != SHARED0:
+        print(f"  [warn] I2 文件漂移: {SHARED0.name} -> {path.name} (已自动定位)")
     if pid != I2_OBJECT_PATH_ID:
         print(f"  [warn] I2 path_id 漂移: {I2_OBJECT_PATH_ID} -> {pid} (已自动定位)")
-    raw = bf.objects[pid].get_raw_data()
-    terms, ok, fail = parse_i2_source(raw)
     print(f"  I2 terms parsed: {ok} ok, {fail} failed anchors -> {len(terms)} unique keys")
     return terms
 

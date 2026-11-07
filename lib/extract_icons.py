@@ -24,10 +24,12 @@ from UnityPy import AssetsManager
 from UnityPy.enums import ClassIDType
 
 from catalog import Catalog
-from config import (AA_DIR, BUNDLE_PATH, CATALOG_BIN, GAME_DATA_DIR, SHARED0, SHARED1,
-                    SHARED2, SHARED3, SITE_DIR)
+from config import (AA_DIR, BUNDLE_PATH, CATALOG_BIN, GAME_DATA_DIR, SITE_DIR,
+                    locate_shared_data_files)
 from logwarn import warn, flush_warns
 import rawparse as rp
+from bundle_assets import load_bundle_assets
+from baoling import baoling_category
 
 SIZE = 512
 SS = 2  # 超采样倍数
@@ -396,7 +398,7 @@ def render_pailing_icons(bundle_path, out_dir):
         except Exception:
             warn()
             continue
-        if sn == "PaiLingPayload":
+        if baoling_category(sn, d) == "pailing":
             pls.append(d)
 
     pailing_dir = out_dir / "pailing"
@@ -438,9 +440,7 @@ def extract_achievement_icons():
     if not bpath:
         print("  [WARN] bundle not found, skip achievement icons")
         return
-    am = AssetsManager()
-    bf = am.load_file(str(bpath))
-    sf = bf.files[list(bf.files.keys())[0]]
+    am, sf = load_bundle_assets()
     count = 0
     seen = set()
     for cpath, pp in sf.container.items():
@@ -489,13 +489,7 @@ def extract_lingyong_icons():
     if not bpath:
         print("  [WARN] bundle not found, skip lingyong icons")
         return
-    am = AssetsManager()
-    for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
-        am.load_file(str(ms_bf))
-        break
-    bf = am.load_file(str(bpath))
-    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
-    sf = bf.files[cab_keys[0]]
+    am, sf = load_bundle_assets()
 
     sprite_map = {}
     for obj in sf.objects.values():
@@ -560,7 +554,7 @@ def extract_lingyong_icons():
             warn()
             continue
 
-    env1 = UnityPy.load(str(SHARED0))
+    env1 = UnityPy.load(str(locate_shared_data_files()["base"]))
     for obj in env1.objects:
         if obj.type.name != "MonoBehaviour":
             continue
@@ -581,7 +575,7 @@ def extract_lingyong_icons():
             warn()
             continue
 
-    env4 = UnityPy.load(str(SHARED3))
+    env4 = UnityPy.load(str(locate_shared_data_files()["characters"]))
     for obj in env4.objects:
         if obj.type.name != "MonoBehaviour":
             continue
@@ -610,7 +604,7 @@ def extract_character_avatars():
     out_dir = SITE_DIR / "icons" / "character"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env4 = UnityPy.load(str(SHARED3))
+    env4 = UnityPy.load(str(locate_shared_data_files()["characters"]))
     count = 0
     for obj in env4.objects:
         if obj.type.name != "MonoBehaviour":
@@ -651,13 +645,7 @@ def extract_character_skill_icons():
     if not bpath:
         print("  [WARN] bundle not found, skip character skill icons")
         return
-    am = AssetsManager()
-    for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
-        am.load_file(str(ms_bf))
-        break
-    bf = am.load_file(str(bpath))
-    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
-    sf = bf.files[cab_keys[0]]
+    am, sf = load_bundle_assets()
 
     sprite_map = {}
     sprite_by_lower = {}
@@ -718,7 +706,7 @@ def extract_character_skill_icons():
             warn()
             continue
 
-    env4 = UnityPy.load(str(SHARED3))
+    env4 = UnityPy.load(str(locate_shared_data_files()["characters"]))
     for obj in env4.objects:
         if obj.type.name != "MonoBehaviour":
             continue
@@ -746,7 +734,7 @@ def extract_relic_icons():
     out_dir = SITE_DIR / "icons" / "relics"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env4 = UnityPy.load(str(SHARED3))
+    env4 = UnityPy.load(str(locate_shared_data_files()["characters"]))
     count = 0
     seen = set()
 
@@ -839,13 +827,7 @@ def extract_relic_icons():
 
     bpath = BUNDLE_PATH
     if bpath:
-        am = AssetsManager()
-        for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
-            am.load_file(str(ms_bf))
-            break
-        bf = am.load_file(str(bpath))
-        cab_keys = [k for k in bf.files if k.startswith("CAB-")]
-        sf = bf.files[cab_keys[0]]
+        am, sf = load_bundle_assets()
 
         for obj in sf.objects.values():
             if obj.type != ClassIDType.MonoBehaviour:
@@ -863,13 +845,9 @@ def extract_relic_icons():
                 if icon is None:
                     continue
                 ipid = getattr(icon, "path_id", 0)
-                fid = getattr(icon, "m_FileID", 0)
-                if ipid == 0 or fid != 0:
+                if ipid == 0:
                     continue
-                for io in sf.objects.values():
-                    if io.path_id == ipid:
-                        _save_icon(did, io)
-                        break
+                _save_icon(did, icon.deref())
             except Exception:
                 warn()
                 continue
@@ -882,7 +860,7 @@ def extract_offering_icons():
     out_dir = SITE_DIR / "icons" / "offerings"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env1 = UnityPy.load(str(SHARED0))
+    env1 = UnityPy.load(str(locate_shared_data_files()["base"]))
     count = 0
     seen = set()
     for obj in env1.objects:
@@ -922,11 +900,12 @@ def extract_offering_skill_icons():
     out_dir = SITE_DIR / "icons" / "character_skill"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    env4 = UnityPy.load(str(SHARED3))
-    env1 = UnityPy.load(str(SHARED0))
+    paths = locate_shared_data_files()
+    env4 = UnityPy.load(str(paths["characters"]))
+    env1 = UnityPy.load(str(paths["base"]))
     other_envs = []
-    for sa in [SHARED1, SHARED2]:
-        if sa.exists():
+    for sa in sorted(GAME_DATA_DIR.glob("*.assets")):
+        if sa not in paths.values():
             other_envs.append(UnityPy.load(str(sa)))
     count = 0
     seen = set()
@@ -981,13 +960,7 @@ def extract_baopai_icons():
     if not bpath:
         print("  [WARN] bundle not found, skip baopai icons")
         return
-    am = AssetsManager()
-    for ms_bf in AA_DIR.glob("*_monoscripts_*.bundle"):
-        am.load_file(str(ms_bf))
-        break
-    bf = am.load_file(str(bpath))
-    cab_keys = [k for k in bf.files if k.startswith("CAB-")]
-    sf = bf.files[cab_keys[0]]
+    am, sf = load_bundle_assets()
 
     count = 0
     for obj in sf.objects.values():
@@ -997,7 +970,7 @@ def extract_baopai_icons():
             d = obj.read()
             ms = getattr(d, "m_Script", None)
             sn = getattr(ms.read(), "m_ClassName", "?") if ms else "?"
-            if sn != "BaoPaiPayload":
+            if baoling_category(sn, d) != "baopai":
                 continue
             bid = int(getattr(d, "id", 0) or 0)
             if bid == 0:

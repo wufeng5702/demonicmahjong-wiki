@@ -87,6 +87,22 @@ class TestCollectErrors(unittest.TestCase):
             self._write(root, {"relics": [{"id": 3, "src": "enum"}]}, [])
             self.assertEqual(check_site.collect_errors(root, ".png"), [])
 
+    def test_empty_baoling_categories_are_reported(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self._write(root, {"pailing": [], "baopai": []}, [])
+            errs = check_site.collect_errors(root, ".png")
+            self.assertEqual(len(errs), 2)
+            self.assertTrue(any("pailing:" in e for e in errs))
+            self.assertTrue(any("baopai:" in e for e in errs))
+
+    def test_nonempty_baoling_categories_need_their_icons(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self._write(root, {"pailing": [{"id": 10015}], "baopai": [{"id": 1}]},
+                        ["icons/pailing/10015.png", "icons/baopai/1.png"])
+            self.assertEqual(check_site.collect_errors(root, ".png"), [])
+
 
 class TestEventErrors(unittest.TestCase):
     def test_healthy_events(self):
