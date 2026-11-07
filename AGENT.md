@@ -273,7 +273,7 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 - 遗物-牌库：额外牌/摸牌数/摸牌总量/开局调换数
 - 遗物-资源：血量/魂力/金币/遗物/祭品/灵佣
 - 遗物-机制：刷新/移除/变形/和牌
-- 遗物-杂项：地图节点/莲花/特殊事件/毒/蛋
+- 遗物-其他：自动归类未命中上述分组的标签（含地图节点/莲花/特殊事件/毒/蛋），不再单列“杂项”
 
 中文化映射在 `lib/enums.py` 的 `TAG_CN`（英文名→中文）与 `TAG_ID_CN`（ID→中文）中定义，
 `_resolve_tag()` 统一解析；新增 tag 必须两表同步（`tests/test_relic_tags.py` 会校验一致性）。
@@ -328,6 +328,8 @@ IL2CppDumper 用于从 IL2CPP 编译后的二进制中提取类结构信息。
 - 角色头像：从 RoleAvatar 的 headIcon PPtr 提取
 - 事件/Buff/成就：从 bundle 中按名称匹配 Sprite
 - 牌灵 3D 头像：从 bundle 模型光栅化，新增角色可写入 `FACE_ANCHOR` / `ROLL` 校准朝向（如恶念 10038）
+
+遗物的 `kind` 由 `relic_kind.relic_kind()` 统一解析游戏原始 Curse(56000) 标签、脚本类名与列表类别，bundle/shared 共用；人工补充的中文“诅咒”标签可能仅表示与诅咒相关，不会改变主分类。
 
 ---
 

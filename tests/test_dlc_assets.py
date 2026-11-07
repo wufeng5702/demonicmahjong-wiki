@@ -99,7 +99,23 @@ class TestDlcRelicCoverage(unittest.TestCase):
                 self.assertNotEqual(entry.get("src"), "enum")
                 self.assertTrue(entry.get("name"))
                 self.assertTrue(entry.get("desc"))
-                self.assertEqual(entry["kind"], "神秘" if rid == 10030 else "")
+                expected_kind = "神秘" if rid == 10030 else "诅咒" if rid in (197, 198) else ""
+                self.assertEqual(entry["kind"], expected_kind)
+
+    def test_full_moon_curses_use_curse_rarity_group(self):
+        for rid in (197, 198):
+            with self.subTest(id=rid):
+                entry = next(e for e in self.relics if e["id"] == rid)
+                self.assertEqual(entry["kind"], "诅咒")
+                self.assertEqual(entry["rar"], "诅咒")
+                self.assertEqual(entry["rar2"], "普通")
+                self.assertIn("诅咒", entry["tags"])
+
+    def test_curse_related_beneficial_relic_is_not_reclassified(self):
+        entry = next(e for e in self.relics if e["id"] == 184)
+        self.assertIn("诅咒", entry["tags"])
+        self.assertEqual(entry["kind"], "")
+        self.assertNotEqual(entry["rar"], "诅咒")
 
 
 if __name__ == "__main__":

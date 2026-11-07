@@ -1,5 +1,5 @@
 {
- "_comment": "本文件由 build_web.py 于 2026-11-07 20:56:17 自动生成, 请勿手动修改",
+ "_comment": "本文件由 build_web.py 于 2026-11-07 22:03:57 自动生成, 请勿手动修改",
  "meta": {
   "game": "我在地府打麻将",
   "build": "build_web.py"
@@ -24073,7 +24073,7 @@
     "descKey": "Relic/Individual/197_21b10afbf1b87774399275f7fb549e90/Description",
     "rarity": 1,
     "stack": 1,
-    "kind": "",
+    "kind": "诅咒",
     "tags": [
      "诅咒"
     ],
@@ -24081,7 +24081,7 @@
     "src": "shared",
     "name": "诅咒纺锤",
     "desc": "对局开始时，随机为你手牌中的1张牌附上临时的【恶念】。",
-    "rar": "普通",
+    "rar": "诅咒",
     "rar2": "普通"
    },
    {
@@ -24092,7 +24092,7 @@
     "descKey": "Relic/Individual/198_4ee88fb8704d0a443abd67a10aea11ea/Description",
     "rarity": 1,
     "stack": 1,
-    "kind": "",
+    "kind": "诅咒",
     "tags": [
      "诅咒"
     ],
@@ -24100,7 +24100,7 @@
     "src": "shared",
     "name": "弥达斯雕像",
     "desc": "拾起时，魂力上限-10。",
-    "rar": "普通",
+    "rar": "诅咒",
     "rar2": "普通"
    },
    {
