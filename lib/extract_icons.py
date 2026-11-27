@@ -465,6 +465,26 @@ def extract_achievement_icons():
     flush_warns("extract_achievement_icons")
 
 
+def _trim_alpha(img, pad=2, thresh=8):
+    """按 alpha 边界裁掉全透明留白, 四周保留 pad 像素缓冲 (仅灵俑图标使用)。
+
+    部分灵俑原图 (如 303/307/310) 画布左侧自带大片透明留白, 直接导出会让主体
+    在头像框里偏右, 因此导出前统一裁到内容边界。
+    """
+    if "A" not in img.getbands():
+        return img
+    alpha = img.getchannel("A").point(lambda v: 255 if v > thresh else 0)
+    bb = alpha.getbbox()
+    if not bb:
+        return img
+    l, t, r, b = bb
+    box = (max(0, l - pad), max(0, t - pad),
+           min(img.width, r + pad), min(img.height, b + pad))
+    if box == (0, 0, img.width, img.height):
+        return img
+    return img.crop(box)
+
+
 def _lingyong_sprite_name(sprite_map, xid, sub, en_name="", guid="", catalog=None):
     """优先使用子资源名或 catalog GUID, 仅在无匹配时回退到 ID 命名。"""
     if sub in sprite_map:
@@ -504,6 +524,7 @@ def extract_lingyong_icons():
                 pass
 
     count = 0
+    trimmed = 0
     seen = set()
     catalog = None
     if CATALOG_BIN.exists():
@@ -513,7 +534,7 @@ def extract_lingyong_icons():
             warn(f"catalog.bin 加载失败: {e}")
 
     def _save_icon(xid, sub, en_name="", guid=""):
-        nonlocal count
+        nonlocal count, trimmed
         if xid in seen or xid == 0:
             return
         if 20000 <= xid < 30000:
@@ -522,7 +543,10 @@ def extract_lingyong_icons():
         if not sub:
             return
         try:
-            img = sprite_map[sub].read().image
+            raw = sprite_map[sub].read().image
+            img = _trim_alpha(raw)
+            if img is not raw:
+                trimmed += 1
             if (10000 <= xid < 20000) or (30000 <= xid < 40000):
                 target = out_dir / "lingyong_BOSS"
             else:
@@ -596,7 +620,7 @@ def extract_lingyong_icons():
             warn()
             continue
 
-    print(f"  lingyong icons: {count} extracted")
+    print(f"  lingyong icons: {count} extracted ({trimmed} trimmed)")
     flush_warns("extract_lingyong_icons")
 
 
