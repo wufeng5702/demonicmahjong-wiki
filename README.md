@@ -89,7 +89,7 @@ uv run python extract_enums.py         # 提取枚举到 assets/enums.json
 
 ## 相关文档
 
-- [AGENT.md](AGENT.md) — 详细技术文档、架构说明、开发规范
+- [AGENTS.md](AGENTS.md) — 详细技术文档、架构说明、开发规范
 
 ## 许可
 
