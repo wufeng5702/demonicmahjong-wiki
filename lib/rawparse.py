@@ -200,10 +200,14 @@ def read_typed(r: RawReader, t):
         return r.saints_dict()
     if t == "ar":
         return r.asset_ref()
+    if t == "pa":  # Paidian 结构体(huaSe/number/feng/jian, 游戏更新新增 changePaiMians)
+        return (r.i32(), r.i32(), r.i32(), r.i32())
+    if t == "oi":  # OfferingInfo 结构体(PPtr offeringDisplay + int level)
+        return r.pptr(), r.i32()
     raise ParseError(f"unknown type {t}")
 
 
-VEC_OF = {"vi": "i", "vs": "s", "vp": "p", "vls": "ls"}
+VEC_OF = {"vi": "i", "vs": "s", "vp": "p", "vls": "ls", "vpa": "pa", "voi": "oi"}
 
 
 def read_ls(r: RawReader):
@@ -261,8 +265,9 @@ XIAOCHOU_SPEC = [
     ("descriptionTranslation", "sd"),
     ("dynamicDescriptionTerm", LS), ("dynamicDescriptionTerms", "vls"),
     ("tags", "vi"), ("skillLevel", "i"),
-    ("iconReference", "ar"), ("modelReference", "ar"), ("prefabReference", "ar"),
-    ("huaSe", "i"), ("number", "i"), ("numberType", "i"), ("isZi", "b"),
+    ("iconReference", "ar"), ("miniIcon", "p"), ("modelReference", "ar"), ("prefabReference", "ar"),
+    ("huaSe", "i"), ("number", "i"), ("changePaiMians", "vpa"),
+    ("numberType", "i"), ("isZi", "b"),
     ("jian", "i"), ("count", "i"), ("maxCount", "f"), ("count2", "i"),
     ("isExceptBaoPai", "b"), ("isFeng", "b"), ("isRandomNumber", "b"),
     ("addSoul", "i"), ("feng", "i"), ("pattern", "i"), ("fanZhong", "i"),
@@ -274,13 +279,14 @@ XIAOCHOU_SPEC = [
     ("addCoin", "f"), ("addCoin1", "f"), ("addFan", "f"), ("decline", "f"),
     ("addChou", "i"), ("addHp", "i"), ("addHpMax", "i"), ("addSwap", "i"),
     ("huPaiSlotsCount", "i"), ("maxValue", "f"), ("isPlayerSkill", "b"),
-    ("baoLingDisplayPrefab", "p"),
+    ("baoLingPayload", "p"),
     ("paiMianScore", "i"), ("multiple", "f"), ("percent", "f"), ("percentLimit", "f"),
     ("relicIds", "vi"), ("zhuFuGangCount", "i"), ("bossJiFenPaiKu", "p"),
     ("zhuFuPlayingCount", "i"), ("lianHuaPlayingCount", "i"), ("lianHuaPlayingCount2", "i"),
+    ("wanFanXing", "p"), ("tongFanXing", "p"), ("tiaoFanXing", "p"),
     # offeringInfo: struct { OfferingDisplay offeringDisplay(PPtr); int level }
-    ("offeringInfo_display", "p"), ("offeringInfo_level", "i"),
-    ("gameEvent", "p"),
+    ("offeringInfo_display", "p"), ("offeringInfo_level", "i"), ("offeringInfos", "voi"),
+    ("gameEvent", "p"), ("gameEvent2", "p"),
 ]
 
 OFFERING_SPEC = [
